@@ -2,7 +2,8 @@
   "domain": "market_ticker_ultra",
   "name": "Market Ticker Ultra",
   "after_dependencies": [
-    "lovelace"
+    "lovelace",
+    "recorder"
   ],
   "codeowners": [
     "@somansch"
