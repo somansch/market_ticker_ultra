@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "グループを追加",
+                "description": "グループには銘柄が入ります。ポートフォリオは保有分を合計し、ウォッチリストは監視のみで合計には含まれません。銘柄は後から **銘柄を追加** で追加します。",
+                "data": {
+                    "name": "名前",
+                    "kind": "種類",
+                    "benchmark": "比較するインデックス"
+                },
+                "data_description": {
+                    "benchmark": "ポートフォリオ用: カードでパフォーマンスと並べて表示するインデックスです。一覧から選ぶか、Yahoo Finance の任意のシンボルを入力します。空欄の場合は比較しません。"
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "株式、ファンド、インデックス、コモディティ、通貨、暗号資産の相場を公開ソースから取得します。アカウントも API キーも不要です。銘柄は後から、統合のページの **銘柄を追加** で1つずつ追加します。",
+                "data": {
+                    "scan_interval": "更新間隔",
+                    "logos": "ロゴ",
+                    "base_currency": "基準通貨",
+                    "sources": "ソース"
+                },
+                "data_description": {
+                    "scan_interval": "市場が開いている間に相場を取得する頻度です。すべての市場が閉まっている間は、最大で30分ごとに取得します。",
+                    "logos": "カードで各銘柄をロゴ付きで表示します。ロゴはブラウザーが Elbstream から読み込み、カードのエディターと README で「Logos by Elbstream」としてクレジットしています。オフにすると、カードには頭文字と、自分でアップロードしたロゴが表示されます。",
+                    "base_currency": "すべてのポジションを合計する通貨で、EUR、USD、CHF のような3文字のコードです。他の通貨のポジションは ECB の日次参照レートで換算されます。",
+                    "sources": "相場の取得元です。オフにしたソースには問い合わせません。そこでの検索結果はなくなり、そのソースから追加した銘柄は、同じ銘柄を扱う別のソースがあればそこから相場を取得し、なければ最後の相場を保持します。"
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "設定はすでに存在します。"
+        },
+        "error": {
+            "invalid_currency": "EUR や USD のような3文字で入力してください。",
+            "no_source": "ソースが少なくとも1つ必要です。",
+            "invalid_benchmark": "Yahoo Finance にはこのシンボルの価格系列がありません。"
+        },
+        "initiate_flow": {
+            "user": "グループを追加"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ 全般",
+                    "sources": "🌐 データソース",
+                    "alert_targets": "🔔 価格アラート: 通知先",
+                    "alert_texts": "✏️ 価格アラート: テキスト"
+                }
+            },
+            "general": {
+                "title": "全般",
+                "data": {
+                    "scan_interval": "更新間隔",
+                    "base_currency": "基準通貨",
+                    "logos": "ロゴ"
+                },
+                "data_description": {
+                    "scan_interval": "市場が開いている間に相場を取得する頻度です。すべての市場が閉まっている間は、最大で30分ごとに取得します。",
+                    "base_currency": "すべてのポジションを合計する通貨で、EUR、USD、CHF のような3文字のコードです。他の通貨のポジションは ECB の日次参照レートで換算されます。",
+                    "logos": "カードで各銘柄をロゴ付きで表示します。ロゴはブラウザーが Elbstream から読み込み、カードのエディターと README で「Logos by Elbstream」としてクレジットしています。オフにすると、カードには頭文字と、自分でアップロードしたロゴが表示されます。"
+                }
+            },
+            "sources": {
+                "title": "データソース",
+                "data": {
+                    "sources": "ソース",
+                    "news_google": "Google News のニュースも取得"
+                },
+                "data_description": {
+                    "sources": "相場の取得元です。オフにしたソースには問い合わせません。そこでの検索結果はなくなり、そのソースから追加した銘柄は、同じ銘柄を扱う別のソースがあればそこから相場を取得し、なければ最後の相場を保持します。",
+                    "news_google": "銘柄名で Google News も検索します。Yahoo Finance より多くのヘッドラインが見つかりますが、無関係なものも含まれます。"
+                }
+            },
+            "alert_targets": {
+                "title": "価格アラート: 通知先",
+                "description": "価格アラートが発生したときの通知先です。すべてのアラートは、オートメーション用にイベント market_ticker_ultra_alert も発生させます。",
+                "data": {
+                    "alert_persistent": "Home Assistant の通知",
+                    "alert_notify": "価格アラートの通知先",
+                    "alert_services": "価格アラートの通知サービス",
+                    "alert_speakers": "価格アラートを読み上げるスピーカー",
+                    "alert_tts": "読み上げの音声",
+                    "alert_test": "今すぐテストメッセージを送信"
+                },
+                "data_description": {
+                    "alert_persistent": "価格アラートが発生したとき、Home Assistant 自体にも通知を表示します。",
+                    "alert_notify": "価格アラートが発生したときにメッセージを受け取る notify エンティティです。たとえば Companion App を入れたスマートフォンです。",
+                    "alert_services": "メッセンジャーやメール用の notify.whatsapp や notify.mail のようなサービスです。一覧から選ぶか、名前を入力します。",
+                    "alert_speakers": "価格アラートを読み上げるスピーカーです。たとえば Sonos です。",
+                    "alert_tts": "アラートを読み上げる音声合成の音声です。空欄の場合は最初に見つかったものを使います。",
+                    "alert_test": "保存時に、上記のすべての通知先へテストメッセージを送信します。"
+                }
+            },
+            "alert_texts": {
+                "title": "価格アラート: テキスト",
+                "description": "価格アラートの内容です。変数: {name}、{symbol}、{price} と {limit} (それぞれ通貨付き)、{currency}、{direction} (「以下」/「以上」)、{change} (当日の騰落率)。空欄にすると既定値に戻ります。",
+                "data": {
+                    "alert_title": "タイトル",
+                    "alert_message": "メッセージ",
+                    "alert_spoken": "読み上げ",
+                    "alert_test": "今すぐテストメッセージを送信"
+                },
+                "data_description": {
+                    "alert_title": "通知の見出しです。",
+                    "alert_message": "通知の本文です。",
+                    "alert_spoken": "スピーカーで読み上げる内容です。",
+                    "alert_test": "保存時に、このテキストでテストメッセージをすべての通知先へ送信します。"
+                }
+            },
+            "group": {
+                "title": "グループ",
+                "description": "グループの名前と、ポートフォリオかウォッチリストかの種類です。ウォッチリストでは、銘柄の購入は保持されますが合計されません。",
+                "data": {
+                    "name": "名前",
+                    "kind": "種類",
+                    "benchmark": "比較するインデックス"
+                },
+                "data_description": {
+                    "benchmark": "ポートフォリオ用: カードでパフォーマンスと並べて表示するインデックスです。一覧から選ぶか、Yahoo Finance の任意のシンボルを入力します。空欄の場合は比較しません。"
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "EUR や USD のような3文字で入力してください。",
+            "no_source": "ソースが少なくとも1つ必要です。",
+            "invalid_benchmark": "Yahoo Finance にはこのシンボルの価格系列がありません。"
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "銘柄",
+            "initiate_flow": {
+                "user": "銘柄を追加",
+                "reconfigure": "銘柄を編集"
+            },
+            "step": {
+                "user": {
+                    "title": "銘柄を検索",
+                    "description": "名前、シンボル、ISIN で検索します。株式、ファンド、インデックス、コモディティ、通貨ペア、暗号資産が対象です。すべてのソースに問い合わせます: ほぼすべてに Yahoo Finance、ISIN による Xetra に Börse Frankfurt、通貨ペアに ECB の参照レート、暗号資産に Kraken、金属のスポット価格に gold-api.com。",
+                    "data": {
+                        "query": "名前、シンボル、ISIN"
+                    },
+                    "data_description": {
+                        "query": "例: Apple、AAPL、US0378331005、S&P 500、EUR/USD、BTC、gold。"
+                    }
+                },
+                "listing": {
+                    "title": "取引市場を選択",
+                    "description": "「{query}」の検索結果です。同じ銘柄が複数の取引所やソースで、異なる通貨で扱われていることがよくあります。各行の末尾には、そこでの直近の価格と取得元が表示されます。価格の後ろに日付がある場合、その価格は今日のものではありません。",
+                    "data": {
+                        "listing": "取引市場"
+                    }
+                },
+                "holding": {
+                    "title": "保有ポジション",
+                    "description": "**{name}** の保有内容です。監視だけする場合はすべて空欄にします。追加の購入は後から **銘柄を編集** で追加できます。",
+                    "data": {
+                        "quantity": "数量",
+                        "price": "1単位あたりの購入価格 ({currency})",
+                        "date": "購入日",
+                        "fees": "手数料 ({currency})",
+                        "taxes": "税金 ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "株数、口数、またはコインの数です。",
+                        "price": "1単位あたりの購入価格で、この取引市場の表示通貨で入力します。",
+                        "date": "任意。購入と売却を計算する順序だけを決めます。",
+                        "fees": "任意。購入または売却にかかった手数料です。",
+                        "taxes": "任意。それにかかった税金です。"
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - 登録済みの購入: {count}、保有: {quantity} (平均 {average})、実現損益: {realized}。",
+                    "menu_options": {
+                        "rename": "✏️ 名前を変更",
+                        "move": "📂 別のグループへ移動",
+                        "add_lot": "➕ 購入を追加",
+                        "sell_lot": "➖ 売却を追加",
+                        "remove_lots": "🗑️ 購入と売却を削除",
+                        "alerts": "🔔 価格アラート",
+                        "color": "🎨 色",
+                        "logo": "🖼️ 独自のロゴ",
+                        "tradingview": "📈 TradingView リンク"
+                    }
+                },
+                "rename": {
+                    "title": "銘柄の名前を変更",
+                    "description": "{symbol} の名前です。デバイスとセンサーの名前になります。",
+                    "data": {
+                        "name": "名前"
+                    }
+                },
+                "add_lot": {
+                    "title": "購入を追加",
+                    "description": "{name} - これまでの登録: {count}、保有: {quantity} (平均 {average})。",
+                    "data": {
+                        "quantity": "購入数量",
+                        "price": "1単位あたりの購入価格 ({currency})",
+                        "date": "購入日",
+                        "add_another": "続けてもう1件追加",
+                        "fees": "手数料 ({currency})",
+                        "taxes": "税金 ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "購入した株数、口数、またはコインの数です。",
+                        "price": "1単位あたりの購入価格で、この取引市場の取引通貨で入力します。",
+                        "date": "任意。購入と売却を計算する順序だけを決めます。",
+                        "fees": "任意。購入にかかった手数料です。",
+                        "taxes": "任意。それにかかった税金です。"
+                    }
+                },
+                "sell_lot": {
+                    "title": "売却を追加",
+                    "description": "{name} - これまでの登録: {count}、保有: {quantity} (平均 {average})。",
+                    "data": {
+                        "quantity": "売却数量",
+                        "price": "1単位あたりの売却価格 ({currency})",
+                        "date": "売却日",
+                        "add_another": "続けてもう1件追加",
+                        "fees": "手数料 ({currency})",
+                        "taxes": "税金 ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "売却した数量です。それまでの平均取得価格で保有分から差し引かれます。",
+                        "price": "1単位あたりの売却価格で、この取引市場の取引通貨で入力します。",
+                        "date": "空欄の場合は今日です。購入と売却を計算する順序を決めます。",
+                        "fees": "任意。売却にかかった手数料です。",
+                        "taxes": "任意。それにかかった税金です。"
+                    }
+                },
+                "remove_lots": {
+                    "title": "購入と売却を削除",
+                    "description": "{name}: 削除するものにチェックを入れます。すべて削除すると、監視するだけの銘柄になります。",
+                    "data": {
+                        "remove": "登録済み"
+                    }
+                },
+                "logo": {
+                    "title": "独自のロゴ",
+                    "description": "{name}: 独自の画像です。ロゴのない銘柄に、または既存のロゴの代わりに使います。PNG、JPG、WebP、GIF、SVG で最大1 MB、正方形の画像が最適です。設定フォルダーに保存され、ロゴをオフにしても表示されます。",
+                    "data": {
+                        "file": "画像",
+                        "remove_logo": "アップロードしたロゴを削除"
+                    },
+                    "data_description": {
+                        "remove_logo": "銘柄本来のロゴに戻します。新しい画像をアップロードした場合は無視されます。"
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView リンク",
+                    "description": "カードは {name} の詳細を TradingView のページにリンクします。**{symbol} について判定されたシンボル: {found}。** フィールドには使用中のシンボルが表示されます。TradingView の表記どおりに、取引所、コロン、ティッカーの順で独自のものに変更できます (例: NASDAQ:AAPL)。空欄にすると判定されたシンボルに戻り、それもない場合はリンクを表示しません。",
+                    "data": {
+                        "tradingview": "TradingView シンボル"
+                    }
+                },
+                "move": {
+                    "title": "別のグループへ移動",
+                    "description": "{name}: 所属するグループです。ウォッチリストでは、購入は保持されますが合計されません。",
+                    "data": {
+                        "group": "グループ"
+                    }
+                },
+                "alerts": {
+                    "title": "価格アラート",
+                    "description": "{name}: 価格がしきい値に達しているか超えている間、アラートは発生中になります。しきい値ごとにバイナリセンサーが作成されます。通知先は統合の設定で指定します。しきい値が不要な場合は空欄にします。",
+                    "data": {
+                        "alert_below": "以下 ({currency})",
+                        "alert_above": "以上 ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "色",
+                    "description": "{name}: カードでポートフォリオの比率を表示するときの色です。独自の色にするには、検索欄に #009999 のような値を入力します。空欄の場合はカードが色を割り当てます。",
+                    "data": {
+                        "color": "色"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "どのポートフォリオへ?",
+                    "description": "{name}: 購入により、銘柄はウォッチリストからポートフォリオへ移動します。センサーは変わりません。",
+                    "data": {
+                        "target": "ポートフォリオ",
+                        "name": "新しいポートフォリオの名前"
+                    },
+                    "data_description": {
+                        "name": "新しいポートフォリオの場合のみ。空欄の場合は「ポートフォリオ」という名前になります。"
+                    }
+                },
+                "sold_out": {
+                    "title": "すべて売却済み",
+                    "description": "{name}: 保有はなくなりました。購入と売却の記録と、それによる実現損益 ({realized}) は銘柄に残ります。",
+                    "data": {
+                        "after_sale": "次はどうしますか?"
+                    },
+                    "data_description": {
+                        "after_sale": "矢印付きのフォルダーを選ぶと、銘柄はそのウォッチリストへ移動します。"
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "ソースに接続できませんでした。しばらくしてからもう一度お試しください。",
+                "nothing_found": "見つかりませんでした。別の表記、シンボル、または ISIN をお試しください。",
+                "already_configured": "この取引市場はすでに追加されています。",
+                "invalid_lot": "0より大きい数量と価格を入力してください。",
+                "logo_wrong_type": "対応していない画像形式です。PNG、JPG、WebP、GIF、SVG を使用してください。",
+                "logo_too_large": "画像が1 MB を超えています。",
+                "invalid_tradingview": "TradingView シンボルではありません。NASDAQ:AAPL のように、取引所、コロン、ティッカーの順で入力してください。",
+                "invalid_color": "色を選ぶか、#009999 のような値を入力してください。",
+                "group_exists": "この名前のグループはすでに存在します。",
+                "sell_too_many": "保有数量を超えています。"
+            },
+            "abort": {
+                "reconfigure_successful": "銘柄を更新しました。"
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "最終更新"
+            },
+            "position_value": {
+                "name": "ポジション評価額"
+            },
+            "position_gain": {
+                "name": "損益"
+            },
+            "total_value": {
+                "name": "合計評価額"
+            },
+            "total_gain": {
+                "name": "合計損益"
+            },
+            "group_value": {
+                "name": "{group} 評価額"
+            },
+            "group_gain": {
+                "name": "{group} 損益"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "下限アラート"
+            },
+            "alert_above": {
+                "name": "上限アラート"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} が応答しません",
+            "description": "**{source}** が {count} 回連続で応答していません。最後の理由:\n\n`{reason}`\n\nその銘柄は最後の相場を、それぞれの時刻とともに保持します。同じ銘柄を扱う別のソースがあれば、そちらが代わりに使われます。対応は不要です。ソースが次に応答すると相場は戻り、この修復項目も消えます。"
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB 参照レート - 通貨ペア、1日1回",
+                "goldapi": "gold-api.com - 金、銀、プラチナ、パラジウム、銅のスポット価格",
+                "kraken": "Kraken - 暗号資産",
+                "yahoo": "Yahoo Finance - 株式、ファンド、インデックス、先物、通貨、暗号資産",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra とフランクフルト"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "ポートフォリオ - 購入を合計",
+                "watchlist": "ウォッチリスト - 監視のみ"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "ポートフォリオに残す",
+                "new": "📂 新しいウォッチリストへ移動",
+                "delete": "🗑️ 銘柄を削除"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ 新しいポートフォリオを作成"
+            }
+        }
+    }
+}

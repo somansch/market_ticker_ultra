@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Adicionar grupo",
+                "description": "Um grupo reúne ativos. Uma carteira soma o que você possui; uma watchlist é só acompanhada e não entra em nenhuma soma. Os ativos são adicionados depois, com **Adicionar ativo**.",
+                "data": {
+                    "name": "Nome",
+                    "kind": "Tipo",
+                    "benchmark": "Índice de comparação"
+                },
+                "data_description": {
+                    "benchmark": "Para uma carteira: o índice ao lado do qual o desempenho dela aparece no cartão. Escolha um ou digite qualquer símbolo do Yahoo Finance. Vazio não compara com nenhum."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Cotações de ações, fundos, índices, commodities, moedas e criptomoedas de fontes públicas - sem conta, sem chave de API. Os ativos são adicionados depois, um a um, com **Adicionar ativo** na página da integração.",
+                "data": {
+                    "scan_interval": "Intervalo de atualização",
+                    "logos": "Logos",
+                    "base_currency": "Moeda base",
+                    "sources": "Fontes"
+                },
+                "data_description": {
+                    "scan_interval": "Com que frequência as cotações são buscadas enquanto um mercado está aberto. Com todos os mercados fechados, são buscadas no máximo a cada 30 minutos.",
+                    "logos": "Mostra cada ativo com seu logo no cartão. Os logos são carregados pelo navegador a partir da Elbstream, creditada por eles - \"Logos by Elbstream\" - no editor do cartão e no README. Desativado, o cartão mostra iniciais e os logos que você mesmo enviou.",
+                    "base_currency": "A moeda em que todas as posições são somadas, como código de três letras - EUR, USD, CHF. Posições em outras moedas são convertidas pela taxa de referência diária do Banco Central Europeu.",
+                    "sources": "De onde as cotações podem vir. Uma fonte desativada não é consultada: a busca não encontra nada nela, e um ativo adicionado a partir dela é cotado por outra fonte que liste o mesmo ativo ou, se não houver, mantém sua última cotação."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "As configurações já existem."
+        },
+        "error": {
+            "invalid_currency": "Três letras, como EUR ou USD.",
+            "no_source": "É necessária pelo menos uma fonte.",
+            "invalid_benchmark": "O Yahoo Finance não tem série de preços para este símbolo."
+        },
+        "initiate_flow": {
+            "user": "Adicionar grupo"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Geral",
+                    "sources": "🌐 Fontes de dados",
+                    "alert_targets": "🔔 Alertas de preço: destinatários",
+                    "alert_texts": "✏️ Alertas de preço: textos"
+                }
+            },
+            "general": {
+                "title": "Geral",
+                "data": {
+                    "scan_interval": "Intervalo de atualização",
+                    "base_currency": "Moeda base",
+                    "logos": "Logos"
+                },
+                "data_description": {
+                    "scan_interval": "Com que frequência as cotações são buscadas enquanto um mercado está aberto. Com todos os mercados fechados, são buscadas no máximo a cada 30 minutos.",
+                    "base_currency": "A moeda em que todas as posições são somadas, como código de três letras - EUR, USD, CHF. Posições em outras moedas são convertidas pela taxa de referência diária do Banco Central Europeu.",
+                    "logos": "Mostra cada ativo com seu logo no cartão. Os logos são carregados pelo navegador a partir da Elbstream, creditada por eles - \"Logos by Elbstream\" - no editor do cartão e no README. Desativado, o cartão mostra iniciais e os logos que você mesmo enviou."
+                }
+            },
+            "sources": {
+                "title": "Fontes de dados",
+                "data": {
+                    "sources": "Fontes",
+                    "news_google": "Notícias também do Google News"
+                },
+                "data_description": {
+                    "sources": "De onde as cotações podem vir. Uma fonte desativada não é consultada: a busca não encontra nada nela, e um ativo adicionado a partir dela é cotado por outra fonte que liste o mesmo ativo ou, se não houver, mantém sua última cotação.",
+                    "news_google": "Também procura o nome do ativo no Google News. Encontra mais manchetes que o Yahoo Finance, e algumas sobre outros assuntos."
+                }
+            },
+            "alert_targets": {
+                "title": "Alertas de preço: destinatários",
+                "description": "Quem é avisado quando um alerta de preço é disparado. Todo alerta também dispara o evento market_ticker_ultra_alert, para automações.",
+                "data": {
+                    "alert_persistent": "Notificação no Home Assistant",
+                    "alert_notify": "Avisar sobre alertas de preço",
+                    "alert_services": "Serviços de notificação para alertas de preço",
+                    "alert_speakers": "Anunciar alertas de preço em",
+                    "alert_tts": "Voz dos anúncios",
+                    "alert_test": "Enviar uma mensagem de teste agora"
+                },
+                "data_description": {
+                    "alert_persistent": "Também cria uma notificação no próprio Home Assistant quando um alerta de preço é disparado.",
+                    "alert_notify": "As entidades de notificação que recebem uma mensagem quando um alerta de preço é disparado - um celular com o Companion App, por exemplo.",
+                    "alert_services": "Serviços como notify.whatsapp ou notify.mail, para mensageiros e e-mail. Escolha na lista ou digite um nome.",
+                    "alert_speakers": "Os alto-falantes em que um alerta de preço é lido - um Sonos, por exemplo.",
+                    "alert_tts": "A voz de conversão de texto em fala que lê o alerta. Vazio usa a primeira disponível.",
+                    "alert_test": "Envia uma mensagem de teste a todos os indicados acima ao salvar."
+                }
+            },
+            "alert_texts": {
+                "title": "Alertas de preço: textos",
+                "description": "O que um alerta de preço diz. Variáveis: {name}, {symbol}, {price} e {limit} (cada uma com sua moeda), {currency}, {direction} (\"igual ou abaixo de\" / \"igual ou acima de\") e {change} (a variação do dia em percentual). Um campo vazio volta ao padrão.",
+                "data": {
+                    "alert_title": "Título",
+                    "alert_message": "Mensagem",
+                    "alert_spoken": "Anúncio",
+                    "alert_test": "Enviar uma mensagem de teste agora"
+                },
+                "data_description": {
+                    "alert_title": "O título de uma notificação.",
+                    "alert_message": "O texto de uma notificação.",
+                    "alert_spoken": "O que é lido nos alto-falantes.",
+                    "alert_test": "Envia uma mensagem de teste com estes textos a todos os destinatários ao salvar."
+                }
+            },
+            "group": {
+                "title": "Grupo",
+                "description": "O nome do grupo e se ele é uma carteira ou uma watchlist. Numa watchlist, as compras dos ativos são mantidas, mas não contadas.",
+                "data": {
+                    "name": "Nome",
+                    "kind": "Tipo",
+                    "benchmark": "Índice de comparação"
+                },
+                "data_description": {
+                    "benchmark": "Para uma carteira: o índice ao lado do qual o desempenho dela aparece no cartão. Escolha um ou digite qualquer símbolo do Yahoo Finance. Vazio não compara com nenhum."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Três letras, como EUR ou USD.",
+            "no_source": "É necessária pelo menos uma fonte.",
+            "invalid_benchmark": "O Yahoo Finance não tem série de preços para este símbolo."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Ativo",
+            "initiate_flow": {
+                "user": "Adicionar ativo",
+                "reconfigure": "Editar ativo"
+            },
+            "step": {
+                "user": {
+                    "title": "Buscar um ativo",
+                    "description": "Busque por nome, símbolo ou ISIN - uma ação, um fundo, um índice, uma commodity, um par de moedas ou uma criptomoeda. Todas as fontes são consultadas: Yahoo Finance para quase tudo, Börse Frankfurt para a Xetra por ISIN, a taxa de referência do BCE para um par de moedas, Kraken para uma criptomoeda, gold-api.com para o preço à vista de um metal.",
+                    "data": {
+                        "query": "Nome, símbolo ou ISIN"
+                    },
+                    "data_description": {
+                        "query": "Por exemplo: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, ouro."
+                    }
+                },
+                "listing": {
+                    "title": "Escolha a listagem",
+                    "description": "Encontrado para \"{query}\". O mesmo ativo costuma ser listado em várias bolsas e fontes, em moedas diferentes. Cada linha termina com o último preço ali e a sua origem; uma data após o preço indica que ele não é de hoje.",
+                    "data": {
+                        "listing": "Listagem"
+                    }
+                },
+                "holding": {
+                    "title": "Sua posição",
+                    "description": "Quanto você possui de **{name}** - ou deixe tudo vazio para apenas acompanhá-lo. Outras compras podem ser adicionadas depois, em **Editar ativo**.",
+                    "data": {
+                        "quantity": "Quantidade",
+                        "price": "Preço de compra por unidade ({currency})",
+                        "date": "Data da compra",
+                        "fees": "Taxas ({currency})",
+                        "taxes": "Impostos ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Quantas ações, cotas ou criptomoedas.",
+                        "price": "Quanto custou cada uma, na moeda em que esta listagem é cotada.",
+                        "date": "Opcional. Define apenas a ordem em que compras e vendas são contadas.",
+                        "fees": "Opcional. Quanto a compra ou venda custou em taxas.",
+                        "taxes": "Opcional. Quanto foi pago de impostos sobre ela."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - compras registradas: {count}; posição: {quantity} a um preço médio de {average}; realizado: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Renomear",
+                        "move": "📂 Mover para outro grupo",
+                        "add_lot": "➕ Adicionar uma compra",
+                        "sell_lot": "➖ Adicionar uma venda",
+                        "remove_lots": "🗑️ Remover compras e vendas",
+                        "alerts": "🔔 Alertas de preço",
+                        "color": "🎨 Cor",
+                        "logo": "🖼️ Logo próprio",
+                        "tradingview": "📈 Link do TradingView"
+                    }
+                },
+                "rename": {
+                    "title": "Renomear ativo",
+                    "description": "O nome de {symbol}: como se chamam o dispositivo e os sensores dele.",
+                    "data": {
+                        "name": "Nome"
+                    }
+                },
+                "add_lot": {
+                    "title": "Adicionar uma compra",
+                    "description": "{name} - lançamentos até agora: {count}; posição: {quantity} a um preço médio de {average}.",
+                    "data": {
+                        "quantity": "Quantidade comprada",
+                        "price": "Preço de compra unitário ({currency})",
+                        "date": "Data da compra",
+                        "add_another": "Adicionar outra em seguida",
+                        "fees": "Taxas ({currency})",
+                        "taxes": "Impostos ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Quantas ações, cotas ou criptomoedas foram compradas.",
+                        "price": "Quanto custou cada uma, na moeda em que esta listagem é negociada.",
+                        "date": "Opcional. Define apenas a ordem em que compras e vendas são contadas.",
+                        "fees": "Opcional. Quanto a compra custou em taxas.",
+                        "taxes": "Opcional. Quanto foi pago de impostos sobre ela."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Adicionar uma venda",
+                    "description": "{name} - lançamentos até agora: {count}; posição: {quantity} a um preço médio de {average}.",
+                    "data": {
+                        "quantity": "Quantidade vendida",
+                        "price": "Preço de venda unitário ({currency})",
+                        "date": "Data da venda",
+                        "add_another": "Adicionar outra em seguida",
+                        "fees": "Taxas ({currency})",
+                        "taxes": "Impostos ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Quantas foram vendidas. Saem da posição pelo preço médio até então.",
+                        "price": "Quanto rendeu cada uma, na moeda em que esta listagem é negociada.",
+                        "date": "Vazio significa hoje. Define a ordem em que compras e vendas são contadas.",
+                        "fees": "Opcional. Quanto a venda custou em taxas.",
+                        "taxes": "Opcional. Quanto foi pago de impostos sobre ela."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Remover compras e vendas",
+                    "description": "{name}: marque o que deve sair. Remover todas deixa um ativo apenas acompanhado.",
+                    "data": {
+                        "remove": "Lançamentos"
+                    }
+                },
+                "logo": {
+                    "title": "Logo próprio",
+                    "description": "{name}: uma imagem sua - para um ativo sem logo, ou no lugar do que ele tem. PNG, JPG, WebP, GIF ou SVG, até 1 MB; uma imagem quadrada fica melhor. Ela é guardada na sua pasta de configuração e aparece mesmo com os logos desativados.",
+                    "data": {
+                        "file": "Imagem",
+                        "remove_logo": "Remover o logo enviado"
+                    },
+                    "data_description": {
+                        "remove_logo": "Volta ao logo que o ativo tem sem ele. Ignorado quando uma nova imagem é enviada."
+                    }
+                },
+                "tradingview": {
+                    "title": "Link do TradingView",
+                    "description": "O cartão liga os detalhes de {name} à página dele no TradingView. **O símbolo determinado para {symbol}: {found}.** O campo mostra o símbolo em uso. Troque-o pelo seu, como o TradingView o escreve - a bolsa, dois-pontos, o ticker, como NASDAQ:AAPL. Vazio volta ao determinado; onde não houver nenhum, o cartão não mostra link.",
+                    "data": {
+                        "tradingview": "Símbolo do TradingView"
+                    }
+                },
+                "move": {
+                    "title": "Mover para outro grupo",
+                    "description": "{name}: o grupo em que ele está. Numa watchlist, as compras dele são mantidas, mas não contadas.",
+                    "data": {
+                        "group": "Grupo"
+                    }
+                },
+                "alerts": {
+                    "title": "Alertas de preço",
+                    "description": "{name}: um alerta fica ativo enquanto o preço estiver no limite ou além dele. Cada limite ganha um sensor binário; quem é avisado é definido nas configurações da integração. Deixe um campo vazio para não ter limite.",
+                    "data": {
+                        "alert_below": "Igual ou abaixo de ({currency})",
+                        "alert_above": "Igual ou acima de ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Cor",
+                    "description": "{name}: a cor em que ele aparece quando um cartão mostra as participações de uma carteira. Digite um valor como #009999 na busca para uma cor própria. Vazio, o cartão escolhe uma.",
+                    "data": {
+                        "color": "Cor"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Para qual carteira?",
+                    "description": "{name}: com uma compra, o ativo passa da watchlist para uma carteira. Os sensores dele continuam os mesmos.",
+                    "data": {
+                        "target": "Carteira",
+                        "name": "Nome da nova carteira"
+                    },
+                    "data_description": {
+                        "name": "Só para uma nova carteira. Vazio a chama de “Carteira”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Tudo vendido",
+                    "description": "{name}: não há mais posição. Compras e vendas ficam com o ativo, e com elas o que ele rendeu ({realized}).",
+                    "data": {
+                        "after_sale": "E agora?"
+                    },
+                    "data_description": {
+                        "after_sale": "Uma pasta com uma seta move o ativo para essa watchlist."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Não foi possível acessar a fonte. Tente novamente em instantes.",
+                "nothing_found": "Nada encontrado. Tente outra grafia, o símbolo ou o ISIN.",
+                "already_configured": "Esta listagem já foi adicionada.",
+                "invalid_lot": "Informe uma quantidade acima de 0 e um preço.",
+                "logo_wrong_type": "Tipo de imagem não aceito. Use PNG, JPG, WebP, GIF ou SVG.",
+                "logo_too_large": "A imagem tem mais de 1 MB.",
+                "invalid_tradingview": "Não é um símbolo do TradingView. Escreva a bolsa, dois-pontos e o ticker, como NASDAQ:AAPL.",
+                "invalid_color": "Escolha uma das cores ou digite um valor como #009999.",
+                "group_exists": "Já existe um grupo com este nome.",
+                "sell_too_many": "Isso é mais do que você possui."
+            },
+            "abort": {
+                "reconfigure_successful": "O ativo foi atualizado."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Última atualização"
+            },
+            "position_value": {
+                "name": "Valor da posição"
+            },
+            "position_gain": {
+                "name": "Ganho"
+            },
+            "total_value": {
+                "name": "Valor total"
+            },
+            "total_gain": {
+                "name": "Ganho total"
+            },
+            "group_value": {
+                "name": "Valor de {group}"
+            },
+            "group_gain": {
+                "name": "Ganho de {group}"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alerta abaixo"
+            },
+            "alert_above": {
+                "name": "Alerta acima"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} não responde",
+            "description": "**{source}** não respondeu {count} vezes seguidas. O último motivo:\n\n`{reason}`\n\nOs ativos dela mantêm as últimas cotações, cada uma com o horário de origem; onde outra fonte cota o mesmo ativo, ela a substitui. Não é preciso fazer nada: as cotações voltam com a próxima resposta da fonte, e este reparo some junto."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "Taxas de referência do BCE - pares de moedas, uma vez por dia",
+                "goldapi": "gold-api.com - preços à vista de ouro, prata, platina, paládio, cobre",
+                "kraken": "Kraken - criptomoedas",
+                "yahoo": "Yahoo Finance - ações, fundos, índices, futuros, moedas, criptomoedas",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra e Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Carteira - as compras são somadas",
+                "watchlist": "Watchlist - apenas acompanhada"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Manter na carteira",
+                "new": "📂 Mover para uma nova watchlist",
+                "delete": "🗑️ Remover o ativo"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Criar uma nova carteira"
+            }
+        }
+    }
+}

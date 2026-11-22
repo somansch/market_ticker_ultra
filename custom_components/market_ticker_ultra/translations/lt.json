@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Pridėti grupę",
+                "description": "Grupėje laikomos priemonės. Portfelis sumuoja tai, kas turima; stebimų sąrašas tik stebimas ir į jokią sumą neįskaičiuojamas. Priemonės į ją pridedamos vėliau, mygtuku **Pridėti priemonę**.",
+                "data": {
+                    "name": "Pavadinimas",
+                    "kind": "Rūšis",
+                    "benchmark": "Lyginamasis indeksas"
+                },
+                "data_description": {
+                    "benchmark": "Portfeliui: indeksas, šalia kurio kortelėje rodoma jo grąža. Pasirinkite vieną arba įveskite bet kurį Yahoo Finance simbolį. Tuščia – be palyginimo."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Akcijų, fondų, indeksų, žaliavų, valiutų ir kriptovaliutų kursai iš viešų šaltinių – be paskyros, be API rakto. Priemonės pridedamos vėliau, po vieną, mygtuku **Pridėti priemonę** integracijos puslapyje.",
+                "data": {
+                    "scan_interval": "Atnaujinimo intervalas",
+                    "logos": "Logotipai",
+                    "base_currency": "Bazinė valiuta",
+                    "sources": "Šaltiniai"
+                },
+                "data_description": {
+                    "scan_interval": "Kaip dažnai gaunami kursai, kol rinka atvira. Kol visos rinkos uždarytos, jie gaunami ne dažniau kaip kas 30 minučių.",
+                    "logos": "Rodyti kiekvieną priemonę kortelėje su jos logotipu. Logotipus naršyklė įkelia iš Elbstream, kuri kaip jų šaltinis nurodoma – „Logos by Elbstream“ – kortelės redaktoriuje ir README. Išjungus kortelė rodo inicialus ir jūsų įkeltus logotipus.",
+                    "base_currency": "Valiuta, kuria sumuojamos visos pozicijos, trijų raidžių kodu – EUR, USD, CHF. Kitų valiutų pozicijos perskaičiuojamos pagal ECB dienos orientacinį kursą.",
+                    "sources": "Iš kur gali būti gaunami kursai. Išjungtas šaltinis neklausiamas: paieška jame nieko neranda, o iš jo pridėtą priemonę kotiruoja kitas šaltinis, jei jame yra ta pati priemonė, kitaip ji išlaiko paskutinį kursą."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Nustatymai jau yra."
+        },
+        "error": {
+            "invalid_currency": "Trys raidės, pvz., EUR arba USD.",
+            "no_source": "Reikia bent vieno šaltinio.",
+            "invalid_benchmark": "Yahoo Finance neturi šio simbolio kainų sekos."
+        },
+        "initiate_flow": {
+            "user": "Pridėti grupę"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Bendra",
+                    "sources": "🌐 Duomenų šaltiniai",
+                    "alert_targets": "🔔 Kainos įspėjimai: gavėjai",
+                    "alert_texts": "✏️ Kainos įspėjimai: tekstai"
+                }
+            },
+            "general": {
+                "title": "Bendra",
+                "data": {
+                    "scan_interval": "Atnaujinimo intervalas",
+                    "base_currency": "Bazinė valiuta",
+                    "logos": "Logotipai"
+                },
+                "data_description": {
+                    "scan_interval": "Kaip dažnai gaunami kursai, kol rinka atvira. Kol visos rinkos uždarytos, jie gaunami ne dažniau kaip kas 30 minučių.",
+                    "base_currency": "Valiuta, kuria sumuojamos visos pozicijos, trijų raidžių kodu – EUR, USD, CHF. Kitų valiutų pozicijos perskaičiuojamos pagal ECB dienos orientacinį kursą.",
+                    "logos": "Rodyti kiekvieną priemonę kortelėje su jos logotipu. Logotipus naršyklė įkelia iš Elbstream, kuri kaip jų šaltinis nurodoma – „Logos by Elbstream“ – kortelės redaktoriuje ir README. Išjungus kortelė rodo inicialus ir jūsų įkeltus logotipus."
+                }
+            },
+            "sources": {
+                "title": "Duomenų šaltiniai",
+                "data": {
+                    "sources": "Šaltiniai",
+                    "news_google": "Naujienos ir iš Google News"
+                },
+                "data_description": {
+                    "sources": "Iš kur gali būti gaunami kursai. Išjungtas šaltinis neklausiamas: paieška jame nieko neranda, o iš jo pridėtą priemonę kotiruoja kitas šaltinis, jei jame yra ta pati priemonė, kitaip ji išlaiko paskutinį kursą.",
+                    "news_google": "Taip pat ieško priemonės pavadinimo Google News. Randa daugiau antraščių nei Yahoo Finance, ir kai kurias – apie ką nors kita."
+                }
+            },
+            "alert_targets": {
+                "title": "Kainos įspėjimai: gavėjai",
+                "description": "Kam pranešama, kai suveikia kainos įspėjimas. Kiekvienas įspėjimas taip pat sukelia įvykį market_ticker_ultra_alert automatizavimams.",
+                "data": {
+                    "alert_persistent": "Pranešimas Home Assistant",
+                    "alert_notify": "Pranešti apie kainos įspėjimus",
+                    "alert_services": "Pranešimų paslaugos kainos įspėjimams",
+                    "alert_speakers": "Skelbti kainos įspėjimus per",
+                    "alert_tts": "Balsas skelbimams",
+                    "alert_test": "Siųsti bandomąjį pranešimą dabar"
+                },
+                "data_description": {
+                    "alert_persistent": "Suveikus kainos įspėjimui, taip pat įdeda pranešimą pačiame Home Assistant.",
+                    "alert_notify": "Pranešimų subjektai, gaunantys žinutę, kai suveikia kainos įspėjimas – pavyzdžiui, telefonas su Companion App.",
+                    "alert_services": "Paslaugos, pvz., notify.whatsapp ar notify.mail, pokalbių programoms ir el. paštui. Pasirinkite iš sąrašo arba įveskite pavadinimą.",
+                    "alert_speakers": "Garsiakalbiai, per kuriuos perskaitomas kainos įspėjimas – pavyzdžiui, Sonos.",
+                    "alert_tts": "Teksto vertimo į kalbą balsas, kuriuo ištariamas įspėjimas. Tuščia – pirmasis esamas.",
+                    "alert_test": "Išsaugojus siunčia bandomąjį pranešimą visiems aukščiau nurodytiems."
+                }
+            },
+            "alert_texts": {
+                "title": "Kainos įspėjimai: tekstai",
+                "description": "Ką sako kainos įspėjimas. Kintamieji: {name}, {symbol}, {price} ir {limit} (kiekvienas su valiuta), {currency}, {direction} („ties arba žemiau“ / „ties arba aukščiau“) ir {change} (dienos pokytis procentais). Tuščias laukas vėl naudoja numatytąjį.",
+                "data": {
+                    "alert_title": "Pavadinimas",
+                    "alert_message": "Žinutė",
+                    "alert_spoken": "Skelbimas",
+                    "alert_test": "Siųsti bandomąjį pranešimą dabar"
+                },
+                "data_description": {
+                    "alert_title": "Pranešimo antraštė.",
+                    "alert_message": "Pranešimo tekstas.",
+                    "alert_spoken": "Kas perskaitoma per garsiakalbius.",
+                    "alert_test": "Išsaugojus siunčia bandomąjį pranešimą su šiais tekstais visiems gavėjams."
+                }
+            },
+            "group": {
+                "title": "Grupė",
+                "description": "Grupės pavadinimas ir ar tai portfelis, ar stebimų sąrašas. Stebimų sąraše priemonių pirkimai išsaugomi, bet neįskaičiuojami.",
+                "data": {
+                    "name": "Pavadinimas",
+                    "kind": "Rūšis",
+                    "benchmark": "Lyginamasis indeksas"
+                },
+                "data_description": {
+                    "benchmark": "Portfeliui: indeksas, šalia kurio kortelėje rodoma jo grąža. Pasirinkite vieną arba įveskite bet kurį Yahoo Finance simbolį. Tuščia – be palyginimo."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Trys raidės, pvz., EUR arba USD.",
+            "no_source": "Reikia bent vieno šaltinio.",
+            "invalid_benchmark": "Yahoo Finance neturi šio simbolio kainų sekos."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Priemonė",
+            "initiate_flow": {
+                "user": "Pridėti priemonę",
+                "reconfigure": "Redaguoti priemonę"
+            },
+            "step": {
+                "user": {
+                    "title": "Rasti priemonę",
+                    "description": "Ieškokite pagal pavadinimą, simbolį arba ISIN – akciją, fondą, indeksą, žaliavą, valiutų porą ar kriptovaliutą. Klausiami visi šaltiniai: Yahoo Finance beveik viskam, Börse Frankfurt – Xetra pagal ISIN, ECB orientacinis kursas – valiutų porai, Kraken – kriptovaliutai, gold-api.com – metalo neatidėliotinų sandorių kainai.",
+                    "data": {
+                        "query": "Pavadinimas, simbolis arba ISIN"
+                    },
+                    "data_description": {
+                        "query": "Pavyzdžiui: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, gold."
+                    }
+                },
+                "listing": {
+                    "title": "Pasirinkite kotiravimą",
+                    "description": "Rasta pagal „{query}“. Ta pati priemonė dažnai kotiruojama keliose biržose ir šaltiniuose, skirtingomis valiutomis. Kiekviena eilutė baigiasi paskutine ten esančia kaina ir jos šaltiniu; data po kainos reiškia, kad ji ne šiandienos.",
+                    "data": {
+                        "listing": "Kotiravimas"
+                    }
+                },
+                "holding": {
+                    "title": "Jūsų pozicija",
+                    "description": "Kiek turite **{name}** – arba palikite viską tuščią, kad tik stebėtumėte. Kitus pirkimus galima pridėti vėliau, skiltyje **Redaguoti priemonę**.",
+                    "data": {
+                        "quantity": "Kiekis",
+                        "price": "Pirkimo kaina už vienetą ({currency})",
+                        "date": "Pirkimo data",
+                        "fees": "Komisiniai ({currency})",
+                        "taxes": "Mokesčiai ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kiek akcijų, vienetų ar monetų.",
+                        "price": "Kiek kainavo vienas vienetas, ta valiuta, kuria pateikiama šio kotiravimo kaina.",
+                        "date": "Neprivaloma. Lemia tik tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
+                        "fees": "Neprivaloma. Kiek pirkimas ar pardavimas kainavo komisinių.",
+                        "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} – įvesta pirkimų: {count}; turima: {quantity} vidutine kaina {average}; realizuota: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Pervadinti",
+                        "move": "📂 Perkelti į kitą grupę",
+                        "add_lot": "➕ Pridėti pirkimą",
+                        "sell_lot": "➖ Pridėti pardavimą",
+                        "remove_lots": "🗑️ Pašalinti pirkimus ir pardavimus",
+                        "alerts": "🔔 Kainos įspėjimai",
+                        "color": "🎨 Spalva",
+                        "logo": "🖼️ Savas logotipas",
+                        "tradingview": "📈 TradingView nuoroda"
+                    }
+                },
+                "rename": {
+                    "title": "Pervadinti priemonę",
+                    "description": "{symbol} pavadinimas: kaip vadinamas jo įrenginys ir jutikliai.",
+                    "data": {
+                        "name": "Pavadinimas"
+                    }
+                },
+                "add_lot": {
+                    "title": "Pridėti pirkimą",
+                    "description": "{name} – iki šiol įvesta: {count}; turima: {quantity} vidutine kaina {average}.",
+                    "data": {
+                        "quantity": "Nupirktas kiekis",
+                        "price": "Pirkimo kaina už vienetą ({currency})",
+                        "date": "Pirkimo data",
+                        "add_another": "Po šio pridėti dar vieną",
+                        "fees": "Komisiniai ({currency})",
+                        "taxes": "Mokesčiai ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kiek akcijų, vienetų ar monetų nupirkta.",
+                        "price": "Kiek kainavo vienas vienetas, ta valiuta, kuria prekiaujama šiame kotiravime.",
+                        "date": "Neprivaloma. Lemia tik tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
+                        "fees": "Neprivaloma. Kiek pirkimas kainavo komisinių.",
+                        "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Pridėti pardavimą",
+                    "description": "{name} – iki šiol įvesta: {count}; turima: {quantity} vidutine kaina {average}.",
+                    "data": {
+                        "quantity": "Parduotas kiekis",
+                        "price": "Pardavimo kaina už vienetą ({currency})",
+                        "date": "Pardavimo data",
+                        "add_another": "Po šio pridėti dar vieną",
+                        "fees": "Komisiniai ({currency})",
+                        "taxes": "Mokesčiai ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kiek parduota. Jie pašalinami iš pozicijos iki šiol buvusia vidutine kaina.",
+                        "price": "Kiek gauta už vieną vienetą, ta valiuta, kuria prekiaujama šiame kotiravime.",
+                        "date": "Tuščia reiškia šiandien. Nustato tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
+                        "fees": "Neprivaloma. Kiek pardavimas kainavo komisinių.",
+                        "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Pašalinti pirkimus ir pardavimus",
+                    "description": "{name}: pažymėkite, ką pašalinti. Pašalinus visus lieka tik stebima priemonė.",
+                    "data": {
+                        "remove": "Įvesta"
+                    }
+                },
+                "logo": {
+                    "title": "Savas logotipas",
+                    "description": "{name}: jūsų paveikslėlis – priemonei, neturinčiai logotipo, arba vietoj esamo. PNG, JPG, WebP, GIF ar SVG, iki 1 MB; geriausiai tinka kvadratinis paveikslėlis. Jis saugomas jūsų konfigūracijos aplanke ir rodomas net išjungus logotipus.",
+                    "data": {
+                        "file": "Paveikslėlis",
+                        "remove_logo": "Pašalinti įkeltą logotipą"
+                    },
+                    "data_description": {
+                        "remove_logo": "Grąžina logotipą, kurį priemonė turi be jo. Nepaisoma, kai įkeliamas naujas paveikslėlis."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView nuoroda",
+                    "description": "Kortelė susieja {name} išsamią informaciją su jos puslapiu TradingView. **Simbolis, nustatytas {symbol}: {found}.** Laukelyje rodomas naudojamas simbolis. Pakeiskite jį savu, taip, kaip jį rašo TradingView – birža, dvitaškis, tikeris, pvz., NASDAQ:AAPL. Tuščia grąžina nustatytąjį; kur jo nėra, kortelė nuorodos nerodo.",
+                    "data": {
+                        "tradingview": "TradingView simbolis"
+                    }
+                },
+                "move": {
+                    "title": "Perkelti į kitą grupę",
+                    "description": "{name}: grupė, kurioje ji yra. Stebimų sąraše jos pirkimai išsaugomi, bet neįskaičiuojami.",
+                    "data": {
+                        "group": "Grupė"
+                    }
+                },
+                "alerts": {
+                    "title": "Kainos įspėjimai",
+                    "description": "{name}: įspėjimas suveikęs, kol kaina yra ties riba arba už jos. Kiekviena riba gauna dvejetainį jutiklį; kam pranešama, nustatoma integracijos nustatymuose. Palikite lauką tuščią, jei ribos nereikia.",
+                    "data": {
+                        "alert_below": "Ties arba žemiau ({currency})",
+                        "alert_above": "Ties arba aukščiau ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Spalva",
+                    "description": "{name}: spalva, kuria ji piešiama, kai kortelė rodo portfelio dalis. Savai spalvai paieškoje įveskite reikšmę, pvz., #009999. Tuščia – kortelė parenka spalvą pati.",
+                    "data": {
+                        "color": "Spalva"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Į kurį portfelį?",
+                    "description": "{name}: su pirkimu priemonė iš stebimų sąrašo perkeliama į portfelį. Jos jutikliai lieka tie patys.",
+                    "data": {
+                        "target": "Portfelis",
+                        "name": "Naujo portfelio pavadinimas"
+                    },
+                    "data_description": {
+                        "name": "Tik naujam portfeliui. Tuščia – pavadinama „Portfelis“."
+                    }
+                },
+                "sold_out": {
+                    "title": "Viskas parduota",
+                    "description": "{name}: nieko nebeturima. Pirkimai ir pardavimai lieka su priemone, o kartu ir tai, ką ji uždirbo ({realized}).",
+                    "data": {
+                        "after_sale": "Kas toliau?"
+                    },
+                    "data_description": {
+                        "after_sale": "Aplankas su rodykle perkelia priemonę į tą stebimų sąrašą."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Nepavyko pasiekti šaltinio. Bandykite dar kartą po akimirkos.",
+                "nothing_found": "Nieko nerasta. Bandykite kitą rašybą, simbolį arba ISIN.",
+                "already_configured": "Šis kotiravimas jau pridėtas.",
+                "invalid_lot": "Įveskite didesnį nei 0 kiekį ir kainą.",
+                "logo_wrong_type": "Toks paveikslėlis netinka. Naudokite PNG, JPG, WebP, GIF arba SVG.",
+                "logo_too_large": "Paveikslėlis didesnis nei 1 MB.",
+                "invalid_tradingview": "Tai ne TradingView simbolis. Parašykite biržą, dvitaškį ir tikerį, pvz., NASDAQ:AAPL.",
+                "invalid_color": "Pasirinkite vieną iš spalvų arba įveskite reikšmę, pvz., #009999.",
+                "group_exists": "Grupė tokiu pavadinimu jau yra.",
+                "sell_too_many": "Tai daugiau, nei turima."
+            },
+            "abort": {
+                "reconfigure_successful": "Priemonė atnaujinta."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Paskutinis atnaujinimas"
+            },
+            "position_value": {
+                "name": "Pozicijos vertė"
+            },
+            "position_gain": {
+                "name": "Pelnas"
+            },
+            "total_value": {
+                "name": "Bendra vertė"
+            },
+            "total_gain": {
+                "name": "Bendras pelnas"
+            },
+            "group_value": {
+                "name": "{group} vertė"
+            },
+            "group_gain": {
+                "name": "{group} pelnas"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Įspėjimas žemiau"
+            },
+            "alert_above": {
+                "name": "Įspėjimas aukščiau"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} neatsako",
+            "description": "**{source}** neatsako; nesėkmingų bandymų iš eilės: {count}. Paskutinė priežastis:\n\n`{reason}`\n\nJo priemonės išlaiko paskutinius kursus, kiekvienas su savo laiku; kur tą pačią priemonę kotiruoja kitas šaltinis, šis jį pavaduoja. Nieko daryti nereikia: kursai grįš su kitu šaltinio atsakymu, ir šis taisymas išnyks kartu."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB orientaciniai kursai – valiutų poros, kartą per dieną",
+                "goldapi": "gold-api.com – aukso, sidabro, platinos, paladžio, vario neatidėliotinų sandorių kainos",
+                "kraken": "Kraken – kriptovaliutos",
+                "yahoo": "Yahoo Finance – akcijos, fondai, indeksai, ateities sandoriai, valiutos, kriptovaliutos",
+                "boerse_frankfurt": "Börse Frankfurt – Xetra ir Frankfurtas"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfelis – pirkimai sumuojami",
+                "watchlist": "Stebimų sąrašas – tik stebima"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Palikti portfelyje",
+                "new": "📂 Perkelti į naują stebimų sąrašą",
+                "delete": "🗑️ Pašalinti priemonę"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Sukurti naują portfelį"
+            }
+        }
+    }
+}

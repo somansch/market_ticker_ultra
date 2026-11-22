@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Gruppe hinzufügen",
+                "description": "Eine Gruppe fasst Werte zusammen. Ein Depot summiert, was im Bestand ist; eine Watchlist wird nur beobachtet und zählt in keiner Summe. Werte kommen danach mit **Wert hinzufügen** hinein.",
+                "data": {
+                    "name": "Name",
+                    "kind": "Art",
+                    "benchmark": "Vergleichsindex"
+                },
+                "data_description": {
+                    "benchmark": "Für ein Depot: der Index, neben den die Karte seine Wertentwicklung stellt. Wähle einen aus oder tippe ein beliebiges Symbol von Yahoo Finance. Leer vergleicht mit keinem."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Kurse für Aktien, Fonds, Indizes, Rohstoffe, Währungen und Coins aus öffentlichen Quellen - ohne Konto, ohne API-Key. Die Werte kommen danach einzeln dazu, mit **Wert hinzufügen** auf der Seite der Integration.",
+                "data": {
+                    "scan_interval": "Aktualisierungsintervall",
+                    "logos": "Logos",
+                    "base_currency": "Basiswährung",
+                    "sources": "Quellen"
+                },
+                "data_description": {
+                    "scan_interval": "Wie oft die Kurse abgerufen werden, solange ein Markt geöffnet ist. Sind alle Märkte geschlossen, höchstens alle 30 Minuten.",
+                    "logos": "Zeigt jeden Wert auf der Karte mit seinem Logo. Die Logos lädt der Browser von Elbstream, das dafür genannt wird - \"Logos by Elbstream\" - im Editor der Karte und in der README. Ausgeschaltet zeigt die Karte Initialen und deine eigenen hochgeladenen Logos.",
+                    "base_currency": "Die Währung, in der alle Positionen zusammengezählt werden, als Kürzel mit drei Buchstaben - EUR, USD, CHF. Positionen in anderen Währungen werden zum täglichen Referenzkurs der Europäischen Zentralbank umgerechnet.",
+                    "sources": "Woher Kurse kommen dürfen. Eine ausgeschaltete Quelle wird nicht gefragt: Die Suche findet dort nichts, und ein Wert, der von ihr stammt, bekommt seinen Kurs von einer anderen Quelle, wenn eine denselben Wert führt - sonst behält er seinen letzten Kurs."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Die Einstellungen gibt es bereits."
+        },
+        "error": {
+            "invalid_currency": "Drei Buchstaben, zum Beispiel EUR oder USD.",
+            "no_source": "Mindestens eine Quelle wird gebraucht.",
+            "invalid_benchmark": "Yahoo Finance hat zu diesem Symbol keinen Kursverlauf."
+        },
+        "initiate_flow": {
+            "user": "Gruppe hinzufügen"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Allgemein",
+                    "sources": "🌐 Datenquellen",
+                    "alert_targets": "🔔 Kursalarme: Empfänger",
+                    "alert_texts": "✏️ Kursalarme: Texte"
+                }
+            },
+            "general": {
+                "title": "Allgemein",
+                "data": {
+                    "scan_interval": "Aktualisierungsintervall",
+                    "base_currency": "Basiswährung",
+                    "logos": "Logos"
+                },
+                "data_description": {
+                    "scan_interval": "Wie oft die Kurse abgerufen werden, solange ein Markt geöffnet ist. Sind alle Märkte geschlossen, höchstens alle 30 Minuten.",
+                    "base_currency": "Die Währung, in der alle Positionen zusammengezählt werden, als Kürzel mit drei Buchstaben - EUR, USD, CHF. Positionen in anderen Währungen werden zum täglichen Referenzkurs der Europäischen Zentralbank umgerechnet.",
+                    "logos": "Zeigt jeden Wert auf der Karte mit seinem Logo. Die Logos lädt der Browser von Elbstream, das dafür genannt wird - \"Logos by Elbstream\" - im Editor der Karte und in der README. Ausgeschaltet zeigt die Karte Initialen und deine eigenen hochgeladenen Logos."
+                }
+            },
+            "sources": {
+                "title": "Datenquellen",
+                "data": {
+                    "sources": "Quellen",
+                    "news_google": "News auch von Google News"
+                },
+                "data_description": {
+                    "sources": "Woher Kurse kommen dürfen. Eine ausgeschaltete Quelle wird nicht gefragt: Die Suche findet dort nichts, und ein Wert, der von ihr stammt, bekommt seinen Kurs von einer anderen Quelle, wenn eine denselben Wert führt - sonst behält er seinen letzten Kurs.",
+                    "news_google": "Sucht zusätzlich bei Google News nach dem Namen eines Werts. Das findet mehr Meldungen als Yahoo Finance, darunter auch unpassende."
+                }
+            },
+            "alert_targets": {
+                "title": "Kursalarme: Empfänger",
+                "description": "Wer eine Meldung bekommt, wenn ein Kursalarm angeht. Jeder Alarm löst außerdem das Ereignis market_ticker_ultra_alert aus, für Automationen.",
+                "data": {
+                    "alert_persistent": "Benachrichtigung in Home Assistant",
+                    "alert_notify": "Über Kursalarme benachrichtigen",
+                    "alert_services": "Benachrichtigungsdienste für Kursalarme",
+                    "alert_speakers": "Kursalarme ansagen auf",
+                    "alert_tts": "Stimme für Ansagen",
+                    "alert_test": "Jetzt eine Testmeldung senden"
+                },
+                "data_description": {
+                    "alert_persistent": "Legt zusätzlich eine Benachrichtigung in Home Assistant selbst an, wenn ein Kursalarm angeht.",
+                    "alert_notify": "Die Benachrichtigungs-Entitäten, die eine Meldung bekommen, wenn ein Kursalarm angeht - etwa ein Handy mit der Companion App.",
+                    "alert_services": "Dienste wie notify.whatsapp oder notify.mail, für Messenger und Mail. Aus der Liste wählen oder einen Namen eintippen.",
+                    "alert_speakers": "Die Lautsprecher, auf denen ein Kursalarm vorgelesen wird - zum Beispiel ein Sonos.",
+                    "alert_tts": "Die Sprachausgabe, mit der der Alarm gesprochen wird. Leer nimmt die erste, die es gibt.",
+                    "alert_test": "Schickt beim Speichern eine Testmeldung an alle oben genannten Empfänger."
+                }
+            },
+            "alert_texts": {
+                "title": "Kursalarme: Texte",
+                "description": "Was ein Kursalarm meldet. Variablen: {name}, {symbol}, {price} und {limit} (jeweils mit Währung), {currency}, {direction} („auf oder unter“ / „auf oder über“) und {change} (Tagesänderung in Prozent). Ein leeres Feld nimmt wieder den Standard.",
+                "data": {
+                    "alert_title": "Titel",
+                    "alert_message": "Meldung",
+                    "alert_spoken": "Ansage",
+                    "alert_test": "Jetzt eine Testmeldung senden"
+                },
+                "data_description": {
+                    "alert_title": "Die Überschrift einer Benachrichtigung.",
+                    "alert_message": "Der Text einer Benachrichtigung.",
+                    "alert_spoken": "Was auf den Lautsprechern vorgelesen wird.",
+                    "alert_test": "Schickt beim Speichern eine Testmeldung mit diesen Texten an alle Empfänger."
+                }
+            },
+            "group": {
+                "title": "Gruppe",
+                "description": "Der Name der Gruppe und ob sie ein Depot oder eine Watchlist ist. In einer Watchlist bleiben die Käufe ihrer Werte erhalten, zählen aber nicht mit.",
+                "data": {
+                    "name": "Name",
+                    "kind": "Art",
+                    "benchmark": "Vergleichsindex"
+                },
+                "data_description": {
+                    "benchmark": "Für ein Depot: der Index, neben den die Karte seine Wertentwicklung stellt. Wähle einen aus oder tippe ein beliebiges Symbol von Yahoo Finance. Leer vergleicht mit keinem."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Drei Buchstaben, zum Beispiel EUR oder USD.",
+            "no_source": "Mindestens eine Quelle wird gebraucht.",
+            "invalid_benchmark": "Yahoo Finance hat zu diesem Symbol keinen Kursverlauf."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Wert",
+            "initiate_flow": {
+                "user": "Wert hinzufügen",
+                "reconfigure": "Wert bearbeiten"
+            },
+            "step": {
+                "user": {
+                    "title": "Wert suchen",
+                    "description": "Suche nach Name, Symbol oder ISIN - eine Aktie, ein Fonds, ein Index, ein Rohstoff, ein Währungspaar oder ein Coin. Gefragt wird jede Quelle: Yahoo Finance für fast alles, die Börse Frankfurt für Xetra per ISIN, der EZB-Referenzkurs für ein Währungspaar, Kraken für einen Coin, gold-api.com für den Spotpreis eines Metalls.",
+                    "data": {
+                        "query": "Name, Symbol oder ISIN"
+                    },
+                    "data_description": {
+                        "query": "Zum Beispiel: Siemens, SIE.DE, DE0007236101, DAX, EUR/USD, BTC, Gold."
+                    }
+                },
+                "listing": {
+                    "title": "Handelsplatz wählen",
+                    "description": "Gefunden zu \"{query}\". Derselbe Wert wird oft an mehreren Börsen und bei mehreren Quellen geführt, in unterschiedlichen Währungen. Jede Zeile endet mit dem letzten Kurs dort und seiner Herkunft; ein Datum hinter einem Kurs heißt, dass er nicht von heute ist.",
+                    "data": {
+                        "listing": "Handelsplatz"
+                    }
+                },
+                "holding": {
+                    "title": "Dein Bestand",
+                    "description": "Was du von **{name}** hältst - oder alles leer lassen, um den Wert nur zu beobachten. Weitere Käufe kommen danach unter **Wert bearbeiten** dazu.",
+                    "data": {
+                        "quantity": "Stückzahl",
+                        "price": "Kaufpreis je Stück ({currency})",
+                        "date": "Kaufdatum",
+                        "fees": "Gebühren ({currency})",
+                        "taxes": "Steuern ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Wie viele Aktien, Anteile oder Coins.",
+                        "price": "Was ein Stück gekostet hat, in der Währung dieses Handelsplatzes.",
+                        "date": "Optional. Es bestimmt nur die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
+                        "fees": "Optional. Was der Kauf oder Verkauf an Gebühren gekostet hat.",
+                        "taxes": "Optional. Was darauf an Steuern gezahlt wurde."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - erfasste Käufe: {count}; im Bestand: {quantity} zu durchschnittlich {average}; realisiert: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Umbenennen",
+                        "move": "📂 In eine andere Gruppe verschieben",
+                        "add_lot": "➕ Kauf hinzufügen",
+                        "sell_lot": "➖ Verkauf hinzufügen",
+                        "remove_lots": "🗑️ Käufe und Verkäufe entfernen",
+                        "alerts": "🔔 Kursalarme",
+                        "color": "🎨 Farbe",
+                        "logo": "🖼️ Eigenes Logo",
+                        "tradingview": "📈 TradingView-Link"
+                    }
+                },
+                "rename": {
+                    "title": "Wert umbenennen",
+                    "description": "Der Name von {symbol}: So heißen sein Gerät und seine Sensoren.",
+                    "data": {
+                        "name": "Name"
+                    }
+                },
+                "add_lot": {
+                    "title": "Kauf hinzufügen",
+                    "description": "{name} - bisher erfasst: {count}; im Bestand: {quantity} Stück zu durchschnittlich {average}.",
+                    "data": {
+                        "quantity": "Gekaufte Stückzahl",
+                        "price": "Kaufpreis je Stück ({currency})",
+                        "date": "Kaufdatum",
+                        "add_another": "Danach noch einen hinzufügen",
+                        "fees": "Gebühren ({currency})",
+                        "taxes": "Steuern ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Wie viele Aktien, Anteile oder Coins gekauft wurden.",
+                        "price": "Was eines davon gekostet hat, in der Währung, in der dieser Handelsplatz notiert.",
+                        "date": "Optional. Es bestimmt nur die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
+                        "fees": "Optional. Was der Kauf an Gebühren gekostet hat.",
+                        "taxes": "Optional. Was darauf an Steuern gezahlt wurde."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Verkauf hinzufügen",
+                    "description": "{name} - bisher erfasst: {count}; im Bestand: {quantity} Stück zu durchschnittlich {average}.",
+                    "data": {
+                        "quantity": "Verkaufte Stückzahl",
+                        "price": "Verkaufspreis je Stück ({currency})",
+                        "date": "Verkaufsdatum",
+                        "add_another": "Danach noch einen hinzufügen",
+                        "fees": "Gebühren ({currency})",
+                        "taxes": "Steuern ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Wie viele verkauft wurden. Sie gehen zum bisherigen Durchschnittspreis aus dem Bestand.",
+                        "price": "Was eines davon erlöst hat, in der Währung, in der dieser Handelsplatz notiert.",
+                        "date": "Leer gilt heute. Es bestimmt die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
+                        "fees": "Optional. Was der Verkauf an Gebühren gekostet hat.",
+                        "taxes": "Optional. Was darauf an Steuern gezahlt wurde."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Käufe und Verkäufe entfernen",
+                    "description": "{name}: Hake an, was weg soll. Ohne Käufe bleibt ein Wert, der nur beobachtet wird.",
+                    "data": {
+                        "remove": "Erfasst"
+                    }
+                },
+                "logo": {
+                    "title": "Eigenes Logo",
+                    "description": "{name}: ein eigenes Bild - für einen Wert ohne Logo oder anstelle des vorhandenen. PNG, JPG, WebP, GIF oder SVG, bis 1 MB; am besten passt ein quadratisches Bild. Es liegt in deinem Konfigurationsordner und wird auch bei ausgeschalteten Logos gezeigt.",
+                    "data": {
+                        "file": "Bild",
+                        "remove_logo": "Hochgeladenes Logo entfernen"
+                    },
+                    "data_description": {
+                        "remove_logo": "Zurück zu dem Logo, das der Wert ohne eigenes hat. Wird ignoriert, wenn ein neues Bild hochgeladen wird."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView-Link",
+                    "description": "Die Karte verlinkt die Details von {name} mit der Seite bei TradingView. **Das ermittelte Symbol für {symbol}: {found}.** Im Feld steht das Symbol, das gerade gilt. Ändere es in ein eigenes, in TradingViews Schreibweise - die Börse, ein Doppelpunkt, das Kürzel, etwa NASDAQ:AAPL. Leer gilt wieder das ermittelte; gibt es keines, zeigt die Karte keinen Link.",
+                    "data": {
+                        "tradingview": "TradingView-Symbol"
+                    }
+                },
+                "move": {
+                    "title": "In eine andere Gruppe verschieben",
+                    "description": "{name}: die Gruppe, in der der Wert steht. In einer Watchlist bleiben seine Käufe erhalten, zählen aber nicht mit.",
+                    "data": {
+                        "group": "Gruppe"
+                    }
+                },
+                "alerts": {
+                    "title": "Kursalarme",
+                    "description": "{name}: Ein Alarm ist an, solange der Kurs auf oder jenseits seiner Grenze steht. Jede Grenze bekommt einen Binärsensor; wer benachrichtigt wird, steht in den Einstellungen der Integration. Ein leeres Feld bedeutet keine Grenze.",
+                    "data": {
+                        "alert_below": "Auf oder unter ({currency})",
+                        "alert_above": "Auf oder über ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Farbe",
+                    "description": "{name}: die Farbe, in der der Wert gezeichnet wird, wo eine Karte die Anteile eines Depots zeigt. Für eine eigene Farbe einen Wert wie #009999 in die Suche tippen. Leer vergibt die Karte eine.",
+                    "data": {
+                        "color": "Farbe"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "In welches Depot?",
+                    "description": "{name}: Mit einem Kauf wechselt der Wert von der Watchlist in ein Depot. Seine Sensoren bleiben dieselben.",
+                    "data": {
+                        "target": "Depot",
+                        "name": "Name des neuen Depots"
+                    },
+                    "data_description": {
+                        "name": "Nur für ein neues Depot. Leer heißt es „Depot“."
+                    }
+                },
+                "sold_out": {
+                    "title": "Alles verkauft",
+                    "description": "{name}: Es ist nichts mehr im Bestand. Käufe und Verkäufe bleiben am Wert erhalten und damit der realisierte Gewinn ({realized}).",
+                    "data": {
+                        "after_sale": "Wie weiter?"
+                    },
+                    "data_description": {
+                        "after_sale": "Ein Ordner mit Pfeil verschiebt den Wert in diese Watchlist."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Die Quelle ist nicht erreichbar. Versuche es gleich noch einmal.",
+                "nothing_found": "Nichts gefunden. Versuche eine andere Schreibweise, das Symbol oder die ISIN.",
+                "already_configured": "Dieser Handelsplatz wurde bereits hinzugefügt.",
+                "invalid_lot": "Gib eine Stückzahl größer als 0 und einen Preis ein.",
+                "logo_wrong_type": "Kein Bild, das hier geht. Nimm PNG, JPG, WebP, GIF oder SVG.",
+                "logo_too_large": "Das Bild ist größer als 1 MB.",
+                "invalid_tradingview": "Kein TradingView-Symbol. Schreibe die Börse, einen Doppelpunkt und das Kürzel, etwa NASDAQ:AAPL.",
+                "invalid_color": "Wähle eine der Farben oder tippe einen Wert wie #009999.",
+                "group_exists": "Eine Gruppe mit diesem Namen gibt es schon.",
+                "sell_too_many": "Das ist mehr, als im Bestand ist."
+            },
+            "abort": {
+                "reconfigure_successful": "Der Wert wurde aktualisiert."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Letzte Aktualisierung"
+            },
+            "position_value": {
+                "name": "Positionswert"
+            },
+            "position_gain": {
+                "name": "Gewinn"
+            },
+            "total_value": {
+                "name": "Gesamtwert"
+            },
+            "total_gain": {
+                "name": "Gesamtgewinn"
+            },
+            "group_value": {
+                "name": "{group} Wert"
+            },
+            "group_gain": {
+                "name": "{group} Gewinn"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alarm unter"
+            },
+            "alert_above": {
+                "name": "Alarm über"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} antwortet nicht",
+            "description": "**{source}** hat {count}-mal in Folge nicht geantwortet. Der letzte Grund:\n\n`{reason}`\n\nDie Werte dieser Quelle behalten ihre letzten Kurse, jeder mit seinem Zeitpunkt; wo eine andere Quelle denselben Wert führt, springt sie ein. Zu tun ist nichts: Die Kurse kommen mit der nächsten Antwort der Quelle zurück, und diese Reparatur verschwindet damit."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "EZB-Referenzkurse - Währungspaare, einmal täglich",
+                "goldapi": "gold-api.com - Spotpreise für Gold, Silber, Platin, Palladium, Kupfer",
+                "kraken": "Kraken - Coins",
+                "yahoo": "Yahoo Finance - Aktien, Fonds, Indizes, Futures, Währungen, Coins",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra und Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Depot - Käufe werden summiert",
+                "watchlist": "Watchlist - nur beobachtet"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Im Depot behalten",
+                "new": "📂 In eine neue Watchlist verschieben",
+                "delete": "🗑️ Wert entfernen"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Neues Depot anlegen"
+            }
+        }
+    }
+}

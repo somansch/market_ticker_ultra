@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "添加分组",
+                "description": "分组用于存放标的。投资组合会汇总持有的资产；自选列表仅用于关注，不计入任何总和。之后可通过 **添加标的** 向其中添加标的。",
+                "data": {
+                    "name": "名称",
+                    "kind": "类型",
+                    "benchmark": "对比指数"
+                },
+                "data_description": {
+                    "benchmark": "仅适用于投资组合：卡片上与其业绩并列显示的指数。可从列表中选择，或输入任意 Yahoo Finance 代码。留空则不进行对比。"
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "来自公开来源的股票、基金、指数、大宗商品、货币和加密货币行情，无需账户，无需 API 密钥。之后可在集成页面通过 **添加标的** 逐个添加标的。",
+                "data": {
+                    "scan_interval": "更新间隔",
+                    "logos": "标志",
+                    "base_currency": "基准货币",
+                    "sources": "来源"
+                },
+                "data_description": {
+                    "scan_interval": "市场开盘期间获取行情的频率。所有市场均已收盘时，最多每 30 分钟获取一次。",
+                    "logos": "在卡片上为每个标的显示其标志。标志由浏览器从 Elbstream 加载，并在卡片编辑器和 README 中注明“Logos by Elbstream”。关闭后，卡片显示首字母以及您自己上传的标志。",
+                    "base_currency": "汇总所有持仓所用的货币，使用三位字母代码，如 EUR、USD、CHF。其他货币的持仓按欧洲央行的每日参考汇率换算。",
+                    "sources": "行情可以来自哪些来源。已关闭的来源不会被查询：搜索不会在其中找到结果；从该来源添加的标的若有其他来源提供同一标的则由其报价，否则保留最后一次行情。"
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "设置已存在。"
+        },
+        "error": {
+            "invalid_currency": "请输入三个字母，如 EUR 或 USD。",
+            "no_source": "至少需要一个来源。",
+            "invalid_benchmark": "Yahoo Finance 没有此代码的价格序列。"
+        },
+        "initiate_flow": {
+            "user": "添加分组"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ 常规",
+                    "sources": "🌐 数据来源",
+                    "alert_targets": "🔔 价格提醒：接收方",
+                    "alert_texts": "✏️ 价格提醒：文本"
+                }
+            },
+            "general": {
+                "title": "常规",
+                "data": {
+                    "scan_interval": "更新间隔",
+                    "base_currency": "基准货币",
+                    "logos": "标志"
+                },
+                "data_description": {
+                    "scan_interval": "市场开盘期间获取行情的频率。所有市场均已收盘时，最多每 30 分钟获取一次。",
+                    "base_currency": "汇总所有持仓所用的货币，使用三位字母代码，如 EUR、USD、CHF。其他货币的持仓按欧洲央行的每日参考汇率换算。",
+                    "logos": "在卡片上为每个标的显示其标志。标志由浏览器从 Elbstream 加载，并在卡片编辑器和 README 中注明“Logos by Elbstream”。关闭后，卡片显示首字母以及您自己上传的标志。"
+                }
+            },
+            "sources": {
+                "title": "数据来源",
+                "data": {
+                    "sources": "来源",
+                    "news_google": "同时获取 Google News 新闻"
+                },
+                "data_description": {
+                    "sources": "行情可以来自哪些来源。已关闭的来源不会被查询：搜索不会在其中找到结果；从该来源添加的标的若有其他来源提供同一标的则由其报价，否则保留最后一次行情。",
+                    "news_google": "同时在 Google News 中搜索标的名称。它比 Yahoo Finance 找到更多新闻标题，但其中一些与该标的无关。"
+                }
+            },
+            "alert_targets": {
+                "title": "价格提醒：接收方",
+                "description": "价格提醒触发时通知谁。每次提醒还会触发事件 market_ticker_ultra_alert，供自动化使用。",
+                "data": {
+                    "alert_persistent": "Home Assistant 中的通知",
+                    "alert_notify": "价格提醒通知对象",
+                    "alert_services": "价格提醒通知服务",
+                    "alert_speakers": "播报价格提醒的音箱",
+                    "alert_tts": "播报语音",
+                    "alert_test": "立即发送测试消息"
+                },
+                "data_description": {
+                    "alert_persistent": "价格提醒触发时，同时在 Home Assistant 中创建一条通知。",
+                    "alert_notify": "价格提醒触发时接收消息的通知实体，例如装有 Companion App 的手机。",
+                    "alert_services": "诸如 notify.whatsapp 或 notify.mail 的服务，用于即时通讯和邮件。可从列表中选择或输入名称。",
+                    "alert_speakers": "朗读价格提醒的音箱，例如 Sonos。",
+                    "alert_tts": "朗读提醒所用的文字转语音声音。留空则使用第一个可用的声音。",
+                    "alert_test": "保存时向上述所有接收方发送一条测试消息。"
+                }
+            },
+            "alert_texts": {
+                "title": "价格提醒：文本",
+                "description": "价格提醒的内容。变量：{name}、{symbol}、{price} 和 {limit}（各含货币）、{currency}、{direction}（“等于或低于”/“等于或高于”）以及 {change}（当日涨跌幅百分比）。字段留空则恢复默认值。",
+                "data": {
+                    "alert_title": "标题",
+                    "alert_message": "消息",
+                    "alert_spoken": "播报",
+                    "alert_test": "立即发送测试消息"
+                },
+                "data_description": {
+                    "alert_title": "通知的标题。",
+                    "alert_message": "通知的正文。",
+                    "alert_spoken": "在音箱上朗读的内容。",
+                    "alert_test": "保存时使用这些文本向所有接收方发送一条测试消息。"
+                }
+            },
+            "group": {
+                "title": "分组",
+                "description": "分组的名称，以及它是投资组合还是自选列表。在自选列表中，其标的的买入记录会保留，但不计入总和。",
+                "data": {
+                    "name": "名称",
+                    "kind": "类型",
+                    "benchmark": "对比指数"
+                },
+                "data_description": {
+                    "benchmark": "仅适用于投资组合：卡片上与其业绩并列显示的指数。可从列表中选择，或输入任意 Yahoo Finance 代码。留空则不进行对比。"
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "请输入三个字母，如 EUR 或 USD。",
+            "no_source": "至少需要一个来源。",
+            "invalid_benchmark": "Yahoo Finance 没有此代码的价格序列。"
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "标的",
+            "initiate_flow": {
+                "user": "添加标的",
+                "reconfigure": "编辑标的"
+            },
+            "step": {
+                "user": {
+                    "title": "查找标的",
+                    "description": "按名称、代码或 ISIN 搜索股票、基金、指数、大宗商品、货币对或加密货币。所有来源都会被查询：Yahoo Finance 几乎涵盖一切，Börse Frankfurt 按 ISIN 查询 Xetra，欧洲央行参考汇率用于货币对，Kraken 用于加密货币，gold-api.com 用于金属现货价格。",
+                    "data": {
+                        "query": "名称、代码或 ISIN"
+                    },
+                    "data_description": {
+                        "query": "例如：Apple、AAPL、US0378331005、S&P 500、EUR/USD、BTC、gold。"
+                    }
+                },
+                "listing": {
+                    "title": "选择上市地",
+                    "description": "“{query}”的搜索结果。同一标的常在多个交易所和来源上市，币种各不相同。每行末尾是该处的最新价格及其来源；价格后带日期表示不是今日的价格。",
+                    "data": {
+                        "listing": "上市地"
+                    }
+                },
+                "holding": {
+                    "title": "您的持仓",
+                    "description": "填写您持有的 **{name}**；若只想关注，请全部留空。之后可在 **编辑标的** 中添加更多买入记录。",
+                    "data": {
+                        "quantity": "数量",
+                        "price": "每单位买入价（{currency}）",
+                        "date": "买入日期",
+                        "fees": "费用（{currency}）",
+                        "taxes": "税费（{currency}）"
+                    },
+                    "data_description": {
+                        "quantity": "股数、份额或加密货币数量。",
+                        "price": "每单位的成本，以该上市地的报价货币计。",
+                        "date": "可选。仅决定买入和卖出的计算顺序。",
+                        "fees": "可选。买入或卖出所支付的费用。",
+                        "taxes": "可选。为此支付的税费。"
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - 已录入买入：{count}；持有：{quantity}，均价 {average}；已实现：{realized}。",
+                    "menu_options": {
+                        "rename": "✏️ 重命名",
+                        "move": "📂 移至其他分组",
+                        "add_lot": "➕ 添加买入",
+                        "sell_lot": "➖ 添加卖出",
+                        "remove_lots": "🗑️ 移除买入和卖出记录",
+                        "alerts": "🔔 价格提醒",
+                        "color": "🎨 颜色",
+                        "logo": "🖼️ 自定义标志",
+                        "tradingview": "📈 TradingView 链接"
+                    }
+                },
+                "rename": {
+                    "title": "重命名标的",
+                    "description": "{symbol} 的名称：其设备和传感器的名称。",
+                    "data": {
+                        "name": "名称"
+                    }
+                },
+                "add_lot": {
+                    "title": "添加买入",
+                    "description": "{name} - 已录入：{count}；持有：{quantity}，均价 {average}。",
+                    "data": {
+                        "quantity": "买入数量",
+                        "price": "每单位买入价（{currency}）",
+                        "date": "买入日期",
+                        "add_another": "之后继续添加",
+                        "fees": "费用（{currency}）",
+                        "taxes": "税费（{currency}）"
+                    },
+                    "data_description": {
+                        "quantity": "买入的股数、份额或加密货币数量。",
+                        "price": "每单位的成本，以该上市地的交易货币计。",
+                        "date": "可选。仅决定买入和卖出的计算顺序。",
+                        "fees": "可选。买入所支付的费用。",
+                        "taxes": "可选。为此支付的税费。"
+                    }
+                },
+                "sell_lot": {
+                    "title": "添加卖出",
+                    "description": "{name} - 已录入：{count}；持有：{quantity}，均价 {average}。",
+                    "data": {
+                        "quantity": "卖出数量",
+                        "price": "每单位卖出价（{currency}）",
+                        "date": "卖出日期",
+                        "add_another": "之后继续添加",
+                        "fees": "费用（{currency}）",
+                        "taxes": "税费（{currency}）"
+                    },
+                    "data_description": {
+                        "quantity": "卖出的数量。按此前的均价从持仓中扣除。",
+                        "price": "每单位的卖出所得，以该上市地的交易货币计。",
+                        "date": "留空表示今日。决定买入和卖出的计算顺序。",
+                        "fees": "可选。卖出所支付的费用。",
+                        "taxes": "可选。为此支付的税费。"
+                    }
+                },
+                "remove_lots": {
+                    "title": "移除买入和卖出记录",
+                    "description": "{name}：勾选要移除的记录。全部移除后，该标的仅作关注。",
+                    "data": {
+                        "remove": "已录入"
+                    }
+                },
+                "logo": {
+                    "title": "自定义标志",
+                    "description": "{name}：您自己的图片，用于没有标志的标的或替换现有标志。支持 PNG、JPG、WebP、GIF 或 SVG，最大 1 MB；正方形图片效果最佳。图片保存在您的配置文件夹中，关闭标志时也会显示。",
+                    "data": {
+                        "file": "图片",
+                        "remove_logo": "移除上传的标志"
+                    },
+                    "data_description": {
+                        "remove_logo": "恢复该标的原有的标志。上传新图片时忽略此项。"
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView 链接",
+                    "description": "卡片会将 {name} 的详情链接到其 TradingView 页面。**为 {symbol} 推算出的代码：{found}。** 此字段显示当前使用的代码。可按 TradingView 的写法改为您自己的代码：交易所、冒号、代码，例如 NASDAQ:AAPL。留空则恢复推算出的代码；若无推算结果，卡片不显示链接。",
+                    "data": {
+                        "tradingview": "TradingView 代码"
+                    }
+                },
+                "move": {
+                    "title": "移至其他分组",
+                    "description": "{name}：所属分组。在自选列表中，其买入记录会保留，但不计入总和。",
+                    "data": {
+                        "group": "分组"
+                    }
+                },
+                "alerts": {
+                    "title": "价格提醒",
+                    "description": "{name}：价格达到或超过阈值时提醒触发。每个阈值对应一个二元传感器；通知对象在集成设置中设定。字段留空表示不设阈值。",
+                    "data": {
+                        "alert_below": "等于或低于（{currency}）",
+                        "alert_above": "等于或高于（{currency}）"
+                    }
+                },
+                "color": {
+                    "title": "颜色",
+                    "description": "{name}：卡片显示投资组合占比时使用的颜色。在搜索框中输入 #009999 这样的值可使用自定义颜色。留空则由卡片自动分配。",
+                    "data": {
+                        "color": "颜色"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "移至哪个投资组合？",
+                    "description": "{name}：录入买入后，该标的将从自选列表移至投资组合。其传感器保持不变。",
+                    "data": {
+                        "target": "投资组合",
+                        "name": "新投资组合的名称"
+                    },
+                    "data_description": {
+                        "name": "仅用于新投资组合。留空则命名为“投资组合”。"
+                    }
+                },
+                "sold_out": {
+                    "title": "已全部卖出",
+                    "description": "{name}：已无持仓。买入和卖出记录仍保留在该标的中，其已实现收益（{realized}）也一并保留。",
+                    "data": {
+                        "after_sale": "接下来怎么做？"
+                    },
+                    "data_description": {
+                        "after_sale": "带箭头的文件夹表示将该标的移至对应的自选列表。"
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "无法连接到该来源。请稍后重试。",
+                "nothing_found": "未找到结果。请尝试其他拼写、代码或 ISIN。",
+                "already_configured": "此上市地的该标的已添加。",
+                "invalid_lot": "请输入大于 0 的数量和价格。",
+                "logo_wrong_type": "不支持此图片格式。请使用 PNG、JPG、WebP、GIF 或 SVG。",
+                "logo_too_large": "图片大于 1 MB。",
+                "invalid_tradingview": "不是有效的 TradingView 代码。请写交易所、冒号和代码，例如 NASDAQ:AAPL。",
+                "invalid_color": "请选择一种颜色，或输入 #009999 这样的值。",
+                "group_exists": "已存在同名分组。",
+                "sell_too_many": "超过了持有数量。"
+            },
+            "abort": {
+                "reconfigure_successful": "标的已更新。"
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "最后更新"
+            },
+            "position_value": {
+                "name": "持仓市值"
+            },
+            "position_gain": {
+                "name": "收益"
+            },
+            "total_value": {
+                "name": "总市值"
+            },
+            "total_gain": {
+                "name": "总收益"
+            },
+            "group_value": {
+                "name": "{group} 市值"
+            },
+            "group_gain": {
+                "name": "{group} 收益"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "低于提醒"
+            },
+            "alert_above": {
+                "name": "高于提醒"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} 无响应",
+            "description": "**{source}** 已连续 {count} 次未响应。最后一次原因：\n\n`{reason}`\n\n其标的保留最后一次行情，并各自标明时间；若有其他来源提供同一标的，则由其代为报价。无需任何操作：来源下次响应时行情会恢复，此修复提示也会随之消失。"
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "欧洲央行参考汇率 - 货币对，每日一次",
+                "goldapi": "gold-api.com - 黄金、白银、铂金、钯金、铜的现货价格",
+                "kraken": "Kraken - 加密货币",
+                "yahoo": "Yahoo Finance - 股票、基金、指数、期货、货币、加密货币",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra 和法兰克福"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "投资组合 - 汇总买入",
+                "watchlist": "自选列表 - 仅关注"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "保留在投资组合中",
+                "new": "📂 移至新的自选列表",
+                "delete": "🗑️ 移除该标的"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ 创建新的投资组合"
+            }
+        }
+    }
+}

@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Dodaj grupę",
+                "description": "Grupa zawiera instrumenty. Portfel sumuje posiadane pozycje; lista obserwowanych służy tylko do obserwacji i nie wlicza się do żadnej sumy. Instrumenty dodaje się do niej później, przez **Dodaj instrument**.",
+                "data": {
+                    "name": "Nazwa",
+                    "kind": "Rodzaj",
+                    "benchmark": "Indeks porównawczy"
+                },
+                "data_description": {
+                    "benchmark": "Dla portfela: indeks, obok którego karta pokazuje jego wyniki. Wybierz jeden lub wpisz dowolny symbol z Yahoo Finance. Puste pole oznacza brak porównania."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Notowania akcji, funduszy, indeksów, surowców, walut i kryptowalut z publicznych źródeł - bez konta i bez klucza API. Instrumenty dodaje się później, pojedynczo, przez **Dodaj instrument** na stronie integracji.",
+                "data": {
+                    "scan_interval": "Interwał aktualizacji",
+                    "logos": "Logo",
+                    "base_currency": "Waluta bazowa",
+                    "sources": "Źródła"
+                },
+                "data_description": {
+                    "scan_interval": "Jak często pobierane są notowania, gdy rynek jest otwarty. Gdy wszystkie rynki są zamknięte, pobierane są najwyżej co 30 minut.",
+                    "logos": "Pokazuje każdy instrument z jego logo na karcie. Przeglądarka pobiera logo z serwisu Elbstream, wskazanego jako ich źródło - \"Logos by Elbstream\" - w edytorze karty i w README. Po wyłączeniu karta pokazuje inicjały oraz Twoje własne przesłane logo.",
+                    "base_currency": "Waluta, w której sumowane są wszystkie pozycje, jako trzyliterowy kod - EUR, USD, CHF. Pozycje w innych walutach są przeliczane po dziennym kursie referencyjnym Europejskiego Banku Centralnego.",
+                    "sources": "Skąd mogą pochodzić notowania. Wyłączone źródło nie jest odpytywane: wyszukiwanie nic w nim nie znajdzie, a dodany z niego instrument jest notowany przez inne źródło, jeśli któreś go ma, a w przeciwnym razie zachowuje ostatnie notowanie."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Ustawienia już istnieją."
+        },
+        "error": {
+            "invalid_currency": "Trzy litery, np. EUR lub USD.",
+            "no_source": "Potrzebne jest co najmniej jedno źródło.",
+            "invalid_benchmark": "Yahoo Finance nie ma serii cen dla tego symbolu."
+        },
+        "initiate_flow": {
+            "user": "Dodaj grupę"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Ogólne",
+                    "sources": "🌐 Źródła danych",
+                    "alert_targets": "🔔 Alerty cenowe: odbiorcy",
+                    "alert_texts": "✏️ Alerty cenowe: teksty"
+                }
+            },
+            "general": {
+                "title": "Ogólne",
+                "data": {
+                    "scan_interval": "Interwał aktualizacji",
+                    "base_currency": "Waluta bazowa",
+                    "logos": "Logo"
+                },
+                "data_description": {
+                    "scan_interval": "Jak często pobierane są notowania, gdy rynek jest otwarty. Gdy wszystkie rynki są zamknięte, pobierane są najwyżej co 30 minut.",
+                    "base_currency": "Waluta, w której sumowane są wszystkie pozycje, jako trzyliterowy kod - EUR, USD, CHF. Pozycje w innych walutach są przeliczane po dziennym kursie referencyjnym Europejskiego Banku Centralnego.",
+                    "logos": "Pokazuje każdy instrument z jego logo na karcie. Przeglądarka pobiera logo z serwisu Elbstream, wskazanego jako ich źródło - \"Logos by Elbstream\" - w edytorze karty i w README. Po wyłączeniu karta pokazuje inicjały oraz Twoje własne przesłane logo."
+                }
+            },
+            "sources": {
+                "title": "Źródła danych",
+                "data": {
+                    "sources": "Źródła",
+                    "news_google": "Wiadomości także z Google News"
+                },
+                "data_description": {
+                    "sources": "Skąd mogą pochodzić notowania. Wyłączone źródło nie jest odpytywane: wyszukiwanie nic w nim nie znajdzie, a dodany z niego instrument jest notowany przez inne źródło, jeśli któreś go ma, a w przeciwnym razie zachowuje ostatnie notowanie.",
+                    "news_google": "Szuka nazwy instrumentu także w Google News. Znajduje więcej nagłówków niż Yahoo Finance, w tym niektóre na inny temat."
+                }
+            },
+            "alert_targets": {
+                "title": "Alerty cenowe: odbiorcy",
+                "description": "Kto jest powiadamiany, gdy alert cenowy zostanie wyzwolony. Każdy alert wywołuje też zdarzenie market_ticker_ultra_alert dla automatyzacji.",
+                "data": {
+                    "alert_persistent": "Powiadomienie w Home Assistant",
+                    "alert_notify": "Powiadamiaj o alertach cenowych",
+                    "alert_services": "Usługi powiadomień dla alertów cenowych",
+                    "alert_speakers": "Ogłaszaj alerty cenowe na",
+                    "alert_tts": "Głos ogłoszeń",
+                    "alert_test": "Wyślij teraz wiadomość testową"
+                },
+                "data_description": {
+                    "alert_persistent": "Gdy alert cenowy zostanie wyzwolony, dodaje też powiadomienie w samym Home Assistant.",
+                    "alert_notify": "Encje powiadomień, które dostają wiadomość, gdy alert cenowy zostanie wyzwolony - np. telefon z Companion App.",
+                    "alert_services": "Usługi takie jak notify.whatsapp lub notify.mail, dla komunikatorów i poczty. Wybierz z listy lub wpisz nazwę.",
+                    "alert_speakers": "Głośniki, na których odczytywany jest alert cenowy - np. Sonos.",
+                    "alert_tts": "Głos syntezy mowy, którym odczytywany jest alert. Puste pole wybiera pierwszy dostępny.",
+                    "alert_test": "Po zapisaniu wysyła wiadomość testową do wszystkich wymienionych powyżej."
+                }
+            },
+            "alert_texts": {
+                "title": "Alerty cenowe: teksty",
+                "description": "Co mówi alert cenowy. Zmienne: {name}, {symbol}, {price} i {limit} (każda z walutą), {currency}, {direction} (\"na poziomie lub poniżej\" / \"na poziomie lub powyżej\") i {change} (dzienna zmiana w procentach). Puste pole przywraca wartość domyślną.",
+                "data": {
+                    "alert_title": "Tytuł",
+                    "alert_message": "Wiadomość",
+                    "alert_spoken": "Ogłoszenie",
+                    "alert_test": "Wyślij teraz wiadomość testową"
+                },
+                "data_description": {
+                    "alert_title": "Tytuł powiadomienia.",
+                    "alert_message": "Treść powiadomienia.",
+                    "alert_spoken": "Co jest odczytywane na głośnikach.",
+                    "alert_test": "Po zapisaniu wysyła wiadomość testową z tymi tekstami do wszystkich odbiorców."
+                }
+            },
+            "group": {
+                "title": "Grupa",
+                "description": "Nazwa grupy i to, czy jest portfelem, czy listą obserwowanych. Na liście obserwowanych zakupy jej instrumentów są zachowywane, ale nie są wliczane.",
+                "data": {
+                    "name": "Nazwa",
+                    "kind": "Rodzaj",
+                    "benchmark": "Indeks porównawczy"
+                },
+                "data_description": {
+                    "benchmark": "Dla portfela: indeks, obok którego karta pokazuje jego wyniki. Wybierz jeden lub wpisz dowolny symbol z Yahoo Finance. Puste pole oznacza brak porównania."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Trzy litery, np. EUR lub USD.",
+            "no_source": "Potrzebne jest co najmniej jedno źródło.",
+            "invalid_benchmark": "Yahoo Finance nie ma serii cen dla tego symbolu."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Dodaj instrument",
+                "reconfigure": "Edytuj instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Znajdź instrument",
+                    "description": "Szukaj po nazwie, symbolu lub ISIN - akcji, funduszu, indeksu, surowca, pary walutowej lub kryptowaluty. Odpytywane jest każde źródło: Yahoo Finance prawie dla wszystkiego, Börse Frankfurt dla Xetra po ISIN, kurs referencyjny EBC dla pary walutowej, Kraken dla kryptowaluty, gold-api.com dla ceny spot metalu.",
+                    "data": {
+                        "query": "Nazwa, symbol lub ISIN"
+                    },
+                    "data_description": {
+                        "query": "Na przykład: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, złoto."
+                    }
+                },
+                "listing": {
+                    "title": "Wybierz notowanie",
+                    "description": "Znaleziono dla \"{query}\". Ten sam instrument jest często notowany na kilku giełdach i w kilku źródłach, w różnych walutach. Każdy wiersz kończy się ostatnią ceną i jej źródłem; data przy cenie oznacza, że nie jest z dzisiaj.",
+                    "data": {
+                        "listing": "Notowanie"
+                    }
+                },
+                "holding": {
+                    "title": "Twoja pozycja",
+                    "description": "Ile posiadasz **{name}** - lub zostaw wszystko puste, aby tylko obserwować. Kolejne zakupy można dodać później, w opcji **Edytuj instrument**.",
+                    "data": {
+                        "quantity": "Ilość",
+                        "price": "Cena zakupu za jednostkę ({currency})",
+                        "date": "Data zakupu",
+                        "fees": "Opłaty ({currency})",
+                        "taxes": "Podatki ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Ile akcji, jednostek lub monet.",
+                        "price": "Ile kosztowała jedna sztuka, w walucie tego notowania.",
+                        "date": "Opcjonalnie. Decyduje tylko o kolejności liczenia zakupów i sprzedaży.",
+                        "fees": "Opcjonalnie. Ile wyniosły opłaty za zakup lub sprzedaż.",
+                        "taxes": "Opcjonalnie. Ile podatku od tego zapłacono."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - wprowadzone zakupy: {count}; posiadane: {quantity} po średniej cenie {average}; zrealizowano: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Zmień nazwę",
+                        "move": "📂 Przenieś do innej grupy",
+                        "add_lot": "➕ Dodaj zakup",
+                        "sell_lot": "➖ Dodaj sprzedaż",
+                        "remove_lots": "🗑️ Usuń zakupy i sprzedaże",
+                        "alerts": "🔔 Alerty cenowe",
+                        "color": "🎨 Kolor",
+                        "logo": "🖼️ Własne logo",
+                        "tradingview": "📈 Link do TradingView"
+                    }
+                },
+                "rename": {
+                    "title": "Zmień nazwę instrumentu",
+                    "description": "Nazwa {symbol}: tak nazywają się jego urządzenie i sensory.",
+                    "data": {
+                        "name": "Nazwa"
+                    }
+                },
+                "add_lot": {
+                    "title": "Dodaj zakup",
+                    "description": "{name} - dotąd wprowadzono: {count}; posiadane: {quantity} po średniej cenie {average}.",
+                    "data": {
+                        "quantity": "Kupiona ilość",
+                        "price": "Cena zakupu za sztukę ({currency})",
+                        "date": "Data zakupu",
+                        "add_another": "Potem dodaj kolejny",
+                        "fees": "Opłaty ({currency})",
+                        "taxes": "Podatki ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Ile akcji, jednostek lub monet kupiono.",
+                        "price": "Ile kosztowała jedna sztuka, w walucie tego notowania.",
+                        "date": "Opcjonalnie. Decyduje tylko o kolejności liczenia zakupów i sprzedaży.",
+                        "fees": "Opcjonalnie. Ile wyniosły opłaty za zakup.",
+                        "taxes": "Opcjonalnie. Ile podatku od tego zapłacono."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Dodaj sprzedaż",
+                    "description": "{name} - dotąd wprowadzono: {count}; posiadane: {quantity} po średniej cenie {average}.",
+                    "data": {
+                        "quantity": "Sprzedana ilość",
+                        "price": "Cena sprzedaży za sztukę ({currency})",
+                        "date": "Data sprzedaży",
+                        "add_another": "Potem dodaj kolejną",
+                        "fees": "Opłaty ({currency})",
+                        "taxes": "Podatki ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Ile sprzedano. Opuszczają pozycję po jej dotychczasowej średniej cenie.",
+                        "price": "Ile uzyskano za jedną sztukę, w walucie tego notowania.",
+                        "date": "Puste pole oznacza dzisiaj. Ustala kolejność liczenia zakupów i sprzedaży.",
+                        "fees": "Opcjonalnie. Ile wyniosły opłaty za sprzedaż.",
+                        "taxes": "Opcjonalnie. Ile podatku od tego zapłacono."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Usuń zakupy i sprzedaże",
+                    "description": "{name}: zaznacz, co ma zostać usunięte. Usunięcie wszystkich pozostawia instrument tylko do obserwacji.",
+                    "data": {
+                        "remove": "Wprowadzone"
+                    }
+                },
+                "logo": {
+                    "title": "Własne logo",
+                    "description": "{name}: własny obraz - dla instrumentu bez logo lub zamiast istniejącego. PNG, JPG, WebP, GIF lub SVG, do 1 MB; najlepiej pasuje obraz kwadratowy. Jest przechowywany w folderze konfiguracji i pokazywany także przy wyłączonych logo.",
+                    "data": {
+                        "file": "Obraz",
+                        "remove_logo": "Usuń przesłane logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Przywraca logo, które instrument ma bez niego. Ignorowane, gdy przesyłany jest nowy obraz."
+                    }
+                },
+                "tradingview": {
+                    "title": "Link do TradingView",
+                    "description": "Karta łączy szczegóły {name} z jego stroną w TradingView. **Symbol ustalony dla {symbol}: {found}.** Pole pokazuje używany symbol. Zmień go na własny, zapisany tak jak w TradingView - giełda, dwukropek, ticker, np. NASDAQ:AAPL. Puste pole przywraca ustalony symbol; jeśli go nie ma, karta nie pokazuje linku.",
+                    "data": {
+                        "tradingview": "Symbol TradingView"
+                    }
+                },
+                "move": {
+                    "title": "Przenieś do innej grupy",
+                    "description": "{name}: grupa, w której się znajduje. Na liście obserwowanych jego zakupy są zachowywane, ale nie są wliczane.",
+                    "data": {
+                        "group": "Grupa"
+                    }
+                },
+                "alerts": {
+                    "title": "Alerty cenowe",
+                    "description": "{name}: alert jest wyzwolony, gdy cena jest na poziomie limitu lub go przekracza. Każdy limit dostaje sensor binarny; kto jest powiadamiany, ustala się w ustawieniach integracji. Zostaw pole puste, aby nie ustawiać limitu.",
+                    "data": {
+                        "alert_below": "Na poziomie lub poniżej ({currency})",
+                        "alert_above": "Na poziomie lub powyżej ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Kolor",
+                    "description": "{name}: kolor, w którym jest rysowany tam, gdzie karta pokazuje udziały w portfelu. Wpisz w wyszukiwanie wartość, np. #009999, aby użyć własnego koloru. Gdy pole jest puste, karta sama przydziela kolor.",
+                    "data": {
+                        "color": "Kolor"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Do którego portfela?",
+                    "description": "{name}: wraz z zakupem instrument przechodzi z listy obserwowanych do portfela. Jego sensory pozostają te same.",
+                    "data": {
+                        "target": "Portfel",
+                        "name": "Nazwa nowego portfela"
+                    },
+                    "data_description": {
+                        "name": "Tylko dla nowego portfela. Puste pole nadaje nazwę „Portfel”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Wszystko sprzedane",
+                    "description": "{name}: nic już nie posiadasz. Zakupy i sprzedaże zostają przy instrumencie, a wraz z nimi zrealizowany zysk ({realized}).",
+                    "data": {
+                        "after_sale": "Co teraz?"
+                    },
+                    "data_description": {
+                        "after_sale": "Folder ze strzałką przenosi instrument na tę listę obserwowanych."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Nie udało się połączyć ze źródłem. Spróbuj ponownie za chwilę.",
+                "nothing_found": "Nic nie znaleziono. Spróbuj innej pisowni, symbolu lub ISIN.",
+                "already_configured": "To notowanie zostało już dodane.",
+                "invalid_lot": "Wpisz ilość większą od 0 i cenę.",
+                "logo_wrong_type": "Nieobsługiwany obraz. Użyj PNG, JPG, WebP, GIF lub SVG.",
+                "logo_too_large": "Obraz jest większy niż 1 MB.",
+                "invalid_tradingview": "To nie jest symbol TradingView. Wpisz giełdę, dwukropek i ticker, np. NASDAQ:AAPL.",
+                "invalid_color": "Wybierz jeden z kolorów lub wpisz wartość, np. #009999.",
+                "group_exists": "Grupa o tej nazwie już istnieje.",
+                "sell_too_many": "To więcej, niż posiadasz."
+            },
+            "abort": {
+                "reconfigure_successful": "Instrument został zaktualizowany."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Ostatnia aktualizacja"
+            },
+            "position_value": {
+                "name": "Wartość pozycji"
+            },
+            "position_gain": {
+                "name": "Zysk"
+            },
+            "total_value": {
+                "name": "Wartość łączna"
+            },
+            "total_gain": {
+                "name": "Zysk łączny"
+            },
+            "group_value": {
+                "name": "{group} – wartość"
+            },
+            "group_gain": {
+                "name": "{group} – zysk"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alert poniżej"
+            },
+            "alert_above": {
+                "name": "Alert powyżej"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} nie odpowiada",
+            "description": "Źródło **{source}** nie odpowiedziało {count} razy z rzędu. Ostatnia przyczyna:\n\n`{reason}`\n\nJego instrumenty zachowują ostatnie notowania, każde z czasem, z którego pochodzi; jeśli inne źródło notuje ten sam instrument, zastępuje je. Nic nie trzeba robić: notowania wrócą z następną odpowiedzią źródła, a ta naprawa wtedy zniknie."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "Kursy referencyjne EBC - pary walutowe, raz dziennie",
+                "goldapi": "gold-api.com - ceny spot złota, srebra, platyny, palladu, miedzi",
+                "kraken": "Kraken - kryptowaluty",
+                "yahoo": "Yahoo Finance - akcje, fundusze, indeksy, kontrakty terminowe, waluty, kryptowaluty",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra i Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfel - zakupy są sumowane",
+                "watchlist": "Lista obserwowanych - tylko obserwacja"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Zostaw w portfelu",
+                "new": "📂 Przenieś na nową listę obserwowanych",
+                "delete": "🗑️ Usuń instrument"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Utwórz nowy portfel"
+            }
+        }
+    }
+}

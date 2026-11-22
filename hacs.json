@@ -1,0 +1,7 @@
+{
+  "name": "Market Ticker Ultra",
+  "render_readme": true,
+  "zip_release": true,
+  "filename": "market_ticker_ultra.zip",
+  "homeassistant": "2025.3.0"
+}

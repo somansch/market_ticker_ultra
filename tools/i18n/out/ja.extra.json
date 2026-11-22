@@ -1,0 +1,11 @@
+{
+  "alert_title": "価格アラート",
+  "alert_message": "{name}: {price} - {limit} {direction}",
+  "alert_spoken": "価格アラート。{name} は {price} で、{limit} {direction}です。",
+  "direction_below": "以下",
+  "direction_above": "以上",
+  "settings": "設定",
+  "portfolio": "ポートフォリオ",
+  "watchlist": "ウォッチリスト",
+  "decimal_comma": false
+}

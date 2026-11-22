@@ -1,0 +1,11 @@
+{
+  "alert_title": "价格提醒",
+  "alert_message": "{name}：{price} - {direction} {limit}",
+  "alert_spoken": "价格提醒。{name} 现价 {price}，{direction} {limit}。",
+  "direction_below": "等于或低于",
+  "direction_above": "等于或高于",
+  "settings": "设置",
+  "portfolio": "投资组合",
+  "watchlist": "自选列表",
+  "decimal_comma": false
+}

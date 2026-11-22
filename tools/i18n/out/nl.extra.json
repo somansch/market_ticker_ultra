@@ -1,0 +1,11 @@
+{
+  "alert_title": "Koersalarm",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Koersalarm. {name} staat op {price}, {direction} {limit}.",
+  "direction_below": "op of onder",
+  "direction_above": "op of boven",
+  "settings": "Instellingen",
+  "portfolio": "Portefeuille",
+  "watchlist": "Watchlist",
+  "decimal_comma": true
+}

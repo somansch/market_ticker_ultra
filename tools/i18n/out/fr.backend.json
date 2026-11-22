@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Ajouter un groupe",
+                "description": "Un groupe contient des instruments. Un portefeuille additionne ce qui est détenu ; une liste de suivi sert uniquement à suivre et n'entre dans aucune somme. Les instruments y sont ajoutés ensuite, avec **Ajouter un instrument**.",
+                "data": {
+                    "name": "Nom",
+                    "kind": "Type",
+                    "benchmark": "Indice de comparaison"
+                },
+                "data_description": {
+                    "benchmark": "Pour un portefeuille : l'indice auquel sa performance est comparée sur la carte. Choisissez-en un, ou saisissez n'importe quel symbole Yahoo Finance. Vide, aucune comparaison."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Cours d'actions, de fonds, d'indices, de matières premières, de devises et de cryptomonnaies issus de sources publiques - sans compte ni clé API. Les instruments sont ajoutés ensuite, un par un, avec **Ajouter un instrument** sur la page de l'intégration.",
+                "data": {
+                    "scan_interval": "Intervalle de mise à jour",
+                    "logos": "Logos",
+                    "base_currency": "Devise de référence",
+                    "sources": "Sources"
+                },
+                "data_description": {
+                    "scan_interval": "Fréquence de récupération des cours pendant qu'un marché est ouvert. Quand tous les marchés sont fermés, ils sont récupérés au plus toutes les 30 minutes.",
+                    "logos": "Affiche chaque instrument avec son logo sur la carte. Les logos sont chargés par le navigateur depuis Elbstream, qui est crédité - « Logos by Elbstream » - dans l'éditeur de la carte et dans le README. Désactivé, la carte affiche les initiales, ainsi que vos propres logos téléversés.",
+                    "base_currency": "La devise dans laquelle toutes les positions sont additionnées, en code à trois lettres - EUR, USD, CHF. Les positions dans d'autres devises sont converties au taux de référence quotidien de la BCE.",
+                    "sources": "D'où peuvent provenir les cours. Une source désactivée n'est pas interrogée : la recherche n'y trouve rien, et un instrument ajouté depuis celle-ci est coté par une autre source qui liste le même instrument, sinon il garde son dernier cours."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Les paramètres existent déjà."
+        },
+        "error": {
+            "invalid_currency": "Trois lettres, comme EUR ou USD.",
+            "no_source": "Au moins une source est nécessaire.",
+            "invalid_benchmark": "Yahoo Finance n'a pas d'historique de cours pour ce symbole."
+        },
+        "initiate_flow": {
+            "user": "Ajouter un groupe"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Général",
+                    "sources": "🌐 Sources de données",
+                    "alert_targets": "🔔 Alertes de cours : destinataires",
+                    "alert_texts": "✏️ Alertes de cours : textes"
+                }
+            },
+            "general": {
+                "title": "Général",
+                "data": {
+                    "scan_interval": "Intervalle de mise à jour",
+                    "base_currency": "Devise de référence",
+                    "logos": "Logos"
+                },
+                "data_description": {
+                    "scan_interval": "Fréquence de récupération des cours pendant qu'un marché est ouvert. Quand tous les marchés sont fermés, ils sont récupérés au plus toutes les 30 minutes.",
+                    "base_currency": "La devise dans laquelle toutes les positions sont additionnées, en code à trois lettres - EUR, USD, CHF. Les positions dans d'autres devises sont converties au taux de référence quotidien de la BCE.",
+                    "logos": "Affiche chaque instrument avec son logo sur la carte. Les logos sont chargés par le navigateur depuis Elbstream, qui est crédité - « Logos by Elbstream » - dans l'éditeur de la carte et dans le README. Désactivé, la carte affiche les initiales, ainsi que vos propres logos téléversés."
+                }
+            },
+            "sources": {
+                "title": "Sources de données",
+                "data": {
+                    "sources": "Sources",
+                    "news_google": "Actualités aussi depuis Google News"
+                },
+                "data_description": {
+                    "sources": "D'où peuvent provenir les cours. Une source désactivée n'est pas interrogée : la recherche n'y trouve rien, et un instrument ajouté depuis celle-ci est coté par une autre source qui liste le même instrument, sinon il garde son dernier cours.",
+                    "news_google": "Recherche aussi le nom d'un instrument dans Google News. On y trouve plus de titres que sur Yahoo Finance, dont certains portent sur autre chose."
+                }
+            },
+            "alert_targets": {
+                "title": "Alertes de cours : destinataires",
+                "description": "Qui est prévenu quand une alerte de cours se déclenche. Chaque alerte déclenche aussi l'événement market_ticker_ultra_alert, pour les automatisations.",
+                "data": {
+                    "alert_persistent": "Notification dans Home Assistant",
+                    "alert_notify": "Prévenir des alertes de cours",
+                    "alert_services": "Services de notification pour les alertes de cours",
+                    "alert_speakers": "Annoncer les alertes de cours sur",
+                    "alert_tts": "Voix des annonces",
+                    "alert_test": "Envoyer un message de test maintenant"
+                },
+                "data_description": {
+                    "alert_persistent": "Ajoute aussi une notification dans Home Assistant quand une alerte de cours se déclenche.",
+                    "alert_notify": "Les entités de notification qui reçoivent un message quand une alerte de cours se déclenche - un téléphone avec la Companion App, par exemple.",
+                    "alert_services": "Des services comme notify.whatsapp ou notify.mail, pour les messageries et l'e-mail. Choisissez dans la liste ou saisissez un nom.",
+                    "alert_speakers": "Les haut-parleurs sur lesquels une alerte de cours est lue - un Sonos, par exemple.",
+                    "alert_tts": "La voix de synthèse vocale qui énonce l'alerte. Vide, la première disponible est utilisée.",
+                    "alert_test": "Envoie un message de test à tous les destinataires ci-dessus lors de l'enregistrement."
+                }
+            },
+            "alert_texts": {
+                "title": "Alertes de cours : textes",
+                "description": "Ce que dit une alerte de cours. Variables : {name}, {symbol}, {price} et {limit} (chacun avec sa devise), {currency}, {direction} (« égal ou inférieur à » / « égal ou supérieur à ») et {change} (la variation du jour en pourcentage). Un champ vide reprend le texte par défaut.",
+                "data": {
+                    "alert_title": "Titre",
+                    "alert_message": "Message",
+                    "alert_spoken": "Annonce",
+                    "alert_test": "Envoyer un message de test maintenant"
+                },
+                "data_description": {
+                    "alert_title": "Le titre d'une notification.",
+                    "alert_message": "Le texte d'une notification.",
+                    "alert_spoken": "Ce qui est lu sur les haut-parleurs.",
+                    "alert_test": "Envoie un message de test avec ces textes à tous les destinataires lors de l'enregistrement."
+                }
+            },
+            "group": {
+                "title": "Groupe",
+                "description": "Le nom du groupe, et s'il s'agit d'un portefeuille ou d'une liste de suivi. Dans une liste de suivi, les achats de ses instruments sont conservés mais pas comptabilisés.",
+                "data": {
+                    "name": "Nom",
+                    "kind": "Type",
+                    "benchmark": "Indice de comparaison"
+                },
+                "data_description": {
+                    "benchmark": "Pour un portefeuille : l'indice auquel sa performance est comparée sur la carte. Choisissez-en un, ou saisissez n'importe quel symbole Yahoo Finance. Vide, aucune comparaison."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Trois lettres, comme EUR ou USD.",
+            "no_source": "Au moins une source est nécessaire.",
+            "invalid_benchmark": "Yahoo Finance n'a pas d'historique de cours pour ce symbole."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Ajouter un instrument",
+                "reconfigure": "Modifier l'instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Trouver un instrument",
+                    "description": "Recherchez par nom, par symbole ou par ISIN - une action, un fonds, un indice, une matière première, une paire de devises ou une cryptomonnaie. Toutes les sources sont interrogées : Yahoo Finance pour presque tout, Börse Frankfurt pour Xetra par ISIN, le taux de référence de la BCE pour une paire de devises, Kraken pour une cryptomonnaie, gold-api.com pour le cours au comptant d'un métal.",
+                    "data": {
+                        "query": "Nom, symbole ou ISIN"
+                    },
+                    "data_description": {
+                        "query": "Par exemple : Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, or."
+                    }
+                },
+                "listing": {
+                    "title": "Choisir la cotation",
+                    "description": "Résultats pour « {query} ». Un même instrument est souvent coté sur plusieurs bourses et sources, dans différentes devises. Chaque ligne se termine par le dernier cours et sa provenance ; une date après un cours signifie qu'il ne date pas d'aujourd'hui.",
+                    "data": {
+                        "listing": "Cotation"
+                    }
+                },
+                "holding": {
+                    "title": "Votre position",
+                    "description": "Ce que vous détenez de **{name}** - ou laissez tout vide pour simplement le suivre. D'autres achats peuvent être ajoutés ensuite, sous **Modifier l'instrument**.",
+                    "data": {
+                        "quantity": "Quantité",
+                        "price": "Prix d'achat unitaire ({currency})",
+                        "date": "Date d'achat",
+                        "fees": "Frais ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Combien d'actions, de parts ou de cryptomonnaies.",
+                        "price": "Le prix d'une unité, dans la devise de cette cotation.",
+                        "date": "Facultatif. Détermine seulement l'ordre dans lequel les achats et les ventes sont comptabilisés.",
+                        "fees": "Facultatif. Les frais de l'achat ou de la vente.",
+                        "taxes": "Facultatif. Les taxes payées à cette occasion."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - achats saisis : {count} ; détenu : {quantity} à un prix moyen de {average} ; réalisé : {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Renommer",
+                        "move": "📂 Déplacer vers un autre groupe",
+                        "add_lot": "➕ Ajouter un achat",
+                        "sell_lot": "➖ Ajouter une vente",
+                        "remove_lots": "🗑️ Supprimer des achats et ventes",
+                        "alerts": "🔔 Alertes de cours",
+                        "color": "🎨 Couleur",
+                        "logo": "🖼️ Logo personnel",
+                        "tradingview": "📈 Lien TradingView"
+                    }
+                },
+                "rename": {
+                    "title": "Renommer l'instrument",
+                    "description": "Le nom de {symbol} : celui de son appareil et de ses capteurs.",
+                    "data": {
+                        "name": "Nom"
+                    }
+                },
+                "add_lot": {
+                    "title": "Ajouter un achat",
+                    "description": "{name} - saisis jusqu'ici : {count} ; détenu : {quantity} à un prix moyen de {average}.",
+                    "data": {
+                        "quantity": "Quantité achetée",
+                        "price": "Prix d'achat unitaire ({currency})",
+                        "date": "Date d'achat",
+                        "add_another": "En ajouter un autre ensuite",
+                        "fees": "Frais ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Combien d'actions, de parts ou de cryptomonnaies ont été achetées.",
+                        "price": "Le prix d'une unité, dans la devise de cette cotation.",
+                        "date": "Facultatif. Détermine seulement l'ordre dans lequel les achats et les ventes sont comptabilisés.",
+                        "fees": "Facultatif. Les frais de l'achat.",
+                        "taxes": "Facultatif. Les taxes payées à cette occasion."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Ajouter une vente",
+                    "description": "{name} - saisis jusqu'ici : {count} ; détenu : {quantity} à un prix moyen de {average}.",
+                    "data": {
+                        "quantity": "Quantité vendue",
+                        "price": "Prix de vente unitaire ({currency})",
+                        "date": "Date de vente",
+                        "add_another": "En ajouter une autre ensuite",
+                        "fees": "Frais ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Combien d'unités ont été vendues. Elles quittent la position à son prix moyen actuel.",
+                        "price": "Ce qu'une unité a rapporté, dans la devise de cette cotation.",
+                        "date": "Vide signifie aujourd'hui. Détermine l'ordre dans lequel les achats et les ventes sont comptabilisés.",
+                        "fees": "Facultatif. Les frais de la vente.",
+                        "taxes": "Facultatif. Les taxes payées à cette occasion."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Supprimer des achats et ventes",
+                    "description": "{name} : cochez ce qui doit être supprimé. Tout supprimer laisse un instrument simplement suivi.",
+                    "data": {
+                        "remove": "Saisis"
+                    }
+                },
+                "logo": {
+                    "title": "Logo personnel",
+                    "description": "{name} : une image personnelle - pour un instrument sans logo, ou à la place du sien. PNG, JPG, WebP, GIF ou SVG, jusqu'à 1 Mo ; une image carrée convient le mieux. Elle est conservée dans votre dossier de configuration et affichée même logos désactivés.",
+                    "data": {
+                        "file": "Image",
+                        "remove_logo": "Supprimer le logo téléversé"
+                    },
+                    "data_description": {
+                        "remove_logo": "Rétablit le logo d'origine de l'instrument. Ignoré si une nouvelle image est téléversée."
+                    }
+                },
+                "tradingview": {
+                    "title": "Lien TradingView",
+                    "description": "La carte relie les détails de {name} à sa page sur TradingView. **Symbole déterminé pour {symbol} : {found}.** Le champ indique le symbole utilisé. Remplacez-le par le vôtre, tel que TradingView l'écrit - la bourse, deux-points, le ticker, comme NASDAQ:AAPL. Vide, le symbole déterminé est repris ; s'il n'y en a pas, la carte n'affiche aucun lien.",
+                    "data": {
+                        "tradingview": "Symbole TradingView"
+                    }
+                },
+                "move": {
+                    "title": "Déplacer vers un autre groupe",
+                    "description": "{name} : le groupe dans lequel il se trouve. Dans une liste de suivi, ses achats sont conservés mais pas comptabilisés.",
+                    "data": {
+                        "group": "Groupe"
+                    }
+                },
+                "alerts": {
+                    "title": "Alertes de cours",
+                    "description": "{name} : une alerte est déclenchée tant que le cours atteint ou dépasse son seuil. Chaque seuil reçoit un capteur binaire ; les destinataires se règlent dans les paramètres de l'intégration. Laissez un champ vide pour aucun seuil.",
+                    "data": {
+                        "alert_below": "Égal ou inférieur à ({currency})",
+                        "alert_above": "Égal ou supérieur à ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Couleur",
+                    "description": "{name} : la couleur dans laquelle il est affiché quand une carte montre les parts d'un portefeuille. Saisissez une valeur comme #009999 dans la recherche pour une couleur personnelle. Vide, la carte lui en attribue une.",
+                    "data": {
+                        "color": "Couleur"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Dans quel portefeuille ?",
+                    "description": "{name} : avec un achat, l'instrument passe de la liste de suivi à un portefeuille. Ses capteurs restent les mêmes.",
+                    "data": {
+                        "target": "Portefeuille",
+                        "name": "Nom du nouveau portefeuille"
+                    },
+                    "data_description": {
+                        "name": "Uniquement pour un nouveau portefeuille. Vide, il s'appelle « Portefeuille »."
+                    }
+                },
+                "sold_out": {
+                    "title": "Tout est vendu",
+                    "description": "{name} : plus rien n'est détenu. Les achats et ventes restent avec l'instrument, et avec eux ce qu'il a rapporté ({realized}).",
+                    "data": {
+                        "after_sale": "Et maintenant ?"
+                    },
+                    "data_description": {
+                        "after_sale": "Un dossier avec une flèche déplace l'instrument vers cette liste de suivi."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "La source est injoignable. Réessayez dans un instant.",
+                "nothing_found": "Aucun résultat. Essayez une autre orthographe, le symbole ou l'ISIN.",
+                "already_configured": "Cette cotation a déjà été ajoutée.",
+                "invalid_lot": "Saisissez une quantité supérieure à 0 et un prix.",
+                "logo_wrong_type": "Format d'image non accepté. Utilisez PNG, JPG, WebP, GIF ou SVG.",
+                "logo_too_large": "L'image dépasse 1 Mo.",
+                "invalid_tradingview": "Ce n'est pas un symbole TradingView. Écrivez la bourse, deux-points et le ticker, comme NASDAQ:AAPL.",
+                "invalid_color": "Choisissez une des couleurs, ou saisissez une valeur comme #009999.",
+                "group_exists": "Un groupe portant ce nom existe déjà.",
+                "sell_too_many": "C'est plus que ce qui est détenu."
+            },
+            "abort": {
+                "reconfigure_successful": "L'instrument a été mis à jour."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Dernière mise à jour"
+            },
+            "position_value": {
+                "name": "Valeur de la position"
+            },
+            "position_gain": {
+                "name": "Plus-value"
+            },
+            "total_value": {
+                "name": "Valeur totale"
+            },
+            "total_gain": {
+                "name": "Plus-value totale"
+            },
+            "group_value": {
+                "name": "Valeur {group}"
+            },
+            "group_gain": {
+                "name": "Plus-value {group}"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alerte basse"
+            },
+            "alert_above": {
+                "name": "Alerte haute"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} ne répond pas",
+            "description": "**{source}** n'a pas répondu {count} fois de suite. Dernière raison :\n\n`{reason}`\n\nSes instruments gardent leurs derniers cours, chacun avec son heure ; si une autre source cote le même instrument, elle prend le relais. Rien à faire : les cours reviennent à la prochaine réponse de la source, et cette réparation disparaît alors."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "Taux de référence BCE - paires de devises, une fois par jour",
+                "goldapi": "gold-api.com - cours au comptant de l'or, de l'argent, du platine, du palladium et du cuivre",
+                "kraken": "Kraken - cryptomonnaies",
+                "yahoo": "Yahoo Finance - actions, fonds, indices, contrats à terme, devises, cryptomonnaies",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra et Francfort"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portefeuille - les achats sont additionnés",
+                "watchlist": "Liste de suivi - uniquement suivie"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Le garder dans le portefeuille",
+                "new": "📂 Déplacer vers une nouvelle liste de suivi",
+                "delete": "🗑️ Supprimer l'instrument"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Créer un nouveau portefeuille"
+            }
+        }
+    }
+}

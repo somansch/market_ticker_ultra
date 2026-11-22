@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Add group",
+                "description": "A group holds instruments. A portfolio adds up what is held; a watchlist is only watched and counts in no sum. Instruments are added to it afterwards, with **Add instrument**.",
+                "data": {
+                    "name": "Name",
+                    "kind": "Kind",
+                    "benchmark": "Index to compare with"
+                },
+                "data_description": {
+                    "benchmark": "For a portfolio: the index its performance is set beside on the card. Choose one, or type any symbol of Yahoo Finance. Empty compares with none."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Quotes for stocks, funds, indices, commodities, currencies and coins from public sources - no account, no API key. Instruments are added afterwards, one by one, with **Add instrument** on the integration's page.",
+                "data": {
+                    "scan_interval": "Update interval",
+                    "logos": "Logos",
+                    "base_currency": "Base currency",
+                    "sources": "Sources"
+                },
+                "data_description": {
+                    "scan_interval": "How often the quotes are fetched while a market is open. While all markets are closed, they are fetched every 30 minutes at most.",
+                    "logos": "Show each instrument with its logo on the card. The logos are loaded by the browser from Elbstream, which is credited for them - \"Logos by Elbstream\" - in the card's editor and in the README. Switched off, the card shows initials, and your own uploaded logos.",
+                    "base_currency": "The currency all positions are added up in, as a three-letter code - EUR, USD, CHF. Positions in other currencies are converted at the European Central Bank's daily reference rate.",
+                    "sources": "Where quotes may come from. A source that is switched off is not asked: the search finds nothing there, and an instrument that was added from it is quoted by another source where one lists the same instrument, and keeps its last quote otherwise."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "The settings exist already."
+        },
+        "error": {
+            "invalid_currency": "Three letters, such as EUR or USD.",
+            "no_source": "At least one source is needed.",
+            "invalid_benchmark": "Yahoo Finance has no price series for this symbol."
+        },
+        "initiate_flow": {
+            "user": "Add group"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ General",
+                    "sources": "🌐 Data sources",
+                    "alert_targets": "🔔 Price alerts: recipients",
+                    "alert_texts": "✏️ Price alerts: texts"
+                }
+            },
+            "general": {
+                "title": "General",
+                "data": {
+                    "scan_interval": "Update interval",
+                    "base_currency": "Base currency",
+                    "logos": "Logos"
+                },
+                "data_description": {
+                    "scan_interval": "How often the quotes are fetched while a market is open. While all markets are closed, they are fetched every 30 minutes at most.",
+                    "base_currency": "The currency all positions are added up in, as a three-letter code - EUR, USD, CHF. Positions in other currencies are converted at the European Central Bank's daily reference rate.",
+                    "logos": "Show each instrument with its logo on the card. The logos are loaded by the browser from Elbstream, which is credited for them - \"Logos by Elbstream\" - in the card's editor and in the README. Switched off, the card shows initials, and your own uploaded logos."
+                }
+            },
+            "sources": {
+                "title": "Data sources",
+                "data": {
+                    "sources": "Sources",
+                    "news_google": "News from Google News too"
+                },
+                "data_description": {
+                    "sources": "Where quotes may come from. A source that is switched off is not asked: the search finds nothing there, and an instrument that was added from it is quoted by another source where one lists the same instrument, and keeps its last quote otherwise.",
+                    "news_google": "Also searches Google News for an instrument's name. It finds more headlines than Yahoo Finance, and some that are about something else."
+                }
+            },
+            "alert_targets": {
+                "title": "Price alerts: recipients",
+                "description": "Who is told when a price alert comes on. Every alert also fires the event market_ticker_ultra_alert, for automations.",
+                "data": {
+                    "alert_persistent": "Notification in Home Assistant",
+                    "alert_notify": "Tell about price alerts",
+                    "alert_services": "Notify services for price alerts",
+                    "alert_speakers": "Announce price alerts on",
+                    "alert_tts": "Voice for announcements",
+                    "alert_test": "Send a test message now"
+                },
+                "data_description": {
+                    "alert_persistent": "Also puts a notification into Home Assistant itself when a price alert comes on.",
+                    "alert_notify": "The notify entities that get a message when a price alert comes on - a phone with the Companion App, for one.",
+                    "alert_services": "Services such as notify.whatsapp or notify.mail, for messengers and mail. Choose from the list or type a name.",
+                    "alert_speakers": "The speakers a price alert is read out on - a Sonos, for example.",
+                    "alert_tts": "The text-to-speech voice the alert is spoken with. Empty takes the first there is.",
+                    "alert_test": "Sends a test message to everybody named above when you save."
+                }
+            },
+            "alert_texts": {
+                "title": "Price alerts: texts",
+                "description": "What a price alert says. Variables: {name}, {symbol}, {price} and {limit} (each with its currency), {currency}, {direction} (\"at or below\" / \"at or above\") and {change} (the day's change in percent). An empty field takes the default again.",
+                "data": {
+                    "alert_title": "Title",
+                    "alert_message": "Message",
+                    "alert_spoken": "Announcement",
+                    "alert_test": "Send a test message now"
+                },
+                "data_description": {
+                    "alert_title": "The heading of a notification.",
+                    "alert_message": "The text of a notification.",
+                    "alert_spoken": "What is read out on the speakers.",
+                    "alert_test": "Sends a test message with these texts to all recipients when you save."
+                }
+            },
+            "group": {
+                "title": "Group",
+                "description": "The name of the group, and whether it is a portfolio or a watchlist. In a watchlist the purchases of its instruments are kept but not counted.",
+                "data": {
+                    "name": "Name",
+                    "kind": "Kind",
+                    "benchmark": "Index to compare with"
+                },
+                "data_description": {
+                    "benchmark": "For a portfolio: the index its performance is set beside on the card. Choose one, or type any symbol of Yahoo Finance. Empty compares with none."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Three letters, such as EUR or USD.",
+            "no_source": "At least one source is needed.",
+            "invalid_benchmark": "Yahoo Finance has no price series for this symbol."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Add instrument",
+                "reconfigure": "Edit instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Find an instrument",
+                    "description": "Search by name, by symbol or by ISIN - a stock, a fund, an index, a commodity, a currency pair or a coin. Every source is asked: Yahoo Finance for nearly everything, Börse Frankfurt for Xetra by ISIN, the ECB's reference rate for a currency pair, Kraken for a coin, gold-api.com for a metal's spot price.",
+                    "data": {
+                        "query": "Name, symbol or ISIN"
+                    },
+                    "data_description": {
+                        "query": "For example: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, gold."
+                    }
+                },
+                "listing": {
+                    "title": "Choose the listing",
+                    "description": "Found for \"{query}\". The same instrument is often listed at several exchanges and sources, in different currencies. Each line ends with the last price there and where it is from; a date behind a price means it is not from today.",
+                    "data": {
+                        "listing": "Listing"
+                    }
+                },
+                "holding": {
+                    "title": "Your holding",
+                    "description": "What you hold of **{name}** - or leave everything empty to only watch it. Further purchases can be added afterwards, under **Edit instrument**.",
+                    "data": {
+                        "quantity": "Quantity",
+                        "price": "Purchase price per unit ({currency})",
+                        "date": "Purchase date",
+                        "fees": "Fees ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "How many shares, units or coins.",
+                        "price": "What one of them cost, in the currency this listing is quoted in.",
+                        "date": "Optional. It only decides the order in which purchases and sales are counted.",
+                        "fees": "Optional. What the purchase or sale cost in fees.",
+                        "taxes": "Optional. What was paid in taxes on it."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - purchases entered: {count}; held: {quantity} at an average of {average}; realised: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Rename",
+                        "move": "📂 Move to another group",
+                        "add_lot": "➕ Add a purchase",
+                        "sell_lot": "➖ Add a sale",
+                        "remove_lots": "🗑️ Remove purchases and sales",
+                        "alerts": "🔔 Price alerts",
+                        "color": "🎨 Colour",
+                        "logo": "🖼️ Own logo",
+                        "tradingview": "📈 TradingView link"
+                    }
+                },
+                "rename": {
+                    "title": "Rename instrument",
+                    "description": "The name of {symbol}: what its device and its sensors are called.",
+                    "data": {
+                        "name": "Name"
+                    }
+                },
+                "add_lot": {
+                    "title": "Add a purchase",
+                    "description": "{name} - entered so far: {count}; held: {quantity} at an average of {average}.",
+                    "data": {
+                        "quantity": "Quantity bought",
+                        "price": "Purchase price each ({currency})",
+                        "date": "Purchase date",
+                        "add_another": "Add another one after this",
+                        "fees": "Fees ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "How many shares, units or coins were bought.",
+                        "price": "What one of them cost, in the currency this listing trades in.",
+                        "date": "Optional. It only decides the order in which purchases and sales are counted.",
+                        "fees": "Optional. What the purchase cost in fees.",
+                        "taxes": "Optional. What was paid in taxes on it."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Add a sale",
+                    "description": "{name} - entered so far: {count}; held: {quantity} at an average of {average}.",
+                    "data": {
+                        "quantity": "Quantity sold",
+                        "price": "Sale price each ({currency})",
+                        "date": "Sale date",
+                        "add_another": "Add another one after this",
+                        "fees": "Fees ({currency})",
+                        "taxes": "Taxes ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "How many were sold. They leave the holding at its average price so far.",
+                        "price": "What one of them brought in, in the currency this listing trades in.",
+                        "date": "Empty means today. It sets the order in which purchases and sales are counted.",
+                        "fees": "Optional. What the sale cost in fees.",
+                        "taxes": "Optional. What was paid in taxes on it."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Remove purchases and sales",
+                    "description": "{name}: tick what should go. Removing all of them leaves an instrument that is only watched.",
+                    "data": {
+                        "remove": "Entered"
+                    }
+                },
+                "logo": {
+                    "title": "Own logo",
+                    "description": "{name}: an image of your own - for an instrument that has no logo, or in place of the one it has. PNG, JPG, WebP, GIF or SVG, up to 1 MB; a square image fits best. It is kept in your configuration folder and shown with the logos switched off too.",
+                    "data": {
+                        "file": "Image",
+                        "remove_logo": "Remove the uploaded logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Goes back to the logo the instrument has without it. Ignored when a new image is uploaded."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView link",
+                    "description": "The card links the details of {name} to its page at TradingView. **The symbol worked out for {symbol}: {found}.** The field shows the symbol in use. Change it to your own, as TradingView writes it - the exchange, a colon, the ticker, such as NASDAQ:AAPL. Empty goes back to the one worked out; where there is none, the card shows no link.",
+                    "data": {
+                        "tradingview": "TradingView symbol"
+                    }
+                },
+                "move": {
+                    "title": "Move to another group",
+                    "description": "{name}: the group it stands in. In a watchlist its purchases are kept but not counted.",
+                    "data": {
+                        "group": "Group"
+                    }
+                },
+                "alerts": {
+                    "title": "Price alerts",
+                    "description": "{name}: an alert is on while the price stands at or beyond its limit. Each limit gets a binary sensor; who is told is set in the integration's settings. Leave a field empty for no limit.",
+                    "data": {
+                        "alert_below": "At or below ({currency})",
+                        "alert_above": "At or above ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Colour",
+                    "description": "{name}: the colour it is drawn in where a card shows a portfolio's shares. Type a value such as #009999 into the search for a colour of your own. Empty, the card gives it one.",
+                    "data": {
+                        "color": "Colour"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Into which portfolio?",
+                    "description": "{name}: with a purchase the instrument moves from the watchlist into a portfolio. Its sensors stay the same.",
+                    "data": {
+                        "target": "Portfolio",
+                        "name": "Name of the new portfolio"
+                    },
+                    "data_description": {
+                        "name": "Only for a new portfolio. Empty names it “Portfolio”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Everything sold",
+                    "description": "{name}: nothing is held any more. Purchases and sales stay with the instrument, and with them what it has earned ({realized}).",
+                    "data": {
+                        "after_sale": "What now?"
+                    },
+                    "data_description": {
+                        "after_sale": "A folder with an arrow moves the instrument to that watchlist."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "The source could not be reached. Try again in a moment.",
+                "nothing_found": "Nothing found. Try another spelling, the symbol or the ISIN.",
+                "already_configured": "This listing has already been added.",
+                "invalid_lot": "Enter a quantity above 0 and a price.",
+                "logo_wrong_type": "Not an image this takes. Use PNG, JPG, WebP, GIF or SVG.",
+                "logo_too_large": "The image is larger than 1 MB.",
+                "invalid_tradingview": "Not a TradingView symbol. Write the exchange, a colon and the ticker, such as NASDAQ:AAPL.",
+                "invalid_color": "Choose one of the colours, or type a value such as #009999.",
+                "group_exists": "A group of this name already exists.",
+                "sell_too_many": "That is more than is held."
+            },
+            "abort": {
+                "reconfigure_successful": "The instrument was updated."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Last update"
+            },
+            "position_value": {
+                "name": "Position value"
+            },
+            "position_gain": {
+                "name": "Gain"
+            },
+            "total_value": {
+                "name": "Total value"
+            },
+            "total_gain": {
+                "name": "Total gain"
+            },
+            "group_value": {
+                "name": "{group} value"
+            },
+            "group_gain": {
+                "name": "{group} gain"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alert below"
+            },
+            "alert_above": {
+                "name": "Alert above"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} does not answer",
+            "description": "**{source}** has not answered {count} times in a row. The last reason:\n\n`{reason}`\n\nIts instruments keep their last quotes, each with the time it is from; where another source quotes the same instrument, that one stands in. Nothing needs doing: the quotes come back with the source's next answer, and this repair goes with it."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB reference rates - currency pairs, once a day",
+                "goldapi": "gold-api.com - spot prices of gold, silver, platinum, palladium, copper",
+                "kraken": "Kraken - coins",
+                "yahoo": "Yahoo Finance - stocks, funds, indices, futures, currencies, coins",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra and Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfolio - purchases are added up",
+                "watchlist": "Watchlist - only watched"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Keep it in the portfolio",
+                "new": "📂 Move to a new watchlist",
+                "delete": "🗑️ Remove the instrument"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Create a new portfolio"
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "alert_title": "Kursalarm",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Kursalarm. {name} står i {price}, {direction} {limit}.",
+  "direction_below": "på eller under",
+  "direction_above": "på eller over",
+  "settings": "Indstillinger",
+  "portfolio": "Portefølje",
+  "watchlist": "Watchlist",
+  "decimal_comma": true
+}

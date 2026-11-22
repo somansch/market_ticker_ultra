@@ -1,0 +1,11 @@
+{
+  "alert_title": "Fiyat alarmı",
+  "alert_message": "{name}: {price} - {limit} {direction}",
+  "alert_spoken": "Fiyat alarmı. {name} {price} fiyatında, {limit} {direction}.",
+  "direction_below": "seviyesinde veya altında",
+  "direction_above": "seviyesinde veya üstünde",
+  "settings": "Ayarlar",
+  "portfolio": "Portföy",
+  "watchlist": "İzleme listesi",
+  "decimal_comma": true
+}

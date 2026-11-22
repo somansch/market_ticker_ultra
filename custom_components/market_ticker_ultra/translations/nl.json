@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Groep toevoegen",
+                "description": "Een groep bevat instrumenten. Een portefeuille telt op wat in bezit is; een watchlist wordt alleen gevolgd en telt in geen enkele som mee. Instrumenten voeg je daarna toe, met **Instrument toevoegen**.",
+                "data": {
+                    "name": "Naam",
+                    "kind": "Soort",
+                    "benchmark": "Vergelijkingsindex"
+                },
+                "data_description": {
+                    "benchmark": "Voor een portefeuille: de index waarnaast het rendement op de kaart wordt getoond. Kies er een, of typ een willekeurig symbool van Yahoo Finance. Leeg: geen vergelijking."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Koersen voor aandelen, fondsen, indices, grondstoffen, valuta's en cryptomunten uit openbare bronnen - geen account, geen API-sleutel. Instrumenten voeg je daarna één voor één toe, met **Instrument toevoegen** op de pagina van de integratie.",
+                "data": {
+                    "scan_interval": "Update-interval",
+                    "logos": "Logo's",
+                    "base_currency": "Basisvaluta",
+                    "sources": "Bronnen"
+                },
+                "data_description": {
+                    "scan_interval": "Hoe vaak de koersen worden opgehaald terwijl een markt open is. Zolang alle markten gesloten zijn, hoogstens elke 30 minuten.",
+                    "logos": "Toon elk instrument met zijn logo op de kaart. De browser laadt de logo's van Elbstream, dat daarvoor vermeld wordt - \"Logos by Elbstream\" - in de editor van de kaart en in de README. Uitgeschakeld toont de kaart initialen, en je eigen geüploade logo's.",
+                    "base_currency": "De valuta waarin alle posities worden opgeteld, als code van drie letters - EUR, USD, CHF. Posities in andere valuta's worden omgerekend tegen de dagelijkse referentiekoers van de Europese Centrale Bank.",
+                    "sources": "Waar koersen vandaan mogen komen. Een uitgeschakelde bron wordt niet geraadpleegd: de zoekopdracht vindt daar niets, en een instrument dat via die bron is toegevoegd krijgt zijn koers van een andere bron die hetzelfde instrument noteert, en behoudt anders zijn laatste koers."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "De instellingen bestaan al."
+        },
+        "error": {
+            "invalid_currency": "Drie letters, zoals EUR of USD.",
+            "no_source": "Er is minstens één bron nodig.",
+            "invalid_benchmark": "Yahoo Finance heeft geen koersverloop voor dit symbool."
+        },
+        "initiate_flow": {
+            "user": "Groep toevoegen"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Algemeen",
+                    "sources": "🌐 Gegevensbronnen",
+                    "alert_targets": "🔔 Koersalarmen: ontvangers",
+                    "alert_texts": "✏️ Koersalarmen: teksten"
+                }
+            },
+            "general": {
+                "title": "Algemeen",
+                "data": {
+                    "scan_interval": "Update-interval",
+                    "base_currency": "Basisvaluta",
+                    "logos": "Logo's"
+                },
+                "data_description": {
+                    "scan_interval": "Hoe vaak de koersen worden opgehaald terwijl een markt open is. Zolang alle markten gesloten zijn, hoogstens elke 30 minuten.",
+                    "base_currency": "De valuta waarin alle posities worden opgeteld, als code van drie letters - EUR, USD, CHF. Posities in andere valuta's worden omgerekend tegen de dagelijkse referentiekoers van de Europese Centrale Bank.",
+                    "logos": "Toon elk instrument met zijn logo op de kaart. De browser laadt de logo's van Elbstream, dat daarvoor vermeld wordt - \"Logos by Elbstream\" - in de editor van de kaart en in de README. Uitgeschakeld toont de kaart initialen, en je eigen geüploade logo's."
+                }
+            },
+            "sources": {
+                "title": "Gegevensbronnen",
+                "data": {
+                    "sources": "Bronnen",
+                    "news_google": "Ook nieuws van Google News"
+                },
+                "data_description": {
+                    "sources": "Waar koersen vandaan mogen komen. Een uitgeschakelde bron wordt niet geraadpleegd: de zoekopdracht vindt daar niets, en een instrument dat via die bron is toegevoegd krijgt zijn koers van een andere bron die hetzelfde instrument noteert, en behoudt anders zijn laatste koers.",
+                    "news_google": "Zoekt ook in Google News naar de naam van een instrument. Dat vindt meer berichten dan Yahoo Finance, en ook sommige die over iets anders gaan."
+                }
+            },
+            "alert_targets": {
+                "title": "Koersalarmen: ontvangers",
+                "description": "Wie bericht krijgt als een koersalarm afgaat. Elk alarm vuurt ook de gebeurtenis market_ticker_ultra_alert af, voor automatiseringen.",
+                "data": {
+                    "alert_persistent": "Melding in Home Assistant",
+                    "alert_notify": "Koersalarmen melden aan",
+                    "alert_services": "Notify-diensten voor koersalarmen",
+                    "alert_speakers": "Koersalarmen aankondigen op",
+                    "alert_tts": "Stem voor aankondigingen",
+                    "alert_test": "Nu een testbericht sturen"
+                },
+                "data_description": {
+                    "alert_persistent": "Plaatst ook een melding in Home Assistant zelf als een koersalarm afgaat.",
+                    "alert_notify": "De notify-entiteiten die een bericht krijgen als een koersalarm afgaat - bijvoorbeeld een telefoon met de Companion App.",
+                    "alert_services": "Diensten zoals notify.whatsapp of notify.mail, voor messengers en e-mail. Kies uit de lijst of typ een naam.",
+                    "alert_speakers": "De speakers waarop een koersalarm wordt voorgelezen - bijvoorbeeld een Sonos.",
+                    "alert_tts": "De tekst-naar-spraakstem waarmee het alarm wordt uitgesproken. Leeg neemt de eerste die er is.",
+                    "alert_test": "Stuurt bij het opslaan een testbericht naar iedereen hierboven."
+                }
+            },
+            "alert_texts": {
+                "title": "Koersalarmen: teksten",
+                "description": "Wat een koersalarm zegt. Variabelen: {name}, {symbol}, {price} en {limit} (elk met valuta), {currency}, {direction} (\"op of onder\" / \"op of boven\") en {change} (de verandering van de dag in procent). Een leeg veld krijgt weer de standaardtekst.",
+                "data": {
+                    "alert_title": "Titel",
+                    "alert_message": "Bericht",
+                    "alert_spoken": "Aankondiging",
+                    "alert_test": "Nu een testbericht sturen"
+                },
+                "data_description": {
+                    "alert_title": "De kop van een melding.",
+                    "alert_message": "De tekst van een melding.",
+                    "alert_spoken": "Wat op de speakers wordt voorgelezen.",
+                    "alert_test": "Stuurt bij het opslaan een testbericht met deze teksten naar alle ontvangers."
+                }
+            },
+            "group": {
+                "title": "Groep",
+                "description": "De naam van de groep, en of het een portefeuille of een watchlist is. In een watchlist worden de aankopen van de instrumenten bewaard maar niet meegeteld.",
+                "data": {
+                    "name": "Naam",
+                    "kind": "Soort",
+                    "benchmark": "Vergelijkingsindex"
+                },
+                "data_description": {
+                    "benchmark": "Voor een portefeuille: de index waarnaast het rendement op de kaart wordt getoond. Kies er een, of typ een willekeurig symbool van Yahoo Finance. Leeg: geen vergelijking."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Drie letters, zoals EUR of USD.",
+            "no_source": "Er is minstens één bron nodig.",
+            "invalid_benchmark": "Yahoo Finance heeft geen koersverloop voor dit symbool."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Instrument toevoegen",
+                "reconfigure": "Instrument bewerken"
+            },
+            "step": {
+                "user": {
+                    "title": "Een instrument zoeken",
+                    "description": "Zoek op naam, symbool of ISIN - een aandeel, een fonds, een index, een grondstof, een valutapaar of een cryptomunt. Elke bron wordt geraadpleegd: Yahoo Finance voor bijna alles, Börse Frankfurt voor Xetra op ISIN, de referentiekoers van de ECB voor een valutapaar, Kraken voor een cryptomunt, gold-api.com voor de spotprijs van een metaal.",
+                    "data": {
+                        "query": "Naam, symbool of ISIN"
+                    },
+                    "data_description": {
+                        "query": "Bijvoorbeeld: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, goud."
+                    }
+                },
+                "listing": {
+                    "title": "Kies de notering",
+                    "description": "Gevonden voor \"{query}\". Hetzelfde instrument is vaak op meerdere beurzen en bronnen genoteerd, in verschillende valuta's. Elke regel eindigt met de laatste koers daar en waar die vandaan komt; een datum achter een koers betekent dat die niet van vandaag is.",
+                    "data": {
+                        "listing": "Notering"
+                    }
+                },
+                "holding": {
+                    "title": "Je positie",
+                    "description": "Wat je bezit van **{name}** - of laat alles leeg om het alleen te volgen. Verdere aankopen voeg je later toe, onder **Instrument bewerken**.",
+                    "data": {
+                        "quantity": "Aantal",
+                        "price": "Aankoopprijs per stuk ({currency})",
+                        "date": "Aankoopdatum",
+                        "fees": "Kosten ({currency})",
+                        "taxes": "Belastingen ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hoeveel aandelen, participaties of munten.",
+                        "price": "Wat één ervan kostte, in de valuta waarin deze notering verhandeld wordt.",
+                        "date": "Optioneel. Bepaalt alleen de volgorde waarin aankopen en verkopen worden meegeteld.",
+                        "fees": "Optioneel. De transactiekosten van de aankoop of verkoop.",
+                        "taxes": "Optioneel. De belasting die erover is betaald."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - ingevoerde aankopen: {count}; in bezit: {quantity} tegen gemiddeld {average}; gerealiseerd: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Hernoemen",
+                        "move": "📂 Naar een andere groep verplaatsen",
+                        "add_lot": "➕ Aankoop toevoegen",
+                        "sell_lot": "➖ Verkoop toevoegen",
+                        "remove_lots": "🗑️ Aankopen en verkopen verwijderen",
+                        "alerts": "🔔 Koersalarmen",
+                        "color": "🎨 Kleur",
+                        "logo": "🖼️ Eigen logo",
+                        "tradingview": "📈 TradingView-link"
+                    }
+                },
+                "rename": {
+                    "title": "Instrument hernoemen",
+                    "description": "De naam van {symbol}: hoe het apparaat en de sensoren heten.",
+                    "data": {
+                        "name": "Naam"
+                    }
+                },
+                "add_lot": {
+                    "title": "Aankoop toevoegen",
+                    "description": "{name} - tot nu toe ingevoerd: {count}; in bezit: {quantity} tegen gemiddeld {average}.",
+                    "data": {
+                        "quantity": "Gekocht aantal",
+                        "price": "Aankoopprijs per stuk ({currency})",
+                        "date": "Aankoopdatum",
+                        "add_another": "Hierna nog een toevoegen",
+                        "fees": "Kosten ({currency})",
+                        "taxes": "Belastingen ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hoeveel aandelen, participaties of munten er gekocht zijn.",
+                        "price": "Wat één ervan kostte, in de valuta waarin deze notering verhandeld wordt.",
+                        "date": "Optioneel. Bepaalt alleen de volgorde waarin aankopen en verkopen worden meegeteld.",
+                        "fees": "Optioneel. De transactiekosten van de aankoop.",
+                        "taxes": "Optioneel. De belasting die erover is betaald."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Verkoop toevoegen",
+                    "description": "{name} - tot nu toe ingevoerd: {count}; in bezit: {quantity} tegen gemiddeld {average}.",
+                    "data": {
+                        "quantity": "Verkocht aantal",
+                        "price": "Verkoopprijs per stuk ({currency})",
+                        "date": "Verkoopdatum",
+                        "add_another": "Hierna nog een toevoegen",
+                        "fees": "Kosten ({currency})",
+                        "taxes": "Belastingen ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hoeveel er verkocht zijn. Ze verlaten de positie tegen de gemiddelde prijs tot nu toe.",
+                        "price": "Wat één ervan opbracht, in de valuta waarin deze notering verhandeld wordt.",
+                        "date": "Leeg betekent vandaag. Bepaalt de volgorde waarin aankopen en verkopen worden meegeteld.",
+                        "fees": "Optioneel. De transactiekosten van de verkoop.",
+                        "taxes": "Optioneel. De belasting die erover is betaald."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Aankopen en verkopen verwijderen",
+                    "description": "{name}: vink aan wat weg moet. Als je ze allemaal verwijdert, blijft een instrument over dat alleen gevolgd wordt.",
+                    "data": {
+                        "remove": "Ingevoerd"
+                    }
+                },
+                "logo": {
+                    "title": "Eigen logo",
+                    "description": "{name}: een eigen afbeelding - voor een instrument zonder logo, of in plaats van het logo dat het heeft. PNG, JPG, WebP, GIF of SVG, tot 1 MB; een vierkante afbeelding past het best. Die wordt in je configuratiemap bewaard en ook getoond als de logo's zijn uitgeschakeld.",
+                    "data": {
+                        "file": "Afbeelding",
+                        "remove_logo": "Geüpload logo verwijderen"
+                    },
+                    "data_description": {
+                        "remove_logo": "Gaat terug naar het logo dat het instrument zonder dit heeft. Wordt genegeerd als er een nieuwe afbeelding wordt geüpload."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView-link",
+                    "description": "De kaart linkt de details van {name} naar de bijbehorende pagina op TradingView. **Het afgeleide symbool voor {symbol}: {found}.** Het veld toont het symbool dat gebruikt wordt. Vervang het door je eigen, zoals TradingView het schrijft - de beurs, een dubbele punt, de ticker, zoals NASDAQ:AAPL. Leeg gaat terug naar het afgeleide symbool; waar er geen is, toont de kaart geen link.",
+                    "data": {
+                        "tradingview": "TradingView-symbool"
+                    }
+                },
+                "move": {
+                    "title": "Naar een andere groep verplaatsen",
+                    "description": "{name}: de groep waarin het staat. In een watchlist worden de aankopen bewaard maar niet meegeteld.",
+                    "data": {
+                        "group": "Groep"
+                    }
+                },
+                "alerts": {
+                    "title": "Koersalarmen",
+                    "description": "{name}: een alarm is afgegaan zolang de koers op of voorbij de grens staat. Elke grens krijgt een binaire sensor; wie bericht krijgt, stel je in bij de instellingen van de integratie. Laat een veld leeg voor geen grens.",
+                    "data": {
+                        "alert_below": "Op of onder ({currency})",
+                        "alert_above": "Op of boven ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Kleur",
+                    "description": "{name}: de kleur waarin het getekend wordt waar een kaart de wegingen van een portefeuille toont. Typ een waarde zoals #009999 in het zoekveld voor een eigen kleur. Bij leeg kiest de kaart er zelf een.",
+                    "data": {
+                        "color": "Kleur"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Naar welke portefeuille?",
+                    "description": "{name}: met een aankoop gaat het instrument van de watchlist naar een portefeuille. De sensoren blijven hetzelfde.",
+                    "data": {
+                        "target": "Portefeuille",
+                        "name": "Naam van de nieuwe portefeuille"
+                    },
+                    "data_description": {
+                        "name": "Alleen voor een nieuwe portefeuille. Leeg noemt hem “Portefeuille”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Alles verkocht",
+                    "description": "{name}: er is niets meer in bezit. Aankopen en verkopen blijven bij het instrument, en daarmee wat het heeft opgeleverd ({realized}).",
+                    "data": {
+                        "after_sale": "Wat nu?"
+                    },
+                    "data_description": {
+                        "after_sale": "Een map met een pijl verplaatst het instrument naar die watchlist."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "De bron was niet bereikbaar. Probeer het zo opnieuw.",
+                "nothing_found": "Niets gevonden. Probeer een andere spelling, het symbool of de ISIN.",
+                "already_configured": "Deze notering is al toegevoegd.",
+                "invalid_lot": "Voer een aantal boven 0 en een prijs in.",
+                "logo_wrong_type": "Dit type afbeelding wordt niet ondersteund. Gebruik PNG, JPG, WebP, GIF of SVG.",
+                "logo_too_large": "De afbeelding is groter dan 1 MB.",
+                "invalid_tradingview": "Geen TradingView-symbool. Schrijf de beurs, een dubbele punt en de ticker, zoals NASDAQ:AAPL.",
+                "invalid_color": "Kies een van de kleuren, of typ een waarde zoals #009999.",
+                "group_exists": "Er bestaat al een groep met deze naam.",
+                "sell_too_many": "Dat is meer dan er in bezit is."
+            },
+            "abort": {
+                "reconfigure_successful": "Het instrument is bijgewerkt."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Laatste update"
+            },
+            "position_value": {
+                "name": "Positiewaarde"
+            },
+            "position_gain": {
+                "name": "Winst"
+            },
+            "total_value": {
+                "name": "Totale waarde"
+            },
+            "total_gain": {
+                "name": "Totale winst"
+            },
+            "group_value": {
+                "name": "Waarde {group}"
+            },
+            "group_gain": {
+                "name": "Winst {group}"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alarm onder"
+            },
+            "alert_above": {
+                "name": "Alarm boven"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} antwoordt niet",
+            "description": "**{source}** heeft {count} keer achter elkaar niet geantwoord. De laatste reden:\n\n`{reason}`\n\nDe instrumenten ervan behouden hun laatste koersen, elk met het bijbehorende tijdstip; waar een andere bron hetzelfde instrument noteert, neemt die het over. Je hoeft niets te doen: de koersen komen terug met het volgende antwoord van de bron, en deze melding verdwijnt dan ook."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB-referentiekoersen - valutaparen, eenmaal per dag",
+                "goldapi": "gold-api.com - spotprijzen van goud, zilver, platina, palladium, koper",
+                "kraken": "Kraken - cryptomunten",
+                "yahoo": "Yahoo Finance - aandelen, fondsen, indices, futures, valuta's, cryptomunten",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra en Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portefeuille - aankopen worden opgeteld",
+                "watchlist": "Watchlist - alleen volgen"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "In de portefeuille houden",
+                "new": "📂 Naar een nieuwe watchlist verplaatsen",
+                "delete": "🗑️ Het instrument verwijderen"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Een nieuwe portefeuille aanmaken"
+            }
+        }
+    }
+}

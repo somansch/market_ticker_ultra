@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Tilføj gruppe",
+                "description": "En gruppe indeholder instrumenter. En portefølje lægger beholdningen sammen; en watchlist bliver kun fulgt og indgår ikke i nogen sum. Instrumenter tilføjes bagefter med **Tilføj instrument**.",
+                "data": {
+                    "name": "Navn",
+                    "kind": "Type",
+                    "benchmark": "Sammenligningsindeks"
+                },
+                "data_description": {
+                    "benchmark": "For en portefølje: det indeks, dens udvikling vises ved siden af på kortet. Vælg et, eller skriv et vilkårligt symbol fra Yahoo Finance. Tom sammenligner ikke med noget."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Kurser på aktier, fonde, indeks, råvarer, valutaer og kryptovalutaer fra offentlige kilder - ingen konto, ingen API-nøgle. Instrumenter tilføjes bagefter, ét ad gangen, med **Tilføj instrument** på integrationens side.",
+                "data": {
+                    "scan_interval": "Opdateringsinterval",
+                    "logos": "Logoer",
+                    "base_currency": "Basisvaluta",
+                    "sources": "Kilder"
+                },
+                "data_description": {
+                    "scan_interval": "Hvor ofte kurserne hentes, mens et marked er åbent. Mens alle markeder er lukkede, hentes de højst hvert 30. minut.",
+                    "logos": "Vis hvert instrument med sit logo på kortet. Logoerne hentes af browseren fra Elbstream, som krediteres for dem - \"Logos by Elbstream\" - i kortets editor og i README. Slået fra viser kortet forbogstaver og dine egne uploadede logoer.",
+                    "base_currency": "Den valuta, alle positioner lægges sammen i, som kode på tre bogstaver - EUR, USD, CHF. Positioner i andre valutaer omregnes til ECB's daglige referencekurs.",
+                    "sources": "Hvor kurser må komme fra. En kilde, der er slået fra, bliver ikke spurgt: søgningen finder intet der, og et instrument, der blev tilføjet derfra, får kurs fra en anden kilde, hvis en sådan har samme instrument, og beholder ellers sin seneste kurs."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Indstillingerne findes allerede."
+        },
+        "error": {
+            "invalid_currency": "Tre bogstaver, f.eks. EUR eller USD.",
+            "no_source": "Der skal være mindst én kilde.",
+            "invalid_benchmark": "Yahoo Finance har ingen kursserie for dette symbol."
+        },
+        "initiate_flow": {
+            "user": "Tilføj gruppe"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Generelt",
+                    "sources": "🌐 Datakilder",
+                    "alert_targets": "🔔 Kursalarmer: modtagere",
+                    "alert_texts": "✏️ Kursalarmer: tekster"
+                }
+            },
+            "general": {
+                "title": "Generelt",
+                "data": {
+                    "scan_interval": "Opdateringsinterval",
+                    "base_currency": "Basisvaluta",
+                    "logos": "Logoer"
+                },
+                "data_description": {
+                    "scan_interval": "Hvor ofte kurserne hentes, mens et marked er åbent. Mens alle markeder er lukkede, hentes de højst hvert 30. minut.",
+                    "base_currency": "Den valuta, alle positioner lægges sammen i, som kode på tre bogstaver - EUR, USD, CHF. Positioner i andre valutaer omregnes til ECB's daglige referencekurs.",
+                    "logos": "Vis hvert instrument med sit logo på kortet. Logoerne hentes af browseren fra Elbstream, som krediteres for dem - \"Logos by Elbstream\" - i kortets editor og i README. Slået fra viser kortet forbogstaver og dine egne uploadede logoer."
+                }
+            },
+            "sources": {
+                "title": "Datakilder",
+                "data": {
+                    "sources": "Kilder",
+                    "news_google": "Også nyheder fra Google News"
+                },
+                "data_description": {
+                    "sources": "Hvor kurser må komme fra. En kilde, der er slået fra, bliver ikke spurgt: søgningen finder intet der, og et instrument, der blev tilføjet derfra, får kurs fra en anden kilde, hvis en sådan har samme instrument, og beholder ellers sin seneste kurs.",
+                    "news_google": "Søger også i Google News efter et instruments navn. Det finder flere nyheder end Yahoo Finance, og nogle, der handler om noget andet."
+                }
+            },
+            "alert_targets": {
+                "title": "Kursalarmer: modtagere",
+                "description": "Hvem der får besked, når en kursalarm udløses. Hver alarm udløser også hændelsen market_ticker_ultra_alert til automatiseringer.",
+                "data": {
+                    "alert_persistent": "Notifikation i Home Assistant",
+                    "alert_notify": "Giv besked om kursalarmer",
+                    "alert_services": "Notify-tjenester til kursalarmer",
+                    "alert_speakers": "Annoncér kursalarmer på",
+                    "alert_tts": "Stemme til annonceringer",
+                    "alert_test": "Send en testbesked nu"
+                },
+                "data_description": {
+                    "alert_persistent": "Opretter også en notifikation i selve Home Assistant, når en kursalarm udløses.",
+                    "alert_notify": "De notify-entiteter, der får en besked, når en kursalarm udløses - f.eks. en telefon med Companion App.",
+                    "alert_services": "Tjenester som notify.whatsapp eller notify.mail til beskedtjenester og mail. Vælg på listen, eller skriv et navn.",
+                    "alert_speakers": "De højttalere, en kursalarm læses op på - f.eks. en Sonos.",
+                    "alert_tts": "Den tekst-til-tale-stemme, alarmen læses op med. Tom bruger den første, der findes.",
+                    "alert_test": "Sender en testbesked til alle ovenfor, når du gemmer."
+                }
+            },
+            "alert_texts": {
+                "title": "Kursalarmer: tekster",
+                "description": "Hvad en kursalarm siger. Variabler: {name}, {symbol}, {price} og {limit} (hver med sin valuta), {currency}, {direction} (\"på eller under\" / \"på eller over\") og {change} (dagens ændring i procent). Et tomt felt bruger standarden igen.",
+                "data": {
+                    "alert_title": "Titel",
+                    "alert_message": "Besked",
+                    "alert_spoken": "Annoncering",
+                    "alert_test": "Send en testbesked nu"
+                },
+                "data_description": {
+                    "alert_title": "Overskriften på en notifikation.",
+                    "alert_message": "Teksten i en notifikation.",
+                    "alert_spoken": "Det, der læses op på højttalerne.",
+                    "alert_test": "Sender en testbesked med disse tekster til alle modtagere, når du gemmer."
+                }
+            },
+            "group": {
+                "title": "Gruppe",
+                "description": "Gruppens navn, og om den er en portefølje eller en watchlist. I en watchlist gemmes købene af dens instrumenter, men de tælles ikke med.",
+                "data": {
+                    "name": "Navn",
+                    "kind": "Type",
+                    "benchmark": "Sammenligningsindeks"
+                },
+                "data_description": {
+                    "benchmark": "For en portefølje: det indeks, dens udvikling vises ved siden af på kortet. Vælg et, eller skriv et vilkårligt symbol fra Yahoo Finance. Tom sammenligner ikke med noget."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Tre bogstaver, f.eks. EUR eller USD.",
+            "no_source": "Der skal være mindst én kilde.",
+            "invalid_benchmark": "Yahoo Finance har ingen kursserie for dette symbol."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Tilføj instrument",
+                "reconfigure": "Rediger instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Find et instrument",
+                    "description": "Søg på navn, symbol eller ISIN - en aktie, en fond, et indeks, en råvare, et valutapar eller en kryptovaluta. Alle kilder bliver spurgt: Yahoo Finance for næsten alt, Börse Frankfurt for Xetra via ISIN, ECB's referencekurs for et valutapar, Kraken for en kryptovaluta, gold-api.com for et metals spotpris.",
+                    "data": {
+                        "query": "Navn, symbol eller ISIN"
+                    },
+                    "data_description": {
+                        "query": "For eksempel: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, guld."
+                    }
+                },
+                "listing": {
+                    "title": "Vælg noteringen",
+                    "description": "Fundet for \"{query}\". Det samme instrument er ofte noteret på flere børser og kilder, i forskellige valutaer. Hver linje slutter med den seneste kurs der og hvor den kommer fra; en dato efter en kurs betyder, at den ikke er fra i dag.",
+                    "data": {
+                        "listing": "Notering"
+                    }
+                },
+                "holding": {
+                    "title": "Din beholdning",
+                    "description": "Hvad du ejer af **{name}** - eller lad alt være tomt for kun at følge det. Flere køb kan tilføjes bagefter under **Rediger instrument**.",
+                    "data": {
+                        "quantity": "Antal",
+                        "price": "Købskurs pr. stk. ({currency})",
+                        "date": "Købsdato",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skat ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange aktier, andele eller coins.",
+                        "price": "Hvad én af dem kostede, i den valuta noteringen handles i.",
+                        "date": "Valgfri. Den afgør kun rækkefølgen, købene og salgene tælles i.",
+                        "fees": "Valgfri. Hvad købet eller salget kostede i gebyrer.",
+                        "taxes": "Valgfri. Hvad der blev betalt i skat af det."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - registrerede køb: {count}; beholdning: {quantity} til en gennemsnitskurs på {average}; realiseret: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Omdøb",
+                        "move": "📂 Flyt til en anden gruppe",
+                        "add_lot": "➕ Tilføj et køb",
+                        "sell_lot": "➖ Tilføj et salg",
+                        "remove_lots": "🗑️ Fjern køb og salg",
+                        "alerts": "🔔 Kursalarmer",
+                        "color": "🎨 Farve",
+                        "logo": "🖼️ Eget logo",
+                        "tradingview": "📈 TradingView-link"
+                    }
+                },
+                "rename": {
+                    "title": "Omdøb instrument",
+                    "description": "Navnet på {symbol}: det, dets enhed og dets sensorer hedder.",
+                    "data": {
+                        "name": "Navn"
+                    }
+                },
+                "add_lot": {
+                    "title": "Tilføj et køb",
+                    "description": "{name} - registreret indtil nu: {count}; beholdning: {quantity} til en gennemsnitskurs på {average}.",
+                    "data": {
+                        "quantity": "Købt antal",
+                        "price": "Købskurs pr. stk. ({currency})",
+                        "date": "Købsdato",
+                        "add_another": "Tilføj endnu et bagefter",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skat ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange aktier, andele eller coins der blev købt.",
+                        "price": "Hvad én af dem kostede, i den valuta noteringen handles i.",
+                        "date": "Valgfri. Den afgør kun rækkefølgen, købene og salgene tælles i.",
+                        "fees": "Valgfri. Hvad købet kostede i gebyrer.",
+                        "taxes": "Valgfri. Hvad der blev betalt i skat af det."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Tilføj et salg",
+                    "description": "{name} - registreret indtil nu: {count}; beholdning: {quantity} til en gennemsnitskurs på {average}.",
+                    "data": {
+                        "quantity": "Solgt antal",
+                        "price": "Salgskurs pr. stk. ({currency})",
+                        "date": "Salgsdato",
+                        "add_another": "Tilføj endnu et bagefter",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skat ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange der blev solgt. De forlader beholdningen til dens hidtidige gennemsnitskurs.",
+                        "price": "Hvad én af dem indbragte, i den valuta noteringen handles i.",
+                        "date": "Tom betyder i dag. Den afgør rækkefølgen, købene og salgene tælles i.",
+                        "fees": "Valgfri. Hvad salget kostede i gebyrer.",
+                        "taxes": "Valgfri. Hvad der blev betalt i skat af det."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Fjern køb og salg",
+                    "description": "{name}: sæt flueben ved det, der skal fjernes. Fjernes alle, er instrumentet kun noget, der følges.",
+                    "data": {
+                        "remove": "Registreret"
+                    }
+                },
+                "logo": {
+                    "title": "Eget logo",
+                    "description": "{name}: et billede efter eget valg - til et instrument uden logo, eller i stedet for det, det har. PNG, JPG, WebP, GIF eller SVG, op til 1 MB; et kvadratisk billede passer bedst. Det gemmes i din konfigurationsmappe og vises også, når logoerne er slået fra.",
+                    "data": {
+                        "file": "Billede",
+                        "remove_logo": "Fjern det uploadede logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Går tilbage til det logo, instrumentet har uden det. Ignoreres, når et nyt billede uploades."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView-link",
+                    "description": "Kortet linker detaljerne for {name} til dets side på TradingView. **Det fundne symbol for {symbol}: {found}.** Feltet viser det symbol, der bruges. Skift det til dit eget, som TradingView skriver det - børsen, et kolon, tickeren, f.eks. NASDAQ:AAPL. Tom går tilbage til det fundne; hvor der ikke er noget, viser kortet intet link.",
+                    "data": {
+                        "tradingview": "TradingView-symbol"
+                    }
+                },
+                "move": {
+                    "title": "Flyt til en anden gruppe",
+                    "description": "{name}: den gruppe, det står i. I en watchlist gemmes dets køb, men de tælles ikke med.",
+                    "data": {
+                        "group": "Gruppe"
+                    }
+                },
+                "alerts": {
+                    "title": "Kursalarmer",
+                    "description": "{name}: en alarm er udløst, mens kursen står på eller ud over sin grænse. Hver grænse får en binær sensor; hvem der får besked, indstilles i integrationens indstillinger. Lad et felt være tomt for ingen grænse.",
+                    "data": {
+                        "alert_below": "På eller under ({currency})",
+                        "alert_above": "På eller over ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Farve",
+                    "description": "{name}: den farve, det tegnes med, hvor et kort viser en porteføljes andele. Skriv en værdi som #009999 i søgefeltet for en farve efter eget valg. Er feltet tomt, giver kortet det en farve.",
+                    "data": {
+                        "color": "Farve"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Til hvilken portefølje?",
+                    "description": "{name}: med et køb flytter instrumentet fra watchlisten til en portefølje. Dets sensorer forbliver de samme.",
+                    "data": {
+                        "target": "Portefølje",
+                        "name": "Navn på den nye portefølje"
+                    },
+                    "data_description": {
+                        "name": "Kun for en ny portefølje. Tom giver den navnet “Portefølje”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Alt solgt",
+                    "description": "{name}: der er ingen beholdning længere. Køb og salg bliver ved instrumentet, og med dem det, det har tjent ({realized}).",
+                    "data": {
+                        "after_sale": "Hvad nu?"
+                    },
+                    "data_description": {
+                        "after_sale": "En mappe med en pil flytter instrumentet til den pågældende watchlist."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Kilden kunne ikke nås. Prøv igen om et øjeblik.",
+                "nothing_found": "Intet fundet. Prøv en anden stavemåde, symbolet eller ISIN.",
+                "already_configured": "Denne notering er allerede tilføjet.",
+                "invalid_lot": "Angiv et antal over 0 og en kurs.",
+                "logo_wrong_type": "Det billedformat kan ikke bruges. Brug PNG, JPG, WebP, GIF eller SVG.",
+                "logo_too_large": "Billedet er større end 1 MB.",
+                "invalid_tradingview": "Ikke et TradingView-symbol. Skriv børsen, et kolon og tickeren, f.eks. NASDAQ:AAPL.",
+                "invalid_color": "Vælg en af farverne, eller skriv en værdi som #009999.",
+                "group_exists": "Der findes allerede en gruppe med dette navn.",
+                "sell_too_many": "Det er mere end beholdningen."
+            },
+            "abort": {
+                "reconfigure_successful": "Instrumentet blev opdateret."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Seneste opdatering"
+            },
+            "position_value": {
+                "name": "Positionens værdi"
+            },
+            "position_gain": {
+                "name": "Gevinst"
+            },
+            "total_value": {
+                "name": "Samlet værdi"
+            },
+            "total_gain": {
+                "name": "Samlet gevinst"
+            },
+            "group_value": {
+                "name": "Værdi af {group}"
+            },
+            "group_gain": {
+                "name": "Gevinst i {group}"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alarm under"
+            },
+            "alert_above": {
+                "name": "Alarm over"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} svarer ikke",
+            "description": "**{source}** har ikke svaret {count} gange i træk. Seneste årsag:\n\n`{reason}`\n\nDens instrumenter beholder deres seneste kurser, hver med tidspunktet, den er fra; hvor en anden kilde har kurs på samme instrument, træder den til. Du behøver ikke gøre noget: kurserne kommer tilbage med kildens næste svar, og denne reparation forsvinder med det."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB-referencekurser - valutapar, én gang om dagen",
+                "goldapi": "gold-api.com - spotpriser på guld, sølv, platin, palladium, kobber",
+                "kraken": "Kraken - kryptovalutaer",
+                "yahoo": "Yahoo Finance - aktier, fonde, indeks, futures, valutaer, kryptovalutaer",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra og Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portefølje - køb lægges sammen",
+                "watchlist": "Watchlist - følges kun"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Behold i porteføljen",
+                "new": "📂 Flyt til en ny watchlist",
+                "delete": "🗑️ Fjern instrumentet"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Opret en ny portefølje"
+            }
+        }
+    }
+}

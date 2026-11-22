@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Lisää ryhmä",
+                "description": "Ryhmä sisältää arvopapereita. Salkku laskee omistukset yhteen; seurantalistaa vain seurataan, eikä sitä lasketa mihinkään summaan. Arvopaperit lisätään siihen jälkeenpäin kohdasta **Lisää arvopaperi**.",
+                "data": {
+                    "name": "Nimi",
+                    "kind": "Tyyppi",
+                    "benchmark": "Vertailuindeksi"
+                },
+                "data_description": {
+                    "benchmark": "Salkulle: indeksi, jonka rinnalla sen kehitys näytetään kortilla. Valitse yksi tai kirjoita mikä tahansa Yahoo Financen symboli. Tyhjänä ei vertailua."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Osakkeiden, rahastojen, indeksien, raaka-aineiden, valuuttojen ja kryptovaluuttojen kurssit julkisista lähteistä - ei tiliä, ei API-avainta. Arvopaperit lisätään jälkeenpäin yksi kerrallaan integraation sivulla kohdasta **Lisää arvopaperi**.",
+                "data": {
+                    "scan_interval": "Päivitysväli",
+                    "logos": "Logot",
+                    "base_currency": "Perusvaluutta",
+                    "sources": "Lähteet"
+                },
+                "data_description": {
+                    "scan_interval": "Kuinka usein kurssit haetaan, kun jokin markkina on auki. Kun kaikki markkinat ovat kiinni, ne haetaan enintään 30 minuutin välein.",
+                    "logos": "Näyttää kortilla jokaisen arvopaperin logon. Selain lataa logot Elbstreamilta, joka mainitaan niiden lähteenä - \"Logos by Elbstream\" - kortin editorissa ja README-tiedostossa. Kun asetus on pois päältä, kortti näyttää alkukirjaimet ja itse lataamasi logot.",
+                    "base_currency": "Valuutta, jossa kaikki omistukset lasketaan yhteen, kolmikirjaimisena koodina - EUR, USD, CHF. Muissa valuutoissa olevat omistukset muunnetaan EKP:n päivittäisellä viitekurssilla.",
+                    "sources": "Mistä kursseja saa hakea. Pois päältä olevalta lähteeltä ei kysytä: haku ei löydä sieltä mitään, ja sieltä lisätyn arvopaperin kurssi tulee toisesta lähteestä, jos jollakin on sama arvopaperi; muuten se säilyttää viimeisen kurssinsa."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Asetukset ovat jo olemassa."
+        },
+        "error": {
+            "invalid_currency": "Kolme kirjainta, kuten EUR tai USD.",
+            "no_source": "Tarvitaan vähintään yksi lähde.",
+            "invalid_benchmark": "Yahoo Financella ei ole kurssihistoriaa tälle symbolille."
+        },
+        "initiate_flow": {
+            "user": "Lisää ryhmä"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Yleiset",
+                    "sources": "🌐 Tietolähteet",
+                    "alert_targets": "🔔 Hintahälytykset: vastaanottajat",
+                    "alert_texts": "✏️ Hintahälytykset: tekstit"
+                }
+            },
+            "general": {
+                "title": "Yleiset",
+                "data": {
+                    "scan_interval": "Päivitysväli",
+                    "base_currency": "Perusvaluutta",
+                    "logos": "Logot"
+                },
+                "data_description": {
+                    "scan_interval": "Kuinka usein kurssit haetaan, kun jokin markkina on auki. Kun kaikki markkinat ovat kiinni, ne haetaan enintään 30 minuutin välein.",
+                    "base_currency": "Valuutta, jossa kaikki omistukset lasketaan yhteen, kolmikirjaimisena koodina - EUR, USD, CHF. Muissa valuutoissa olevat omistukset muunnetaan EKP:n päivittäisellä viitekurssilla.",
+                    "logos": "Näyttää kortilla jokaisen arvopaperin logon. Selain lataa logot Elbstreamilta, joka mainitaan niiden lähteenä - \"Logos by Elbstream\" - kortin editorissa ja README-tiedostossa. Kun asetus on pois päältä, kortti näyttää alkukirjaimet ja itse lataamasi logot."
+                }
+            },
+            "sources": {
+                "title": "Tietolähteet",
+                "data": {
+                    "sources": "Lähteet",
+                    "news_google": "Uutiset myös Google Newsista"
+                },
+                "data_description": {
+                    "sources": "Mistä kursseja saa hakea. Pois päältä olevalta lähteeltä ei kysytä: haku ei löydä sieltä mitään, ja sieltä lisätyn arvopaperin kurssi tulee toisesta lähteestä, jos jollakin on sama arvopaperi; muuten se säilyttää viimeisen kurssinsa.",
+                    "news_google": "Hakee arvopaperin nimellä myös Google Newsista. Se löytää enemmän uutisia kuin Yahoo Finance, ja osa niistä koskee jotain muuta."
+                }
+            },
+            "alert_targets": {
+                "title": "Hintahälytykset: vastaanottajat",
+                "description": "Kenelle ilmoitetaan, kun hintahälytys laukeaa. Jokainen hälytys laukaisee myös tapahtuman market_ticker_ultra_alert automaatioita varten.",
+                "data": {
+                    "alert_persistent": "Ilmoitus Home Assistantissa",
+                    "alert_notify": "Ilmoita hintahälytyksistä",
+                    "alert_services": "Ilmoituspalvelut hintahälytyksille",
+                    "alert_speakers": "Kuuluta hintahälytykset kaiuttimista",
+                    "alert_tts": "Kuulutusten ääni",
+                    "alert_test": "Lähetä testiviesti nyt"
+                },
+                "data_description": {
+                    "alert_persistent": "Lisää ilmoituksen myös itse Home Assistantiin, kun hintahälytys laukeaa.",
+                    "alert_notify": "Ilmoitusentiteetit, jotka saavat viestin hintahälytyksen lauetessa - esimerkiksi puhelin, jossa on Companion App.",
+                    "alert_services": "Palvelut, kuten notify.whatsapp tai notify.mail, pikaviestimille ja sähköpostille. Valitse listasta tai kirjoita nimi.",
+                    "alert_speakers": "Kaiuttimet, joista hintahälytys luetaan ääneen - esimerkiksi Sonos.",
+                    "alert_tts": "Puhesynteesin ääni, jolla hälytys luetaan. Tyhjänä käytetään ensimmäistä saatavilla olevaa.",
+                    "alert_test": "Lähettää tallennettaessa testiviestin kaikille yllä mainituille."
+                }
+            },
+            "alert_texts": {
+                "title": "Hintahälytykset: tekstit",
+                "description": "Mitä hintahälytys sanoo. Muuttujat: {name}, {symbol}, {price} ja {limit} (kukin valuuttoineen), {currency}, {direction} (\"enintään\" / \"vähintään\") ja {change} (päivän muutos prosentteina). Tyhjä kenttä palauttaa oletuksen.",
+                "data": {
+                    "alert_title": "Otsikko",
+                    "alert_message": "Viesti",
+                    "alert_spoken": "Kuulutus",
+                    "alert_test": "Lähetä testiviesti nyt"
+                },
+                "data_description": {
+                    "alert_title": "Ilmoituksen otsikko.",
+                    "alert_message": "Ilmoituksen teksti.",
+                    "alert_spoken": "Mitä kaiuttimista luetaan ääneen.",
+                    "alert_test": "Lähettää tallennettaessa testiviestin näillä teksteillä kaikille vastaanottajille."
+                }
+            },
+            "group": {
+                "title": "Ryhmä",
+                "description": "Ryhmän nimi ja se, onko se salkku vai seurantalista. Seurantalistalla sen arvopapereiden ostot säilytetään, mutta niitä ei lasketa mukaan.",
+                "data": {
+                    "name": "Nimi",
+                    "kind": "Tyyppi",
+                    "benchmark": "Vertailuindeksi"
+                },
+                "data_description": {
+                    "benchmark": "Salkulle: indeksi, jonka rinnalla sen kehitys näytetään kortilla. Valitse yksi tai kirjoita mikä tahansa Yahoo Financen symboli. Tyhjänä ei vertailua."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Kolme kirjainta, kuten EUR tai USD.",
+            "no_source": "Tarvitaan vähintään yksi lähde.",
+            "invalid_benchmark": "Yahoo Financella ei ole kurssihistoriaa tälle symbolille."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Arvopaperi",
+            "initiate_flow": {
+                "user": "Lisää arvopaperi",
+                "reconfigure": "Muokkaa arvopaperia"
+            },
+            "step": {
+                "user": {
+                    "title": "Etsi arvopaperi",
+                    "description": "Hae nimellä, symbolilla tai ISIN-koodilla - osake, rahasto, indeksi, raaka-aine, valuuttapari tai kryptovaluutta. Haku kysyy kaikilta lähteiltä: Yahoo Financelta lähes kaiken, Börse Frankfurtilta Xetran ISIN-koodilla, EKP:n viitekurssin valuuttaparille, Krakenilta kryptovaluutan ja gold-api.comilta metallin spot-hinnan.",
+                    "data": {
+                        "query": "Nimi, symboli tai ISIN"
+                    },
+                    "data_description": {
+                        "query": "Esimerkiksi: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, kulta."
+                    }
+                },
+                "listing": {
+                    "title": "Valitse listaus",
+                    "description": "Löytyi haulla \"{query}\". Sama arvopaperi on usein listattu useassa pörssissä ja lähteessä eri valuutoissa. Jokaisen rivin lopussa on viimeisin kurssi siellä ja sen lähde; kurssin perässä oleva päivämäärä tarkoittaa, ettei se ole tältä päivältä.",
+                    "data": {
+                        "listing": "Listaus"
+                    }
+                },
+                "holding": {
+                    "title": "Omistuksesi",
+                    "description": "Omistuksesi arvopaperissa **{name}** - tai jätä kaikki tyhjäksi, jos haluat vain seurata sitä. Uusia ostoja voi lisätä myöhemmin kohdassa **Muokkaa arvopaperia**.",
+                    "data": {
+                        "quantity": "Määrä",
+                        "price": "Ostohinta/kpl ({currency})",
+                        "date": "Ostopäivä",
+                        "fees": "Kulut ({currency})",
+                        "taxes": "Verot ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Montako osaketta, osuutta tai kolikkoa.",
+                        "price": "Mitä yksi niistä maksoi, siinä valuutassa, jossa tämä listaus noteerataan.",
+                        "date": "Valinnainen. Se ratkaisee vain, missä järjestyksessä ostot ja myynnit lasketaan.",
+                        "fees": "Valinnainen. Oston tai myynnin kulut.",
+                        "taxes": "Valinnainen. Siitä maksetut verot."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - kirjattuja ostoja: {count}; omistus: {quantity}, keskihinta {average}; toteutunut: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Nimeä uudelleen",
+                        "move": "📂 Siirrä toiseen ryhmään",
+                        "add_lot": "➕ Lisää osto",
+                        "sell_lot": "➖ Lisää myynti",
+                        "remove_lots": "🗑️ Poista ostoja ja myyntejä",
+                        "alerts": "🔔 Hintahälytykset",
+                        "color": "🎨 Väri",
+                        "logo": "🖼️ Oma logo",
+                        "tradingview": "📈 TradingView-linkki"
+                    }
+                },
+                "rename": {
+                    "title": "Nimeä arvopaperi uudelleen",
+                    "description": "Symbolin {symbol} nimi: millä nimellä sen laite ja anturit näkyvät.",
+                    "data": {
+                        "name": "Nimi"
+                    }
+                },
+                "add_lot": {
+                    "title": "Lisää osto",
+                    "description": "{name} - kirjattu tähän mennessä: {count}; omistus: {quantity}, keskihinta {average}.",
+                    "data": {
+                        "quantity": "Ostettu määrä",
+                        "price": "Ostohinta/kpl ({currency})",
+                        "date": "Ostopäivä",
+                        "add_another": "Lisää vielä yksi tämän jälkeen",
+                        "fees": "Kulut ({currency})",
+                        "taxes": "Verot ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Montako osaketta, osuutta tai kolikkoa ostettiin.",
+                        "price": "Mitä yksi niistä maksoi, siinä valuutassa, jossa tällä listauksella käydään kauppaa.",
+                        "date": "Valinnainen. Se ratkaisee vain, missä järjestyksessä ostot ja myynnit lasketaan.",
+                        "fees": "Valinnainen. Oston kulut.",
+                        "taxes": "Valinnainen. Siitä maksetut verot."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Lisää myynti",
+                    "description": "{name} - kirjattu tähän mennessä: {count}; omistus: {quantity}, keskihinta {average}.",
+                    "data": {
+                        "quantity": "Myyty määrä",
+                        "price": "Myyntihinta/kpl ({currency})",
+                        "date": "Myyntipäivä",
+                        "add_another": "Lisää vielä yksi tämän jälkeen",
+                        "fees": "Kulut ({currency})",
+                        "taxes": "Verot ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Montako myytiin. Ne poistuvat omistuksesta tähänastisella keskihinnalla.",
+                        "price": "Mitä yhdestä niistä saatiin, siinä valuutassa, jossa tällä listauksella käydään kauppaa.",
+                        "date": "Tyhjä tarkoittaa tätä päivää. Se määrää, missä järjestyksessä ostot ja myynnit lasketaan.",
+                        "fees": "Valinnainen. Myynnin kulut.",
+                        "taxes": "Valinnainen. Siitä maksetut verot."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Poista ostoja ja myyntejä",
+                    "description": "{name}: valitse poistettavat. Jos poistat kaikki, arvopaperia vain seurataan.",
+                    "data": {
+                        "remove": "Kirjatut"
+                    }
+                },
+                "logo": {
+                    "title": "Oma logo",
+                    "description": "{name}: oma kuva - arvopaperille, jolla ei ole logoa, tai sen nykyisen logon tilalle. PNG, JPG, WebP, GIF tai SVG, enintään 1 Mt; neliön muotoinen kuva sopii parhaiten. Se tallennetaan asetuskansioosi ja näytetään myös, kun logot ovat pois päältä.",
+                    "data": {
+                        "file": "Kuva",
+                        "remove_logo": "Poista ladattu logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Palauttaa arvopaperin oman logon. Ohitetaan, jos ladataan uusi kuva."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView-linkki",
+                    "description": "Kortti linkittää arvopaperin {name} tiedot sen TradingView-sivulle. **Symbolille {symbol} päätelty symboli: {found}.** Kentässä näkyy käytössä oleva symboli. Vaihda tilalle oma symbolisi TradingView’n kirjoitustavalla - pörssi, kaksoispiste, tunnus, kuten NASDAQ:AAPL. Tyhjä palauttaa päätellyn; jos sellaista ei ole, kortti ei näytä linkkiä.",
+                    "data": {
+                        "tradingview": "TradingView-symboli"
+                    }
+                },
+                "move": {
+                    "title": "Siirrä toiseen ryhmään",
+                    "description": "{name}: ryhmä, johon se kuuluu. Seurantalistalla sen ostot säilytetään, mutta niitä ei lasketa mukaan.",
+                    "data": {
+                        "group": "Ryhmä"
+                    }
+                },
+                "alerts": {
+                    "title": "Hintahälytykset",
+                    "description": "{name}: hälytys on lauennut niin kauan kuin kurssi on rajalla tai mennyt sen ohi. Jokainen raja saa binäärianturin; kenelle ilmoitetaan, asetetaan integraation asetuksissa. Jätä kenttä tyhjäksi, jos et halua rajaa.",
+                    "data": {
+                        "alert_below": "Enintään ({currency})",
+                        "alert_above": "Vähintään ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Väri",
+                    "description": "{name}: väri, jolla se piirretään, kun kortti näyttää salkun osuudet. Kirjoita hakuun arvo, kuten #009999, saadaksesi oman värin. Tyhjänä kortti antaa sille värin.",
+                    "data": {
+                        "color": "Väri"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Mihin salkkuun?",
+                    "description": "{name}: oston myötä arvopaperi siirtyy seurantalistalta salkkuun. Sen anturit pysyvät samoina.",
+                    "data": {
+                        "target": "Salkku",
+                        "name": "Uuden salkun nimi"
+                    },
+                    "data_description": {
+                        "name": "Vain uudelle salkulle. Tyhjänä nimeksi tulee ”Salkku”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Kaikki myyty",
+                    "description": "{name}: mitään ei enää omisteta. Ostot ja myynnit säilyvät arvopaperilla, ja niiden mukana sen toteutunut voitto ({realized}).",
+                    "data": {
+                        "after_sale": "Mitä nyt?"
+                    },
+                    "data_description": {
+                        "after_sale": "Kansiolla ja nuolella merkitty vaihtoehto siirtää arvopaperin kyseiselle seurantalistalle."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Lähteeseen ei saatu yhteyttä. Yritä hetken päästä uudelleen.",
+                "nothing_found": "Mitään ei löytynyt. Kokeile toista kirjoitusasua, symbolia tai ISIN-koodia.",
+                "already_configured": "Tämä listaus on jo lisätty.",
+                "invalid_lot": "Anna nollaa suurempi määrä ja hinta.",
+                "logo_wrong_type": "Kuvatyyppiä ei tueta. Käytä PNG-, JPG-, WebP-, GIF- tai SVG-kuvaa.",
+                "logo_too_large": "Kuva on suurempi kuin 1 Mt.",
+                "invalid_tradingview": "Ei kelpaa TradingView-symboliksi. Kirjoita pörssi, kaksoispiste ja tunnus, kuten NASDAQ:AAPL.",
+                "invalid_color": "Valitse jokin väreistä tai kirjoita arvo, kuten #009999.",
+                "group_exists": "Tämänniminen ryhmä on jo olemassa.",
+                "sell_too_many": "Se on enemmän kuin omistat."
+            },
+            "abort": {
+                "reconfigure_successful": "Arvopaperi päivitettiin."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Viimeisin päivitys"
+            },
+            "position_value": {
+                "name": "Omistuksen arvo"
+            },
+            "position_gain": {
+                "name": "Voitto"
+            },
+            "total_value": {
+                "name": "Kokonaisarvo"
+            },
+            "total_gain": {
+                "name": "Kokonaisvoitto"
+            },
+            "group_value": {
+                "name": "{group}: arvo"
+            },
+            "group_gain": {
+                "name": "{group}: voitto"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alarajan hälytys"
+            },
+            "alert_above": {
+                "name": "Ylärajan hälytys"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} ei vastaa",
+            "description": "**{source}** ei ole vastannut {count} kertaa peräkkäin. Viimeisin syy:\n\n`{reason}`\n\nSen arvopaperit säilyttävät viimeiset kurssinsa, kukin aikaleimoineen; jos toinen lähde noteeraa saman arvopaperin, se toimii varalähteenä. Mitään ei tarvitse tehdä: kurssit palaavat lähteen seuraavan vastauksen myötä, ja tämä korjausilmoitus poistuu samalla."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "EKP:n viitekurssit - valuuttaparit, kerran päivässä",
+                "goldapi": "gold-api.com - kullan, hopean, platinan, palladiumin ja kuparin spot-hinnat",
+                "kraken": "Kraken - kryptovaluutat",
+                "yahoo": "Yahoo Finance - osakkeet, rahastot, indeksit, futuurit, valuutat, kryptovaluutat",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra ja Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Salkku - ostot lasketaan yhteen",
+                "watchlist": "Seurantalista - vain seuranta"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Pidä salkussa",
+                "new": "📂 Siirrä uudelle seurantalistalle",
+                "delete": "🗑️ Poista arvopaperi"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Luo uusi salkku"
+            }
+        }
+    }
+}

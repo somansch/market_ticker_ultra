@@ -1,0 +1,11 @@
+{
+  "alert_title": "Alerta de precio",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Alerta de precio. {name} está en {price}, {direction} {limit}.",
+  "direction_below": "igual o por debajo de",
+  "direction_above": "igual o por encima de",
+  "settings": "Configuración",
+  "portfolio": "Cartera",
+  "watchlist": "Lista de seguimiento",
+  "decimal_comma": true
+}

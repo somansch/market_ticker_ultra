@@ -1,0 +1,11 @@
+{
+  "alert_title": "Cenový alarm",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Cenový alarm. {name} je na {price}, {direction} {limit}.",
+  "direction_below": "na nebo pod",
+  "direction_above": "na nebo nad",
+  "settings": "Nastavení",
+  "portfolio": "Portfolio",
+  "watchlist": "Watchlist",
+  "decimal_comma": true
+}

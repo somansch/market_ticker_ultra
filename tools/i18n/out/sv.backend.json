@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Lägg till grupp",
+                "description": "En grupp innehåller instrument. En portfölj summerar innehaven; en bevakningslista bevakas bara och räknas inte in i någon summa. Instrument läggs till efteråt, med **Lägg till instrument**.",
+                "data": {
+                    "name": "Namn",
+                    "kind": "Typ",
+                    "benchmark": "Jämförelseindex"
+                },
+                "data_description": {
+                    "benchmark": "För en portfölj: indexet som dess utveckling visas bredvid på kortet. Välj ett eller skriv valfri symbol från Yahoo Finance. Tomt jämför inte med något."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Kurser för aktier, fonder, index, råvaror, valutor och kryptovalutor från öppna källor - inget konto, ingen API-nyckel. Instrument läggs till efteråt, ett i taget, med **Lägg till instrument** på integrationens sida.",
+                "data": {
+                    "scan_interval": "Uppdateringsintervall",
+                    "logos": "Logotyper",
+                    "base_currency": "Basvaluta",
+                    "sources": "Källor"
+                },
+                "data_description": {
+                    "scan_interval": "Hur ofta kurserna hämtas medan en marknad är öppen. När alla marknader är stängda hämtas de högst var 30:e minut.",
+                    "logos": "Visa varje instrument med sin logotyp på kortet. Logotyperna laddas av webbläsaren från Elbstream, som anges som källa - \"Logos by Elbstream\" - i kortets redigerare och i README. Avstängt visar kortet initialer och dina egna uppladdade logotyper.",
+                    "base_currency": "Valutan som alla innehav summeras i, som en kod med tre bokstäver - EUR, USD, CHF. Innehav i andra valutor räknas om enligt ECB:s dagliga referenskurs.",
+                    "sources": "Varifrån kurser får komma. En avstängd källa tillfrågas inte: sökningen hittar inget där, och ett instrument som lades till från den får kurs från en annan källa som listar samma instrument, och behåller annars sin senaste kurs."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Inställningarna finns redan."
+        },
+        "error": {
+            "invalid_currency": "Tre bokstäver, till exempel EUR eller USD.",
+            "no_source": "Minst en källa behövs.",
+            "invalid_benchmark": "Yahoo Finance har ingen kursserie för den här symbolen."
+        },
+        "initiate_flow": {
+            "user": "Lägg till grupp"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Allmänt",
+                    "sources": "🌐 Datakällor",
+                    "alert_targets": "🔔 Kurslarm: mottagare",
+                    "alert_texts": "✏️ Kurslarm: texter"
+                }
+            },
+            "general": {
+                "title": "Allmänt",
+                "data": {
+                    "scan_interval": "Uppdateringsintervall",
+                    "base_currency": "Basvaluta",
+                    "logos": "Logotyper"
+                },
+                "data_description": {
+                    "scan_interval": "Hur ofta kurserna hämtas medan en marknad är öppen. När alla marknader är stängda hämtas de högst var 30:e minut.",
+                    "base_currency": "Valutan som alla innehav summeras i, som en kod med tre bokstäver - EUR, USD, CHF. Innehav i andra valutor räknas om enligt ECB:s dagliga referenskurs.",
+                    "logos": "Visa varje instrument med sin logotyp på kortet. Logotyperna laddas av webbläsaren från Elbstream, som anges som källa - \"Logos by Elbstream\" - i kortets redigerare och i README. Avstängt visar kortet initialer och dina egna uppladdade logotyper."
+                }
+            },
+            "sources": {
+                "title": "Datakällor",
+                "data": {
+                    "sources": "Källor",
+                    "news_google": "Nyheter även från Google News"
+                },
+                "data_description": {
+                    "sources": "Varifrån kurser får komma. En avstängd källa tillfrågas inte: sökningen hittar inget där, och ett instrument som lades till från den får kurs från en annan källa som listar samma instrument, och behåller annars sin senaste kurs.",
+                    "news_google": "Söker även på Google News efter ett instruments namn. Det hittar fler rubriker än Yahoo Finance, och en del som handlar om något annat."
+                }
+            },
+            "alert_targets": {
+                "title": "Kurslarm: mottagare",
+                "description": "Vem som meddelas när ett kurslarm utlöses. Varje larm utlöser även händelsen market_ticker_ultra_alert, för automationer.",
+                "data": {
+                    "alert_persistent": "Avisering i Home Assistant",
+                    "alert_notify": "Meddela om kurslarm",
+                    "alert_services": "Aviseringstjänster för kurslarm",
+                    "alert_speakers": "Läs upp kurslarm på",
+                    "alert_tts": "Röst för uppläsningar",
+                    "alert_test": "Skicka ett testmeddelande nu"
+                },
+                "data_description": {
+                    "alert_persistent": "Lägger även en avisering i själva Home Assistant när ett kurslarm utlöses.",
+                    "alert_notify": "Notify-entiteterna som får ett meddelande när ett kurslarm utlöses - till exempel en telefon med Companion App.",
+                    "alert_services": "Tjänster som notify.whatsapp eller notify.mail, för meddelandeappar och e-post. Välj i listan eller skriv ett namn.",
+                    "alert_speakers": "Högtalarna som ett kurslarm läses upp på - till exempel en Sonos.",
+                    "alert_tts": "Text-till-tal-rösten som larmet läses upp med. Tomt tar den första som finns.",
+                    "alert_test": "Skickar ett testmeddelande till alla ovan när du sparar."
+                }
+            },
+            "alert_texts": {
+                "title": "Kurslarm: texter",
+                "description": "Vad ett kurslarm säger. Variabler: {name}, {symbol}, {price} och {limit} (var och en med sin valuta), {currency}, {direction} (\"på eller under\" / \"på eller över\") och {change} (dagens förändring i procent). Ett tomt fält tar standardtexten igen.",
+                "data": {
+                    "alert_title": "Titel",
+                    "alert_message": "Meddelande",
+                    "alert_spoken": "Uppläsning",
+                    "alert_test": "Skicka ett testmeddelande nu"
+                },
+                "data_description": {
+                    "alert_title": "Överskriften i en avisering.",
+                    "alert_message": "Texten i en avisering.",
+                    "alert_spoken": "Det som läses upp på högtalarna.",
+                    "alert_test": "Skickar ett testmeddelande med de här texterna till alla mottagare när du sparar."
+                }
+            },
+            "group": {
+                "title": "Grupp",
+                "description": "Gruppens namn, och om den är en portfölj eller en bevakningslista. I en bevakningslista sparas köpen av dess instrument men räknas inte.",
+                "data": {
+                    "name": "Namn",
+                    "kind": "Typ",
+                    "benchmark": "Jämförelseindex"
+                },
+                "data_description": {
+                    "benchmark": "För en portfölj: indexet som dess utveckling visas bredvid på kortet. Välj ett eller skriv valfri symbol från Yahoo Finance. Tomt jämför inte med något."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Tre bokstäver, till exempel EUR eller USD.",
+            "no_source": "Minst en källa behövs.",
+            "invalid_benchmark": "Yahoo Finance har ingen kursserie för den här symbolen."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Lägg till instrument",
+                "reconfigure": "Ändra instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Hitta ett instrument",
+                    "description": "Sök på namn, symbol eller ISIN - en aktie, en fond, ett index, en råvara, ett valutapar eller en kryptovaluta. Alla källor tillfrågas: Yahoo Finance för nästan allt, Börse Frankfurt för Xetra via ISIN, ECB:s referenskurs för ett valutapar, Kraken för en kryptovaluta, gold-api.com för en metalls spotpris.",
+                    "data": {
+                        "query": "Namn, symbol eller ISIN"
+                    },
+                    "data_description": {
+                        "query": "Till exempel: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, guld."
+                    }
+                },
+                "listing": {
+                    "title": "Välj notering",
+                    "description": "Hittat för \"{query}\". Samma instrument är ofta noterat på flera börser och hos flera källor, i olika valutor. Varje rad slutar med den senaste kursen där och var den kommer ifrån; ett datum efter en kurs betyder att den inte är från i dag.",
+                    "data": {
+                        "listing": "Notering"
+                    }
+                },
+                "holding": {
+                    "title": "Ditt innehav",
+                    "description": "Vad du äger av **{name}** - eller lämna allt tomt för att bara bevaka det. Fler köp kan läggas till efteråt, under **Ändra instrument**.",
+                    "data": {
+                        "quantity": "Antal",
+                        "price": "Köpkurs per st ({currency})",
+                        "date": "Köpdatum",
+                        "fees": "Avgifter ({currency})",
+                        "taxes": "Skatter ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hur många aktier, andelar eller mynt.",
+                        "price": "Vad en av dem kostade, i den valuta som noteringen handlas i.",
+                        "date": "Valfritt. Avgör bara i vilken ordning köp och försäljningar räknas.",
+                        "fees": "Valfritt. Vad köpet eller försäljningen kostade i avgifter.",
+                        "taxes": "Valfritt. Vad som betalades i skatt på det."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - inlagda köp: {count}; innehav: {quantity} till ett snitt på {average}; realiserat: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Byt namn",
+                        "move": "📂 Flytta till en annan grupp",
+                        "add_lot": "➕ Lägg till ett köp",
+                        "sell_lot": "➖ Lägg till en försäljning",
+                        "remove_lots": "🗑️ Ta bort köp och försäljningar",
+                        "alerts": "🔔 Kurslarm",
+                        "color": "🎨 Färg",
+                        "logo": "🖼️ Egen logotyp",
+                        "tradingview": "📈 TradingView-länk"
+                    }
+                },
+                "rename": {
+                    "title": "Byt namn på instrument",
+                    "description": "Namnet på {symbol}: vad dess enhet och dess sensorer heter.",
+                    "data": {
+                        "name": "Namn"
+                    }
+                },
+                "add_lot": {
+                    "title": "Lägg till ett köp",
+                    "description": "{name} - inlagda hittills: {count}; innehav: {quantity} till ett snitt på {average}.",
+                    "data": {
+                        "quantity": "Köpt antal",
+                        "price": "Köpkurs per st ({currency})",
+                        "date": "Köpdatum",
+                        "add_another": "Lägg till ett till efter detta",
+                        "fees": "Avgifter ({currency})",
+                        "taxes": "Skatter ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hur många aktier, andelar eller mynt som köptes.",
+                        "price": "Vad en av dem kostade, i den valuta som noteringen handlas i.",
+                        "date": "Valfritt. Avgör bara i vilken ordning köp och försäljningar räknas.",
+                        "fees": "Valfritt. Vad köpet kostade i avgifter.",
+                        "taxes": "Valfritt. Vad som betalades i skatt på det."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Lägg till en försäljning",
+                    "description": "{name} - inlagda hittills: {count}; innehav: {quantity} till ett snitt på {average}.",
+                    "data": {
+                        "quantity": "Sålt antal",
+                        "price": "Säljkurs per st ({currency})",
+                        "date": "Säljdatum",
+                        "add_another": "Lägg till en till efter denna",
+                        "fees": "Avgifter ({currency})",
+                        "taxes": "Skatter ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Hur många som såldes. De lämnar innehavet till dess hittillsvarande snittkurs.",
+                        "price": "Vad en av dem inbringade, i den valuta som noteringen handlas i.",
+                        "date": "Tomt betyder i dag. Avgör i vilken ordning köp och försäljningar räknas.",
+                        "fees": "Valfritt. Vad försäljningen kostade i avgifter.",
+                        "taxes": "Valfritt. Vad som betalades i skatt på det."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Ta bort köp och försäljningar",
+                    "description": "{name}: markera det som ska bort. Tas alla bort blir instrumentet bara bevakat.",
+                    "data": {
+                        "remove": "Inlagda"
+                    }
+                },
+                "logo": {
+                    "title": "Egen logotyp",
+                    "description": "{name}: en egen bild - för ett instrument som saknar logotyp, eller i stället för den det har. PNG, JPG, WebP, GIF eller SVG, upp till 1 MB; en kvadratisk bild passar bäst. Den sparas i din konfigurationsmapp och visas även när logotyperna är avstängda.",
+                    "data": {
+                        "file": "Bild",
+                        "remove_logo": "Ta bort den uppladdade logotypen"
+                    },
+                    "data_description": {
+                        "remove_logo": "Återgår till logotypen som instrumentet har utan den. Ignoreras när en ny bild laddas upp."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView-länk",
+                    "description": "Kortet länkar detaljerna för {name} till dess sida på TradingView. **Symbolen som togs fram för {symbol}: {found}.** Fältet visar symbolen som används. Ändra den till din egen, så som TradingView skriver den - börsen, ett kolon, tickern, till exempel NASDAQ:AAPL. Tomt återgår till den framtagna; där ingen finns visar kortet ingen länk.",
+                    "data": {
+                        "tradingview": "TradingView-symbol"
+                    }
+                },
+                "move": {
+                    "title": "Flytta till en annan grupp",
+                    "description": "{name}: gruppen det ligger i. I en bevakningslista sparas dess köp men räknas inte.",
+                    "data": {
+                        "group": "Grupp"
+                    }
+                },
+                "alerts": {
+                    "title": "Kurslarm",
+                    "description": "{name}: ett larm är utlöst så länge kursen ligger på eller bortom sin gräns. Varje gräns får en binär sensor; vem som meddelas ställs in i integrationens inställningar. Lämna ett fält tomt för ingen gräns.",
+                    "data": {
+                        "alert_below": "På eller under ({currency})",
+                        "alert_above": "På eller över ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Färg",
+                    "description": "{name}: färgen det ritas i där ett kort visar en portföljs andelar. Skriv ett värde som #009999 i sökfältet för en egen färg. Lämnas fältet tomt väljer kortet en färg.",
+                    "data": {
+                        "color": "Färg"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Till vilken portfölj?",
+                    "description": "{name}: med ett köp flyttas instrumentet från bevakningslistan till en portfölj. Dess sensorer förblir desamma.",
+                    "data": {
+                        "target": "Portfölj",
+                        "name": "Namn på den nya portföljen"
+                    },
+                    "data_description": {
+                        "name": "Bara för en ny portfölj. Tomt ger namnet ”Portfölj”."
+                    }
+                },
+                "sold_out": {
+                    "title": "Allt sålt",
+                    "description": "{name}: inget innehav finns kvar. Köp och försäljningar stannar hos instrumentet, och med dem vad det har tjänat ({realized}).",
+                    "data": {
+                        "after_sale": "Vad nu?"
+                    },
+                    "data_description": {
+                        "after_sale": "En mapp med en pil flyttar instrumentet till den bevakningslistan."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Källan kunde inte nås. Försök igen om en stund.",
+                "nothing_found": "Inget hittades. Prova en annan stavning, symbolen eller ISIN.",
+                "already_configured": "Den här noteringen har redan lagts till.",
+                "invalid_lot": "Ange ett antal över 0 och en kurs.",
+                "logo_wrong_type": "Den här bildtypen stöds inte. Använd PNG, JPG, WebP, GIF eller SVG.",
+                "logo_too_large": "Bilden är större än 1 MB.",
+                "invalid_tradingview": "Inte en TradingView-symbol. Skriv börsen, ett kolon och tickern, till exempel NASDAQ:AAPL.",
+                "invalid_color": "Välj en av färgerna eller skriv ett värde som #009999.",
+                "group_exists": "Det finns redan en grupp med det här namnet.",
+                "sell_too_many": "Det är mer än innehavet."
+            },
+            "abort": {
+                "reconfigure_successful": "Instrumentet har uppdaterats."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Senaste uppdatering"
+            },
+            "position_value": {
+                "name": "Innehavets värde"
+            },
+            "position_gain": {
+                "name": "Vinst"
+            },
+            "total_value": {
+                "name": "Totalt värde"
+            },
+            "total_gain": {
+                "name": "Total vinst"
+            },
+            "group_value": {
+                "name": "{group} värde"
+            },
+            "group_gain": {
+                "name": "{group} vinst"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Larm under"
+            },
+            "alert_above": {
+                "name": "Larm över"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} svarar inte",
+            "description": "**{source}** har inte svarat {count} gånger i rad. Senaste orsak:\n\n`{reason}`\n\nDess instrument behåller sina senaste kurser, var och en med tiden den är från; där en annan källa har kurs för samma instrument tar den över. Inget behöver göras: kurserna kommer tillbaka med källans nästa svar, och den här reparationen försvinner då."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "ECB:s referenskurser - valutapar, en gång om dagen",
+                "goldapi": "gold-api.com - spotpriser för guld, silver, platina, palladium, koppar",
+                "kraken": "Kraken - kryptovalutor",
+                "yahoo": "Yahoo Finance - aktier, fonder, index, terminer, valutor, kryptovalutor",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra och Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfölj - köpen summeras",
+                "watchlist": "Bevakningslista - bevakas bara"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Behåll i portföljen",
+                "new": "📂 Flytta till en ny bevakningslista",
+                "delete": "🗑️ Ta bort instrumentet"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Skapa en ny portfölj"
+            }
+        }
+    }
+}

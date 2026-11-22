@@ -1,0 +1,11 @@
+{
+  "alert_title": "Hintahälytys",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Hintahälytys. {name}: kurssi on {price}, {direction} {limit}.",
+  "direction_below": "enintään",
+  "direction_above": "vähintään",
+  "settings": "Asetukset",
+  "portfolio": "Salkku",
+  "watchlist": "Seurantalista",
+  "decimal_comma": true
+}

@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Pridať skupinu",
+                "description": "Skupina obsahuje inštrumenty. Portfólio sčítava, čo držíte; zoznam sledovaných sa iba sleduje a nezapočítava sa do žiadneho súčtu. Inštrumenty do nej pridáte potom cez **Pridať inštrument**.",
+                "data": {
+                    "name": "Názov",
+                    "kind": "Druh",
+                    "benchmark": "Index na porovnanie"
+                },
+                "data_description": {
+                    "benchmark": "Pre portfólio: index, vedľa ktorého karta zobrazí jeho výkonnosť. Vyberte jeden alebo zadajte ľubovoľný symbol z Yahoo Finance. Prázdne pole znamená bez porovnania."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Kurzy akcií, fondov, indexov, komodít, mien a kryptomien z verejných zdrojov – bez účtu a bez API kľúča. Inštrumenty pridáte potom jeden po druhom cez **Pridať inštrument** na stránke integrácie.",
+                "data": {
+                    "scan_interval": "Interval aktualizácie",
+                    "logos": "Logá",
+                    "base_currency": "Základná mena",
+                    "sources": "Zdroje"
+                },
+                "data_description": {
+                    "scan_interval": "Ako často sa načítavajú kurzy, kým je niektorý trh otvorený. Keď sú všetky trhy zatvorené, načítavajú sa najviac raz za 30 minút.",
+                    "logos": "Zobrazí každý inštrument na karte s jeho logom. Logá načítava prehliadač zo služby Elbstream, ktorá je ako ich zdroj uvedená – „Logos by Elbstream“ – v editore karty a v README. Ak je vypnuté, karta zobrazí iniciály a vaše vlastné nahrané logá.",
+                    "base_currency": "Mena, v ktorej sa sčítavajú všetky pozície, ako trojpísmenový kód – EUR, USD, CHF. Pozície v iných menách sa prepočítajú denným referenčným kurzom ECB.",
+                    "sources": "Odkiaľ môžu kurzy pochádzať. Vypnutý zdroj sa nepoužíva: vyhľadávanie v ňom nič nenájde a inštrument pridaný z neho dostane kurz z iného zdroja, ktorý ho tiež uvádza, inak si ponechá posledný kurz."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Nastavenia už existujú."
+        },
+        "error": {
+            "invalid_currency": "Tri písmená, napríklad EUR alebo USD.",
+            "no_source": "Potrebný je aspoň jeden zdroj.",
+            "invalid_benchmark": "Yahoo Finance nemá pre tento symbol cenový rad."
+        },
+        "initiate_flow": {
+            "user": "Pridať skupinu"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Všeobecné",
+                    "sources": "🌐 Zdroje údajov",
+                    "alert_targets": "🔔 Cenové upozornenia: príjemcovia",
+                    "alert_texts": "✏️ Cenové upozornenia: texty"
+                }
+            },
+            "general": {
+                "title": "Všeobecné",
+                "data": {
+                    "scan_interval": "Interval aktualizácie",
+                    "base_currency": "Základná mena",
+                    "logos": "Logá"
+                },
+                "data_description": {
+                    "scan_interval": "Ako často sa načítavajú kurzy, kým je niektorý trh otvorený. Keď sú všetky trhy zatvorené, načítavajú sa najviac raz za 30 minút.",
+                    "base_currency": "Mena, v ktorej sa sčítavajú všetky pozície, ako trojpísmenový kód – EUR, USD, CHF. Pozície v iných menách sa prepočítajú denným referenčným kurzom ECB.",
+                    "logos": "Zobrazí každý inštrument na karte s jeho logom. Logá načítava prehliadač zo služby Elbstream, ktorá je ako ich zdroj uvedená – „Logos by Elbstream“ – v editore karty a v README. Ak je vypnuté, karta zobrazí iniciály a vaše vlastné nahrané logá."
+                }
+            },
+            "sources": {
+                "title": "Zdroje údajov",
+                "data": {
+                    "sources": "Zdroje",
+                    "news_google": "Správy aj z Google News"
+                },
+                "data_description": {
+                    "sources": "Odkiaľ môžu kurzy pochádzať. Vypnutý zdroj sa nepoužíva: vyhľadávanie v ňom nič nenájde a inštrument pridaný z neho dostane kurz z iného zdroja, ktorý ho tiež uvádza, inak si ponechá posledný kurz.",
+                    "news_google": "Hľadá názov inštrumentu aj v Google News. Nájde viac titulkov ako Yahoo Finance, niektoré však o niečom inom."
+                }
+            },
+            "alert_targets": {
+                "title": "Cenové upozornenia: príjemcovia",
+                "description": "Kto dostane správu, keď sa cenové upozornenie spustí. Každé upozornenie tiež vyvolá udalosť market_ticker_ultra_alert pre automatizácie.",
+                "data": {
+                    "alert_persistent": "Oznámenie v Home Assistant",
+                    "alert_notify": "Posielať cenové upozornenia na",
+                    "alert_services": "Notifikačné služby pre cenové upozornenia",
+                    "alert_speakers": "Ohlasovať cenové upozornenia na",
+                    "alert_tts": "Hlas pre ohlásenia",
+                    "alert_test": "Teraz odoslať testovaciu správu"
+                },
+                "data_description": {
+                    "alert_persistent": "Keď sa cenové upozornenie spustí, vytvorí aj oznámenie priamo v Home Assistant.",
+                    "alert_notify": "Notifikačné entity, ktoré dostanú správu, keď sa cenové upozornenie spustí – napríklad telefón s Companion App.",
+                    "alert_services": "Služby ako notify.whatsapp alebo notify.mail pre komunikátory a e-mail. Vyberte zo zoznamu alebo zadajte názov.",
+                    "alert_speakers": "Reproduktory, na ktorých sa cenové upozornenie prečíta – napríklad Sonos.",
+                    "alert_tts": "Hlas prevodu textu na reč, ktorým sa upozornenie vysloví. Prázdne pole použije prvý dostupný.",
+                    "alert_test": "Pri uložení odošle testovaciu správu všetkým vyššie uvedeným."
+                }
+            },
+            "alert_texts": {
+                "title": "Cenové upozornenia: texty",
+                "description": "Čo cenové upozornenie hovorí. Premenné: {name}, {symbol}, {price} a {limit} (každá s menou), {currency}, {direction} („na alebo pod“ / „na alebo nad“) a {change} (denná zmena v percentách). Prázdne pole opäť použije predvolený text.",
+                "data": {
+                    "alert_title": "Nadpis",
+                    "alert_message": "Správa",
+                    "alert_spoken": "Ohlásenie",
+                    "alert_test": "Teraz odoslať testovaciu správu"
+                },
+                "data_description": {
+                    "alert_title": "Nadpis oznámenia.",
+                    "alert_message": "Text oznámenia.",
+                    "alert_spoken": "Čo sa prečíta na reproduktoroch.",
+                    "alert_test": "Pri uložení odošle testovaciu správu s týmito textami všetkým príjemcom."
+                }
+            },
+            "group": {
+                "title": "Skupina",
+                "description": "Názov skupiny a či je to portfólio alebo zoznam sledovaných. V zozname sledovaných sa nákupy jeho inštrumentov uchovajú, ale nezapočítavajú.",
+                "data": {
+                    "name": "Názov",
+                    "kind": "Druh",
+                    "benchmark": "Index na porovnanie"
+                },
+                "data_description": {
+                    "benchmark": "Pre portfólio: index, vedľa ktorého karta zobrazí jeho výkonnosť. Vyberte jeden alebo zadajte ľubovoľný symbol z Yahoo Finance. Prázdne pole znamená bez porovnania."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Tri písmená, napríklad EUR alebo USD.",
+            "no_source": "Potrebný je aspoň jeden zdroj.",
+            "invalid_benchmark": "Yahoo Finance nemá pre tento symbol cenový rad."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Inštrument",
+            "initiate_flow": {
+                "user": "Pridať inštrument",
+                "reconfigure": "Upraviť inštrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Nájsť inštrument",
+                    "description": "Hľadajte podľa názvu, symbolu alebo ISIN – akciu, fond, index, komoditu, menový pár alebo kryptomenu. Prehľadajú sa všetky zdroje: Yahoo Finance pre takmer všetko, Börse Frankfurt pre Xetra podľa ISIN, referenčný kurz ECB pre menový pár, Kraken pre kryptomenu, gold-api.com pre spotovú cenu kovu.",
+                    "data": {
+                        "query": "Názov, symbol alebo ISIN"
+                    },
+                    "data_description": {
+                        "query": "Napríklad: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, zlato."
+                    }
+                },
+                "listing": {
+                    "title": "Vyberte kótovanie",
+                    "description": "Nájdené pre „{query}“. Ten istý inštrument je často kótovaný na viacerých burzách a vo viacerých zdrojoch, v rôznych menách. Každý riadok končí posledným kurzom a jeho zdrojom; dátum za kurzom znamená, že nie je z dneška.",
+                    "data": {
+                        "listing": "Kótovanie"
+                    }
+                },
+                "holding": {
+                    "title": "Vaša pozícia",
+                    "description": "Koľko držíte z **{name}** – alebo nechajte všetko prázdne, ak ho chcete iba sledovať. Ďalšie nákupy pridáte neskôr cez **Upraviť inštrument**.",
+                    "data": {
+                        "quantity": "Množstvo",
+                        "price": "Nákupná cena za kus ({currency})",
+                        "date": "Dátum nákupu",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Dane ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Koľko akcií, podielov alebo mincí.",
+                        "price": "Koľko stál jeden kus, v mene, v ktorej sa toto kótovanie obchoduje.",
+                        "date": "Voliteľné. Určuje iba poradie, v akom sa nákupy a predaje započítavajú.",
+                        "fees": "Voliteľné. Koľko stál nákup alebo predaj na poplatkoch.",
+                        "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} – zadané nákupy: {count}; v držbe: {quantity} za priemernú cenu {average}; realizované: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Premenovať",
+                        "move": "📂 Presunúť do inej skupiny",
+                        "add_lot": "➕ Pridať nákup",
+                        "sell_lot": "➖ Pridať predaj",
+                        "remove_lots": "🗑️ Odstrániť nákupy a predaje",
+                        "alerts": "🔔 Cenové upozornenia",
+                        "color": "🎨 Farba",
+                        "logo": "🖼️ Vlastné logo",
+                        "tradingview": "📈 Odkaz na TradingView"
+                    }
+                },
+                "rename": {
+                    "title": "Premenovať inštrument",
+                    "description": "Názov {symbol}: ako sa volajú jeho zariadenie a senzory.",
+                    "data": {
+                        "name": "Názov"
+                    }
+                },
+                "add_lot": {
+                    "title": "Pridať nákup",
+                    "description": "{name} – zatiaľ zadané: {count}; v držbe: {quantity} za priemernú cenu {average}.",
+                    "data": {
+                        "quantity": "Kúpené množstvo",
+                        "price": "Nákupná cena za kus ({currency})",
+                        "date": "Dátum nákupu",
+                        "add_another": "Potom pridať ďalší",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Dane ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Koľko akcií, podielov alebo mincí sa kúpilo.",
+                        "price": "Koľko stál jeden kus, v mene, v ktorej sa toto kótovanie obchoduje.",
+                        "date": "Voliteľné. Určuje iba poradie, v akom sa nákupy a predaje započítavajú.",
+                        "fees": "Voliteľné. Koľko stál nákup na poplatkoch.",
+                        "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Pridať predaj",
+                    "description": "{name} – zatiaľ zadané: {count}; v držbe: {quantity} za priemernú cenu {average}.",
+                    "data": {
+                        "quantity": "Predané množstvo",
+                        "price": "Predajná cena za kus ({currency})",
+                        "date": "Dátum predaja",
+                        "add_another": "Potom pridať ďalší",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Dane ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Koľko sa predalo. Z pozície sa odpíšu za doterajšiu priemernú cenu.",
+                        "price": "Koľko vyniesol jeden kus, v mene, v ktorej sa toto kótovanie obchoduje.",
+                        "date": "Prázdne pole znamená dnes. Určuje poradie, v akom sa nákupy a predaje započítavajú.",
+                        "fees": "Voliteľné. Koľko stál predaj na poplatkoch.",
+                        "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Odstrániť nákupy a predaje",
+                    "description": "{name}: označte, čo sa má odstrániť. Ak odstránite všetko, zostane inštrument, ktorý sa iba sleduje.",
+                    "data": {
+                        "remove": "Zadané"
+                    }
+                },
+                "logo": {
+                    "title": "Vlastné logo",
+                    "description": "{name}: vlastný obrázok – pre inštrument bez loga alebo namiesto jeho loga. PNG, JPG, WebP, GIF alebo SVG, najviac 1 MB; najlepšie sa hodí štvorcový obrázok. Uloží sa do vášho konfiguračného priečinka a zobrazí sa aj pri vypnutých logách.",
+                    "data": {
+                        "file": "Obrázok",
+                        "remove_logo": "Odstrániť nahrané logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Vráti logo, ktoré má inštrument bez neho. Ignoruje sa, keď sa nahrá nový obrázok."
+                    }
+                },
+                "tradingview": {
+                    "title": "Odkaz na TradingView",
+                    "description": "Karta prepojí detaily {name} s jeho stránkou na TradingView. **Symbol zistený pre {symbol}: {found}.** Pole ukazuje používaný symbol. Zmeňte ho na vlastný v zápise TradingView – burza, dvojbodka, ticker, napríklad NASDAQ:AAPL. Prázdne pole vráti zistený symbol; ak žiadny nie je, karta odkaz nezobrazí.",
+                    "data": {
+                        "tradingview": "Symbol TradingView"
+                    }
+                },
+                "move": {
+                    "title": "Presunúť do inej skupiny",
+                    "description": "{name}: skupina, v ktorej sa nachádza. V zozname sledovaných sa jeho nákupy uchovajú, ale nezapočítavajú.",
+                    "data": {
+                        "group": "Skupina"
+                    }
+                },
+                "alerts": {
+                    "title": "Cenové upozornenia",
+                    "description": "{name}: upozornenie je spustené, kým je cena na limite alebo za ním. Každý limit dostane binárny senzor; kto dostane správu, sa nastavuje v nastaveniach integrácie. Nechajte pole prázdne, ak limit nechcete.",
+                    "data": {
+                        "alert_below": "Na alebo pod ({currency})",
+                        "alert_above": "Na alebo nad ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Farba",
+                    "description": "{name}: farba, ktorou sa kreslí tam, kde karta zobrazuje podiely portfólia. Pre vlastnú farbu zadajte do vyhľadávania hodnotu ako #009999. Ak je prázdne, karta mu farbu pridelí.",
+                    "data": {
+                        "color": "Farba"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Do ktorého portfólia?",
+                    "description": "{name}: s nákupom sa inštrument presunie zo zoznamu sledovaných do portfólia. Jeho senzory zostanú rovnaké.",
+                    "data": {
+                        "target": "Portfólio",
+                        "name": "Názov nového portfólia"
+                    },
+                    "data_description": {
+                        "name": "Iba pre nové portfólio. Ak je prázdne, nazve sa „Portfólio“."
+                    }
+                },
+                "sold_out": {
+                    "title": "Všetko predané",
+                    "description": "{name}: už nič nedržíte. Nákupy a predaje zostanú pri inštrumente a s nimi aj to, čo zarobil ({realized}).",
+                    "data": {
+                        "after_sale": "Čo teraz?"
+                    },
+                    "data_description": {
+                        "after_sale": "Priečinok so šípkou presunie inštrument do daného zoznamu sledovaných."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Zdroj nie je dostupný. Skúste to znova o chvíľu.",
+                "nothing_found": "Nič sa nenašlo. Skúste iný zápis, symbol alebo ISIN.",
+                "already_configured": "Toto kótovanie už bolo pridané.",
+                "invalid_lot": "Zadajte množstvo väčšie ako 0 a cenu.",
+                "logo_wrong_type": "Tento typ obrázka nie je podporovaný. Použite PNG, JPG, WebP, GIF alebo SVG.",
+                "logo_too_large": "Obrázok je väčší ako 1 MB.",
+                "invalid_tradingview": "Toto nie je symbol TradingView. Zadajte burzu, dvojbodku a ticker, napríklad NASDAQ:AAPL.",
+                "invalid_color": "Vyberte jednu z farieb alebo zadajte hodnotu ako #009999.",
+                "group_exists": "Skupina s týmto názvom už existuje.",
+                "sell_too_many": "To je viac, ako držíte."
+            },
+            "abort": {
+                "reconfigure_successful": "Inštrument bol aktualizovaný."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Posledná aktualizácia"
+            },
+            "position_value": {
+                "name": "Hodnota pozície"
+            },
+            "position_gain": {
+                "name": "Zisk"
+            },
+            "total_value": {
+                "name": "Celková hodnota"
+            },
+            "total_gain": {
+                "name": "Celkový zisk"
+            },
+            "group_value": {
+                "name": "{group} – hodnota"
+            },
+            "group_gain": {
+                "name": "{group} – zisk"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Upozornenie pod"
+            },
+            "alert_above": {
+                "name": "Upozornenie nad"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} neodpovedá",
+            "description": "Zdroj **{source}** neodpovedal {count}-krát za sebou. Posledný dôvod:\n\n`{reason}`\n\nJeho inštrumenty si ponechajú posledné kurzy, každý s časom, z ktorého pochádza; kde ten istý inštrument uvádza iný zdroj, zastúpi ho. Netreba nič robiť: kurzy sa vrátia s ďalšou odpoveďou zdroja a táto oprava zmizne spolu s nimi."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "Referenčné kurzy ECB – menové páry, raz denne",
+                "goldapi": "gold-api.com – spotové ceny zlata, striebra, platiny, paládia, medi",
+                "kraken": "Kraken – kryptomeny",
+                "yahoo": "Yahoo Finance – akcie, fondy, indexy, futures, meny, kryptomeny",
+                "boerse_frankfurt": "Börse Frankfurt – Xetra a Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfólio – nákupy sa sčítavajú",
+                "watchlist": "Zoznam sledovaných – iba sledovanie"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Ponechať v portfóliu",
+                "new": "📂 Presunúť do nového zoznamu sledovaných",
+                "delete": "🗑️ Odstrániť inštrument"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Vytvoriť nové portfólio"
+            }
+        }
+    }
+}

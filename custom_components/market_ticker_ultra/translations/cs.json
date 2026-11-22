@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Přidat skupinu",
+                "description": "Skupina obsahuje instrumenty. Portfolio sčítá to, co držíte; watchlist se jen sleduje a nezapočítává se do žádného součtu. Instrumenty se do ní přidávají potom, pomocí **Přidat instrument**.",
+                "data": {
+                    "name": "Název",
+                    "kind": "Druh",
+                    "benchmark": "Index pro srovnání"
+                },
+                "data_description": {
+                    "benchmark": "Pro portfolio: index, vedle kterého se na kartě zobrazí jeho výkonnost. Vyberte jeden, nebo zadejte libovolný symbol Yahoo Finance. Prázdné nesrovnává s žádným."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Kurzy akcií, fondů, indexů, komodit, měn a kryptoměn z veřejných zdrojů - bez účtu, bez API klíče. Instrumenty se přidávají potom, jeden po druhém, pomocí **Přidat instrument** na stránce integrace.",
+                "data": {
+                    "scan_interval": "Interval aktualizace",
+                    "logos": "Loga",
+                    "base_currency": "Základní měna",
+                    "sources": "Zdroje"
+                },
+                "data_description": {
+                    "scan_interval": "Jak často se načítají kurzy, dokud je trh otevřen. Když jsou všechny trhy zavřené, načítají se nejvýše jednou za 30 minut.",
+                    "logos": "Zobrazí každý instrument na kartě s jeho logem. Loga načítá prohlížeč ze služby Elbstream, která je jako jejich zdroj uvedena - \"Logos by Elbstream\" - v editoru karty a v README. Po vypnutí karta zobrazí iniciály a vaše vlastní nahraná loga.",
+                    "base_currency": "Měna, ve které se sčítají všechny pozice, jako třípísmenný kód - EUR, USD, CHF. Pozice v jiných měnách se přepočítávají denním referenčním kurzem ECB.",
+                    "sources": "Odkud mohou kurzy pocházet. Na vypnutý zdroj se dotazy neposílají: vyhledávání v něm nic nenajde a instrumentu z něj přidanému dodává kurz jiný zdroj, pokud tentýž instrument uvádí; jinak si ponechá poslední kurz."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Nastavení už existuje."
+        },
+        "error": {
+            "invalid_currency": "Tři písmena, například EUR nebo USD.",
+            "no_source": "Je potřeba alespoň jeden zdroj.",
+            "invalid_benchmark": "Yahoo Finance pro tento symbol nemá cenovou řadu."
+        },
+        "initiate_flow": {
+            "user": "Přidat skupinu"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Obecné",
+                    "sources": "🌐 Zdroje dat",
+                    "alert_targets": "🔔 Cenové alarmy: příjemci",
+                    "alert_texts": "✏️ Cenové alarmy: texty"
+                }
+            },
+            "general": {
+                "title": "Obecné",
+                "data": {
+                    "scan_interval": "Interval aktualizace",
+                    "base_currency": "Základní měna",
+                    "logos": "Loga"
+                },
+                "data_description": {
+                    "scan_interval": "Jak často se načítají kurzy, dokud je trh otevřen. Když jsou všechny trhy zavřené, načítají se nejvýše jednou za 30 minut.",
+                    "base_currency": "Měna, ve které se sčítají všechny pozice, jako třípísmenný kód - EUR, USD, CHF. Pozice v jiných měnách se přepočítávají denním referenčním kurzem ECB.",
+                    "logos": "Zobrazí každý instrument na kartě s jeho logem. Loga načítá prohlížeč ze služby Elbstream, která je jako jejich zdroj uvedena - \"Logos by Elbstream\" - v editoru karty a v README. Po vypnutí karta zobrazí iniciály a vaše vlastní nahraná loga."
+                }
+            },
+            "sources": {
+                "title": "Zdroje dat",
+                "data": {
+                    "sources": "Zdroje",
+                    "news_google": "Zprávy také z Google News"
+                },
+                "data_description": {
+                    "sources": "Odkud mohou kurzy pocházet. Na vypnutý zdroj se dotazy neposílají: vyhledávání v něm nic nenajde a instrumentu z něj přidanému dodává kurz jiný zdroj, pokud tentýž instrument uvádí; jinak si ponechá poslední kurz.",
+                    "news_google": "Hledá název instrumentu také v Google News. Najde více titulků než Yahoo Finance, i některé, které jsou o něčem jiném."
+                }
+            },
+            "alert_targets": {
+                "title": "Cenové alarmy: příjemci",
+                "description": "Kdo dostane zprávu, když se cenový alarm spustí. Každý alarm také vyvolá událost market_ticker_ultra_alert pro automatizace.",
+                "data": {
+                    "alert_persistent": "Oznámení v Home Assistant",
+                    "alert_notify": "Informovat o cenových alarmech",
+                    "alert_services": "Služby notify pro cenové alarmy",
+                    "alert_speakers": "Hlásit cenové alarmy na",
+                    "alert_tts": "Hlas pro hlášení",
+                    "alert_test": "Odeslat zkušební zprávu"
+                },
+                "data_description": {
+                    "alert_persistent": "Při spuštění cenového alarmu vytvoří také oznámení přímo v Home Assistant.",
+                    "alert_notify": "Entity notify, které dostanou zprávu při spuštění cenového alarmu - například telefon s Companion App.",
+                    "alert_services": "Služby jako notify.whatsapp nebo notify.mail pro komunikátory a e-mail. Vyberte ze seznamu nebo zadejte název.",
+                    "alert_speakers": "Reproduktory, na kterých se cenový alarm přečte - například Sonos.",
+                    "alert_tts": "Hlas převodu textu na řeč, kterým se alarm vysloví. Prázdné použije první dostupný.",
+                    "alert_test": "Při uložení odešle zkušební zprávu všem výše uvedeným."
+                }
+            },
+            "alert_texts": {
+                "title": "Cenové alarmy: texty",
+                "description": "Co cenový alarm říká. Proměnné: {name}, {symbol}, {price} a {limit} (každá s měnou), {currency}, {direction} (\"na nebo pod\" / \"na nebo nad\") a {change} (denní změna v procentech). Prázdné pole znovu použije výchozí text.",
+                "data": {
+                    "alert_title": "Nadpis",
+                    "alert_message": "Zpráva",
+                    "alert_spoken": "Hlášení",
+                    "alert_test": "Odeslat zkušební zprávu"
+                },
+                "data_description": {
+                    "alert_title": "Nadpis oznámení.",
+                    "alert_message": "Text oznámení.",
+                    "alert_spoken": "Co se přečte na reproduktorech.",
+                    "alert_test": "Při uložení odešle zkušební zprávu s těmito texty všem příjemcům."
+                }
+            },
+            "group": {
+                "title": "Skupina",
+                "description": "Název skupiny a zda jde o portfolio nebo watchlist. Ve watchlistu se nákupy jeho instrumentů uchovávají, ale nezapočítávají.",
+                "data": {
+                    "name": "Název",
+                    "kind": "Druh",
+                    "benchmark": "Index pro srovnání"
+                },
+                "data_description": {
+                    "benchmark": "Pro portfolio: index, vedle kterého se na kartě zobrazí jeho výkonnost. Vyberte jeden, nebo zadejte libovolný symbol Yahoo Finance. Prázdné nesrovnává s žádným."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "Tři písmena, například EUR nebo USD.",
+            "no_source": "Je potřeba alespoň jeden zdroj.",
+            "invalid_benchmark": "Yahoo Finance pro tento symbol nemá cenovou řadu."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Instrument",
+            "initiate_flow": {
+                "user": "Přidat instrument",
+                "reconfigure": "Upravit instrument"
+            },
+            "step": {
+                "user": {
+                    "title": "Najít instrument",
+                    "description": "Hledejte podle názvu, symbolu nebo ISIN - akcii, fond, index, komoditu, měnový pár nebo kryptoměnu. Hledá se ve všech zdrojích: Yahoo Finance téměř pro vše, Börse Frankfurt pro Xetra podle ISIN, referenční kurz ECB pro měnový pár, Kraken pro kryptoměnu, gold-api.com pro spotovou cenu kovu.",
+                    "data": {
+                        "query": "Název, symbol nebo ISIN"
+                    },
+                    "data_description": {
+                        "query": "Například: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, gold."
+                    }
+                },
+                "listing": {
+                    "title": "Vyberte kotaci",
+                    "description": "Nalezeno pro \"{query}\". Stejný instrument je často kotován na více burzách a zdrojích, v různých měnách. Každý řádek končí poslední cenou a jejím původem; datum za cenou znamená, že není z dneška.",
+                    "data": {
+                        "listing": "Kotace"
+                    }
+                },
+                "holding": {
+                    "title": "Vaše pozice",
+                    "description": "Vaše pozice v **{name}** - nebo vše nechte prázdné a jen jej sledujte. Další nákupy lze přidat později v **Upravit instrument**.",
+                    "data": {
+                        "quantity": "Množství",
+                        "price": "Nákupní cena za kus ({currency})",
+                        "date": "Datum nákupu",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Daně ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kolik akcií, podílů nebo mincí.",
+                        "price": "Kolik stál jeden kus, v měně, ve které je tato kotace.",
+                        "date": "Volitelné. Určuje jen pořadí, v jakém se nákupy a prodeje započítávají.",
+                        "fees": "Volitelné. Kolik stál nákup nebo prodej na poplatcích.",
+                        "taxes": "Volitelné. Kolik se z toho zaplatilo na daních."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - zadané nákupy: {count}; drženo: {quantity} za průměrnou cenu {average}; realizováno: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Přejmenovat",
+                        "move": "📂 Přesunout do jiné skupiny",
+                        "add_lot": "➕ Přidat nákup",
+                        "sell_lot": "➖ Přidat prodej",
+                        "remove_lots": "🗑️ Odebrat nákupy a prodeje",
+                        "alerts": "🔔 Cenové alarmy",
+                        "color": "🎨 Barva",
+                        "logo": "🖼️ Vlastní logo",
+                        "tradingview": "📈 Odkaz na TradingView"
+                    }
+                },
+                "rename": {
+                    "title": "Přejmenovat instrument",
+                    "description": "Název {symbol}: jak se jmenuje jeho zařízení a jeho senzory.",
+                    "data": {
+                        "name": "Název"
+                    }
+                },
+                "add_lot": {
+                    "title": "Přidat nákup",
+                    "description": "{name} - dosud zadáno: {count}; drženo: {quantity} za průměrnou cenu {average}.",
+                    "data": {
+                        "quantity": "Nakoupené množství",
+                        "price": "Nákupní cena za kus ({currency})",
+                        "date": "Datum nákupu",
+                        "add_another": "Potom přidat další",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Daně ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kolik akcií, podílů nebo mincí bylo nakoupeno.",
+                        "price": "Kolik stál jeden kus, v měně, ve které se tato kotace obchoduje.",
+                        "date": "Volitelné. Určuje jen pořadí, v jakém se nákupy a prodeje započítávají.",
+                        "fees": "Volitelné. Kolik stál nákup na poplatcích.",
+                        "taxes": "Volitelné. Kolik se z toho zaplatilo na daních."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Přidat prodej",
+                    "description": "{name} - dosud zadáno: {count}; drženo: {quantity} za průměrnou cenu {average}.",
+                    "data": {
+                        "quantity": "Prodané množství",
+                        "price": "Prodejní cena za kus ({currency})",
+                        "date": "Datum prodeje",
+                        "add_another": "Potom přidat další",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Daně ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kolik kusů bylo prodáno. Odcházejí z pozice za její dosavadní průměrnou cenu.",
+                        "price": "Kolik jeden kus vynesl, v měně, ve které se tato kotace obchoduje.",
+                        "date": "Prázdné znamená dnes. Určuje pořadí, v jakém se nákupy a prodeje započítávají.",
+                        "fees": "Volitelné. Kolik stál prodej na poplatcích.",
+                        "taxes": "Volitelné. Kolik se z toho zaplatilo na daních."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Odebrat nákupy a prodeje",
+                    "description": "{name}: zaškrtněte, co se má odebrat. Po odebrání všech zůstane instrument, který se jen sleduje.",
+                    "data": {
+                        "remove": "Zadáno"
+                    }
+                },
+                "logo": {
+                    "title": "Vlastní logo",
+                    "description": "{name}: vlastní obrázek - pro instrument bez loga nebo místo toho, které má. PNG, JPG, WebP, GIF nebo SVG, do 1 MB; nejlépe sedí čtvercový obrázek. Uloží se do vaší konfigurační složky a zobrazí se i při vypnutých logech.",
+                    "data": {
+                        "file": "Obrázek",
+                        "remove_logo": "Odebrat nahrané logo"
+                    },
+                    "data_description": {
+                        "remove_logo": "Vrátí logo, které instrument má bez něj. Ignoruje se, pokud se nahrává nový obrázek."
+                    }
+                },
+                "tradingview": {
+                    "title": "Odkaz na TradingView",
+                    "description": "Karta propojí detaily {name} s jeho stránkou na TradingView. **Symbol odvozený pro {symbol}: {found}.** Pole ukazuje používaný symbol. Změňte jej na vlastní, jak jej píše TradingView - burza, dvojtečka, ticker, například NASDAQ:AAPL. Prázdné vrátí odvozený symbol; pokud žádný není, karta odkaz nezobrazí.",
+                    "data": {
+                        "tradingview": "Symbol TradingView"
+                    }
+                },
+                "move": {
+                    "title": "Přesunout do jiné skupiny",
+                    "description": "{name}: skupina, ve které je. Ve watchlistu se jeho nákupy uchovávají, ale nezapočítávají.",
+                    "data": {
+                        "group": "Skupina"
+                    }
+                },
+                "alerts": {
+                    "title": "Cenové alarmy",
+                    "description": "{name}: alarm je spuštěn, dokud je cena na limitu nebo za ním. Každý limit dostane binární senzor; kdo dostane zprávu, se nastavuje v nastavení integrace. Prázdné pole znamená žádný limit.",
+                    "data": {
+                        "alert_below": "Na nebo pod ({currency})",
+                        "alert_above": "Na nebo nad ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Barva",
+                    "description": "{name}: barva, kterou se vykreslí tam, kde karta zobrazuje podíly portfolia. Pro vlastní barvu zadejte do hledání hodnotu jako #009999. Je-li prázdné, barvu přidělí karta.",
+                    "data": {
+                        "color": "Barva"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Do kterého portfolia?",
+                    "description": "{name}: s nákupem se instrument přesune z watchlistu do portfolia. Jeho senzory zůstanou stejné.",
+                    "data": {
+                        "target": "Portfolio",
+                        "name": "Název nového portfolia"
+                    },
+                    "data_description": {
+                        "name": "Jen pro nové portfolio. Prázdné jej pojmenuje „Portfolio“."
+                    }
+                },
+                "sold_out": {
+                    "title": "Vše prodáno",
+                    "description": "{name}: už nic nedržíte. Nákupy a prodeje zůstávají u instrumentu a s nimi i to, co vydělal ({realized}).",
+                    "data": {
+                        "after_sale": "Co teď?"
+                    },
+                    "data_description": {
+                        "after_sale": "Složka se šipkou přesune instrument do daného watchlistu."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Zdroj není dostupný. Zkuste to za chvíli znovu.",
+                "nothing_found": "Nic nenalezeno. Zkuste jiný zápis, symbol nebo ISIN.",
+                "already_configured": "Tato kotace už byla přidána.",
+                "invalid_lot": "Zadejte množství větší než 0 a cenu.",
+                "logo_wrong_type": "Tento typ obrázku nelze použít. Použijte PNG, JPG, WebP, GIF nebo SVG.",
+                "logo_too_large": "Obrázek je větší než 1 MB.",
+                "invalid_tradingview": "Toto není symbol TradingView. Napište burzu, dvojtečku a ticker, například NASDAQ:AAPL.",
+                "invalid_color": "Vyberte jednu z barev, nebo zadejte hodnotu jako #009999.",
+                "group_exists": "Skupina s tímto názvem už existuje.",
+                "sell_too_many": "To je víc, než držíte."
+            },
+            "abort": {
+                "reconfigure_successful": "Instrument byl aktualizován."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Poslední aktualizace"
+            },
+            "position_value": {
+                "name": "Hodnota pozice"
+            },
+            "position_gain": {
+                "name": "Zisk"
+            },
+            "total_value": {
+                "name": "Celková hodnota"
+            },
+            "total_gain": {
+                "name": "Celkový zisk"
+            },
+            "group_value": {
+                "name": "{group}: hodnota"
+            },
+            "group_gain": {
+                "name": "{group}: zisk"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alarm pod"
+            },
+            "alert_above": {
+                "name": "Alarm nad"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} neodpovídá",
+            "description": "Zdroj **{source}** neodpověděl {count}krát po sobě. Poslední důvod:\n\n`{reason}`\n\nJeho instrumenty si ponechávají poslední kurzy, každý s časem, ze kterého pochází; kde stejný instrument kotuje jiný zdroj, zastoupí jej. Není nutné nic dělat: kurzy se vrátí s další odpovědí zdroje a tato oprava zmizí s ní."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "Referenční kurzy ECB - měnové páry, jednou denně",
+                "goldapi": "gold-api.com - spotové ceny zlata, stříbra, platiny, palladia, mědi",
+                "kraken": "Kraken - kryptoměny",
+                "yahoo": "Yahoo Finance - akcie, fondy, indexy, futures, měny, kryptoměny",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra a Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portfolio - nákupy se sčítají",
+                "watchlist": "Watchlist - jen sledování"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Ponechat v portfoliu",
+                "new": "📂 Přesunout do nového watchlistu",
+                "delete": "🗑️ Odebrat instrument"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Vytvořit nové portfolio"
+            }
+        }
+    }
+}

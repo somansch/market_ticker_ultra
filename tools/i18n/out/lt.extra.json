@@ -1,0 +1,11 @@
+{
+  "alert_title": "Kainos įspėjimas",
+  "alert_message": "{name}: {price} – {direction} {limit}",
+  "alert_spoken": "Kainos įspėjimas. {name} kaina {price}, {direction} {limit}.",
+  "direction_below": "ties arba žemiau",
+  "direction_above": "ties arba aukščiau",
+  "settings": "Nustatymai",
+  "portfolio": "Portfelis",
+  "watchlist": "Stebimų sąrašas",
+  "decimal_comma": true
+}

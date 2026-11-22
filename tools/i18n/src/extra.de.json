@@ -1,0 +1,11 @@
+{
+  "alert_title": "Kursalarm",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Kursalarm. {name} steht bei {price}, {direction} {limit}.",
+  "direction_below": "auf oder unter",
+  "direction_above": "auf oder über",
+  "settings": "Einstellungen",
+  "portfolio": "Depot",
+  "watchlist": "Watchlist",
+  "decimal_comma": true
+}

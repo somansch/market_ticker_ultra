@@ -1,0 +1,392 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Grup ekle",
+                "description": "Bir grupta enstrümanlar bulunur. Portföy, elde tutulanları toplar; izleme listesi yalnızca izlenir ve hiçbir toplama katılmaz. Enstrümanlar daha sonra **Enstrüman ekle** ile eklenir.",
+                "data": {
+                    "name": "Ad",
+                    "kind": "Tür",
+                    "benchmark": "Karşılaştırma endeksi"
+                },
+                "data_description": {
+                    "benchmark": "Portföy için: kartta performansının yanında gösterilen endeks. Birini seçin veya herhangi bir Yahoo Finance sembolü yazın. Boş bırakılırsa karşılaştırma yapılmaz."
+                }
+            },
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "description": "Hisse senetleri, fonlar, endeksler, emtialar, dövizler ve kripto paralar için herkese açık kaynaklardan fiyatlar - hesap yok, API anahtarı yok. Enstrümanlar daha sonra, entegrasyonun sayfasında **Enstrüman ekle** ile tek tek eklenir.",
+                "data": {
+                    "scan_interval": "Güncelleme aralığı",
+                    "logos": "Logolar",
+                    "base_currency": "Temel para birimi",
+                    "sources": "Kaynaklar"
+                },
+                "data_description": {
+                    "scan_interval": "Bir piyasa açıkken fiyatların ne sıklıkla alındığı. Tüm piyasalar kapalıyken en fazla 30 dakikada bir alınır.",
+                    "logos": "Kartta her enstrümanı logosuyla gösterir. Logolar tarayıcı tarafından Elbstream'den yüklenir; Elbstream kartın düzenleyicisinde ve README'de \"Logos by Elbstream\" olarak anılır. Kapalıyken kart baş harfleri ve kendi yüklediğiniz logoları gösterir.",
+                    "base_currency": "Tüm pozisyonların toplandığı para birimi, üç harfli kod olarak - EUR, USD, CHF. Diğer para birimlerindeki pozisyonlar Avrupa Merkez Bankası'nın günlük referans kuruyla çevrilir.",
+                    "sources": "Fiyatların nereden gelebileceği. Kapalı bir kaynağa sorulmaz: arama orada bir şey bulmaz ve oradan eklenmiş bir enstrüman, aynı enstrümanı listeleyen başka bir kaynak varsa ondan fiyat alır, yoksa son fiyatını korur."
+                }
+            }
+        },
+        "abort": {
+            "already_configured": "Ayarlar zaten mevcut."
+        },
+        "error": {
+            "invalid_currency": "EUR veya USD gibi üç harf.",
+            "no_source": "En az bir kaynak gerekli.",
+            "invalid_benchmark": "Yahoo Finance'te bu sembol için fiyat serisi yok."
+        },
+        "initiate_flow": {
+            "user": "Grup ekle"
+        }
+    },
+    "options": {
+        "step": {
+            "settings": {
+                "title": "Market Ticker Ultra",
+                "menu_options": {
+                    "general": "⚙️ Genel",
+                    "sources": "🌐 Veri kaynakları",
+                    "alert_targets": "🔔 Fiyat alarmları: alıcılar",
+                    "alert_texts": "✏️ Fiyat alarmları: metinler"
+                }
+            },
+            "general": {
+                "title": "Genel",
+                "data": {
+                    "scan_interval": "Güncelleme aralığı",
+                    "base_currency": "Temel para birimi",
+                    "logos": "Logolar"
+                },
+                "data_description": {
+                    "scan_interval": "Bir piyasa açıkken fiyatların ne sıklıkla alındığı. Tüm piyasalar kapalıyken en fazla 30 dakikada bir alınır.",
+                    "base_currency": "Tüm pozisyonların toplandığı para birimi, üç harfli kod olarak - EUR, USD, CHF. Diğer para birimlerindeki pozisyonlar Avrupa Merkez Bankası'nın günlük referans kuruyla çevrilir.",
+                    "logos": "Kartta her enstrümanı logosuyla gösterir. Logolar tarayıcı tarafından Elbstream'den yüklenir; Elbstream kartın düzenleyicisinde ve README'de \"Logos by Elbstream\" olarak anılır. Kapalıyken kart baş harfleri ve kendi yüklediğiniz logoları gösterir."
+                }
+            },
+            "sources": {
+                "title": "Veri kaynakları",
+                "data": {
+                    "sources": "Kaynaklar",
+                    "news_google": "Google News'ten de haberler"
+                },
+                "data_description": {
+                    "sources": "Fiyatların nereden gelebileceği. Kapalı bir kaynağa sorulmaz: arama orada bir şey bulmaz ve oradan eklenmiş bir enstrüman, aynı enstrümanı listeleyen başka bir kaynak varsa ondan fiyat alır, yoksa son fiyatını korur.",
+                    "news_google": "Google News'te de enstrümanın adını arar. Yahoo Finance'ten daha fazla başlık bulur, bazıları da başka konularla ilgilidir."
+                }
+            },
+            "alert_targets": {
+                "title": "Fiyat alarmları: alıcılar",
+                "description": "Bir fiyat alarmı tetiklendiğinde kimin bilgilendirileceği. Her alarm, otomasyonlar için market_ticker_ultra_alert olayını da tetikler.",
+                "data": {
+                    "alert_persistent": "Home Assistant'ta bildirim",
+                    "alert_notify": "Fiyat alarmlarını bildir",
+                    "alert_services": "Fiyat alarmları için bildirim hizmetleri",
+                    "alert_speakers": "Fiyat alarmlarını şurada duyur",
+                    "alert_tts": "Duyurular için ses",
+                    "alert_test": "Şimdi bir test mesajı gönder"
+                },
+                "data_description": {
+                    "alert_persistent": "Bir fiyat alarmı tetiklendiğinde Home Assistant'ın kendisine de bir bildirim ekler.",
+                    "alert_notify": "Bir fiyat alarmı tetiklendiğinde mesaj alan bildirim varlıkları - örneğin Companion App yüklü bir telefon.",
+                    "alert_services": "Mesajlaşma ve e-posta için notify.whatsapp veya notify.mail gibi hizmetler. Listeden seçin veya bir ad yazın.",
+                    "alert_speakers": "Fiyat alarmının sesli okunduğu hoparlörler - örneğin bir Sonos.",
+                    "alert_tts": "Alarmın okunduğu metinden konuşmaya sesi. Boş bırakılırsa ilk bulunan kullanılır.",
+                    "alert_test": "Kaydettiğinizde yukarıda belirtilen herkese bir test mesajı gönderir."
+                }
+            },
+            "alert_texts": {
+                "title": "Fiyat alarmları: metinler",
+                "description": "Bir fiyat alarmının ne söylediği. Değişkenler: {name}, {symbol}, {price} ve {limit} (her biri para birimiyle), {currency}, {direction} (\"seviyesinde veya altında\" / \"seviyesinde veya üstünde\") ve {change} (günlük yüzde değişim). Boş bir alan yeniden varsayılanı alır.",
+                "data": {
+                    "alert_title": "Başlık",
+                    "alert_message": "Mesaj",
+                    "alert_spoken": "Duyuru",
+                    "alert_test": "Şimdi bir test mesajı gönder"
+                },
+                "data_description": {
+                    "alert_title": "Bir bildirimin başlığı.",
+                    "alert_message": "Bir bildirimin metni.",
+                    "alert_spoken": "Hoparlörlerde sesli okunan metin.",
+                    "alert_test": "Kaydettiğinizde bu metinlerle tüm alıcılara bir test mesajı gönderir."
+                }
+            },
+            "group": {
+                "title": "Grup",
+                "description": "Grubun adı ve bir portföy mü yoksa izleme listesi mi olduğu. İzleme listesinde enstrümanların alışları saklanır ama hesaba katılmaz.",
+                "data": {
+                    "name": "Ad",
+                    "kind": "Tür",
+                    "benchmark": "Karşılaştırma endeksi"
+                },
+                "data_description": {
+                    "benchmark": "Portföy için: kartta performansının yanında gösterilen endeks. Birini seçin veya herhangi bir Yahoo Finance sembolü yazın. Boş bırakılırsa karşılaştırma yapılmaz."
+                }
+            }
+        },
+        "error": {
+            "invalid_currency": "EUR veya USD gibi üç harf.",
+            "no_source": "En az bir kaynak gerekli.",
+            "invalid_benchmark": "Yahoo Finance'te bu sembol için fiyat serisi yok."
+        }
+    },
+    "config_subentries": {
+        "instrument": {
+            "entry_type": "Enstrüman",
+            "initiate_flow": {
+                "user": "Enstrüman ekle",
+                "reconfigure": "Enstrümanı düzenle"
+            },
+            "step": {
+                "user": {
+                    "title": "Enstrüman bul",
+                    "description": "Ada, sembole veya ISIN'e göre arayın - bir hisse senedi, fon, endeks, emtia, döviz çifti veya kripto para. Her kaynağa sorulur: neredeyse her şey için Yahoo Finance, ISIN ile Xetra için Börse Frankfurt, döviz çifti için AMB referans kuru, kripto para için Kraken, bir metalin spot fiyatı için gold-api.com.",
+                    "data": {
+                        "query": "Ad, sembol veya ISIN"
+                    },
+                    "data_description": {
+                        "query": "Örneğin: Apple, AAPL, US0378331005, S&P 500, EUR/USD, BTC, altın."
+                    }
+                },
+                "listing": {
+                    "title": "Kotasyonu seçin",
+                    "description": "\"{query}\" için bulunanlar. Aynı enstrüman çoğu zaman birkaç borsada ve kaynakta, farklı para birimlerinde kote edilir. Her satır oradaki son fiyatla ve nereden geldiğiyle biter; fiyatın arkasındaki tarih, fiyatın bugüne ait olmadığını gösterir.",
+                    "data": {
+                        "listing": "Kotasyon"
+                    }
+                },
+                "holding": {
+                    "title": "Pozisyonunuz",
+                    "description": "**{name}** enstrümanından elinizde ne olduğu - ya da yalnızca izlemek için her şeyi boş bırakın. Sonraki alışlar daha sonra **Enstrümanı düzenle** altından eklenebilir.",
+                    "data": {
+                        "quantity": "Miktar",
+                        "price": "Birim alış fiyatı ({currency})",
+                        "date": "Alış tarihi",
+                        "fees": "Ücretler ({currency})",
+                        "taxes": "Vergiler ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kaç hisse, fon payı veya coin.",
+                        "price": "Bir tanesinin maliyeti, bu kotasyonun fiyatlandığı para biriminde.",
+                        "date": "İsteğe bağlı. Yalnızca alış ve satışların hangi sırayla hesaplanacağını belirler.",
+                        "fees": "İsteğe bağlı. Alış veya satışın ücret olarak maliyeti.",
+                        "taxes": "İsteğe bağlı. Bunun için ödenen vergi."
+                    }
+                },
+                "reconfigure": {
+                    "title": "{name}",
+                    "description": "{symbol} - girilen alışlar: {count}; pozisyon: {quantity}, ortalama {average}; gerçekleşen: {realized}.",
+                    "menu_options": {
+                        "rename": "✏️ Yeniden adlandır",
+                        "move": "📂 Başka bir gruba taşı",
+                        "add_lot": "➕ Alış ekle",
+                        "sell_lot": "➖ Satış ekle",
+                        "remove_lots": "🗑️ Alış ve satışları kaldır",
+                        "alerts": "🔔 Fiyat alarmları",
+                        "color": "🎨 Renk",
+                        "logo": "🖼️ Özel logo",
+                        "tradingview": "📈 TradingView bağlantısı"
+                    }
+                },
+                "rename": {
+                    "title": "Enstrümanı yeniden adlandır",
+                    "description": "{symbol} adı: cihazının ve sensörlerinin adı.",
+                    "data": {
+                        "name": "Ad"
+                    }
+                },
+                "add_lot": {
+                    "title": "Alış ekle",
+                    "description": "{name} - şimdiye kadar girilen: {count}; pozisyon: {quantity}, ortalama {average}.",
+                    "data": {
+                        "quantity": "Alınan miktar",
+                        "price": "Birim alış fiyatı ({currency})",
+                        "date": "Alış tarihi",
+                        "add_another": "Bundan sonra bir tane daha ekle",
+                        "fees": "Ücretler ({currency})",
+                        "taxes": "Vergiler ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kaç hisse, fon payı veya coin alındığı.",
+                        "price": "Bir tanesinin maliyeti, bu kotasyonun işlem gördüğü para biriminde.",
+                        "date": "İsteğe bağlı. Yalnızca alış ve satışların hangi sırayla hesaplanacağını belirler.",
+                        "fees": "İsteğe bağlı. Alışın ücret olarak maliyeti.",
+                        "taxes": "İsteğe bağlı. Bunun için ödenen vergi."
+                    }
+                },
+                "sell_lot": {
+                    "title": "Satış ekle",
+                    "description": "{name} - şimdiye kadar girilen: {count}; pozisyon: {quantity}, ortalama {average}.",
+                    "data": {
+                        "quantity": "Satılan miktar",
+                        "price": "Birim satış fiyatı ({currency})",
+                        "date": "Satış tarihi",
+                        "add_another": "Bundan sonra bir tane daha ekle",
+                        "fees": "Ücretler ({currency})",
+                        "taxes": "Vergiler ({currency})"
+                    },
+                    "data_description": {
+                        "quantity": "Kaç tane satıldığı. Pozisyondan, o ana kadarki ortalama fiyatla düşülür.",
+                        "price": "Bir tanesinin getirdiği tutar, bu kotasyonun işlem gördüğü para biriminde.",
+                        "date": "Boş bırakılırsa bugün. Alış ve satışların hangi sırayla hesaplanacağını belirler.",
+                        "fees": "İsteğe bağlı. Satışın ücret olarak maliyeti.",
+                        "taxes": "İsteğe bağlı. Bunun için ödenen vergi."
+                    }
+                },
+                "remove_lots": {
+                    "title": "Alış ve satışları kaldır",
+                    "description": "{name}: kaldırılacakları işaretleyin. Hepsini kaldırmak, yalnızca izlenen bir enstrüman bırakır.",
+                    "data": {
+                        "remove": "Girilenler"
+                    }
+                },
+                "logo": {
+                    "title": "Özel logo",
+                    "description": "{name}: kendi görseliniz - logosu olmayan bir enstrüman için veya mevcut logonun yerine. PNG, JPG, WebP, GIF veya SVG, en fazla 1 MB; kare bir görsel en iyi sonucu verir. Yapılandırma klasörünüzde saklanır ve logolar kapalıyken de gösterilir.",
+                    "data": {
+                        "file": "Görsel",
+                        "remove_logo": "Yüklenen logoyu kaldır"
+                    },
+                    "data_description": {
+                        "remove_logo": "Enstrümanın kendi logosuna geri döner. Yeni bir görsel yüklendiğinde dikkate alınmaz."
+                    }
+                },
+                "tradingview": {
+                    "title": "TradingView bağlantısı",
+                    "description": "Kart, {name} ayrıntılarını TradingView'daki sayfasına bağlar. **{symbol} için belirlenen sembol: {found}.** Alan, kullanılan sembolü gösterir. TradingView'un yazdığı biçimde kendi sembolünüzle değiştirin - borsa, iki nokta üst üste, kod; örneğin NASDAQ:AAPL. Boş bırakılırsa belirlenen sembole döner; belirlenen yoksa kart bağlantı göstermez.",
+                    "data": {
+                        "tradingview": "TradingView sembolü"
+                    }
+                },
+                "move": {
+                    "title": "Başka bir gruba taşı",
+                    "description": "{name}: bulunduğu grup. İzleme listesinde alışları saklanır ama hesaba katılmaz.",
+                    "data": {
+                        "group": "Grup"
+                    }
+                },
+                "alerts": {
+                    "title": "Fiyat alarmları",
+                    "description": "{name}: fiyat, limitte veya limitin ötesindeyken alarm tetiklenir. Her limit bir ikili sensör alır; kimin bilgilendirileceği entegrasyonun ayarlarında belirlenir. Limit istemiyorsanız alanı boş bırakın.",
+                    "data": {
+                        "alert_below": "Bu seviyede veya altında ({currency})",
+                        "alert_above": "Bu seviyede veya üstünde ({currency})"
+                    }
+                },
+                "color": {
+                    "title": "Renk",
+                    "description": "{name}: kartın bir portföyün paylarını gösterdiği yerde çizildiği renk. Kendi renginiz için aramaya #009999 gibi bir değer yazın. Boş bırakılırsa kart bir renk atar.",
+                    "data": {
+                        "color": "Renk"
+                    }
+                },
+                "to_portfolio": {
+                    "title": "Hangi portföye?",
+                    "description": "{name}: bir alışla enstrüman izleme listesinden bir portföye taşınır. Sensörleri aynı kalır.",
+                    "data": {
+                        "target": "Portföy",
+                        "name": "Yeni portföyün adı"
+                    },
+                    "data_description": {
+                        "name": "Yalnızca yeni bir portföy için. Boş bırakılırsa adı “Portföy” olur."
+                    }
+                },
+                "sold_out": {
+                    "title": "Hepsi satıldı",
+                    "description": "{name}: artık elde bir şey yok. Alış ve satışlar ile onlardan elde edilen kâr ({realized}) enstrümanda kalır.",
+                    "data": {
+                        "after_sale": "Şimdi ne olsun?"
+                    },
+                    "data_description": {
+                        "after_sale": "Oklu bir klasör, enstrümanı o izleme listesine taşır."
+                    }
+                }
+            },
+            "error": {
+                "cannot_connect": "Kaynağa ulaşılamadı. Biraz sonra tekrar deneyin.",
+                "nothing_found": "Hiçbir şey bulunamadı. Başka bir yazım, sembol veya ISIN deneyin.",
+                "already_configured": "Bu kotasyon zaten eklenmiş.",
+                "invalid_lot": "0'dan büyük bir miktar ve bir fiyat girin.",
+                "logo_wrong_type": "Bu, kabul edilen bir görsel değil. PNG, JPG, WebP, GIF veya SVG kullanın.",
+                "logo_too_large": "Görsel 1 MB'tan büyük.",
+                "invalid_tradingview": "Bu bir TradingView sembolü değil. Borsayı, iki nokta üst üsteyi ve kodu yazın; örneğin NASDAQ:AAPL.",
+                "invalid_color": "Renklerden birini seçin veya #009999 gibi bir değer yazın.",
+                "group_exists": "Bu adda bir grup zaten var.",
+                "sell_too_many": "Bu, pozisyondaki miktardan fazla."
+            },
+            "abort": {
+                "reconfigure_successful": "Enstrüman güncellendi."
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "last_update": {
+                "name": "Son güncelleme"
+            },
+            "position_value": {
+                "name": "Pozisyon değeri"
+            },
+            "position_gain": {
+                "name": "Kâr"
+            },
+            "total_value": {
+                "name": "Toplam değer"
+            },
+            "total_gain": {
+                "name": "Toplam kâr"
+            },
+            "group_value": {
+                "name": "{group} değeri"
+            },
+            "group_gain": {
+                "name": "{group} kârı"
+            }
+        },
+        "binary_sensor": {
+            "alert_below": {
+                "name": "Alt alarm"
+            },
+            "alert_above": {
+                "name": "Üst alarm"
+            }
+        }
+    },
+    "issues": {
+        "source_failing": {
+            "title": "{source} yanıt vermiyor",
+            "description": "**{source}** art arda {count} kez yanıt vermedi. Son neden:\n\n`{reason}`\n\nEnstrümanları son fiyatlarını, her biri ait olduğu zamanla birlikte korur; aynı enstrümanı başka bir kaynak fiyatlıyorsa onun yerine o kullanılır. Bir şey yapmanız gerekmez: fiyatlar kaynağın bir sonraki yanıtıyla geri gelir ve bu onarım da onunla birlikte kaybolur."
+        }
+    },
+    "selector": {
+        "sources": {
+            "options": {
+                "ecb": "AMB referans kurları - döviz çiftleri, günde bir kez",
+                "goldapi": "gold-api.com - altın, gümüş, platin, paladyum, bakır spot fiyatları",
+                "kraken": "Kraken - kripto paralar",
+                "yahoo": "Yahoo Finance - hisse senetleri, fonlar, endeksler, vadeli işlemler, dövizler, kripto paralar",
+                "boerse_frankfurt": "Börse Frankfurt - Xetra ve Frankfurt"
+            }
+        },
+        "group_kind": {
+            "options": {
+                "portfolio": "Portföy - alışlar toplanır",
+                "watchlist": "İzleme listesi - yalnızca izlenir"
+            }
+        },
+        "after_sale": {
+            "options": {
+                "keep": "Portföyde tut",
+                "new": "📂 Yeni bir izleme listesine taşı",
+                "delete": "🗑️ Enstrümanı kaldır"
+            }
+        },
+        "to_portfolio": {
+            "options": {
+                "new": "➕ Yeni bir portföy oluştur"
+            }
+        }
+    }
+}

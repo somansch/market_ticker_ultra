@@ -1,0 +1,11 @@
+{
+  "alert_title": "Ценовое оповещение",
+  "alert_message": "{name}: {price} — {direction} {limit}",
+  "alert_spoken": "Ценовое оповещение. {name} стоит {price}, {direction} {limit}.",
+  "direction_below": "на уровне или ниже",
+  "direction_above": "на уровне или выше",
+  "settings": "Настройки",
+  "portfolio": "Портфель",
+  "watchlist": "Список наблюдения",
+  "decimal_comma": true
+}

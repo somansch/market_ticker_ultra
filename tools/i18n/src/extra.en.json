@@ -1,0 +1,11 @@
+{
+  "alert_title": "Price alert",
+  "alert_message": "{name}: {price} - {direction} {limit}",
+  "alert_spoken": "Price alert. {name} is at {price}, {direction} {limit}.",
+  "direction_below": "at or below",
+  "direction_above": "at or above",
+  "settings": "Settings",
+  "portfolio": "Portfolio",
+  "watchlist": "Watchlist",
+  "decimal_comma": false
+}

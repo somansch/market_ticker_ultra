@@ -1,0 +1,11 @@
+{
+  "alert_title": "Alerte de cours",
+  "alert_message": "{name} : {price} - {direction} {limit}",
+  "alert_spoken": "Alerte de cours. {name} est à {price}, {direction} {limit}.",
+  "direction_below": "égal ou inférieur à",
+  "direction_above": "égal ou supérieur à",
+  "settings": "Paramètres",
+  "portfolio": "Portefeuille",
+  "watchlist": "Liste de suivi",
+  "decimal_comma": true
+}
