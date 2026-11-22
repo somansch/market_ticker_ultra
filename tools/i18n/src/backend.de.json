@@ -154,7 +154,11 @@
                     "title": "Handelsplatz wählen",
                     "description": "Gefunden zu \"{query}\". Derselbe Wert wird oft an mehreren Börsen und bei mehreren Quellen geführt, in unterschiedlichen Währungen. Jede Zeile endet mit dem letzten Kurs dort und seiner Herkunft; ein Datum hinter einem Kurs heißt, dass er nicht von heute ist.",
                     "data": {
-                        "listing": "Handelsplatz"
+                        "listing": "Handelsplatz",
+                        "convert": "In {base} umrechnen"
+                    },
+                    "data_description": {
+                        "convert": "Für eine Notierung in einer anderen Währung: Alles steht in {base}, zum EZB-Referenzkurs. Der Bestand wird dann ebenfalls in {base} eingetragen."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - erfasste Käufe: {count}; im Bestand: {quantity} zu durchschnittlich {average}; realisiert: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Umbenennen",
+                        "venue": "🏛️ Handelsplatz ändern",
                         "move": "📂 In eine andere Gruppe verschieben",
                         "add_lot": "➕ Kauf hinzufügen",
                         "sell_lot": "➖ Verkauf hinzufügen",
                         "remove_lots": "🗑️ Käufe und Verkäufe entfernen",
                         "alerts": "🔔 Kursalarme",
                         "color": "🎨 Farbe",
+                        "currency": "💱 Währung",
                         "logo": "🖼️ Eigenes Logo",
                         "tradingview": "📈 TradingView-Link"
                     }
@@ -195,6 +201,24 @@
                     "description": "Der Name von {symbol}: So heißen sein Gerät und seine Sensoren.",
                     "data": {
                         "name": "Name"
+                    }
+                },
+                "venue": {
+                    "title": "Handelsplatz ändern",
+                    "description": "{name} wird als {symbol} geführt. Suche den Wert noch einmal - über seine ISIN oder seinen Namen -, um eine andere Börse oder Quelle zu wählen.",
+                    "data": {
+                        "query": "Suche"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Neuen Handelsplatz wählen",
+                    "description": "Gefunden zu \"{query}\". {name} wird ab jetzt dort geführt; Name, Käufe, Alarme und Sensoren bleiben. Käufe, Verkäufe und Kursalarme werden nicht umgerechnet - in einer anderen Währung gelten ihre Zahlen als diese. Ändert sich die Währung, beginnt die Langzeitstatistik der Sensoren neu.",
+                    "data": {
+                        "listing": "Handelsplatz",
+                        "convert": "In {base} umrechnen"
+                    },
+                    "data_description": {
+                        "convert": "Für eine Notierung in einer anderen Währung: Alles steht in {base}, zum EZB-Referenzkurs."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Farbe"
                     }
                 },
+                "currency": {
+                    "title": "Währung",
+                    "description": "{name} wird in {quoted} notiert. Eingeschaltet steht stattdessen alles in {base}: der Kurs zum EZB-Referenzkurs des Tages, jeder Punkt der Kurve zum Kurs seines Tages. Das ist nicht der Kurs, zu dem der Wert in {base} gehandelt wird, und die Änderung enthält die der Währung. Schon eingetragene Käufe, Verkäufe und Kursalarme werden nicht umgerechnet - ihre Zahlen gelten ab dann als {base}. Ändert sich die Währung, beginnt die Langzeitstatistik der Sensoren neu.",
+                    "data": {
+                        "convert": "In {base} umrechnen"
+                    }
+                },
                 "to_portfolio": {
                     "title": "In welches Depot?",
                     "description": "{name}: Mit einem Kauf wechselt der Wert von der Watchlist in ein Depot. Seine Sensoren bleiben dieselben.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Kein TradingView-Symbol. Schreibe die Börse, einen Doppelpunkt und das Kürzel, etwa NASDAQ:AAPL.",
                 "invalid_color": "Wähle eine der Farben oder tippe einen Wert wie #009999.",
                 "group_exists": "Eine Gruppe mit diesem Namen gibt es schon.",
-                "sell_too_many": "Das ist mehr, als im Bestand ist."
+                "sell_too_many": "Das ist mehr, als im Bestand ist.",
+                "no_rate": "Für die Währung dieser Notierung veröffentlicht die EZB keinen Referenzkurs, sie lässt sich deshalb nicht umrechnen."
             },
             "abort": {
                 "reconfigure_successful": "Der Wert wurde aktualisiert."

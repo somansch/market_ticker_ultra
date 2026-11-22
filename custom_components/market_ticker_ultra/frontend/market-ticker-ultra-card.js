@@ -11297,22 +11297,72 @@
     };
   }
 
+  // A bar's length in milliseconds, from the interval's name ("30m", "1h").
+  function intervalMs(interval) {
+    const match = /^(\d+)(m|h)$/.exec(String(interval || ""));
+    return match ? Number(match[1]) * (match[2] === "h" ? 3600000 : 60000) : null;
+  }
+
+  // A week of bars shorter than a day, each day as wide as the next: the
+  // hours of the day that the week has prices in - from the earliest bar's
+  // time of day to the latest one's - are one slot per bar length, in every
+  // day, and each bar stands in the slot of its time. A listing with a few
+  // prices a day then shows them where they were, and a day with one price
+  // is as wide as a day with twenty. Nothing where the bars do not fall
+  // into slots of their own.
+  function weekLayout(history) {
+    const bars = history.bars;
+    const step = intervalMs(history.interval);
+    if (history.range !== "5d" || !step || bars.length < 2) return null;
+    const dayOf = (bar) => {
+      const date = new Date(bar.t);
+      return { key: date.getFullYear() * 10000 + date.getMonth() * 100 + date.getDate(), at: date.getHours() * 3600000 + date.getMinutes() * 60000 };
+    };
+    const placed = bars.map(dayOf);
+    let first = Infinity;
+    let last = -Infinity;
+    for (const place of placed) {
+      first = Math.min(first, place.at);
+      last = Math.max(last, place.at);
+    }
+    const perDay = Math.round((last - first) / step) + 1;
+    const days = [];
+    const slots = placed.map((place, i) => {
+      if (!days.length || days[days.length - 1].key !== place.key) days.push({ key: place.key, t: bars[i].t });
+      return (days.length - 1) * perDay + Math.min(perDay - 1, Math.round((place.at - first) / step));
+    });
+    const count = days.length * perDay;
+    if (days.length < 2 || count > 4000) return null;
+    for (let i = 1; i < slots.length; i++) if (slots[i] <= slots[i - 1]) return null;
+    return {
+      count,
+      slots,
+      from: null,
+      to: null,
+      days: days.map((day, i) => ({ t: day.t, at: (i / days.length) * 100 })),
+    };
+  }
+
   // Where each bar stands along the chart. As a rule the bars are spread
-  // evenly, one slot each: a week of prices has no night and no weekend in
+  // evenly, one slot each: a year of prices has no night and no weekend in
   // it. A day that is still running is different - it has its trading
   // session, and the chart keeps the room for what is still to come: one
   // slot per bar length from the session's start to its end, each bar in
-  // the slot of its time. Bars outside the session, or ones that do not
-  // fall into slots of their own, put the chart back on the plain spread.
+  // the slot of its time. A week is drawn day by day - see weekLayout.
+  // Bars outside the session, or ones that do not fall into slots of their
+  // own, put the chart back on the plain spread.
   function slotLayout(history) {
     const bars = history.bars;
     const even = { count: bars.length, slots: bars.map((bar, i) => i), from: null, to: null };
     const session = history.session;
-    if (!session || bars.length < 2) return even;
+    if (!session) return weekLayout(history) || even;
+    if (bars.length < 2) return even;
     const steps = [];
     for (let i = 1; i < bars.length; i++) steps.push(bars[i].t - bars[i - 1].t);
     steps.sort((a, b) => a - b);
-    const step = steps[Math.floor(steps.length / 2)];
+    // The bar length the source names; without one, the usual gap - which
+    // is longer than a bar where only a few prices were made.
+    const step = intervalMs(history.interval) || steps[Math.floor(steps.length / 2)];
     if (!(step > 0)) return even;
     if (bars[0].t < session.start - step / 2 || bars[bars.length - 1].t > session.end + step / 2) return even;
     const count = Math.max(1, Math.round((session.end - session.start) / step));
@@ -11613,6 +11663,9 @@
     const raw = state ? state.state : null;
     const price = raw === null || raw === "unavailable" || raw === "unknown" ? null : toNumber(raw);
     const symbol = instrument.symbol || attrs.symbol || "";
+    // Where it is quoted and in which currency it is shown: what its chart
+    // and its figures are kept under (see listingOf).
+    LISTINGS.set(instrument.id, symbol + "|" + (attrs.unit_of_measurement || instrument.currency || ""));
     return {
       id: instrument.id,
       entity_id: instrument.entity_id,
@@ -11675,6 +11728,12 @@
   // ask on every price.
   const HISTORY = new Map();
   const DETAILS = new Map();
+  // An instrument keeps its id when it is moved to another listing or
+  // shown in another currency - its chart and its figures are others then.
+  // So they are kept under its listing too, and what was kept before no
+  // longer fits: the new ones are asked for at once.
+  const LISTINGS = new Map();
+  const listingOf = (id) => LISTINGS.get(id) || "";
   const HISTORY_FRESH = { "1d": 120, "5d": 300 };
   const HISTORY_FRESH_LONG = 1800;
   const DETAILS_FRESH = 900;
@@ -11729,7 +11788,7 @@
   // there is too old. `first` puts it ahead of the small curves' requests;
   // `force` asks whatever the age.
   function historyOf(id, range, first, force) {
-    const key = `${id}|${range}`;
+    const key = `${id}|${listingOf(id)}|${range}`;
     let entry = HISTORY.get(key);
     if (!entry) {
       entry = { data: null, at: 0, error: false, errorAt: 0, asking: false };
@@ -11955,13 +12014,14 @@
   }
 
   // The same, without asking: what is there already, if anything.
-  const historyKept = (id, range) => HISTORY.get(`${id}|${range}`) || null;
+  const historyKept = (id, range) => HISTORY.get(`${id}|${listingOf(id)}|${range}`) || null;
 
   function detailsOf(id) {
-    let entry = DETAILS.get(id);
+    const key = id + "|" + listingOf(id);
+    let entry = DETAILS.get(key);
     if (!entry) {
       entry = { data: null, at: 0, error: false, errorAt: 0, asking: false };
-      DETAILS.set(id, entry);
+      DETAILS.set(key, entry);
     }
     if (!isFresh(entry, DETAILS_FRESH)) {
       ask(entry, { type: `${DOMAIN}/details`, instrument: id }, (answer) => answer || {}, true);
@@ -14873,8 +14933,9 @@
       const xLook = elementStyle(config, "detail_x_axis");
       // Along the bottom: five moments spread over the bars - or, on a day
       // drawn across its session, round steps from the session's start,
-      // each standing where its time is.
-      const marks = sessionMarks(chart.layout);
+      // each standing where its time is; on a week drawn day by day, each
+      // day where it begins.
+      const marks = sessionMarks(chart.layout) || chart.layout.days || null;
       const xAxis = marks
         ? `<div class="x-axis marked" style="${xLook}">` +
           marks.map((mark) => `<span class="mark" style="left: ${mark.at.toFixed(2)}%">${timeText(mark.t)}</span>`).join("") +

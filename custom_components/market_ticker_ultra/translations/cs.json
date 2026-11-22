@@ -154,7 +154,11 @@
                     "title": "Vyberte kotaci",
                     "description": "Nalezeno pro \"{query}\". Stejný instrument je často kotován na více burzách a zdrojích, v různých měnách. Každý řádek končí poslední cenou a jejím původem; datum za cenou znamená, že není z dneška.",
                     "data": {
-                        "listing": "Kotace"
+                        "listing": "Kotace",
+                        "convert": "Přepočítat na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pro kotaci v jiné měně: vše se zobrazuje v {base}, podle referenčního kurzu ECB. To, co držíte, se pak také zadává v {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - zadané nákupy: {count}; drženo: {quantity} za průměrnou cenu {average}; realizováno: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Přejmenovat",
+                        "venue": "🏛️ Změnit kotaci",
                         "move": "📂 Přesunout do jiné skupiny",
                         "add_lot": "➕ Přidat nákup",
                         "sell_lot": "➖ Přidat prodej",
                         "remove_lots": "🗑️ Odebrat nákupy a prodeje",
                         "alerts": "🔔 Cenové alarmy",
                         "color": "🎨 Barva",
+                        "currency": "💱 Měna",
                         "logo": "🖼️ Vlastní logo",
                         "tradingview": "📈 Odkaz na TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "Název {symbol}: jak se jmenuje jeho zařízení a jeho senzory.",
                     "data": {
                         "name": "Název"
+                    }
+                },
+                "venue": {
+                    "title": "Změnit kotaci",
+                    "description": "{name} je veden jako {symbol}. Vyhledejte jej znovu - podle ISIN nebo názvu - a vyberte jinou burzu nebo zdroj.",
+                    "data": {
+                        "query": "Hledat"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Vyberte novou kotaci",
+                    "description": "Nalezeno pro \"{query}\". {name} je odteď veden tam; jeho název, nákupy, alarmy a senzory zůstávají. Nákupy, prodeje a cenové alarmy se nepřepočítávají - v jiné měně platí jejich čísla v ní. Změní-li se měna, dlouhodobé statistiky jeho senzorů začnou znovu.",
+                    "data": {
+                        "listing": "Kotace",
+                        "convert": "Přepočítat na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pro kotaci v jiné měně: vše se zobrazuje v {base}, podle referenčního kurzu ECB."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Barva"
                     }
                 },
+                "currency": {
+                    "title": "Měna",
+                    "description": "{name} je kotován v {quoted}. Po zapnutí se vše zobrazuje v {base}: cena podle referenčního kurzu ECB daného dne, každý bod grafu podle kurzu svého dne. Není to cena, za kterou se obchoduje v {base}, a změna zahrnuje i změnu měny. Již zadané nákupy, prodeje a cenové alarmy se nepřepočítávají - jejich čísla od té chvíle platí jako {base}. Změní-li se měna, dlouhodobé statistiky jeho senzorů začnou znovu.",
+                    "data": {
+                        "convert": "Přepočítat na {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Do kterého portfolia?",
                     "description": "{name}: s nákupem se instrument přesune z watchlistu do portfolia. Jeho senzory zůstanou stejné.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Toto není symbol TradingView. Napište burzu, dvojtečku a ticker, například NASDAQ:AAPL.",
                 "invalid_color": "Vyberte jednu z barev, nebo zadejte hodnotu jako #009999.",
                 "group_exists": "Skupina s tímto názvem už existuje.",
-                "sell_too_many": "To je víc, než držíte."
+                "sell_too_many": "To je víc, než držíte.",
+                "no_rate": "Pro měnu této kotace ECB nezveřejňuje referenční kurz, proto ji nelze přepočítat."
             },
             "abort": {
                 "reconfigure_successful": "Instrument byl aktualizován."

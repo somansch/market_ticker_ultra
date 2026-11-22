@@ -154,7 +154,11 @@
                     "title": "Vælg noteringen",
                     "description": "Fundet for \"{query}\". Det samme instrument er ofte noteret på flere børser og kilder, i forskellige valutaer. Hver linje slutter med den seneste kurs der og hvor den kommer fra; en dato efter en kurs betyder, at den ikke er fra i dag.",
                     "data": {
-                        "listing": "Notering"
+                        "listing": "Notering",
+                        "convert": "Omregn til {base}"
+                    },
+                    "data_description": {
+                        "convert": "For en notering i en anden valuta: alt vises i {base}, til ECB's referencekurs. Din beholdning indtastes så også i {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - registrerede køb: {count}; beholdning: {quantity} til en gennemsnitskurs på {average}; realiseret: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Omdøb",
+                        "venue": "🏛️ Skift notering",
                         "move": "📂 Flyt til en anden gruppe",
                         "add_lot": "➕ Tilføj et køb",
                         "sell_lot": "➖ Tilføj et salg",
                         "remove_lots": "🗑️ Fjern køb og salg",
                         "alerts": "🔔 Kursalarmer",
                         "color": "🎨 Farve",
+                        "currency": "💱 Valuta",
                         "logo": "🖼️ Eget logo",
                         "tradingview": "📈 TradingView-link"
                     }
@@ -195,6 +201,24 @@
                     "description": "Navnet på {symbol}: det, dets enhed og dets sensorer hedder.",
                     "data": {
                         "name": "Navn"
+                    }
+                },
+                "venue": {
+                    "title": "Skift notering",
+                    "description": "{name} føres som {symbol}. Søg efter det igen - med ISIN eller navn - for at vælge en anden børs eller kilde.",
+                    "data": {
+                        "query": "Søg"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Vælg den nye notering",
+                    "description": "Fundet for \"{query}\". {name} føres der fra nu af; navn, køb, alarmer og sensorer bliver. Køb, salg og kursalarmer omregnes ikke - i en anden valuta gælder deres tal som den. Skifter valutaen, begynder langtidsstatistikken for sensorerne forfra.",
+                    "data": {
+                        "listing": "Notering",
+                        "convert": "Omregn til {base}"
+                    },
+                    "data_description": {
+                        "convert": "For en notering i en anden valuta: alt vises i {base}, til ECB's referencekurs."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Farve"
                     }
                 },
+                "currency": {
+                    "title": "Valuta",
+                    "description": "{name} noteres i {quoted}. Slået til vises alt i {base} i stedet: kursen til ECB's referencekurs for dagen, hvert punkt i grafen til kursen for sin egen dag. Det er ikke den kurs, det handles til i {base}, og ændringen indeholder valutaens. Køb, salg og kursalarmer, der allerede er indtastet, omregnes ikke - deres tal gælder fra da af som {base}. Skifter valutaen, begynder langtidsstatistikken for sensorerne forfra.",
+                    "data": {
+                        "convert": "Omregn til {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Til hvilken portefølje?",
                     "description": "{name}: med et køb flytter instrumentet fra watchlisten til en portefølje. Dets sensorer forbliver de samme.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Ikke et TradingView-symbol. Skriv børsen, et kolon og tickeren, f.eks. NASDAQ:AAPL.",
                 "invalid_color": "Vælg en af farverne, eller skriv en værdi som #009999.",
                 "group_exists": "Der findes allerede en gruppe med dette navn.",
-                "sell_too_many": "Det er mere end beholdningen."
+                "sell_too_many": "Det er mere end beholdningen.",
+                "no_rate": "ECB offentliggør ingen referencekurs for denne noterings valuta, så den kan ikke omregnes."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet blev opdateret."

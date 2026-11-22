@@ -154,7 +154,11 @@
                     "title": "Kotasyonu seçin",
                     "description": "\"{query}\" için bulunanlar. Aynı enstrüman çoğu zaman birkaç borsada ve kaynakta, farklı para birimlerinde kote edilir. Her satır oradaki son fiyatla ve nereden geldiğiyle biter; fiyatın arkasındaki tarih, fiyatın bugüne ait olmadığını gösterir.",
                     "data": {
-                        "listing": "Kotasyon"
+                        "listing": "Kotasyon",
+                        "convert": "{base} cinsine çevir"
+                    },
+                    "data_description": {
+                        "convert": "Başka para birimindeki bir kotasyon için: her şey AMB referans kuruyla {base} olarak gösterilir. Elinizdekiler de o zaman {base} olarak girilir."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - girilen alışlar: {count}; pozisyon: {quantity}, ortalama {average}; gerçekleşen: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Yeniden adlandır",
+                        "venue": "🏛️ Kotasyonu değiştir",
                         "move": "📂 Başka bir gruba taşı",
                         "add_lot": "➕ Alış ekle",
                         "sell_lot": "➖ Satış ekle",
                         "remove_lots": "🗑️ Alış ve satışları kaldır",
                         "alerts": "🔔 Fiyat alarmları",
                         "color": "🎨 Renk",
+                        "currency": "💱 Para birimi",
                         "logo": "🖼️ Özel logo",
                         "tradingview": "📈 TradingView bağlantısı"
                     }
@@ -195,6 +201,24 @@
                     "description": "{symbol} adı: cihazının ve sensörlerinin adı.",
                     "data": {
                         "name": "Ad"
+                    }
+                },
+                "venue": {
+                    "title": "Kotasyonu değiştir",
+                    "description": "{name}, {symbol} olarak kayıtlı. Başka bir borsa veya kaynak seçmek için onu yeniden arayın - ISIN veya adıyla.",
+                    "data": {
+                        "query": "Arama"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Yeni kotasyonu seçin",
+                    "description": "\"{query}\" için bulunanlar. {name} bundan sonra orada kote edilir; adı, alışları, alarmları ve sensörleri kalır. Alışlar, satışlar ve fiyat alarmları çevrilmez - başka bir para biriminde rakamları o para birimi sayılır. Para birimi değişirse sensörlerinin uzun dönem istatistikleri baştan başlar.",
+                    "data": {
+                        "listing": "Kotasyon",
+                        "convert": "{base} cinsine çevir"
+                    },
+                    "data_description": {
+                        "convert": "Başka para birimindeki bir kotasyon için: her şey AMB referans kuruyla {base} olarak gösterilir."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Renk"
                     }
                 },
+                "currency": {
+                    "title": "Para birimi",
+                    "description": "{name}, {quoted} cinsinden kote edilir. Açıkken her şey {base} olarak gösterilir: fiyat günün AMB referans kuruyla, grafiğin her noktası kendi gününün kuruyla. Bu, {base} cinsinden işlem gördüğü fiyat değildir ve değişim para biriminin değişimini de içerir. Daha önce girilmiş alışlar, satışlar ve fiyat alarmları çevrilmez - rakamları o andan itibaren {base} sayılır. Para birimi değişirse sensörlerinin uzun dönem istatistikleri baştan başlar.",
+                    "data": {
+                        "convert": "{base} cinsine çevir"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Hangi portföye?",
                     "description": "{name}: bir alışla enstrüman izleme listesinden bir portföye taşınır. Sensörleri aynı kalır.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Bu bir TradingView sembolü değil. Borsayı, iki nokta üst üsteyi ve kodu yazın; örneğin NASDAQ:AAPL.",
                 "invalid_color": "Renklerden birini seçin veya #009999 gibi bir değer yazın.",
                 "group_exists": "Bu adda bir grup zaten var.",
-                "sell_too_many": "Bu, pozisyondaki miktardan fazla."
+                "sell_too_many": "Bu, pozisyondaki miktardan fazla.",
+                "no_rate": "AMB bu kotasyonun para birimi için referans kuru yayımlamıyor, bu yüzden çevrilemez."
             },
             "abort": {
                 "reconfigure_successful": "Enstrüman güncellendi."

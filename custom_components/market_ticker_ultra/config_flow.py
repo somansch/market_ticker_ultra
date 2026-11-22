@@ -21,6 +21,7 @@ from homeassistant.config_entries import (
 )
 from homeassistant.components.file_upload import process_uploaded_file
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.selector import (
     BooleanSelector,
@@ -59,7 +60,9 @@ from .const import (
     CONF_BENCHMARK,
     CONF_COLOR,
     THEME_COLORS,
+    CONF_CONVERT,
     CONF_CURRENCY,
+    CONF_QUOTE_CURRENCY,
     CONF_EXCHANGE,
     CONF_GROUP,
     CONF_ISIN,
@@ -715,6 +718,24 @@ def _lot_from_input(user_input: dict[str, Any]) -> dict[str, Any] | None:
     return lots[0] if lots else None
 
 
+def _converted(hass: HomeAssistant, data: Any, convert: bool) -> dict[str, Any]:
+    """What an instrument's data says about its currency, with the
+    conversion into the base currency switched on or off: the currency its
+    figures are in, and the one its venue quotes in. Switched on for one
+    that is quoted in the base currency already, it changes nothing."""
+    quoted = str(data.get(CONF_QUOTE_CURRENCY) or data.get(CONF_CURRENCY) or "").upper()
+    base = _base_currency(hass).upper()
+    if convert and quoted and quoted != base:
+        return {CONF_CONVERT: True, CONF_CURRENCY: base, CONF_QUOTE_CURRENCY: quoted}
+    return {CONF_CONVERT: False, CONF_CURRENCY: quoted or None, CONF_QUOTE_CURRENCY: None}
+
+
+def _base_currency(hass: HomeAssistant) -> str:
+    """The currency positions are added up in - as the coordinator has it."""
+    chosen = str(settings_options(hass).get(CONF_BASE_CURRENCY) or "").strip().upper()
+    return chosen or hass.config.currency
+
+
 def _lot_schema(required: bool, add_another: bool) -> vol.Schema:
     marker = vol.Required if required else vol.Optional
     fields: dict[Any, Any] = {
@@ -738,6 +759,7 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         self._listings: dict[str, Listing] = {}
         self._quotes: dict[str, Quote] = {}
         self._chosen: Listing | None = None
+        self._convert = False
         self._lots: list[dict[str, Any]] = []
 
 
@@ -783,6 +805,73 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
             if entry.entry_id != here
         ]
 
+    # ---------------------------------------------------------- searching
+
+    async def _find(self) -> str | None:
+        """Ask every source for what was typed in, and for the price of each
+        find. The finds are kept for the choice; without any, the error to
+        show is answered."""
+        providers = self._providers()
+
+        async def search(provider: Provider) -> list[Listing] | None:
+            try:
+                return (await provider.search(self._query))[:_PER_SOURCE]
+            except ProviderError:
+                return None
+
+        answers = await asyncio.gather(*(search(provider) for provider in providers))
+        found = [listing for answer in answers if answer for listing in answer]
+        if not found:
+            # Nothing because nobody could be asked, or because there is
+            # nothing: two different things to say.
+            return "cannot_connect" if all(a is None for a in answers) else "nothing_found"
+        found = found[:_MAX_LISTINGS]
+        self._listings = {f"{l.source}:{l.symbol}": l for l in found}
+
+        async def quote(provider: Provider) -> dict[str, Quote]:
+            symbols = [l.symbol for l in found if l.source == provider.key]
+            if not symbols:
+                return {}
+            try:
+                answered = await provider.quotes(symbols)
+            except ProviderError:
+                # The choice works without prices too.
+                return {}
+            return {f"{provider.key}:{s}": q for s, q in answered.items()}
+
+        self._quotes = {}
+        for answered in await asyncio.gather(*(quote(p) for p in providers)):
+            self._quotes.update(answered)
+        return None
+
+    def _listing_options(self) -> list[dict[str, str]]:
+        """The finds, one line each: what it is, where, its last price."""
+        labels = {provider.key: provider.label for provider in self._providers()}
+        return [
+            {
+                "value": key,
+                "label": _listing_label(listing, self._quotes.get(key))
+                + (
+                    f" · {labels[listing.source]}"
+                    if labels.get(listing.source) and labels[listing.source] != listing.exchange
+                    else ""
+                ),
+            }
+            for key, listing in self._listings.items()
+        ]
+
+    async def _no_rate(self, quoted: str | None) -> bool:
+        """Whether figures in this currency cannot be converted into the
+        base currency: the reference rates list neither it nor a way to it."""
+        base = _base_currency(self.hass)
+        if not quoted or quoted.upper() == base.upper():
+            return False
+        coordinator = getattr(self._get_entry(), "runtime_data", None)
+        if coordinator is None:
+            return False
+        await coordinator.rates.async_refresh()
+        return coordinator.rates.convert(1.0, quoted, base) is None
+
     # ------------------------------------------------------------- adding
 
     async def async_step_user(
@@ -791,40 +880,10 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         errors: dict[str, str] = {}
         if user_input is not None:
             self._query = user_input[CONF_QUERY].strip()
-            providers = self._providers()
-
-            async def search(provider: Provider) -> list[Listing] | None:
-                try:
-                    return (await provider.search(self._query))[:_PER_SOURCE]
-                except ProviderError:
-                    return None
-
-            answers = await asyncio.gather(*(search(provider) for provider in providers))
-            found = [listing for answer in answers if answer for listing in answer]
-            if not found:
-                # Nothing because nobody could be asked, or because there
-                # is nothing: two different things to say.
-                errors["base"] = (
-                    "cannot_connect" if all(a is None for a in answers) else "nothing_found"
-                )
+            error = await self._find()
+            if error:
+                errors["base"] = error
             else:
-                found = found[:_MAX_LISTINGS]
-                self._listings = {f"{l.source}:{l.symbol}": l for l in found}
-
-                async def quote(provider: Provider) -> dict[str, Quote]:
-                    symbols = [l.symbol for l in found if l.source == provider.key]
-                    if not symbols:
-                        return {}
-                    try:
-                        answered = await provider.quotes(symbols)
-                    except ProviderError:
-                        # The choice works without prices too.
-                        return {}
-                    return {f"{provider.key}:{s}": q for s, q in answered.items()}
-
-                self._quotes = {}
-                for answered in await asyncio.gather(*(quote(p) for p in providers)):
-                    self._quotes.update(answered)
                 return await self.async_step_listing()
 
         return self.async_show_form(
@@ -843,8 +902,12 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         errors: dict[str, str] = {}
         if user_input is not None:
             key = user_input[CONF_LISTING]
+            self._convert = bool(user_input.get(CONF_CONVERT))
+            found = self._quotes.get(key)
             if key in self._known(self._get_entry()):
                 errors["base"] = "already_configured"
+            elif self._convert and await self._no_rate(found.currency if found else None):
+                errors[CONF_CONVERT] = "no_rate"
             else:
                 self._chosen = self._listings[key]
                 if not is_portfolio(self._get_entry()):
@@ -852,29 +915,21 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
                     return await self._create(None)
                 return await self.async_step_holding()
 
-        labels = {provider.key: provider.label for provider in self._providers()}
-        options = [
-            {
-                "value": key,
-                "label": _listing_label(listing, self._quotes.get(key))
-                + (
-                    f" · {labels[listing.source]}"
-                    if labels.get(listing.source) and labels[listing.source] != listing.exchange
-                    else ""
-                ),
-            }
-            for key, listing in self._listings.items()
-        ]
+        options = self._listing_options()
         return self.async_show_form(
             step_id="listing",
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_LISTING, default=options[0]["value"]): SelectSelector(
                         SelectSelectorConfig(options=options, mode=SelectSelectorMode.LIST)
-                    )
+                    ),
+                    vol.Required(CONF_CONVERT, default=False): BooleanSelector(),
                 }
             ),
-            description_placeholders={"query": self._query},
+            description_placeholders={
+                "query": self._query,
+                "base": _base_currency(self.hass),
+            },
             errors=errors,
             last_step=False,
         )
@@ -888,6 +943,9 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         assert listing is not None
         quote = self._quotes.get(f"{listing.source}:{listing.symbol}")
         currency = (quote.currency if quote else None) or ""
+        if self._convert and currency:
+            # What is held is entered in the currency it is shown in.
+            currency = _base_currency(self.hass)
         if user_input is not None:
             return await self._create(_lot_from_input(user_input))
         return self.async_show_form(
@@ -912,6 +970,7 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
             CONF_CURRENCY: currency or None,
             CONF_LOTS: [lot] if lot else [],
         }
+        data.update(_converted(self.hass, data, self._convert))
         if is_isin(self._query):
             data[CONF_ISIN] = self._query.upper()
         elif listing.source == "boerse_frankfurt":
@@ -938,7 +997,7 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
     ) -> SubentryFlowResult:
         subentry = self._get_reconfigure_subentry()
         self._lots = clean_lots(subentry.data.get(CONF_LOTS))
-        options = ["rename"]
+        options = ["rename", "venue"]
         if self._other_groups():
             options.append("move")
         # A purchase on a watchlist takes the instrument into a portfolio
@@ -952,6 +1011,7 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
             options.append("remove_lots")
         options.append("alerts")
         options.append("color")
+        options.append("currency")
         options.append("logo")
         options.append("tradingview")
         return self.async_show_menu(
@@ -1073,6 +1133,182 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
                 },
             ),
             description_placeholders=self._summary(),
+        )
+
+    def _save_listing(
+        self, changed: dict[str, Any], unique_id: str | None = None
+    ) -> SubentryFlowResult:
+        """Store where an instrument is quoted and in which currency it is
+        shown, and have it asked for again at once - the quote kept is the
+        old listing's.
+
+        Where the currency its figures are in changes, the long-term
+        statistics of its sensors in money are cleared: Home Assistant
+        stops writing a series whose unit has changed, and a series with
+        dollars and euros in it says nothing."""
+        entry = self._get_entry()
+        subentry = self._get_reconfigure_subentry()
+        before = subentry.data.get(CONF_CURRENCY)
+        stale: list[str] = []
+        if before and changed.get(CONF_CURRENCY) != before:
+            stale = [
+                item.entity_id
+                for item in er.async_entries_for_config_entry(
+                    er.async_get(self.hass), entry.entry_id
+                )
+                if item.domain == "sensor"
+                and item.config_subentry_id == subentry.subentry_id
+                and item.unit_of_measurement == before
+            ]
+        coordinator = getattr(entry, "runtime_data", None)
+        hass = self.hass
+        if unique_id is None:
+            result = self.async_update_and_abort(entry, subentry, data=changed)
+        else:
+            result = self.async_update_and_abort(
+                entry, subentry, data=changed, unique_id=unique_id
+            )
+
+        async def afterwards() -> None:
+            if coordinator is not None:
+                await coordinator.async_refresh()
+            if stale and "recorder" in hass.config.components:
+                from homeassistant.components.recorder import get_instance
+
+                get_instance(hass).async_clear_statistics(stale)
+
+        hass.async_create_task(afterwards())
+        return result
+
+    async def async_step_venue(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """Another listing of an instrument that is there: the search for
+        it - by its ISIN where that is known, else by its name."""
+        subentry = self._get_reconfigure_subentry()
+        errors: dict[str, str] = {}
+        if user_input is not None:
+            self._query = user_input[CONF_QUERY].strip()
+            error = await self._find()
+            if error:
+                errors["base"] = error
+            else:
+                return await self.async_step_venue_listing()
+        return self.async_show_form(
+            step_id="venue",
+            data_schema=self.add_suggested_values_to_schema(
+                vol.Schema({vol.Required(CONF_QUERY): TextSelector()}),
+                {
+                    CONF_QUERY: self._query
+                    or subentry.data.get(CONF_ISIN)
+                    or subentry.data.get(CONF_NAME)
+                    or subentry.title
+                },
+            ),
+            errors=errors,
+            description_placeholders=self._summary(),
+            last_step=False,
+        )
+
+    async def async_step_venue_listing(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """The listing it is quoted at from now on. Its name, its purchases,
+        its alerts, its colour and its sensors stay."""
+        subentry = self._get_reconfigure_subentry()
+        data = subentry.data
+        own = f"{data.get(CONF_SOURCE) or SOURCE_YAHOO}:{data.get(CONF_SYMBOL)}"
+        errors: dict[str, str] = {}
+        if user_input is not None:
+            key = user_input[CONF_LISTING]
+            convert = bool(user_input.get(CONF_CONVERT))
+            found = self._quotes.get(key)
+            if key != own and key in self._known(self._get_entry()):
+                errors["base"] = "already_configured"
+            elif convert and await self._no_rate(found.currency if found else None):
+                errors[CONF_CONVERT] = "no_rate"
+            else:
+                listing = self._listings[key]
+                quote = self._quotes.get(key)
+                changed: dict[str, Any] = {
+                    name: value
+                    for name, value in data.items()
+                    if name not in (CONF_TRADINGVIEW_FOUND, CONF_QUOTE_CURRENCY)
+                }
+                changed.update(
+                    {
+                        CONF_SOURCE: listing.source,
+                        CONF_SYMBOL: listing.symbol,
+                        CONF_EXCHANGE: (quote.exchange if quote else None) or listing.exchange,
+                        CONF_TYPE: (quote.type if quote else None) or listing.type,
+                        CONF_CURRENCY: (quote.currency if quote else None) or None,
+                    }
+                )
+                if is_isin(self._query):
+                    changed[CONF_ISIN] = self._query.upper()
+                elif listing.source == "boerse_frankfurt":
+                    changed[CONF_ISIN] = listing.symbol.partition(":")[2]
+                changed.update(_converted(self.hass, changed, convert))
+                changed = {name: value for name, value in changed.items() if value is not None}
+                pair = frankfurt_isin(changed)
+                if pair:
+                    looked_up = await lookup_frankfurt(async_get_clientsession(self.hass), [pair])
+                    if pair in looked_up:
+                        changed[CONF_TRADINGVIEW_FOUND] = looked_up[pair]
+                return self._save_listing(changed, unique_id=key)
+
+        options = self._listing_options()
+        chosen = own if own in self._listings else options[0]["value"]
+        return self.async_show_form(
+            step_id="venue_listing",
+            data_schema=self.add_suggested_values_to_schema(
+                vol.Schema(
+                    {
+                        vol.Required(CONF_LISTING, default=chosen): SelectSelector(
+                            SelectSelectorConfig(options=options, mode=SelectSelectorMode.LIST)
+                        ),
+                        vol.Required(CONF_CONVERT, default=False): BooleanSelector(),
+                    }
+                ),
+                {CONF_CONVERT: bool(data.get(CONF_CONVERT))},
+            ),
+            description_placeholders={
+                **self._summary(),
+                "query": self._query,
+                "base": _base_currency(self.hass),
+            },
+            errors=errors,
+        )
+
+    async def async_step_currency(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """Shown in the base currency, or in the one its venue quotes in."""
+        subentry = self._get_reconfigure_subentry()
+        data = subentry.data
+        quoted = str(data.get(CONF_QUOTE_CURRENCY) or data.get(CONF_CURRENCY) or "")
+        errors: dict[str, str] = {}
+        wanted = bool(data.get(CONF_CONVERT))
+        if user_input is not None:
+            wanted = bool(user_input.get(CONF_CONVERT))
+            if wanted and await self._no_rate(quoted):
+                errors[CONF_CONVERT] = "no_rate"
+            else:
+                changed = {**data, **_converted(self.hass, data, wanted)}
+                changed = {key: value for key, value in changed.items() if value is not None}
+                return self._save_listing(changed)
+        return self.async_show_form(
+            step_id="currency",
+            data_schema=self.add_suggested_values_to_schema(
+                vol.Schema({vol.Required(CONF_CONVERT, default=False): BooleanSelector()}),
+                {CONF_CONVERT: wanted},
+            ),
+            errors=errors,
+            description_placeholders={
+                **self._summary(),
+                "base": _base_currency(self.hass),
+                "quoted": quoted or "-",
+            },
         )
 
     async def async_step_color(

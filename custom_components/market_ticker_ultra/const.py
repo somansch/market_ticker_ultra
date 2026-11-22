@@ -101,6 +101,12 @@ CONF_CURRENCY = "currency"
 # shares: one of Home Assistant's own colours by its name - "red",
 # "deep-purple" - or "#rrggbb"; without one the card takes the next of its own.
 CONF_COLOR = "color"
+# An instrument shown in the base currency although its venue quotes it in
+# another: every figure is converted at the reference rate - the day's own
+# for a bar of a chart. CONF_CURRENCY is the base currency then, and
+# CONF_QUOTE_CURRENCY the one the venue quotes in.
+CONF_CONVERT = "convert"
+CONF_QUOTE_CURRENCY = "quote_currency"
 # Home Assistant's own colours, as its colour picker names them.
 THEME_COLORS = frozenset(
     {

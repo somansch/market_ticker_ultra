@@ -154,7 +154,11 @@
                     "title": "Kies de notering",
                     "description": "Gevonden voor \"{query}\". Hetzelfde instrument is vaak op meerdere beurzen en bronnen genoteerd, in verschillende valuta's. Elke regel eindigt met de laatste koers daar en waar die vandaan komt; een datum achter een koers betekent dat die niet van vandaag is.",
                     "data": {
-                        "listing": "Notering"
+                        "listing": "Notering",
+                        "convert": "Omrekenen naar {base}"
+                    },
+                    "data_description": {
+                        "convert": "Voor een notering in een andere valuta: alles wordt in {base} getoond, tegen de referentiekoers van de ECB. Wat je bezit, voer je dan ook in {base} in."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - ingevoerde aankopen: {count}; in bezit: {quantity} tegen gemiddeld {average}; gerealiseerd: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Hernoemen",
+                        "venue": "🏛️ Notering wijzigen",
                         "move": "📂 Naar een andere groep verplaatsen",
                         "add_lot": "➕ Aankoop toevoegen",
                         "sell_lot": "➖ Verkoop toevoegen",
                         "remove_lots": "🗑️ Aankopen en verkopen verwijderen",
                         "alerts": "🔔 Koersalarmen",
                         "color": "🎨 Kleur",
+                        "currency": "💱 Valuta",
                         "logo": "🖼️ Eigen logo",
                         "tradingview": "📈 TradingView-link"
                     }
@@ -195,6 +201,24 @@
                     "description": "De naam van {symbol}: hoe het apparaat en de sensoren heten.",
                     "data": {
                         "name": "Naam"
+                    }
+                },
+                "venue": {
+                    "title": "Notering wijzigen",
+                    "description": "{name} staat genoteerd als {symbol}. Zoek het opnieuw - op ISIN of naam - om een andere beurs of bron te kiezen.",
+                    "data": {
+                        "query": "Zoeken"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Kies de nieuwe notering",
+                    "description": "Gevonden voor \"{query}\". {name} wordt vanaf nu daar genoteerd; naam, aankopen, alarmen en sensoren blijven. Aankopen, verkopen en koersalarmen worden niet omgerekend - in een andere valuta gelden hun bedragen als die valuta. Verandert de valuta, dan begint de langetermijnstatistiek van de sensoren opnieuw.",
+                    "data": {
+                        "listing": "Notering",
+                        "convert": "Omrekenen naar {base}"
+                    },
+                    "data_description": {
+                        "convert": "Voor een notering in een andere valuta: alles wordt in {base} getoond, tegen de referentiekoers van de ECB."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Kleur"
                     }
                 },
+                "currency": {
+                    "title": "Valuta",
+                    "description": "{name} is genoteerd in {quoted}. Ingeschakeld wordt alles in {base} getoond: de koers tegen de referentiekoers van de ECB van die dag, elk punt van de grafiek tegen de koers van zijn eigen dag. Dat is niet de koers waartegen het in {base} wordt verhandeld, en de verandering bevat die van de valuta. Al ingevoerde aankopen, verkopen en koersalarmen worden niet omgerekend - hun bedragen gelden vanaf dan als {base}. Verandert de valuta, dan begint de langetermijnstatistiek van de sensoren opnieuw.",
+                    "data": {
+                        "convert": "Omrekenen naar {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Naar welke portefeuille?",
                     "description": "{name}: met een aankoop gaat het instrument van de watchlist naar een portefeuille. De sensoren blijven hetzelfde.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Geen TradingView-symbool. Schrijf de beurs, een dubbele punt en de ticker, zoals NASDAQ:AAPL.",
                 "invalid_color": "Kies een van de kleuren, of typ een waarde zoals #009999.",
                 "group_exists": "Er bestaat al een groep met deze naam.",
-                "sell_too_many": "Dat is meer dan er in bezit is."
+                "sell_too_many": "Dat is meer dan er in bezit is.",
+                "no_rate": "De ECB publiceert geen referentiekoers voor de valuta van deze notering, dus kan die niet worden omgerekend."
             },
             "abort": {
                 "reconfigure_successful": "Het instrument is bijgewerkt."

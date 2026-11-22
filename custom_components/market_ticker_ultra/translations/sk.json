@@ -154,7 +154,11 @@
                     "title": "Vyberte kótovanie",
                     "description": "Nájdené pre „{query}“. Ten istý inštrument je často kótovaný na viacerých burzách a vo viacerých zdrojoch, v rôznych menách. Každý riadok končí posledným kurzom a jeho zdrojom; dátum za kurzom znamená, že nie je z dneška.",
                     "data": {
-                        "listing": "Kótovanie"
+                        "listing": "Kótovanie",
+                        "convert": "Prepočítať na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pre kótovanie v inej mene: všetko sa zobrazuje v {base}, podľa referenčného kurzu ECB. To, čo držíte, sa potom tiež zadáva v {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} – zadané nákupy: {count}; v držbe: {quantity} za priemernú cenu {average}; realizované: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Premenovať",
+                        "venue": "🏛️ Zmeniť kótovanie",
                         "move": "📂 Presunúť do inej skupiny",
                         "add_lot": "➕ Pridať nákup",
                         "sell_lot": "➖ Pridať predaj",
                         "remove_lots": "🗑️ Odstrániť nákupy a predaje",
                         "alerts": "🔔 Cenové upozornenia",
                         "color": "🎨 Farba",
+                        "currency": "💱 Mena",
                         "logo": "🖼️ Vlastné logo",
                         "tradingview": "📈 Odkaz na TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "Názov {symbol}: ako sa volajú jeho zariadenie a senzory.",
                     "data": {
                         "name": "Názov"
+                    }
+                },
+                "venue": {
+                    "title": "Zmeniť kótovanie",
+                    "description": "{name} je vedený ako {symbol}. Vyhľadajte ho znova - podľa ISIN alebo názvu - a vyberte inú burzu alebo zdroj.",
+                    "data": {
+                        "query": "Hľadať"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Vyberte nové kótovanie",
+                    "description": "Nájdené pre „{query}“. {name} je odteraz vedený tam; názov, nákupy, upozornenia a senzory zostávajú. Nákupy, predaje a cenové upozornenia sa neprepočítavajú - v inej mene platia ich čísla v nej. Ak sa mena zmení, dlhodobé štatistiky jeho senzorov začnú odznova.",
+                    "data": {
+                        "listing": "Kótovanie",
+                        "convert": "Prepočítať na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pre kótovanie v inej mene: všetko sa zobrazuje v {base}, podľa referenčného kurzu ECB."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Farba"
                     }
                 },
+                "currency": {
+                    "title": "Mena",
+                    "description": "{name} je kótovaný v {quoted}. Po zapnutí sa všetko zobrazuje v {base}: cena podľa referenčného kurzu ECB daného dňa, každý bod grafu podľa kurzu svojho dňa. Nie je to cena, za ktorú sa obchoduje v {base}, a zmena zahŕňa aj zmenu meny. Už zadané nákupy, predaje a cenové upozornenia sa neprepočítavajú - ich čísla odvtedy platia ako {base}. Ak sa mena zmení, dlhodobé štatistiky jeho senzorov začnú odznova.",
+                    "data": {
+                        "convert": "Prepočítať na {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Do ktorého portfólia?",
                     "description": "{name}: s nákupom sa inštrument presunie zo zoznamu sledovaných do portfólia. Jeho senzory zostanú rovnaké.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Toto nie je symbol TradingView. Zadajte burzu, dvojbodku a ticker, napríklad NASDAQ:AAPL.",
                 "invalid_color": "Vyberte jednu z farieb alebo zadajte hodnotu ako #009999.",
                 "group_exists": "Skupina s týmto názvom už existuje.",
-                "sell_too_many": "To je viac, ako držíte."
+                "sell_too_many": "To je viac, ako držíte.",
+                "no_rate": "Pre menu tohto kótovania ECB nezverejňuje referenčný kurz, preto ju nemožno prepočítať."
             },
             "abort": {
                 "reconfigure_successful": "Inštrument bol aktualizovaný."

@@ -154,7 +154,11 @@
                     "title": "Valitse listaus",
                     "description": "Löytyi haulla \"{query}\". Sama arvopaperi on usein listattu useassa pörssissä ja lähteessä eri valuutoissa. Jokaisen rivin lopussa on viimeisin kurssi siellä ja sen lähde; kurssin perässä oleva päivämäärä tarkoittaa, ettei se ole tältä päivältä.",
                     "data": {
-                        "listing": "Listaus"
+                        "listing": "Listaus",
+                        "convert": "Muunna valuuttaan {base}"
+                    },
+                    "data_description": {
+                        "convert": "Toisessa valuutassa olevalle listaukselle: kaikki näytetään valuutassa {base}, EKP:n viitekurssilla. Omistus syötetään silloin myös valuutassa {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - kirjattuja ostoja: {count}; omistus: {quantity}, keskihinta {average}; toteutunut: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Nimeä uudelleen",
+                        "venue": "🏛️ Vaihda listaus",
                         "move": "📂 Siirrä toiseen ryhmään",
                         "add_lot": "➕ Lisää osto",
                         "sell_lot": "➖ Lisää myynti",
                         "remove_lots": "🗑️ Poista ostoja ja myyntejä",
                         "alerts": "🔔 Hintahälytykset",
                         "color": "🎨 Väri",
+                        "currency": "💱 Valuutta",
                         "logo": "🖼️ Oma logo",
                         "tradingview": "📈 TradingView-linkki"
                     }
@@ -195,6 +201,24 @@
                     "description": "Symbolin {symbol} nimi: millä nimellä sen laite ja anturit näkyvät.",
                     "data": {
                         "name": "Nimi"
+                    }
+                },
+                "venue": {
+                    "title": "Vaihda listaus",
+                    "description": "{name} on listattu symbolilla {symbol}. Hae se uudelleen - ISIN-koodilla tai nimellä - ja valitse toinen pörssi tai lähde.",
+                    "data": {
+                        "query": "Haku"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Valitse uusi listaus",
+                    "description": "Löytyi haulla \"{query}\". {name} noteerataan tästä lähtien siellä; nimi, ostot, hälytykset ja anturit säilyvät. Ostoja, myyntejä ja hintahälytyksiä ei muunneta - toisessa valuutassa niiden luvut ovat sitä valuuttaa. Jos valuutta vaihtuu, anturien pitkän aikavälin tilastot alkavat alusta.",
+                    "data": {
+                        "listing": "Listaus",
+                        "convert": "Muunna valuuttaan {base}"
+                    },
+                    "data_description": {
+                        "convert": "Toisessa valuutassa olevalle listaukselle: kaikki näytetään valuutassa {base}, EKP:n viitekurssilla."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Väri"
                     }
                 },
+                "currency": {
+                    "title": "Valuutta",
+                    "description": "{name} noteerataan valuutassa {quoted}. Kun tämä on päällä, kaikki näytetään valuutassa {base}: kurssi EKP:n päivän viitekurssilla, kaavion jokainen piste oman päivänsä kurssilla. Se ei ole kurssi, jolla sillä käydään kauppaa valuutassa {base}, ja muutos sisältää valuutan muutoksen. Jo syötettyjä ostoja, myyntejä ja hintahälytyksiä ei muunneta - niiden luvut ovat siitä lähtien valuuttaa {base}. Jos valuutta vaihtuu, anturien pitkän aikavälin tilastot alkavat alusta.",
+                    "data": {
+                        "convert": "Muunna valuuttaan {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Mihin salkkuun?",
                     "description": "{name}: oston myötä arvopaperi siirtyy seurantalistalta salkkuun. Sen anturit pysyvät samoina.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Ei kelpaa TradingView-symboliksi. Kirjoita pörssi, kaksoispiste ja tunnus, kuten NASDAQ:AAPL.",
                 "invalid_color": "Valitse jokin väreistä tai kirjoita arvo, kuten #009999.",
                 "group_exists": "Tämänniminen ryhmä on jo olemassa.",
-                "sell_too_many": "Se on enemmän kuin omistat."
+                "sell_too_many": "Se on enemmän kuin omistat.",
+                "no_rate": "EKP ei julkaise viitekurssia tämän listauksen valuutalle, joten sitä ei voi muuntaa."
             },
             "abort": {
                 "reconfigure_successful": "Arvopaperi päivitettiin."

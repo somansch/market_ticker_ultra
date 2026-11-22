@@ -154,7 +154,11 @@
                     "title": "Wybierz notowanie",
                     "description": "Znaleziono dla \"{query}\". Ten sam instrument jest często notowany na kilku giełdach i w kilku źródłach, w różnych walutach. Każdy wiersz kończy się ostatnią ceną i jej źródłem; data przy cenie oznacza, że nie jest z dzisiaj.",
                     "data": {
-                        "listing": "Notowanie"
+                        "listing": "Notowanie",
+                        "convert": "Przelicz na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Dla notowania w innej walucie: wszystko jest pokazywane w {base}, po kursie referencyjnym EBC. To, co posiadasz, wpisujesz wtedy także w {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - wprowadzone zakupy: {count}; posiadane: {quantity} po średniej cenie {average}; zrealizowano: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Zmień nazwę",
+                        "venue": "🏛️ Zmień notowanie",
                         "move": "📂 Przenieś do innej grupy",
                         "add_lot": "➕ Dodaj zakup",
                         "sell_lot": "➖ Dodaj sprzedaż",
                         "remove_lots": "🗑️ Usuń zakupy i sprzedaże",
                         "alerts": "🔔 Alerty cenowe",
                         "color": "🎨 Kolor",
+                        "currency": "💱 Waluta",
                         "logo": "🖼️ Własne logo",
                         "tradingview": "📈 Link do TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "Nazwa {symbol}: tak nazywają się jego urządzenie i sensory.",
                     "data": {
                         "name": "Nazwa"
+                    }
+                },
+                "venue": {
+                    "title": "Zmień notowanie",
+                    "description": "{name} jest notowany jako {symbol}. Wyszukaj go ponownie - po ISIN lub nazwie - aby wybrać inną giełdę lub źródło.",
+                    "data": {
+                        "query": "Szukaj"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Wybierz nowe notowanie",
+                    "description": "Znaleziono dla \"{query}\". {name} jest odtąd notowany tam; nazwa, zakupy, alerty i sensory zostają. Zakupy, sprzedaże i alerty cenowe nie są przeliczane - w innej walucie ich kwoty liczą się w niej. Jeśli waluta się zmienia, statystyki długoterminowe sensorów zaczynają się od nowa.",
+                    "data": {
+                        "listing": "Notowanie",
+                        "convert": "Przelicz na {base}"
+                    },
+                    "data_description": {
+                        "convert": "Dla notowania w innej walucie: wszystko jest pokazywane w {base}, po kursie referencyjnym EBC."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Kolor"
                     }
                 },
+                "currency": {
+                    "title": "Waluta",
+                    "description": "{name} jest notowany w {quoted}. Po włączeniu wszystko jest pokazywane w {base}: cena po kursie referencyjnym EBC z danego dnia, każdy punkt wykresu po kursie swojego dnia. To nie jest cena, po której jest notowany w {base}, a zmiana zawiera zmianę waluty. Wpisane już zakupy, sprzedaże i alerty cenowe nie są przeliczane - ich kwoty liczą się odtąd jako {base}. Jeśli waluta się zmienia, statystyki długoterminowe sensorów zaczynają się od nowa.",
+                    "data": {
+                        "convert": "Przelicz na {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Do którego portfela?",
                     "description": "{name}: wraz z zakupem instrument przechodzi z listy obserwowanych do portfela. Jego sensory pozostają te same.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "To nie jest symbol TradingView. Wpisz giełdę, dwukropek i ticker, np. NASDAQ:AAPL.",
                 "invalid_color": "Wybierz jeden z kolorów lub wpisz wartość, np. #009999.",
                 "group_exists": "Grupa o tej nazwie już istnieje.",
-                "sell_too_many": "To więcej, niż posiadasz."
+                "sell_too_many": "To więcej, niż posiadasz.",
+                "no_rate": "EBC nie publikuje kursu referencyjnego dla waluty tego notowania, więc nie można jej przeliczyć."
             },
             "abort": {
                 "reconfigure_successful": "Instrument został zaktualizowany."

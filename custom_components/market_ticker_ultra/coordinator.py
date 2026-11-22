@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+from bisect import bisect_right
 from dataclasses import dataclass, field, replace
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 import logging
 import time
 from typing import Any
@@ -12,6 +13,7 @@ from typing import Any
 from homeassistant.components import persistent_notification
 from homeassistant.config_entries import ConfigEntry, ConfigSubentry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -32,8 +34,10 @@ from .const import (
     CONF_ALERT_TTS,
     EVENT_ALERT,
     CONF_BASE_CURRENCY,
+    CONF_CONVERT,
     CONF_CURRENCY,
     CONF_ISIN,
+    CONF_QUOTE_CURRENCY,
     CONF_SCAN_INTERVAL,
     CONF_SOURCE,
     CONF_SOURCES,
@@ -90,6 +94,8 @@ class Instrument:
     symbol: str
     type: str | None
     isin: str | None
+    # Shown in the base currency, whatever its venue quotes it in.
+    convert: bool = False
 
 
 @dataclass
@@ -158,13 +164,16 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         # What the card asked for before, each with the time it was fetched
         # - several cards and several open pages share one request - and one
         # lock so that two of them asking at the same moment make it one.
-        self._histories: dict[tuple[str, str, str], tuple[float, History]] = {}
-        self._details: dict[tuple[str, str], tuple[float, dict[str, Any]]] = {}
+        self._histories: dict[tuple[str, str, str, str], tuple[float, History]] = {}
+        self._details: dict[tuple[str, str, bool], tuple[float, dict[str, Any]]] = {}
         self._fetch_lock = asyncio.Lock()
         # Which price alerts are on, by instrument and side - None until
         # the first poll has said where every price stands: an alert that is
         # on at start is not news.
         self._alerts: dict[tuple[str, str], bool] | None = None
+        # The base currency as it was when the settings were last looked at
+        # - see settings_changed.
+        self._base = self.base_currency
 
     @property
     def options(self) -> dict[str, Any]:
@@ -180,7 +189,58 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         self._set_interval(any_open=True)
         # Where the news come from may be what has changed.
         self.news.clear()
+        before, self._base = self._base, self.base_currency
+        if before and before.upper() != self._base.upper():
+            self.hass.async_create_task(self._async_base_changed(before))
+            return
         self.hass.async_create_task(self.async_request_refresh())
+
+    async def _async_base_changed(self, before: str) -> None:
+        """Another base currency: every figure that was in the old one is in
+        the new one from now on - the sums, the spot metals, the instruments
+        shown in the base currency. Those instruments follow, and the
+        long-term statistics of all these sensors are cleared: Home
+        Assistant stops writing a series whose unit has changed, and one
+        with two currencies in it says nothing."""
+        hass = self.hass
+        base = self.base_currency.upper()
+        follows: set[str] = set()
+        for subentry_id, (entry, subentry) in self.members().items():
+            data = subentry.data
+            if (data.get(CONF_SOURCE) or SOURCE_YAHOO) == "goldapi":
+                follows.add(subentry_id)
+            if not data.get(CONF_CONVERT):
+                continue
+            follows.add(subentry_id)
+            quoted = str(data.get(CONF_QUOTE_CURRENCY) or "").upper()
+            changed = dict(data)
+            if quoted and quoted != base:
+                changed[CONF_CURRENCY] = base
+            else:
+                # Quoted in the new base currency: nothing to convert.
+                changed.pop(CONF_CONVERT, None)
+                changed.pop(CONF_QUOTE_CURRENCY, None)
+                if quoted:
+                    changed[CONF_CURRENCY] = quoted
+            hass.config_entries.async_update_subentry(entry, subentry, data=changed)
+        ours = {entry.entry_id for entry in hass.config_entries.async_entries(DOMAIN)}
+        stale = [
+            item.entity_id
+            for item in er.async_get(hass).entities.values()
+            if item.platform == DOMAIN
+            and item.domain == "sensor"
+            and item.config_entry_id in ours
+            and (item.unit_of_measurement or "").upper() == before.upper()
+            and (item.config_subentry_id is None or item.config_subentry_id in follows)
+        ]
+        self._histories.clear()
+        self._details.clear()
+        self.performances.clear()
+        await self.async_refresh()
+        if stale and "recorder" in hass.config.components:
+            from homeassistant.components.recorder import get_instance
+
+            get_instance(hass).async_clear_statistics(stale)
 
     async def async_ensure_quotes(self) -> None:
         """Ask the sources unless every instrument has a quote already: the
@@ -227,6 +287,7 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
                     symbol=data[CONF_SYMBOL],
                     type=data.get(CONF_TYPE),
                     isin=data.get(CONF_ISIN),
+                    convert=bool(data.get(CONF_CONVERT)),
                 )
             )
         return found
@@ -373,7 +434,11 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         instruments = self.instruments
         if not instruments:
             return MarketData(fetched_at=dt_util.utcnow())
-        if self.holdings() or self.ledgers() or any(i.source == "goldapi" for i in instruments):
+        if (
+            self.holdings()
+            or self.ledgers()
+            or any(i.source == "goldapi" or i.convert for i in instruments)
+        ):
             # For sums and spot metals in the base currency; kept for
             # hours, and never in the way of the quotes.
             await self.rates.async_refresh()
@@ -438,6 +503,10 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
                 price = self.rates.convert(quote.price, quote.currency, base)
                 if price is not None:
                     quotes[key] = replace(quote, price=round(price, 2), currency=base)
+        for instrument in instruments:
+            quote = quotes.get(instrument.id)
+            if instrument.convert and quote is not None:
+                quotes[instrument.id] = self._in_base(quote)
 
         if limited:
             # Twice as long each time, so that a source that wants a break
@@ -471,6 +540,95 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         self._check_alerts(quotes)
         return MarketData(
             quotes=quotes, sources=sources, fetched_at=dt_util.utcnow(), error=failure
+        )
+
+    # ------------------------------------------------ in the base currency
+
+    def _in_base(self, quote: Quote) -> Quote:
+        """A quote with every price in the base currency, at the reference
+        rate of the day - left as it is where it is in that currency
+        already, or where there is no rate for its own."""
+        base = self.base_currency
+        if not quote.currency or quote.currency.upper() == base.upper():
+            return quote
+        rate = self.rates.convert(1.0, quote.currency, base)
+        if rate is None:
+            return quote
+
+        # Two decimals more than the venue quotes in: rounded to its own,
+        # the change in percent would no longer be the one it had there.
+        digits = max(quote.precision, 2) + 2
+
+        def at(value: float | None) -> float | None:
+            return None if value is None else round(value * rate, digits)
+
+        return replace(
+            quote,
+            price=round(quote.price * rate, digits),
+            currency=base,
+            previous_close=at(quote.previous_close),
+            day_low=at(quote.day_low),
+            day_high=at(quote.day_high),
+            year_low=at(quote.year_low),
+            year_high=at(quote.year_high),
+        )
+
+    async def _history_in_base(self, history: History, range_: str) -> History:
+        """A price series in the base currency: each bar at the reference
+        rate of its day - the last fixing on or before it - and the days
+        since the newest fixing at the rate the quotes are converted with,
+        so that the line ends where the price stands."""
+        base = self.base_currency
+        code = (history.currency or "").upper()
+        if not code or code == base.upper():
+            return history
+        now = self.rates.convert(1.0, code, base)
+        days: list[str] = []
+        fixings: list[float] = []
+        try:
+            past = await self.providers["ecb"].history(f"{code}/{base}", range_)
+        except (ProviderError, KeyError):
+            past = None
+        if past is not None:
+            for stamp, rate in zip(past.timestamps, past.close, strict=True):
+                if rate:
+                    days.append(datetime.fromtimestamp(stamp, UTC).date().isoformat())
+                    fixings.append(rate)
+        if not fixings and now is None:
+            return history
+        newest = self.rates.date or ""
+
+        def rate_on(stamp: int) -> float:
+            day = datetime.fromtimestamp(stamp, UTC).date().isoformat()
+            if now is not None and newest and day >= newest:
+                return now
+            at = bisect_right(days, day)
+            if at:
+                return fixings[at - 1]
+            # Before the first fixing there is: that one.
+            return fixings[0] if fixings else now  # type: ignore[return-value]
+
+        rates = [rate_on(stamp) for stamp in history.timestamps]
+
+        def column(values: list[float | None]) -> list[float | None]:
+            return [
+                None if value is None else value * rate
+                for value, rate in zip(values, rates, strict=True)
+            ]
+
+        previous = history.previous_close
+        if previous is not None and rates:
+            # The close before the period, at the rate of the bar before
+            # the first one shown - or of that one, without a lead-in.
+            previous *= rates[max(0, history.warmup - 1)]
+        return replace(
+            history,
+            currency=base,
+            previous_close=previous,
+            open=column(history.open),
+            high=column(history.high),
+            low=column(history.low),
+            close=column(history.close),
         )
 
     # ---------------------------------------------------------- the alerts
@@ -692,7 +850,10 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         A series that could not be refreshed is answered with the one from
         before, if there is one: an old chart says more than none.
         """
-        key = (instrument.source, instrument.symbol, range_)
+        # A converted series is kept beside the plain one: the same listing
+        # can be in two groups, converted in one of them only.
+        into = self.base_currency.upper() if instrument.convert else ""
+        key = (instrument.source, instrument.symbol, range_, into)
         async with self._fetch_lock:
             cached = self._histories.get(key)
             now = time.monotonic()
@@ -704,6 +865,8 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
                 if cached:
                     return cached[1]
                 raise
+            if into:
+                history = await self._history_in_base(history, range_)
             self._histories[key] = (now, history)
             return history
 
@@ -723,7 +886,7 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
 
     async def async_details(self, instrument: Instrument) -> dict[str, Any]:
         """Company figures plus the usual day's volume of one instrument."""
-        key = (instrument.source, instrument.symbol)
+        key = (instrument.source, instrument.symbol, instrument.convert)
         cached = self._details.get(key)
         now = time.monotonic()
         if cached and now - cached[0] < _DETAILS_TTL:
@@ -763,10 +926,19 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
                     share = listing[0]
             if share:
                 due = await yahoo.earnings(share)
+        market_cap, eps = details.market_cap, details.eps
+        if instrument.convert:
+            # Where the quote is converted, so are the figures in money.
+            member = self.member(instrument.id)
+            quoted = (member.data.get(CONF_QUOTE_CURRENCY) if member else None) or ""
+            rate = self.rates.convert(1.0, quoted, self.base_currency)
+            if rate is not None:
+                market_cap = None if market_cap is None else market_cap * rate
+                eps = None if eps is None else eps * rate
         result = {
-            "market_cap": details.market_cap,
+            "market_cap": market_cap,
             "pe": details.pe,
-            "eps": details.eps,
+            "eps": eps,
             "average_volume": average,
             "as_of": details.as_of,
             "earnings_date": due.get("earnings_date"),

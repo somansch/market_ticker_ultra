@@ -154,7 +154,11 @@
                     "title": "Elegir la cotización",
                     "description": "Encontrado para \"{query}\". El mismo activo suele cotizar en varias bolsas y fuentes, en distintas monedas. Cada línea termina con el último precio allí y su procedencia; una fecha tras un precio significa que no es de hoy.",
                     "data": {
-                        "listing": "Cotización"
+                        "listing": "Cotización",
+                        "convert": "Convertir a {base}"
+                    },
+                    "data_description": {
+                        "convert": "Para una cotización en otra moneda: todo se muestra en {base}, al tipo de referencia del BCE. Lo que tienes se introduce entonces también en {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - compras introducidas: {count}; tienes: {quantity} a un precio medio de {average}; realizado: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Renombrar",
+                        "venue": "🏛️ Cambiar la cotización",
                         "move": "📂 Mover a otro grupo",
                         "add_lot": "➕ Añadir una compra",
                         "sell_lot": "➖ Añadir una venta",
                         "remove_lots": "🗑️ Eliminar compras y ventas",
                         "alerts": "🔔 Alertas de precio",
                         "color": "🎨 Color",
+                        "currency": "💱 Moneda",
                         "logo": "🖼️ Logotipo propio",
                         "tradingview": "📈 Enlace a TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "El nombre de {symbol}: cómo se llaman su dispositivo y sus sensores.",
                     "data": {
                         "name": "Nombre"
+                    }
+                },
+                "venue": {
+                    "title": "Cambiar la cotización",
+                    "description": "{name} figura como {symbol}. Búscalo de nuevo - por su ISIN o su nombre - para elegir otra bolsa o fuente.",
+                    "data": {
+                        "query": "Buscar"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Elegir la nueva cotización",
+                    "description": "Encontrado para \"{query}\". {name} cotiza allí desde ahora; su nombre, sus compras, sus alertas y sus sensores se mantienen. Las compras, las ventas y las alertas de precio no se convierten: en otra moneda sus cifras cuentan como esa. Si cambia la moneda, las estadísticas a largo plazo de sus sensores empiezan de nuevo.",
+                    "data": {
+                        "listing": "Cotización",
+                        "convert": "Convertir a {base}"
+                    },
+                    "data_description": {
+                        "convert": "Para una cotización en otra moneda: todo se muestra en {base}, al tipo de referencia del BCE."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Color"
                     }
                 },
+                "currency": {
+                    "title": "Moneda",
+                    "description": "{name} cotiza en {quoted}. Activado, todo se muestra en {base}: el precio al tipo de referencia del BCE del día, cada punto del gráfico al tipo de su propio día. No es el precio al que se negocia en {base}, y la variación incluye la de la moneda. Las compras, ventas y alertas de precio ya introducidas no se convierten: sus cifras cuentan como {base} desde entonces. Si cambia la moneda, las estadísticas a largo plazo de sus sensores empiezan de nuevo.",
+                    "data": {
+                        "convert": "Convertir a {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "¿A qué cartera?",
                     "description": "{name}: con una compra, el activo pasa de la lista de seguimiento a una cartera. Sus sensores siguen siendo los mismos.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "No es un símbolo de TradingView. Escribe la bolsa, dos puntos y el ticker, como NASDAQ:AAPL.",
                 "invalid_color": "Elige uno de los colores o escribe un valor como #009999.",
                 "group_exists": "Ya existe un grupo con este nombre.",
-                "sell_too_many": "Eso es más de lo que tienes."
+                "sell_too_many": "Eso es más de lo que tienes.",
+                "no_rate": "El BCE no publica un tipo de referencia para la moneda de esta cotización, por lo que no se puede convertir."
             },
             "abort": {
                 "reconfigure_successful": "El activo se ha actualizado."

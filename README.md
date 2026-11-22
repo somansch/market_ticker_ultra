@@ -105,23 +105,25 @@ Add another group with **Add group** on the integration's page - a name, the kin
 Click **Add instrument** on the group it belongs in.
 
 1. **Find an instrument** - search by name, by symbol or by ISIN: *Apple*, *AAPL*, *US0378331005*, *S&P 500*, *EUR/USD*, *BTC*, *gold*. Every source that is switched on is asked at once.
-2. **Choose the listing** - the same instrument is often listed at several exchanges and sources, in different currencies. Each line ends with the last price there and where it is from; a date behind a price means it is not from today.
+2. **Choose the listing** - the same instrument is often listed at several exchanges and sources, in different currencies. Each line ends with the last price there and where it is from; a date behind a price means it is not from today. **Convert to** your base currency shows a listing in another currency in yours - see [Another listing, another currency](#another-listing-another-currency).
 3. **Your holding** - the quantity, the purchase price per unit and, optionally, the date, fees and taxes. Leave it all empty to only watch the instrument.
 
 ## Changing an instrument
 
 Each instrument has its own menu: **Settings → Devices & Services → Market Ticker Ultra**, the three dots on the instrument, **Reconfigure** - or the pencil on the [card](#live-editing). The menu's heading sums up what is held:
 
-<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-live-edit.jpg" alt="The menu of Apple: Rename, Move to another group, Add a purchase, Add a sale, Remove purchases and sales, Price alerts, Colour, Own logo and TradingView link, under a line with the purchases entered, the quantity held, the average price and what was realised" width="45%">
+<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-live-edit.jpg" alt="The menu of Apple: Rename, Change the listing, Move to another group, Add a purchase, Add a sale, Remove purchases and sales, Price alerts, Colour, Currency, Own logo and TradingView link, under a line with the purchases entered, the quantity held, the average price and what was realised" width="45%">
 
 | Entry | What it does |
 |---|---|
 | ✏️ **Rename** | The name its device and sensors are called. |
+| 🏛️ **Change the listing** | Another exchange or source for the same instrument - see [below](#another-listing-another-currency). |
 | 📂 **Move to another group** | Into another portfolio or watchlist. Its sensors stay the same. |
 | ➕ **Add a purchase** | One more purchase - see below. |
 | ➖ **Add a sale** | A sale. Offered while something is held. |
 | 🗑️ **Remove purchases and sales** | Tick what should go. Removing all of them leaves an instrument that is only watched. |
 | 🔔 **Price alerts** | A lower and an upper limit - see [Price alerts](#price-alerts). |
+| 💱 **Currency** | Shown in the base currency, or in the one its exchange quotes in - see [below](#another-listing-another-currency). |
 | 🎨 **Colour**, 🖼️ **Own logo**, 📈 **TradingView link** | See [below](#own-logo-colour-and-tradingview-link). |
 
 ### Purchases and sales
@@ -132,6 +134,21 @@ A purchase and a sale both take a quantity above zero, a price per unit and, opt
 - **The date** decides the order in which purchases and sales are counted: a sale only takes from what was bought before it. A purchase without a date counts first.
 - **A purchase on a watchlist** moves the instrument into a portfolio - one you have, or a new one created on the spot, the first or one more. Its sensors stay the same.
 - **Selling everything** asks what happens next: keep the instrument in the portfolio, move it to a watchlist, or remove it. Its purchases and sales go with it in every case, and so does what it has earned.
+
+### Another listing, another currency
+
+A share is often listed at several exchanges, and not every one of them trades it much: a listing with a handful of prices a day gives a chart of a few straight strokes. Two entries of the menu are for that.
+
+- **Change the listing** searches for the instrument again - by its ISIN where that is known, else by its name - and lets you choose another exchange or source from the same list as when adding it. Its name, purchases and sales, alerts, colour, logo and sensors stay; the TradingView link follows the new listing.
+- **Currency** has one switch, **Convert to** your base currency. Switched on, an instrument quoted in another currency is shown in yours: its price, previous close, day's and 52-week range, market cap and EPS at the European Central Bank's reference rate of the day, and each point of its chart at the rate of its own day. The same switch stands under the list of listings, so a listing in another currency can be chosen and converted in one step.
+
+What to know about a converted instrument:
+
+- It is **not the price it trades at** in your currency. The ECB fixes one rate per working day; between two fixings the figure moves with the share only.
+- Its **change includes the currency's**: a share that gains 1 % while its currency loses 1 % stands still.
+- The rate comes from the ECB's euro reference rates, so one currency is converted into another by way of the euro. A currency the ECB publishes no rate for cannot be converted, and the dialog says so.
+- **Purchases, sales and price alerts are not converted.** Their figures count as the currency the instrument is shown in from then on - enter them the way your broker's statement has them.
+- Where the currency of an instrument changes - by the switch or by a listing in another currency - the **long-term statistics** of its price, position value and gain sensors are cleared and start afresh: Home Assistant does not continue a series whose unit has changed.
 
 ### Own logo, colour and TradingView link
 
@@ -173,7 +190,7 @@ None of them needs an account or a key. A few things about how they are used:
 
 ## Currencies and performance
 
-**Base currency.** Every position is added up in the base currency from [Settings](#settings). A position in another currency is converted at the European Central Bank's daily reference rate; the portfolio's value sensor says which day's rates it used, and which positions could not be converted. An instrument's own sensors stay in its own currency.
+**Base currency.** Every position is added up in the base currency from [Settings](#settings). A position in another currency is converted at the European Central Bank's daily reference rate; the portfolio's value sensor says which day's rates it used, and which positions could not be converted. An instrument's own sensors stay in its own currency - unless it is [shown in the base currency](#another-listing-another-currency). When you change the base currency, the long-term statistics of every sensor that was in the old one - the portfolios' sums, spot metals, converted instruments - are cleared and start afresh.
 
 **Performance.** The [portfolio format](#the-portfolio-format) draws the portfolio's return over a period - one day to the whole period - beside the index set for its group. It is a **time-weighted return**: a purchase or a sale in the middle of the period does not count as a gain or a loss, so the line compares how the holdings did, not how much money was put in. An instrument without a price series is left out and named under the chart.
 
@@ -351,7 +368,7 @@ Every instrument of the card in a line: the alert symbol, its logo and name, the
 The details - on the card in the Details format, in the pop-up in every other - show:
 
 - **The head**: logo, name, symbol, exchange and whether the market is open, closed, in pre-market or in after hours; the price and the change for the period shown.
-- **The chart**, from one day to the whole history, as **Candlesticks** or a **Line** - **Automatic** draws candlesticks up to one year and a line beyond - with the volume as bars, **SMA 20**, **SMA 50** and **EMA 9** as lines and the **RSI 14** as a strip. Each of the four can be hidden from the chart with its eye.
+- **The chart**, from one day to the whole history, as **Candlesticks** or a **Line** - **Automatic** draws candlesticks up to one year and a line beyond - with the volume as bars, **SMA 20**, **SMA 50** and **EMA 9** as lines and the **RSI 14** as a strip. Each of the four can be hidden from the chart with its eye. A week is drawn day by day: every day is as wide as the next, and each price stands at its time of day, so a listing with few prices shows them where they were.
 - **The key figures**: price alerts, open, high and low, previous close, the 52-week range, volume against its three-month average, market cap, P/E, EPS and the next earnings date. Each has its own switch and its own place in the list.
 - **My position**: quantity, value, gain or loss, average price, the change in the period, and what was realised and paid in fees and taxes.
 - **The news** about the instrument.

@@ -154,7 +154,11 @@
                     "title": "取引市場を選択",
                     "description": "「{query}」の検索結果です。同じ銘柄が複数の取引所やソースで、異なる通貨で扱われていることがよくあります。各行の末尾には、そこでの直近の価格と取得元が表示されます。価格の後ろに日付がある場合、その価格は今日のものではありません。",
                     "data": {
-                        "listing": "取引市場"
+                        "listing": "取引市場",
+                        "convert": "{base} に換算"
+                    },
+                    "data_description": {
+                        "convert": "別の通貨の取引市場向けです。すべての数値が ECB の参照レートで {base} で表示されます。 保有分も {base} で入力します。"
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - 登録済みの購入: {count}、保有: {quantity} (平均 {average})、実現損益: {realized}。",
                     "menu_options": {
                         "rename": "✏️ 名前を変更",
+                        "venue": "🏛️ 取引市場を変更",
                         "move": "📂 別のグループへ移動",
                         "add_lot": "➕ 購入を追加",
                         "sell_lot": "➖ 売却を追加",
                         "remove_lots": "🗑️ 購入と売却を削除",
                         "alerts": "🔔 価格アラート",
                         "color": "🎨 色",
+                        "currency": "💱 通貨",
                         "logo": "🖼️ 独自のロゴ",
                         "tradingview": "📈 TradingView リンク"
                     }
@@ -195,6 +201,24 @@
                     "description": "{symbol} の名前です。デバイスとセンサーの名前になります。",
                     "data": {
                         "name": "名前"
+                    }
+                },
+                "venue": {
+                    "title": "取引市場を変更",
+                    "description": "{name} は {symbol} として登録されています。ISIN または名前でもう一度検索して、別の取引所やソースを選びます。",
+                    "data": {
+                        "query": "検索"
+                    }
+                },
+                "venue_listing": {
+                    "title": "新しい取引市場を選択",
+                    "description": "「{query}」の検索結果です。{name} は今後そこで取得されます。名前、購入、アラート、センサーはそのまま残ります。購入、売却、価格アラートは換算されません。通貨が変わると、その数値は新しい通貨のものとして扱われます。通貨が変わる場合、センサーの長期統計は最初からやり直しになります。",
+                    "data": {
+                        "listing": "取引市場",
+                        "convert": "{base} に換算"
+                    },
+                    "data_description": {
+                        "convert": "別の通貨の取引市場向けです。すべての数値が ECB の参照レートで {base} で表示されます。"
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "色"
                     }
                 },
+                "currency": {
+                    "title": "通貨",
+                    "description": "{name} は {quoted} で取引されています。オンにすると、すべてが {base} で表示されます。価格は当日の ECB 参照レートで、チャートの各点はその日のレートで換算されます。{base} で実際に取引される価格ではなく、変動には通貨の変動も含まれます。入力済みの購入、売却、価格アラートは換算されず、その数値は以後 {base} として扱われます。通貨が変わる場合、センサーの長期統計は最初からやり直しになります。",
+                    "data": {
+                        "convert": "{base} に換算"
+                    }
+                },
                 "to_portfolio": {
                     "title": "どのポートフォリオへ?",
                     "description": "{name}: 購入により、銘柄はウォッチリストからポートフォリオへ移動します。センサーは変わりません。",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "TradingView シンボルではありません。NASDAQ:AAPL のように、取引所、コロン、ティッカーの順で入力してください。",
                 "invalid_color": "色を選ぶか、#009999 のような値を入力してください。",
                 "group_exists": "この名前のグループはすでに存在します。",
-                "sell_too_many": "保有数量を超えています。"
+                "sell_too_many": "保有数量を超えています。",
+                "no_rate": "この取引市場の通貨には ECB の参照レートがないため、換算できません。"
             },
             "abort": {
                 "reconfigure_successful": "銘柄を更新しました。"

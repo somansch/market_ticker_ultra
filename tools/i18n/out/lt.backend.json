@@ -154,7 +154,11 @@
                     "title": "Pasirinkite kotiravimą",
                     "description": "Rasta pagal „{query}“. Ta pati priemonė dažnai kotiruojama keliose biržose ir šaltiniuose, skirtingomis valiutomis. Kiekviena eilutė baigiasi paskutine ten esančia kaina ir jos šaltiniu; data po kainos reiškia, kad ji ne šiandienos.",
                     "data": {
-                        "listing": "Kotiravimas"
+                        "listing": "Kotiravimas",
+                        "convert": "Perskaičiuoti į {base}"
+                    },
+                    "data_description": {
+                        "convert": "Kotiravimui kita valiuta: viskas rodoma {base}, pagal ECB orientacinį kursą. Tai, ką turite, tada taip pat įvedama {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} – įvesta pirkimų: {count}; turima: {quantity} vidutine kaina {average}; realizuota: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Pervadinti",
+                        "venue": "🏛️ Keisti kotiravimą",
                         "move": "📂 Perkelti į kitą grupę",
                         "add_lot": "➕ Pridėti pirkimą",
                         "sell_lot": "➖ Pridėti pardavimą",
                         "remove_lots": "🗑️ Pašalinti pirkimus ir pardavimus",
                         "alerts": "🔔 Kainos įspėjimai",
                         "color": "🎨 Spalva",
+                        "currency": "💱 Valiuta",
                         "logo": "🖼️ Savas logotipas",
                         "tradingview": "📈 TradingView nuoroda"
                     }
@@ -195,6 +201,24 @@
                     "description": "{symbol} pavadinimas: kaip vadinamas jo įrenginys ir jutikliai.",
                     "data": {
                         "name": "Pavadinimas"
+                    }
+                },
+                "venue": {
+                    "title": "Keisti kotiravimą",
+                    "description": "{name} įtraukta kaip {symbol}. Ieškokite jos dar kartą - pagal ISIN arba pavadinimą - ir pasirinkite kitą biržą ar šaltinį.",
+                    "data": {
+                        "query": "Paieška"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Pasirinkite naują kotiravimą",
+                    "description": "Rasta pagal „{query}“. {name} nuo šiol kotiruojama ten; pavadinimas, pirkimai, įspėjimai ir jutikliai lieka. Pirkimai, pardavimai ir kainos įspėjimai neperskaičiuojami - kita valiuta jų skaičiai laikomi tos valiutos. Jei valiuta pasikeičia, jutiklių ilgalaikė statistika pradedama iš naujo.",
+                    "data": {
+                        "listing": "Kotiravimas",
+                        "convert": "Perskaičiuoti į {base}"
+                    },
+                    "data_description": {
+                        "convert": "Kotiravimui kita valiuta: viskas rodoma {base}, pagal ECB orientacinį kursą."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Spalva"
                     }
                 },
+                "currency": {
+                    "title": "Valiuta",
+                    "description": "{name} kotiruojama {quoted}. Įjungus viskas rodoma {base}: kaina pagal tos dienos ECB orientacinį kursą, kiekvienas grafiko taškas pagal savo dienos kursą. Tai nėra kaina, kuria prekiaujama {base}, o pokytis apima ir valiutos pokytį. Jau įvesti pirkimai, pardavimai ir kainos įspėjimai neperskaičiuojami - jų skaičiai nuo tada laikomi {base}. Jei valiuta pasikeičia, jutiklių ilgalaikė statistika pradedama iš naujo.",
+                    "data": {
+                        "convert": "Perskaičiuoti į {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Į kurį portfelį?",
                     "description": "{name}: su pirkimu priemonė iš stebimų sąrašo perkeliama į portfelį. Jos jutikliai lieka tie patys.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Tai ne TradingView simbolis. Parašykite biržą, dvitaškį ir tikerį, pvz., NASDAQ:AAPL.",
                 "invalid_color": "Pasirinkite vieną iš spalvų arba įveskite reikšmę, pvz., #009999.",
                 "group_exists": "Grupė tokiu pavadinimu jau yra.",
-                "sell_too_many": "Tai daugiau, nei turima."
+                "sell_too_many": "Tai daugiau, nei turima.",
+                "no_rate": "ECB neskelbia šio kotiravimo valiutos orientacinio kurso, todėl jos perskaičiuoti negalima."
             },
             "abort": {
                 "reconfigure_successful": "Priemonė atnaujinta."

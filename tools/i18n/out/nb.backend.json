@@ -154,7 +154,11 @@
                     "title": "Velg notering",
                     "description": "Funnet for \"{query}\". Det samme instrumentet er ofte notert på flere børser og kilder, i ulike valutaer. Hver linje slutter med siste kurs der og hvor den kommer fra; en dato bak en kurs betyr at den ikke er fra i dag.",
                     "data": {
-                        "listing": "Notering"
+                        "listing": "Notering",
+                        "convert": "Regn om til {base}"
+                    },
+                    "data_description": {
+                        "convert": "For en notering i en annen valuta: alt vises i {base}, til ESBs referansekurs. Beholdningen legges da også inn i {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} – registrerte kjøp: {count}; beholdning: {quantity} til snitt {average}; realisert: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Gi nytt navn",
+                        "venue": "🏛️ Bytt notering",
                         "move": "📂 Flytt til en annen gruppe",
                         "add_lot": "➕ Legg til et kjøp",
                         "sell_lot": "➖ Legg til et salg",
                         "remove_lots": "🗑️ Fjern kjøp og salg",
                         "alerts": "🔔 Kursvarsler",
                         "color": "🎨 Farge",
+                        "currency": "💱 Valuta",
                         "logo": "🖼️ Egen logo",
                         "tradingview": "📈 TradingView-lenke"
                     }
@@ -195,6 +201,24 @@
                     "description": "Navnet på {symbol}: hva enheten og sensorene heter.",
                     "data": {
                         "name": "Navn"
+                    }
+                },
+                "venue": {
+                    "title": "Bytt notering",
+                    "description": "{name} føres som {symbol}. Søk etter det på nytt - med ISIN eller navn - for å velge en annen børs eller kilde.",
+                    "data": {
+                        "query": "Søk"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Velg den nye noteringen",
+                    "description": "Funnet for \"{query}\". {name} føres der fra nå av; navn, kjøp, varsler og sensorer blir stående. Kjøp, salg og kursvarsler regnes ikke om - i en annen valuta gjelder tallene som den. Endres valutaen, begynner langtidsstatistikken for sensorene på nytt.",
+                    "data": {
+                        "listing": "Notering",
+                        "convert": "Regn om til {base}"
+                    },
+                    "data_description": {
+                        "convert": "For en notering i en annen valuta: alt vises i {base}, til ESBs referansekurs."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Farge"
                     }
                 },
+                "currency": {
+                    "title": "Valuta",
+                    "description": "{name} noteres i {quoted}. Slått på vises alt i {base} i stedet: kursen til ESBs referansekurs for dagen, hvert punkt i grafen til kursen for sin egen dag. Det er ikke kursen det handles til i {base}, og endringen inneholder valutaens. Kjøp, salg og kursvarsler som allerede er lagt inn, regnes ikke om - tallene gjelder fra da av som {base}. Endres valutaen, begynner langtidsstatistikken for sensorene på nytt.",
+                    "data": {
+                        "convert": "Regn om til {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Til hvilken portefølje?",
                     "description": "{name}: med et kjøp flyttes instrumentet fra favorittlisten til en portefølje. Sensorene forblir de samme.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Ikke et TradingView-symbol. Skriv børsen, et kolon og tickeren, som NASDAQ:AAPL.",
                 "invalid_color": "Velg en av fargene, eller skriv inn en verdi som #009999.",
                 "group_exists": "Det finnes allerede en gruppe med dette navnet.",
-                "sell_too_many": "Det er mer enn beholdningen."
+                "sell_too_many": "Det er mer enn beholdningen.",
+                "no_rate": "ESB publiserer ingen referansekurs for valutaen til denne noteringen, så den kan ikke regnes om."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet ble oppdatert."

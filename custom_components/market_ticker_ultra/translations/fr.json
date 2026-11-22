@@ -154,7 +154,11 @@
                     "title": "Choisir la cotation",
                     "description": "Résultats pour « {query} ». Un même instrument est souvent coté sur plusieurs bourses et sources, dans différentes devises. Chaque ligne se termine par le dernier cours et sa provenance ; une date après un cours signifie qu'il ne date pas d'aujourd'hui.",
                     "data": {
-                        "listing": "Cotation"
+                        "listing": "Cotation",
+                        "convert": "Convertir en {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pour une cotation dans une autre devise : tout est affiché en {base}, au taux de référence de la BCE. Ce que vous détenez se saisit alors aussi en {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - achats saisis : {count} ; détenu : {quantity} à un prix moyen de {average} ; réalisé : {realized}.",
                     "menu_options": {
                         "rename": "✏️ Renommer",
+                        "venue": "🏛️ Changer de cotation",
                         "move": "📂 Déplacer vers un autre groupe",
                         "add_lot": "➕ Ajouter un achat",
                         "sell_lot": "➖ Ajouter une vente",
                         "remove_lots": "🗑️ Supprimer des achats et ventes",
                         "alerts": "🔔 Alertes de cours",
                         "color": "🎨 Couleur",
+                        "currency": "💱 Devise",
                         "logo": "🖼️ Logo personnel",
                         "tradingview": "📈 Lien TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "Le nom de {symbol} : celui de son appareil et de ses capteurs.",
                     "data": {
                         "name": "Nom"
+                    }
+                },
+                "venue": {
+                    "title": "Changer de cotation",
+                    "description": "{name} est coté sous {symbol}. Recherchez-le à nouveau - par son ISIN ou son nom - pour choisir une autre bourse ou source.",
+                    "data": {
+                        "query": "Recherche"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Choisir la nouvelle cotation",
+                    "description": "Résultats pour « {query} ». {name} y est coté désormais ; son nom, ses achats, ses alertes et ses capteurs restent. Les achats, les ventes et les alertes de cours ne sont pas convertis : dans une autre devise, leurs chiffres valent dans celle-ci. Si la devise change, les statistiques à long terme de ses capteurs repartent de zéro.",
+                    "data": {
+                        "listing": "Cotation",
+                        "convert": "Convertir en {base}"
+                    },
+                    "data_description": {
+                        "convert": "Pour une cotation dans une autre devise : tout est affiché en {base}, au taux de référence de la BCE."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Couleur"
                     }
                 },
+                "currency": {
+                    "title": "Devise",
+                    "description": "{name} est coté en {quoted}. Activé, tout est affiché en {base} : le cours au taux de référence de la BCE du jour, chaque point du graphique au taux de son propre jour. Ce n'est pas le cours auquel il se négocie en {base}, et la variation inclut celle de la devise. Les achats, ventes et alertes de cours déjà saisis ne sont pas convertis : leurs chiffres valent en {base} dès lors. Si la devise change, les statistiques à long terme de ses capteurs repartent de zéro.",
+                    "data": {
+                        "convert": "Convertir en {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Dans quel portefeuille ?",
                     "description": "{name} : avec un achat, l'instrument passe de la liste de suivi à un portefeuille. Ses capteurs restent les mêmes.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Ce n'est pas un symbole TradingView. Écrivez la bourse, deux-points et le ticker, comme NASDAQ:AAPL.",
                 "invalid_color": "Choisissez une des couleurs, ou saisissez une valeur comme #009999.",
                 "group_exists": "Un groupe portant ce nom existe déjà.",
-                "sell_too_many": "C'est plus que ce qui est détenu."
+                "sell_too_many": "C'est plus que ce qui est détenu.",
+                "no_rate": "La BCE ne publie pas de taux de référence pour la devise de cette cotation ; elle ne peut donc pas être convertie."
             },
             "abort": {
                 "reconfigure_successful": "L'instrument a été mis à jour."

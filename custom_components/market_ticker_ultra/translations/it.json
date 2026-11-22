@@ -154,7 +154,11 @@
                     "title": "Scegli la quotazione",
                     "description": "Risultati per \"{query}\". Lo stesso titolo è spesso quotato su più borse e fonti, in valute diverse. Ogni riga termina con l'ultimo prezzo e la sua provenienza; una data dopo un prezzo indica che non è di oggi.",
                     "data": {
-                        "listing": "Quotazione"
+                        "listing": "Quotazione",
+                        "convert": "Converti in {base}"
+                    },
+                    "data_description": {
+                        "convert": "Per una quotazione in un'altra valuta: tutto è mostrato in {base}, al tasso di riferimento della BCE. Ciò che possiedi si inserisce allora anche in {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - acquisti inseriti: {count}; posizione: {quantity} a un prezzo medio di carico di {average}; realizzato: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Rinomina",
+                        "venue": "🏛️ Cambia quotazione",
                         "move": "📂 Sposta in un altro gruppo",
                         "add_lot": "➕ Aggiungi un acquisto",
                         "sell_lot": "➖ Aggiungi una vendita",
                         "remove_lots": "🗑️ Rimuovi acquisti e vendite",
                         "alerts": "🔔 Avvisi di prezzo",
                         "color": "🎨 Colore",
+                        "currency": "💱 Valuta",
                         "logo": "🖼️ Logo personale",
                         "tradingview": "📈 Link TradingView"
                     }
@@ -195,6 +201,24 @@
                     "description": "Il nome di {symbol}: come si chiamano il suo dispositivo e i suoi sensori.",
                     "data": {
                         "name": "Nome"
+                    }
+                },
+                "venue": {
+                    "title": "Cambia quotazione",
+                    "description": "{name} è quotato come {symbol}. Cercalo di nuovo - per ISIN o per nome - per scegliere un'altra borsa o fonte.",
+                    "data": {
+                        "query": "Ricerca"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Scegli la nuova quotazione",
+                    "description": "Risultati per \"{query}\". {name} è quotato lì da ora; nome, acquisti, avvisi e sensori restano. Acquisti, vendite e avvisi di prezzo non vengono convertiti: in un'altra valuta le loro cifre valgono in quella. Se la valuta cambia, le statistiche a lungo termine dei suoi sensori ripartono da capo.",
+                    "data": {
+                        "listing": "Quotazione",
+                        "convert": "Converti in {base}"
+                    },
+                    "data_description": {
+                        "convert": "Per una quotazione in un'altra valuta: tutto è mostrato in {base}, al tasso di riferimento della BCE."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Colore"
                     }
                 },
+                "currency": {
+                    "title": "Valuta",
+                    "description": "{name} è quotato in {quoted}. Se attivo, tutto è mostrato in {base}: il prezzo al tasso di riferimento della BCE del giorno, ogni punto del grafico al tasso del proprio giorno. Non è il prezzo a cui viene scambiato in {base}, e la variazione include quella della valuta. Acquisti, vendite e avvisi di prezzo già inseriti non vengono convertiti: le loro cifre valgono in {base} da quel momento. Se la valuta cambia, le statistiche a lungo termine dei suoi sensori ripartono da capo.",
+                    "data": {
+                        "convert": "Converti in {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "In quale portafoglio?",
                     "description": "{name}: con un acquisto il titolo passa dalla watchlist a un portafoglio. I suoi sensori restano gli stessi.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Non è un simbolo TradingView. Scrivi la borsa, i due punti e il ticker, come NASDAQ:AAPL.",
                 "invalid_color": "Scegli uno dei colori o digita un valore come #009999.",
                 "group_exists": "Esiste già un gruppo con questo nome.",
-                "sell_too_many": "È più di quanto possiedi."
+                "sell_too_many": "È più di quanto possiedi.",
+                "no_rate": "La BCE non pubblica un tasso di riferimento per la valuta di questa quotazione, quindi non può essere convertita."
             },
             "abort": {
                 "reconfigure_successful": "Il titolo è stato aggiornato."

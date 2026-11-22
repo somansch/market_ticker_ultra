@@ -154,7 +154,11 @@
                     "title": "Choose the listing",
                     "description": "Found for \"{query}\". The same instrument is often listed at several exchanges and sources, in different currencies. Each line ends with the last price there and where it is from; a date behind a price means it is not from today.",
                     "data": {
-                        "listing": "Listing"
+                        "listing": "Listing",
+                        "convert": "Convert to {base}"
+                    },
+                    "data_description": {
+                        "convert": "For a listing in another currency: every figure is shown in {base}, at the ECB's reference rate. What you hold is then entered in {base} too."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - purchases entered: {count}; held: {quantity} at an average of {average}; realised: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Rename",
+                        "venue": "🏛️ Change the listing",
                         "move": "📂 Move to another group",
                         "add_lot": "➕ Add a purchase",
                         "sell_lot": "➖ Add a sale",
                         "remove_lots": "🗑️ Remove purchases and sales",
                         "alerts": "🔔 Price alerts",
                         "color": "🎨 Colour",
+                        "currency": "💱 Currency",
                         "logo": "🖼️ Own logo",
                         "tradingview": "📈 TradingView link"
                     }
@@ -195,6 +201,24 @@
                     "description": "The name of {symbol}: what its device and its sensors are called.",
                     "data": {
                         "name": "Name"
+                    }
+                },
+                "venue": {
+                    "title": "Change the listing",
+                    "description": "{name} is quoted as {symbol}. Search for it again - by its ISIN or its name - to choose another exchange or source.",
+                    "data": {
+                        "query": "Search"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Choose the new listing",
+                    "description": "Found for \"{query}\". {name} is quoted there from now on; its name, its purchases, its alerts and its sensors stay. Purchases, sales and price alerts are not converted - in another currency their figures count as that one. Where the currency changes, the long-term statistics of its sensors start afresh.",
+                    "data": {
+                        "listing": "Listing",
+                        "convert": "Convert to {base}"
+                    },
+                    "data_description": {
+                        "convert": "For a listing in another currency: every figure is shown in {base}, at the ECB's reference rate."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Colour"
                     }
                 },
+                "currency": {
+                    "title": "Currency",
+                    "description": "{name} is quoted in {quoted}. Switched on, every figure is shown in {base} instead: the price at the ECB's reference rate of the day, each point of the chart at the rate of its own day. That is not the price it trades at in {base}, and the change includes the currency's. Purchases, sales and price alerts already entered are not converted - their figures count as {base} from then on. Where the currency changes, the long-term statistics of its sensors start afresh.",
+                    "data": {
+                        "convert": "Convert to {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Into which portfolio?",
                     "description": "{name}: with a purchase the instrument moves from the watchlist into a portfolio. Its sensors stay the same.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Not a TradingView symbol. Write the exchange, a colon and the ticker, such as NASDAQ:AAPL.",
                 "invalid_color": "Choose one of the colours, or type a value such as #009999.",
                 "group_exists": "A group of this name already exists.",
-                "sell_too_many": "That is more than is held."
+                "sell_too_many": "That is more than is held.",
+                "no_rate": "The ECB publishes no reference rate for this listing's currency, so it cannot be converted."
             },
             "abort": {
                 "reconfigure_successful": "The instrument was updated."

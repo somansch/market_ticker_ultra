@@ -154,7 +154,11 @@
                     "title": "Välj notering",
                     "description": "Hittat för \"{query}\". Samma instrument är ofta noterat på flera börser och hos flera källor, i olika valutor. Varje rad slutar med den senaste kursen där och var den kommer ifrån; ett datum efter en kurs betyder att den inte är från i dag.",
                     "data": {
-                        "listing": "Notering"
+                        "listing": "Notering",
+                        "convert": "Räkna om till {base}"
+                    },
+                    "data_description": {
+                        "convert": "För en notering i en annan valuta: allt visas i {base}, enligt ECB:s referenskurs. Ditt innehav anges då också i {base}."
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - inlagda köp: {count}; innehav: {quantity} till ett snitt på {average}; realiserat: {realized}.",
                     "menu_options": {
                         "rename": "✏️ Byt namn",
+                        "venue": "🏛️ Byt notering",
                         "move": "📂 Flytta till en annan grupp",
                         "add_lot": "➕ Lägg till ett köp",
                         "sell_lot": "➖ Lägg till en försäljning",
                         "remove_lots": "🗑️ Ta bort köp och försäljningar",
                         "alerts": "🔔 Kurslarm",
                         "color": "🎨 Färg",
+                        "currency": "💱 Valuta",
                         "logo": "🖼️ Egen logotyp",
                         "tradingview": "📈 TradingView-länk"
                     }
@@ -195,6 +201,24 @@
                     "description": "Namnet på {symbol}: vad dess enhet och dess sensorer heter.",
                     "data": {
                         "name": "Namn"
+                    }
+                },
+                "venue": {
+                    "title": "Byt notering",
+                    "description": "{name} förs som {symbol}. Sök efter det igen - med ISIN eller namn - för att välja en annan börs eller källa.",
+                    "data": {
+                        "query": "Sök"
+                    }
+                },
+                "venue_listing": {
+                    "title": "Välj den nya noteringen",
+                    "description": "Hittat för \"{query}\". {name} förs där från och med nu; namn, köp, larm och sensorer finns kvar. Köp, försäljningar och kurslarm räknas inte om - i en annan valuta gäller deras belopp som den. Ändras valutan börjar långtidsstatistiken för sensorerna om.",
+                    "data": {
+                        "listing": "Notering",
+                        "convert": "Räkna om till {base}"
+                    },
+                    "data_description": {
+                        "convert": "För en notering i en annan valuta: allt visas i {base}, enligt ECB:s referenskurs."
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "Färg"
                     }
                 },
+                "currency": {
+                    "title": "Valuta",
+                    "description": "{name} noteras i {quoted}. Påslaget visas allt i {base} i stället: kursen enligt ECB:s referenskurs för dagen, varje punkt i diagrammet enligt kursen för sin egen dag. Det är inte kursen det handlas till i {base}, och förändringen innehåller valutans. Köp, försäljningar och kurslarm som redan angetts räknas inte om - deras belopp gäller från och med då som {base}. Ändras valutan börjar långtidsstatistiken för sensorerna om.",
+                    "data": {
+                        "convert": "Räkna om till {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "Till vilken portfölj?",
                     "description": "{name}: med ett köp flyttas instrumentet från bevakningslistan till en portfölj. Dess sensorer förblir desamma.",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "Inte en TradingView-symbol. Skriv börsen, ett kolon och tickern, till exempel NASDAQ:AAPL.",
                 "invalid_color": "Välj en av färgerna eller skriv ett värde som #009999.",
                 "group_exists": "Det finns redan en grupp med det här namnet.",
-                "sell_too_many": "Det är mer än innehavet."
+                "sell_too_many": "Det är mer än innehavet.",
+                "no_rate": "ECB publicerar ingen referenskurs för den här noteringens valuta, så den kan inte räknas om."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet har uppdaterats."

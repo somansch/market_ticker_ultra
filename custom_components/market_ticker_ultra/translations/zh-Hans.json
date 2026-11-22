@@ -154,7 +154,11 @@
                     "title": "选择上市地",
                     "description": "“{query}”的搜索结果。同一标的常在多个交易所和来源上市，币种各不相同。每行末尾是该处的最新价格及其来源；价格后带日期表示不是今日的价格。",
                     "data": {
-                        "listing": "上市地"
+                        "listing": "上市地",
+                        "convert": "换算为 {base}"
+                    },
+                    "data_description": {
+                        "convert": "适用于其他币种的上市地：所有数值按欧洲央行参考汇率以 {base} 显示。 持仓也以 {base} 录入。"
                     }
                 },
                 "holding": {
@@ -180,12 +184,14 @@
                     "description": "{symbol} - 已录入买入：{count}；持有：{quantity}，均价 {average}；已实现：{realized}。",
                     "menu_options": {
                         "rename": "✏️ 重命名",
+                        "venue": "🏛️ 更换上市地",
                         "move": "📂 移至其他分组",
                         "add_lot": "➕ 添加买入",
                         "sell_lot": "➖ 添加卖出",
                         "remove_lots": "🗑️ 移除买入和卖出记录",
                         "alerts": "🔔 价格提醒",
                         "color": "🎨 颜色",
+                        "currency": "💱 币种",
                         "logo": "🖼️ 自定义标志",
                         "tradingview": "📈 TradingView 链接"
                     }
@@ -195,6 +201,24 @@
                     "description": "{symbol} 的名称：其设备和传感器的名称。",
                     "data": {
                         "name": "名称"
+                    }
+                },
+                "venue": {
+                    "title": "更换上市地",
+                    "description": "{name} 当前以 {symbol} 记录。请按 ISIN 或名称重新搜索，以选择其他交易所或来源。",
+                    "data": {
+                        "query": "搜索"
+                    }
+                },
+                "venue_listing": {
+                    "title": "选择新的上市地",
+                    "description": "“{query}”的搜索结果。{name} 今后在该处取价；其名称、买入、提醒和传感器保持不变。买入、卖出和价格提醒不会换算：币种不同时，其数值按新币种计。币种变化时，其传感器的长期统计重新开始。",
+                    "data": {
+                        "listing": "上市地",
+                        "convert": "换算为 {base}"
+                    },
+                    "data_description": {
+                        "convert": "适用于其他币种的上市地：所有数值按欧洲央行参考汇率以 {base} 显示。"
                     }
                 },
                 "add_lot": {
@@ -282,6 +306,13 @@
                         "color": "颜色"
                     }
                 },
+                "currency": {
+                    "title": "币种",
+                    "description": "{name} 以 {quoted} 报价。开启后，所有数值改以 {base} 显示：价格按当日欧洲央行参考汇率换算，图表上的每个点按其当日汇率换算。这不是它以 {base} 交易的价格，涨跌也包含汇率变动。已录入的买入、卖出和价格提醒不会换算，其数值此后按 {base} 计。币种变化时，其传感器的长期统计重新开始。",
+                    "data": {
+                        "convert": "换算为 {base}"
+                    }
+                },
                 "to_portfolio": {
                     "title": "移至哪个投资组合？",
                     "description": "{name}：录入买入后，该标的将从自选列表移至投资组合。其传感器保持不变。",
@@ -314,7 +345,8 @@
                 "invalid_tradingview": "不是有效的 TradingView 代码。请写交易所、冒号和代码，例如 NASDAQ:AAPL。",
                 "invalid_color": "请选择一种颜色，或输入 #009999 这样的值。",
                 "group_exists": "已存在同名分组。",
-                "sell_too_many": "超过了持有数量。"
+                "sell_too_many": "超过了持有数量。",
+                "no_rate": "欧洲央行未公布该上市地币种的参考汇率，因此无法换算。"
             },
             "abort": {
                 "reconfigure_successful": "标的已更新。"
