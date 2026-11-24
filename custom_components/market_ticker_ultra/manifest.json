@@ -19,6 +19,8 @@
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/somansch/market_ticker_ultra/issues",
-  "requirements": [],
-  "version": "1.1.0"
+  "requirements": [
+    "defusedxml>=0.7.1"
+  ],
+  "version": "1.1.1"
 }

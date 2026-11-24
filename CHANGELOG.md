@@ -2,6 +2,14 @@
 
 All notable changes to this integration are documented here.
 
+## v1.1.1
+
+Two corrections from the review for the HACS default list.
+
+### Fixed
+- **The integration loads on every installation.** The news are read with `defusedxml`, which Home Assistant does not bring along by itself - it was there only where another integration had installed it. On an installation without it, Market Ticker Ultra did not load at all. It is a requirement now and installed with the integration.
+- **Uploaded logos are served to who is signed in.** A logo of your own was served from a path that asked for no sign-in: whoever could reach the instance and knew the file's name could fetch it. It now takes a sign-in - or the signature Home Assistant puts on the address the card is given, good for a day. The card asks for new addresses after half that time, when the page comes back into view, and when a picture does not load, so a dashboard on a wall keeps its logos, also across a restart of Home Assistant. The logos from the logo source are not affected.
+
 ## v1.1.0
 
 ### Added

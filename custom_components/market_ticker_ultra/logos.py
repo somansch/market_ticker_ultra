@@ -11,6 +11,7 @@ to initials where Elbstream has none.
 
 from __future__ import annotations
 
+from datetime import timedelta
 from pathlib import Path
 import shutil
 from urllib.parse import quote
@@ -92,9 +93,15 @@ def logo_url(
 # An instrument can carry an image the user uploaded: for one the logo source
 # does not know, or in place of the one it has. The file lives in the
 # configuration folder, outside the integration's own - an update replaces
-# that one - and is served from a path of its own.
+# that one - and is served by a view of its own (logo_view.py), to whoever
+# is signed in: what a user uploads is not for everybody who can reach the
+# instance. A picture in a card cannot send a token along, so the card is
+# handed addresses Home Assistant has signed (websocket.py), good for
+# OWN_LOGO_VALID and handed out anew after OWN_LOGO_RENEW.
 
-OWN_LOGO_URL_BASE = "/market_ticker_ultra_logos"
+OWN_LOGO_URL_BASE = "/api/market_ticker_ultra/logo"
+OWN_LOGO_VALID = timedelta(hours=24)
+OWN_LOGO_RENEW = timedelta(hours=12)
 OWN_LOGO_TYPES = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg")
 OWN_LOGO_MAX_BYTES = 1024 * 1024
 
@@ -104,7 +111,8 @@ def own_logo_dir(config_dir: str) -> Path:
 
 
 def own_logo_url(config_dir: str, file_name: str | None) -> str | None:
-    """Where an uploaded logo is served - None where the file is gone.
+    """Where an uploaded logo is served, still to be signed - None where
+    the file is gone.
 
     Reads the file's time from disk: call it off the event loop. The time
     travels in the address, so that a replaced image is fetched again.

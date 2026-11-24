@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry, ConfigEntryState
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
@@ -21,7 +20,8 @@ from .groups import (
     is_portfolio,
     settings_entry,
 )
-from .logos import OWN_LOGO_URL_BASE, own_logo_dir, own_logo_url, tidy_own_logos
+from .logo_view import OwnLogoView
+from .logos import own_logo_dir, own_logo_url, tidy_own_logos
 from .lovelace_resource import async_unregister as async_unregister_resource
 from .tradingview import frankfurt_isin, lookup_frankfurt, needs_lookup
 
@@ -42,13 +42,11 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     await async_register_card(hass)
     websocket.async_register(hass)
 
-    # The logos users upload for their instruments, served from the
-    # configuration folder.
+    # The logos users upload for their instruments, kept in the
+    # configuration folder and served to who is signed in.
     folder = own_logo_dir(hass.config.config_dir)
     await hass.async_add_executor_job(lambda: folder.mkdir(parents=True, exist_ok=True))
-    await hass.http.async_register_static_paths(
-        [StaticPathConfig(OWN_LOGO_URL_BASE, str(folder), False)]
-    )
+    hass.http.register_view(OwnLogoView())
     return True
 
 

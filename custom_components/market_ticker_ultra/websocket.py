@@ -8,11 +8,13 @@ and the version of the card file itself.
 from __future__ import annotations
 
 from dataclasses import asdict
+import time
 from typing import Any
 
 import voluptuous as vol
 
 from homeassistant.components import websocket_api
+from homeassistant.components.http.auth import async_sign_path
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import entity_registry as er
@@ -39,7 +41,7 @@ from .const import (
 from .coordinator import MarketTickerUltraCoordinator
 from .groups import groups_of, is_portfolio
 from .holdings import CONF_LOTS, holding_from_lots, ledger_from_lots
-from .logos import ATTRIBUTION, logo_url
+from .logos import ATTRIBUTION, OWN_LOGO_RENEW, OWN_LOGO_VALID, logo_url
 from .news import async_group_news, async_news
 from .performance import PERFORMANCE_RANGES, async_performance
 from .providers import RANGES, ProviderError
@@ -52,6 +54,29 @@ def _coordinator(hass: HomeAssistant) -> MarketTickerUltraCoordinator | None:
         if entry.state is ConfigEntryState.LOADED:
             return entry.runtime_data
     return None
+
+
+# The signed address of each uploaded logo, per sign-in and address, with
+# the time it was signed: the same one is handed out until it is due for a
+# new one, so that a card asking again does not fetch every picture again.
+_SIGNED: dict[tuple[str | None, str], tuple[float, str]] = {}
+
+
+def _signed_logo(hass: HomeAssistant, connection: websocket_api.ActiveConnection, url: str) -> str:
+    """An uploaded logo's address with Home Assistant's signature on it -
+    what lets a picture in a card be fetched without a token."""
+    key = (connection.refresh_token_id, url)
+    now = time.monotonic()
+    kept = _SIGNED.get(key)
+    if kept and now - kept[0] < OWN_LOGO_RENEW.total_seconds():
+        return kept[1]
+    if len(_SIGNED) > 500:
+        _SIGNED.clear()
+    signed = async_sign_path(
+        hass, url, OWN_LOGO_VALID, refresh_token_id=connection.refresh_token_id
+    )
+    _SIGNED[key] = (now, signed)
+    return signed
 
 
 @websocket_api.websocket_command({vol.Required("type"): f"{DOMAIN}/instruments"})
@@ -127,7 +152,11 @@ def websocket_instruments(
                 ),
                 # An uploaded logo comes before the logo source's, and is
                 # there with the source switched off too.
-                "logo": coordinator.own_logos.get(subentry.subentry_id)
+                "logo": (
+                    _signed_logo(hass, connection, coordinator.own_logos[subentry.subentry_id])
+                    if subentry.subentry_id in coordinator.own_logos
+                    else None
+                )
                 or (
                     logo_url(source, symbol, kind, data.get(CONF_ISIN), data.get(CONF_NAME))
                     if logos
@@ -162,6 +191,9 @@ def websocket_instruments(
             ],
             "base_currency": coordinator.base_currency,
             "logo_attribution": ATTRIBUTION if logos else None,
+            # After how many seconds the card asks for the uploaded logos'
+            # addresses again: well before their signature runs out.
+            "logo_renew": int(OWN_LOGO_RENEW.total_seconds()),
         },
     )
 

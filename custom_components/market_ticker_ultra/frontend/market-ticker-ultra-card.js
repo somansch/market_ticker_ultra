@@ -11569,6 +11569,10 @@
       );
       INSTRUMENTS.base = (answer && typeof answer.base_currency === "string" && answer.base_currency) || "";
       INSTRUMENTS.attribution = attributionOf(answer && answer.logo_attribution);
+      // The uploaded logos' addresses are signed, and the signature runs
+      // out: when they were handed out, and when to ask for new ones.
+      INSTRUMENTS.signedAt = Date.now();
+      INSTRUMENTS.renew = (answer && Number(answer.logo_renew) > 0 ? Number(answer.logo_renew) : 12 * 3600) * 1000;
       INSTRUMENTS.key = key;
       INSTRUMENTS.version += 1;
       INSTRUMENTS.tries = 0;
@@ -11592,6 +11596,49 @@
     if (!INSTRUMENTS.failed && liveHass && (INSTRUMENTS.stale || sensorKey(liveHass) !== INSTRUMENTS.key)) {
       askInstruments();
     }
+  }
+
+  // The uploaded logos are served to who is signed in, by an address with
+  // a signature that is good for a day. A dashboard on a wall stays open
+  // for weeks: so the addresses are asked for again while the old ones are
+  // still good - on a timer, and when the page is looked at again after a
+  // tablet slept through the timer.
+  const OWN_LOGO_PATH = "/api/market_ticker_ultra/logo/";
+  const isOwnLogo = (src) => typeof src === "string" && src.startsWith(OWN_LOGO_PATH);
+  const hasOwnLogos = () => (INSTRUMENTS.list || []).some((item) => isOwnLogo(item.logo));
+  function renewOwnLogos(force) {
+    if (!liveHass || !hasOwnLogos()) return;
+    if (!force && Date.now() - (INSTRUMENTS.signedAt || 0) < (INSTRUMENTS.renew || 12 * 3600 * 1000)) return;
+    INSTRUMENTS.stale = true;
+    watchInstruments(liveHass);
+  }
+  setInterval(() => renewOwnLogos(false), 10 * 60 * 1000);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") renewOwnLogos(false);
+  });
+  // An uploaded logo that did not load: its signature has run out, or Home
+  // Assistant was restarted and signs anew. The addresses are asked for
+  // again, a few times at most per picture - one that still does not load
+  // then is a broken file, and gets the disc with the letter.
+  const OWN_LOGO_TRIES = new Map();
+  let ownLogoAsked = 0;
+  function ownLogoFailed(src) {
+    const path = src.split("?")[0];
+    const tries = (OWN_LOGO_TRIES.get(path) || 0) + 1;
+    OWN_LOGO_TRIES.set(path, tries);
+    if (tries > 3) return false;
+    if (Date.now() - ownLogoAsked > 15000) {
+      ownLogoAsked = Date.now();
+      renewOwnLogos(true);
+    }
+    // Still the same address a moment later: asking again brought no new
+    // one, so it is the file that does not load.
+    setTimeout(() => {
+      if (LOGO_FAILED.has(src) || !(INSTRUMENTS.list || []).some((item) => item.logo === src)) return;
+      LOGO_FAILED.add(src);
+      notify();
+    }, 8000);
+    return true;
   }
 
   // How many of the instruments' sensors are not there right now.
@@ -13904,6 +13951,8 @@
           if (!img || img.localName !== "img" || !img.parentElement || !img.parentElement.classList.contains("logo")) return;
           const src = img.getAttribute("src");
           if (!src || LOGO_FAILED.has(src)) return;
+          // An uploaded logo gets a new address first - see ownLogoFailed.
+          if (isOwnLogo(src) && ownLogoFailed(src)) return;
           LOGO_FAILED.add(src);
           notify();
         },

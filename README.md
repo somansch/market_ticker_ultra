@@ -153,7 +153,7 @@ What to know about a converted instrument:
 ### Own logo, colour and TradingView link
 
 - **Colour** - the colour the instrument is drawn in where the card shows a portfolio's shares: in the ring, on the share bar and on a tile. Choose one of Home Assistant's colours, or type a value such as `#009999`. Empty, the card picks one.
-- **Own logo** - an image of your own, for an instrument without a logo or in place of the one it has: PNG, JPG, WebP, GIF or SVG, up to 1 MB, a square one fits best. It is kept in your configuration folder, under `market_ticker_ultra/logos`, and shown with the logos switched off too.
+- **Own logo** - an image of your own, for an instrument without a logo or in place of the one it has: PNG, JPG, WebP, GIF or SVG, up to 1 MB, a square one fits best. It is kept in your configuration folder, under `market_ticker_ultra/logos`, and shown with the logos switched off too. Only someone signed in to Home Assistant can fetch it: the card is given an address that Home Assistant has signed for a day, and gets a new one in good time - so a dashboard that stays open for weeks keeps its pictures.
 - **TradingView link** - the card links an instrument's details to its page at TradingView. The symbol for that is worked out from what the source calls the instrument; the form shows the one in use, and takes your own in TradingView's spelling - the exchange, a colon, the ticker, such as `NASDAQ:AAPL`. Where nothing can be worked out, the card shows no link rather than one to a wrong page.
 
 ## Settings
