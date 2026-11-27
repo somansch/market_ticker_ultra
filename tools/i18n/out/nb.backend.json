@@ -188,6 +188,7 @@
                         "move": "📂 Flytt til en annen gruppe",
                         "add_lot": "➕ Legg til et kjøp",
                         "sell_lot": "➖ Legg til et salg",
+                        "edit_lot": "✏️ Endre et kjøp eller salg",
                         "remove_lots": "🗑️ Fjern kjøp og salg",
                         "alerts": "🔔 Kursvarsler",
                         "color": "🎨 Farge",
@@ -257,6 +258,53 @@
                         "date": "Tom betyr i dag. Den avgjør rekkefølgen kjøp og salg telles i.",
                         "fees": "Valgfritt. Hva salget kostet i gebyrer.",
                         "taxes": "Valgfritt. Hva som ble betalt i skatt på det."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Endre et kjøp eller salg",
+                    "description": "{name}: velg oppføringen som skal endres.",
+                    "data": {
+                        "lot": "Registrert"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Endre et kjøp",
+                    "description": "{name} – registrert: {entry}.",
+                    "data": {
+                        "quantity": "Antall kjøpt",
+                        "price": "Kjøpskurs per stk. ({currency})",
+                        "date": "Kjøpsdato",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skatt ({currency})",
+                        "remove_lot": "Fjern dette kjøpet"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange aksjer, fondsandeler eller mynter som ble kjøpt.",
+                        "price": "Hva én av dem kostet, i valutaen denne noteringen handles i.",
+                        "date": "Valgfritt. Den avgjør bare rekkefølgen kjøp og salg telles i.",
+                        "fees": "Valgfritt. Hva kjøpet kostet i gebyrer.",
+                        "taxes": "Valgfritt. Hva som ble betalt i skatt på det.",
+                        "remove_lot": "Tar ut dette kjøpet i stedet for å endre det."
+                    }
+                },
+                "change_sale": {
+                    "title": "Endre et salg",
+                    "description": "{name} – registrert: {entry}.",
+                    "data": {
+                        "quantity": "Antall solgt",
+                        "price": "Salgskurs per stk. ({currency})",
+                        "date": "Salgsdato",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skatt ({currency})",
+                        "remove_lot": "Fjern dette salget"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange som ble solgt. De går ut av beholdningen til snittkursen så langt.",
+                        "price": "Hva én av dem innbrakte, i valutaen denne noteringen handles i.",
+                        "date": "Den avgjør rekkefølgen kjøp og salg telles i.",
+                        "fees": "Valgfritt. Hva salget kostet i gebyrer.",
+                        "taxes": "Valgfritt. Hva som ble betalt i skatt på det.",
+                        "remove_lot": "Tar ut dette salget i stedet for å endre det."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Velg en av fargene, eller skriv inn en verdi som #009999.",
                 "group_exists": "Det finnes allerede en gruppe med dette navnet.",
                 "sell_too_many": "Det er mer enn beholdningen.",
-                "no_rate": "ESB publiserer ingen referansekurs for valutaen til denne noteringen, så den kan ikke regnes om."
+                "no_rate": "ESB publiserer ingen referansekurs for valutaen til denne noteringen, så den kan ikke regnes om.",
+                "lots_oversold": "Med denne endringen ville et salg ta ut mer enn det som eies den dagen."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet ble oppdatert."

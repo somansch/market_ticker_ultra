@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/custom_components/market_ticker_ultra/brand/icon.png" width="40" height="40" align="top"> Market Ticker Ultra for Home Assistant - live quotes, portfolios and news, no account, no API key
 
-[![Marketplace (HACS)](https://img.shields.io/badge/Marketplace%20%28HACS%29-Custom-41BDF5?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=somansch&repository=market_ticker_ultra&category=Integration)
+[![Marketplace (HACS)](https://img.shields.io/badge/Marketplace%20%28HACS%29-Default-41BDF5?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=somansch&repository=market_ticker_ultra&category=Integration)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2025.3%2B-41BDF5?style=for-the-badge&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
 [![License](https://img.shields.io/github/license/somansch/market_ticker_ultra?style=for-the-badge)](https://github.com/somansch/market_ticker_ultra/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/somansch/market_ticker_ultra/total?style=for-the-badge&label=Downloads)](https://github.com/somansch/market_ticker_ultra/releases)
@@ -10,17 +10,18 @@
 
 **Available languages:** English, Deutsch, Français, Nederlands, Polski, Español, Italiano, Português (Brasil), Русский, Svenska, 简体中文, Čeština, Norsk bokmål, Dansk, Türkçe, Slovenčina, Lietuvių, Suomi, 日本語
 
-<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-overview.gif" alt="One dashboard with every format of the card: a running ticker across the top, a compact row, a carousel of tiles, a portfolio with its ring, performance against the S&P 500 and its news, the price alerts, and the details of Apple with candlesticks, indicators, key figures and the position" width="90%">
+<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-overview.gif" alt="One dashboard with every format of the card: a running ticker across the top, a compact row, a carousel of tiles, a portfolio with its ring, performance against the S&P 500 and its news, the price alerts, and the details of Apple with candlesticks, indicators, key figures and the position with its purchases and sales" width="90%">
 
 ## Overview
 
 Most ways of getting share prices into Home Assistant start with an account somewhere and an API key to paste, a daily request limit to stay under, and one sensor per symbol that still has to be turned into something worth looking at. Market Ticker Ultra asks public sources instead - Yahoo Finance, Börse Frankfurt, the European Central Bank, Kraken and gold-api.com - and brings its own dashboard card, so a portfolio is on the wall in a few minutes.
 
 Typical reasons to use it:
-- **See the markets at a glance** - a running ticker, a compact row, a carousel of tiles or one instrument's full details, with six [animations](#animations) to move from one instrument to the next.
+- **See the markets at a glance** - a running ticker, a compact row, a carousel of tiles, a [table](#the-table-format) with the columns you choose or one instrument's full details, with six [animations](#animations) to move from one instrument to the next.
 - **Watch any kind of instrument** - stocks, funds, ETFs, indices, futures, currency pairs, coins and precious metals, found by name, symbol or ISIN ([Adding an instrument](#adding-an-instrument)).
 - **Keep track of what you own** - enter your purchases and sales, and every position gets its value and gain as sensors, with what sales have realised and what was paid in fees and taxes ([Purchases and sales](#purchases-and-sales)).
 - **Several portfolios and watchlists** - group your instruments the way your brokers do, each portfolio added up in one base currency and compared with an index of your choice, such as the S&P 500 ([Groups](#groups-portfolios-and-watchlists)).
+- **All your portfolios in one view** - a table or a ticker with one line per portfolio: its value, what the day did to it and what it has gained, and a click away from its positions ([Portfolios as rows](#portfolios-as-rows)).
 - **Get told when a price is reached** - [price alerts](#price-alerts) as binary sensors, announced through your phone, a messenger, a mail service or read out on a Sonos speaker, with texts you write yourself.
 - **Read the news about what you hold** - the newest headlines for each instrument and for a whole portfolio, with the ones you have not seen yet counted and marked ([News](#news)).
 - **Know when the next quarterly figures are due** - the earnings date in the details, marked where it is only an estimate.
@@ -66,6 +67,7 @@ That's the whole setup - everything below covers the individual features and opt
   - [Animations](#animations)
   - [Card size](#card-size)
   - [The portfolio format](#the-portfolio-format)
+  - [The table format](#the-table-format) - columns, starting points, portfolios as rows
   - [The price alerts format](#the-price-alerts-format)
   - [Details and the pop-up](#details-and-the-pop-up)
   - [Live editing](#live-editing)
@@ -112,7 +114,7 @@ Click **Add instrument** on the group it belongs in.
 
 Each instrument has its own menu: **Settings → Devices & Services → Market Ticker Ultra**, the three dots on the instrument, **Reconfigure** - or the pencil on the [card](#live-editing). The menu's heading sums up what is held:
 
-<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-live-edit.jpg" alt="The menu of Apple: Rename, Change the listing, Move to another group, Add a purchase, Add a sale, Remove purchases and sales, Price alerts, Colour, Currency, Own logo and TradingView link, under a line with the purchases entered, the quantity held, the average price and what was realised" width="45%">
+<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-live-edit.jpg" alt="The menu of Apple: Rename, Change the listing, Move to another group, Add a purchase, Add a sale, Change a purchase or sale, Remove purchases and sales, Price alerts, Colour, Currency, Own logo and TradingView link, under a line with the purchases entered, the quantity held, the average price and what was realised" width="45%">
 
 | Entry | What it does |
 |---|---|
@@ -121,6 +123,7 @@ Each instrument has its own menu: **Settings → Devices & Services → Market T
 | 📂 **Move to another group** | Into another portfolio or watchlist. Its sensors stay the same. |
 | ➕ **Add a purchase** | One more purchase - see below. |
 | ➖ **Add a sale** | A sale. Offered while something is held. |
+| ✏️ **Change a purchase or sale** | Pick one of them and correct its quantity, price, date, fees or taxes - or take it out. |
 | 🗑️ **Remove purchases and sales** | Tick what should go. Removing all of them leaves an instrument that is only watched. |
 | 🔔 **Price alerts** | A lower and an upper limit - see [Price alerts](#price-alerts). |
 | 💱 **Currency** | Shown in the base currency, or in the one its exchange quotes in - see [below](#another-listing-another-currency). |
@@ -134,6 +137,7 @@ A purchase and a sale both take a quantity above zero, a price per unit and, opt
 - **The date** decides the order in which purchases and sales are counted: a sale only takes from what was bought before it. A purchase without a date counts first.
 - **A purchase on a watchlist** moves the instrument into a portfolio - one you have, or a new one created on the spot, the first or one more. Its sensors stay the same.
 - **Selling everything** asks what happens next: keep the instrument in the portfolio, move it to a watchlist, or remove it. Its purchases and sales go with it in every case, and so does what it has earned.
+- **Changing one of them** keeps it what it was - a purchase stays a purchase, a sale a sale. A change after which a sale would take out more than was held on its day is refused, and so is removing the purchase a later sale relies on. On the [card](#details-and-the-pop-up), a click on a purchase or a sale in the details opens its form directly.
 
 ### Another listing, another currency
 
@@ -190,7 +194,7 @@ None of them needs an account or a key. A few things about how they are used:
 
 ## Currencies and performance
 
-**Base currency.** Every position is added up in the base currency from [Settings](#settings). A position in another currency is converted at the European Central Bank's daily reference rate; the portfolio's value sensor says which day's rates it used, and which positions could not be converted. An instrument's own sensors stay in its own currency - unless it is [shown in the base currency](#another-listing-another-currency). When you change the base currency, the long-term statistics of every sensor that was in the old one - the portfolios' sums, spot metals, converted instruments - are cleared and start afresh.
+**Base currency.** Every position is added up in the base currency from [Settings](#settings). A position in another currency is converted at the European Central Bank's daily reference rate; the portfolio's value sensor says which day's rates it used, and which positions could not be converted. An instrument's own sensors stay in its own currency - unless it is [shown in the base currency](#another-listing-another-currency). When you change the base currency, the long-term statistics of every sensor that was in the old one - the portfolios' sums, spot metals, converted instruments - are cleared and start afresh. A few minutes after every start and every change of the settings, the integration also looks whether the statistics of one of its sensors are still in another unit than the sensor reports, and clears those: Home Assistant writes nothing to such a series.
 
 **Performance.** The [portfolio format](#the-portfolio-format) draws the portfolio's return over a period - one day to the whole period - beside the index set for its group. It is a **time-weighted return**: a purchase or a sale in the middle of the period does not count as a gain or a loss, so the line compares how the holdings did, not how much money was put in. An instrument without a price series is left out and named under the chart.
 
@@ -304,6 +308,7 @@ Attributes on an instrument's price sensor:
 | `volume` | Units traded today. |
 | `market_state` | Whether the market is open, closed, in pre-market or in after hours. |
 | `quote_time` | When the quote is from, ISO format. |
+| `trend`, `trend_change` | How the price moved with the last update - `up`, `down` or `flat` - and by how much. Not the change against the previous close. |
 | `exchange`, `instrument_type`, `instrument_name` | The exchange, the kind of instrument (`EQUITY`, `ETF`, `INDEX`, `CURRENCY`, `CRYPTOCURRENCY`, ...) and its name at the source. |
 
 | Sensor | Attributes |
@@ -330,9 +335,12 @@ Add it the normal way - search for "Market Ticker Ultra" in the card picker - or
 | **Carousel** | Tiles side by side, as many as fit, moving on. |
 | **Details** | One instrument's details on the card itself, with arrows to step through the others. |
 | **Portfolio** | One portfolio: its shares, its performance beside its index, and its news. |
+| **Table** | Instruments - or whole portfolios - as rows, with the columns you choose. |
 | **Price alerts** | Every instrument with its limits, and where the price stands between them. |
 
-A click on an instrument opens its details in a pop-up - or its page at TradingView, if you set **On click** that way. Which instruments a card shows is chosen by **Groups** - one, several or all - or one by one under **Instruments**, in your own order. **Order** sorts them as listed, by name or by today's change.
+A click on an instrument opens its details in a pop-up. **On click** can make it open the instrument's page at TradingView instead, or **Navigate** to a dashboard or a view of your choice. Which instruments a card shows is chosen by **Groups** - one, several or all - or one by one under **Instruments**, in your own order. **Order** sorts them as listed, by name or by today's change; a table starts sorted by name, every other format as listed.
+
+In the ticker, the compact row and the carousel, **Entries** can be set to **Portfolios**: one entry per portfolio, with its value in the base currency in the place of the price, today's change, and - where the format draws one - the curve of its performance over the day. A click on a portfolio opens the details of its first position, and the pop-up's arrows then lead through the positions of that portfolio.
 
 ### Animations
 
@@ -359,6 +367,35 @@ A click on a part of the ring, the bar or a tile opens that position's details.
 
 <img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-portfolio.jpg" alt="The portfolio format four ways: the ring, the share bar, tiles, and the list without a visualisation, once with the allocation and once with the gains" width="90%">
 
+### The table format
+
+The table lists the card's instruments as rows and shows the columns you choose. Wider than its card, it is moved sideways.
+
+**Columns.** Each column has a **value**, optionally a second, smaller value under it as its **subtitle**, and a **heading** - the value's name until you write another. Columns are added, removed and moved in the editor. What a column can show:
+
+| | Values |
+|---|---|
+| **The instrument** | Name with its logo, name alone, symbol, exchange, symbol and exchange |
+| **Its price** | Price, previous close, the day's high and low, the 52-week low and high, volume, the time of the price |
+| **How it moved** | The day's change as an amount and in percent, the change over the last five trading days as an amount and in percent, and the **trend**: an arrow for how the price moved with the last update |
+| **Curves** | A small curve of the day, of the last five trading days and of the last month |
+| **Symbols** | The price alert's symbol - a click sets the alerts - and the symbol for new headlines, which opens them |
+| **What is held** | Quantity, average price, both in one, value, share, today's gain as an amount and in percent, and the gain since the purchase as an amount and in percent |
+
+What is held is offered where the card shows a portfolio. Every value drawn in the gain or loss colour can stand **as a pill**, per column; a column of pills is set on its middle.
+
+**Starting points.** **Compact** is a watchlist in five columns, **Portfolio** a portfolio in five, and both fit a card about 500 pixels wide without moving sideways. **Classic** has ten columns, for a card across the dashboard. **Automatic** takes Portfolio where the card shows portfolios only, and Compact otherwise. Change a column and the columns are the card's own from then on.
+
+**In the table.** A click on a heading sorts by that column - downwards, upwards with the second click, and back to the card's own order with the third. The **search field** beside the name's heading filters the rows by name or symbol as you type. The **refresh button** at the top right fetches the prices again and says how long ago they were fetched. With a portfolio in the card, a last line shows the **total**: value, today's change and gain in the base currency. Each of them has its own switch.
+
+<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-table.jpg" alt="Three table cards, each with its search field and its refresh button: Classic across the dashboard with ten columns, and under it Portfolio and Compact side by side with five columns each, a total line under the holdings" width="90%">
+
+#### Portfolios as rows
+
+With **Rows** set to **Portfolios**, the table has one line per portfolio and the total of all of them under it: name, number of positions, value, share of the total, today's gain and the gain since the purchases - as amounts and in percent - and small curves of its [performance](#currencies-and-performance) over the day, the last five trading days and the last month. These columns are chosen in a list of their own. A click on a portfolio shows its instruments in the same table, with an arrow back in the title line.
+
+Under **Layout → Table**, every part of the table has its own look: the refresh button with its symbol and background, the column headings, the dividing lines - colour, style, width, or none -, the logos, the values, the subtitles, the pills, the trend's arrows and the total's line.
+
 ### The price alerts format
 
 Every instrument of the card in a line: the alert symbol, its logo and name, the lower limit, a track with a mark where the price stands, and the upper limit. The symbol has three looks - no alert set, an alert set, and an alert on - and a limit that is reached takes the alert's colour. Instruments without an alert are listed too, so an alert is set from here with one click on the symbol (administrators only).
@@ -368,11 +405,13 @@ Every instrument of the card in a line: the alert symbol, its logo and name, the
 The details - on the card in the Details format, in the pop-up in every other - show:
 
 - **The head**: logo, name, symbol, exchange and whether the market is open, closed, in pre-market or in after hours; the price and the change for the period shown.
-- **The chart**, from one day to the whole history, as **Candlesticks** or a **Line** - **Automatic** draws candlesticks up to one year and a line beyond - with the volume as bars, **SMA 20**, **SMA 50** and **EMA 9** as lines and the **RSI 14** as a strip. Each of the four can be hidden from the chart with its eye. A week is drawn day by day: every day is as wide as the next, and each price stands at its time of day, so a listing with few prices shows them where they were.
+- **The chart**, from one day to the whole history, as **Candlesticks** or a **Line** - **Automatic** draws candlesticks up to one year and a line beyond - with the volume as bars, **SMA 20**, **SMA 50** and **EMA 9** as lines and the **RSI 14** as a strip. Each of the four can be hidden from the chart with its eye. Your **purchases and sales** are marked in it - a triangle pointing up for a purchase, down for a sale, at its day and price - with a dashed line at the average price paid. A week is drawn day by day: every day is as wide as the next, and each price stands at its time of day, so a listing with few prices shows them where they were.
 - **The key figures**: price alerts, open, high and low, previous close, the 52-week range, volume against its three-month average, market cap, P/E, EPS and the next earnings date. Each has its own switch and its own place in the list.
-- **My position**: quantity, value, gain or loss, average price, the change in the period, and what was realised and paid in fees and taxes.
+- **My position**: quantity, value, gain or loss, average price, the change in the period, and what was realised and paid in fees and taxes. Under it the **purchases and sales** one by one, the newest first: day, quantity, price and amount - for a sale, what it realised. For administrators, a click on one of them opens the form that [changes it](#purchases-and-sales).
 - **The news** about the instrument.
 - **TradingView's logo**, a link to the instrument's page there.
+
+<img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-purchase-sale-detail.jpg" alt="My position for Apple: 10 units, their value and the gain, a line with the average price, the change over one week, what was realised and the fees, and under it a sale and two purchases with day, quantity, price and amount" width="60%">
 
 Moving the pointer over the chart shows a box with the date, the price and the values of the indicators at that point.
 
@@ -390,18 +429,18 @@ The editor is the one the [Annuals card](https://github.com/somansch/annuals#cus
 
 | Panel | Tab | What it holds |
 |---|---|---|
-| **Settings** | **General** | Card title, format, groups or portfolio, instruments, order, on click, hide amounts, and which [live editing](#live-editing) buttons the card has. |
-| | **Content** | What an entry shows, what the details and the portfolio show, the chart's periods and type, and the news. |
+| **Settings** | **General** | Card title, format, groups or portfolio, instruments, entries, order, on click, hide amounts, and which [live editing](#live-editing) buttons the card has. |
+| | **Content** | What an entry shows, the table's rows and columns, what the details and the portfolio show, the chart's periods and type, and the news. |
 | | **Animation** | Automatic change, effect, duration, seconds per instrument, endless loop. |
-| **Layout** | **General** | The card title, the card's and the tiles' background, the gain and loss colours, the price alert symbols, and the live editing buttons' looks. |
-| | **List** / **Portfolio** / **Price alerts** | How each part of an entry - or of the format - looks. |
+| **Layout** | **General** | The distance to the frame, the card title, the card's and the tiles' background, the gain and loss colours, the price alert symbols, and the live editing buttons' looks. |
+| | **List** / **Portfolio** / **Price alerts** / **Table** | How each part of an entry - or of the format - looks. |
 | | **Pop-up** / **Details** | How each part of the details looks, the chart's lines included. |
 
 The editor shows only what the chosen format can use. Every row carries an **"i"** with a sentence on what it does, and the logos are credited there: *Logos by [Elbstream](https://elbstream.com)*.
 
 ### Making it your own
 
-Every piece of text on the card - names, prices, changes, the figures, the headlines, the axes - has its own colour, size, bold, italic, capitals, underline and letter spacing. The chart's lines, grid and volume bars, the indicators, the dividers, the position's box, the alert symbols, the buttons and the backgrounds have their own colours, styles and sizes. A field left empty keeps the card's own look, which follows your theme, light or dark.
+Every piece of text on the card - names, prices, changes, the figures, the headlines, the axes - has its own colour, size, bold, italic, capitals, underline and letter spacing. The chart's lines, grid and volume bars, the indicators, the dividers, the position's box, the alert symbols, the buttons and the backgrounds have their own colours, styles and sizes. A field left empty keeps the card's own look, which follows your theme, light or dark. Where a theme draws a frame of its own inside its cards, the card's content ends before it; **Distance to the frame** sets that distance by hand.
 
 <img src="https://raw.githubusercontent.com/somansch/market_ticker_ultra/main/docs/market-ticker-card-customizing.jpg" alt="The same dashboard with its own colours, fonts, symbols and backgrounds on every card" width="90%">
 
@@ -409,12 +448,12 @@ Every piece of text on the card - names, prices, changes, the figures, the headl
 
 ### Marketplace (HACS)
 
-The recommended way. Until Market Ticker Ultra is in the Marketplace's default list, add it as a custom repository:
+The recommended way. Market Ticker Ultra is in the default list of the Marketplace - the store Home Assistant 2026.11 ships, HACS on earlier versions - so there is no repository to add:
 
 [![Open Marketplace repository on My Home Assistant](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=somansch&repository=market_ticker_ultra&category=Integration)
 
-1. Click the button above - or open Marketplace (HACS) in Home Assistant, choose **Custom repositories** from the three dots, and add `https://github.com/somansch/market_ticker_ultra` as an **Integration**
-2. Search for "Market Ticker Ultra" and click **Download**
+1. Click the button above, or open Marketplace (HACS) in Home Assistant and search for "Market Ticker Ultra"
+2. Click **Download**
 3. Restart Home Assistant
 
 ### Manual

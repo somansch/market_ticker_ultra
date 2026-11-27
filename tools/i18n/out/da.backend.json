@@ -188,6 +188,7 @@
                         "move": "📂 Flyt til en anden gruppe",
                         "add_lot": "➕ Tilføj et køb",
                         "sell_lot": "➖ Tilføj et salg",
+                        "edit_lot": "✏️ Ret et køb eller salg",
                         "remove_lots": "🗑️ Fjern køb og salg",
                         "alerts": "🔔 Kursalarmer",
                         "color": "🎨 Farve",
@@ -257,6 +258,53 @@
                         "date": "Tom betyder i dag. Den afgør rækkefølgen, købene og salgene tælles i.",
                         "fees": "Valgfri. Hvad salget kostede i gebyrer.",
                         "taxes": "Valgfri. Hvad der blev betalt i skat af det."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Ret et køb eller salg",
+                    "description": "{name}: vælg den post, der skal rettes.",
+                    "data": {
+                        "lot": "Registreret"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Ret et køb",
+                    "description": "{name} - registreret: {entry}.",
+                    "data": {
+                        "quantity": "Købt antal",
+                        "price": "Købskurs pr. stk. ({currency})",
+                        "date": "Købsdato",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skat ({currency})",
+                        "remove_lot": "Fjern dette køb"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange aktier, andele eller coins der blev købt.",
+                        "price": "Hvad én af dem kostede, i den valuta noteringen handles i.",
+                        "date": "Valgfri. Den afgør kun rækkefølgen, købene og salgene tælles i.",
+                        "fees": "Valgfri. Hvad købet kostede i gebyrer.",
+                        "taxes": "Valgfri. Hvad der blev betalt i skat af det.",
+                        "remove_lot": "Tager dette køb ud i stedet for at rette det."
+                    }
+                },
+                "change_sale": {
+                    "title": "Ret et salg",
+                    "description": "{name} - registreret: {entry}.",
+                    "data": {
+                        "quantity": "Solgt antal",
+                        "price": "Salgskurs pr. stk. ({currency})",
+                        "date": "Salgsdato",
+                        "fees": "Gebyrer ({currency})",
+                        "taxes": "Skat ({currency})",
+                        "remove_lot": "Fjern dette salg"
+                    },
+                    "data_description": {
+                        "quantity": "Hvor mange der blev solgt. De forlader beholdningen til dens hidtidige gennemsnitskurs.",
+                        "price": "Hvad én af dem indbragte, i den valuta noteringen handles i.",
+                        "date": "Den afgør rækkefølgen, købene og salgene tælles i.",
+                        "fees": "Valgfri. Hvad salget kostede i gebyrer.",
+                        "taxes": "Valgfri. Hvad der blev betalt i skat af det.",
+                        "remove_lot": "Tager dette salg ud i stedet for at rette det."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Vælg en af farverne, eller skriv en værdi som #009999.",
                 "group_exists": "Der findes allerede en gruppe med dette navn.",
                 "sell_too_many": "Det er mere end beholdningen.",
-                "no_rate": "ECB offentliggør ingen referencekurs for denne noterings valuta, så den kan ikke omregnes."
+                "no_rate": "ECB offentliggør ingen referencekurs for denne noterings valuta, så den kan ikke omregnes.",
+                "lots_oversold": "Med denne ændring ville et salg tage mere ud, end der er i beholdningen på dets dag."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet blev opdateret."

@@ -188,6 +188,7 @@
                         "move": "📂 移至其他分组",
                         "add_lot": "➕ 添加买入",
                         "sell_lot": "➖ 添加卖出",
+                        "edit_lot": "✏️ 更改买入或卖出",
                         "remove_lots": "🗑️ 移除买入和卖出记录",
                         "alerts": "🔔 价格提醒",
                         "color": "🎨 颜色",
@@ -257,6 +258,53 @@
                         "date": "留空表示今日。决定买入和卖出的计算顺序。",
                         "fees": "可选。卖出所支付的费用。",
                         "taxes": "可选。为此支付的税费。"
+                    }
+                },
+                "edit_lot": {
+                    "title": "更改买入或卖出",
+                    "description": "{name}：选择要更改的记录。",
+                    "data": {
+                        "lot": "已录入"
+                    }
+                },
+                "change_purchase": {
+                    "title": "更改买入",
+                    "description": "{name} - 已录入：{entry}。",
+                    "data": {
+                        "quantity": "买入数量",
+                        "price": "每单位买入价（{currency}）",
+                        "date": "买入日期",
+                        "fees": "费用（{currency}）",
+                        "taxes": "税费（{currency}）",
+                        "remove_lot": "移除此笔买入"
+                    },
+                    "data_description": {
+                        "quantity": "买入的股数、份额或加密货币数量。",
+                        "price": "每单位的成本，以该上市地的交易货币计。",
+                        "date": "可选。仅决定买入和卖出的计算顺序。",
+                        "fees": "可选。买入所支付的费用。",
+                        "taxes": "可选。为此支付的税费。",
+                        "remove_lot": "移除此笔买入，而不是更改它。"
+                    }
+                },
+                "change_sale": {
+                    "title": "更改卖出",
+                    "description": "{name} - 已录入：{entry}。",
+                    "data": {
+                        "quantity": "卖出数量",
+                        "price": "每单位卖出价（{currency}）",
+                        "date": "卖出日期",
+                        "fees": "费用（{currency}）",
+                        "taxes": "税费（{currency}）",
+                        "remove_lot": "移除此笔卖出"
+                    },
+                    "data_description": {
+                        "quantity": "卖出的数量。按此前的均价从持仓中扣除。",
+                        "price": "每单位的卖出所得，以该上市地的交易货币计。",
+                        "date": "决定买入和卖出的计算顺序。",
+                        "fees": "可选。卖出所支付的费用。",
+                        "taxes": "可选。为此支付的税费。",
+                        "remove_lot": "移除此笔卖出，而不是更改它。"
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "请选择一种颜色，或输入 #009999 这样的值。",
                 "group_exists": "已存在同名分组。",
                 "sell_too_many": "超过了持有数量。",
-                "no_rate": "欧洲央行未公布该上市地币种的参考汇率，因此无法换算。"
+                "no_rate": "欧洲央行未公布该上市地币种的参考汇率，因此无法换算。",
+                "lots_oversold": "更改后，某笔卖出的数量将超过其当日的持有数量。"
             },
             "abort": {
                 "reconfigure_successful": "标的已更新。"

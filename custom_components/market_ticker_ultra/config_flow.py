@@ -113,6 +113,7 @@ from .holdings import (
     clean_lots,
     holding_from_lots,
     ledger_from_lots,
+    oversold,
 )
 from .logos import OWN_LOGO_TYPES, remove_own_logo, store_own_logo
 from .providers import Listing, Provider, ProviderError, Quote
@@ -137,6 +138,8 @@ _CURRENCY = re.compile(r"^[A-Z]{3}$")
 
 CONF_ADD_ANOTHER = "add_another"
 CONF_REMOVE = "remove"
+CONF_LOT = "lot"
+CONF_REMOVE_LOT = "remove_lot"
 CONF_FILE = "file"
 CONF_REMOVE_LOGO = "remove_logo"
 # Where a purchase on a watchlist takes the instrument, and where the sale
@@ -761,6 +764,8 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         self._chosen: Listing | None = None
         self._convert = False
         self._lots: list[dict[str, Any]] = []
+        # Which of them is being changed - see async_step_edit_lot.
+        self._lot_index: int | None = None
 
 
     def _providers(self) -> list[Provider]:
@@ -1008,6 +1013,7 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
         if is_portfolio(self._get_entry()) and held and held.quantity > 0:
             options.append("sell_lot")
         if is_portfolio(self._get_entry()) and self._lots:
+            options.append("edit_lot")
             options.append("remove_lots")
         options.append("alerts")
         options.append("color")
@@ -1176,6 +1182,9 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
                 from homeassistant.components.recorder import get_instance
 
                 get_instance(hass).async_clear_statistics(stale)
+            # And once more when the window the change fell into is past.
+            if coordinator is not None:
+                coordinator.schedule_mend()
 
         hass.async_create_task(afterwards())
         return result
@@ -1617,6 +1626,119 @@ class InstrumentSubentryFlow(ConfigSubentryFlow):
                 }
             ),
             description_placeholders=self._summary(),
+        )
+
+    async def async_step_edit_lot(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """Which purchase or sale is to be changed."""
+        if user_input is not None:
+            try:
+                index = int(user_input.get(CONF_LOT))
+            except (TypeError, ValueError):
+                index = -1
+            if 0 <= index < len(self._lots):
+                self._lot_index = index
+                return await self.async_step_change_lot()
+        currency = self._get_reconfigure_subentry().data.get(CONF_CURRENCY) or ""
+        options = [
+            {"value": str(index), "label": _lot_label(lot, currency)}
+            for index, lot in enumerate(self._lots)
+        ]
+        return self.async_show_form(
+            step_id="edit_lot",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_LOT): SelectSelector(
+                        SelectSelectorConfig(options=options, mode=SelectSelectorMode.LIST)
+                    )
+                }
+            ),
+            description_placeholders=self._summary(),
+        )
+
+    async def async_step_change_lot(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """On to the form of the entry chosen: a purchase's or a sale's -
+        two steps, so that each has its own words."""
+        index = self._lot_index
+        if index is None or not 0 <= index < len(self._lots):
+            return await self.async_step_edit_lot()
+        if self._lots[index][LOT_QUANTITY] < 0:
+            return await self.async_step_change_sale()
+        return await self.async_step_change_purchase()
+
+    async def async_step_change_purchase(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """A purchase, changed or taken out."""
+        return await self._async_change_lot("change_purchase", user_input)
+
+    async def async_step_change_sale(
+        self, user_input: dict[str, Any] | None = None
+    ) -> SubentryFlowResult:
+        """A sale, changed or taken out."""
+        return await self._async_change_lot("change_sale", user_input)
+
+    async def _async_change_lot(
+        self, step_id: str, user_input: dict[str, Any] | None
+    ) -> SubentryFlowResult:
+        """One purchase or sale, changed or taken out. It stays what it
+        was - a purchase or a sale - and the quantity is entered above zero
+        either way. Refused where a sale would then take more than is held
+        when its turn comes."""
+        index = self._lot_index
+        if index is None or not 0 <= index < len(self._lots):
+            return await self.async_step_edit_lot()
+        old = self._lots[index]
+        sale = old[LOT_QUANTITY] < 0
+        errors: dict[str, str] = {}
+        if user_input is not None:
+            changed: list[dict[str, Any]] | None = None
+            if user_input.get(CONF_REMOVE_LOT):
+                changed = [lot for place, lot in enumerate(self._lots) if place != index]
+            else:
+                lot = _lot_from_input(user_input)
+                if lot is None or lot[LOT_QUANTITY] <= 0:
+                    errors["base"] = "invalid_lot"
+                else:
+                    if sale:
+                        lot = {
+                            **lot,
+                            LOT_QUANTITY: -lot[LOT_QUANTITY],
+                            LOT_DATE: lot.get(LOT_DATE)
+                            or old.get(LOT_DATE)
+                            or dt_util.now().date().isoformat(),
+                        }
+                    changed = [*self._lots]
+                    changed[index] = lot
+            if changed is not None:
+                if oversold(changed):
+                    errors["base"] = "lots_oversold"
+                else:
+                    self._lots = changed
+                    self._lot_index = None
+                    return await self._async_after_lots()
+        shown = user_input or {
+            LOT_QUANTITY: abs(old[LOT_QUANTITY]),
+            LOT_PRICE: old[LOT_PRICE],
+            **{key: old[key] for key in (LOT_DATE, LOT_FEES, LOT_TAXES) if old.get(key)},
+        }
+        schema = _lot_schema(required=True, add_another=False).extend(
+            {vol.Required(CONF_REMOVE_LOT, default=False): BooleanSelector()}
+        )
+        # As it was entered - a sale's quantity without the sign it is
+        # kept with.
+        entered = _lot_label(
+            {**old, LOT_QUANTITY: abs(old[LOT_QUANTITY])},
+            self._get_reconfigure_subentry().data.get(CONF_CURRENCY) or "",
+        )
+        return self.async_show_form(
+            step_id=step_id,
+            data_schema=self.add_suggested_values_to_schema(schema, shown),
+            description_placeholders={**self._summary(), "entry": entered},
+            errors=errors,
         )
 
     async def async_step_remove_lots(

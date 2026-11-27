@@ -16,6 +16,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.event import async_call_later
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.util import dt as dt_util
 
@@ -83,6 +84,10 @@ _VOLUME_RANGE = "3mo"
 _FAILURES_FOR_ISSUE = 3
 
 _LOGGER = logging.getLogger(__name__)
+
+# How long after a start or a change the statistics' units are looked at:
+# past the five-minute window the change fell into.
+MEND_AFTER = 400
 
 
 @dataclass(frozen=True, slots=True)
@@ -171,9 +176,15 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         # the first poll has said where every price stands: an alert that is
         # on at start is not news.
         self._alerts: dict[tuple[str, str], bool] | None = None
+        # How each price moved with its last update: (direction, difference)
+        # by instrument - see _note_trends.
+        self.trends: dict[str, tuple[str, float]] = {}
         # The base currency as it was when the settings were last looked at
         # - see settings_changed.
         self._base = self.base_currency
+        # The look at the statistics' units that is still to come - see
+        # schedule_mend.
+        self._mend: Any = None
 
     @property
     def options(self) -> dict[str, Any]:
@@ -189,11 +200,79 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
         self._set_interval(any_open=True)
         # Where the news come from may be what has changed.
         self.news.clear()
+        # After a start and after every change of the settings.
+        self.schedule_mend()
         before, self._base = self._base, self.base_currency
         if before and before.upper() != self._base.upper():
             self.hass.async_create_task(self._async_base_changed(before))
             return
         self.hass.async_create_task(self.async_request_refresh())
+
+    def schedule_mend(self) -> None:
+        """Look at the statistics' units in a few minutes - see
+        async_mend_statistics. Not at once: the recorder works a five-minute
+        window off some seconds after its end, and after a start it catches
+        up on the ones it missed. Statistics cleared at the moment of a
+        change come back in the old unit where a window from before the
+        change is still to be worked off."""
+        if self._mend is not None:
+            self._mend()
+
+        async def mend(_now: datetime) -> None:
+            self._mend = None
+            await self.async_mend_statistics()
+
+        self._mend = async_call_later(self.hass, MEND_AFTER, mend)
+
+    async def async_mend_statistics(self) -> None:
+        """Clear the long-term statistics of our sensors that are in another
+        unit than the sensor now reports - a currency that was changed.
+        Home Assistant writes nothing to such a series, so nothing is lost
+        that would have gone on."""
+        hass = self.hass
+        if "recorder" not in hass.config.components:
+            return
+        from homeassistant.components.recorder import get_instance
+        from homeassistant.components.recorder.statistics import get_metadata
+
+        ours = {entry.entry_id for entry in hass.config_entries.async_entries(DOMAIN)}
+        units: dict[str, str | None] = {}
+        for item in er.async_get(hass).entities.values():
+            if item.platform != DOMAIN or item.domain != "sensor" or item.config_entry_id not in ours:
+                continue
+            state = hass.states.get(item.entity_id)
+            # Only what reports a value: without one there is no unit to go by.
+            if state is None or state.state in ("unavailable", "unknown"):
+                continue
+            units[item.entity_id] = state.attributes.get("unit_of_measurement") or None
+        if not units:
+            return
+
+        def read() -> dict[str, Any]:
+            return get_metadata(hass, statistic_ids=set(units))
+
+        try:
+            metadata = await get_instance(hass).async_add_executor_job(read)
+        except Exception as err:  # noqa: BLE001 - never worth failing for
+            _LOGGER.debug("Statistics could not be looked at: %s", err)
+            return
+        stale = sorted(
+            statistic_id
+            for statistic_id, (_, meta) in metadata.items()
+            if (meta.get("unit_of_measurement") or None) != units.get(statistic_id)
+        )
+        if stale:
+            _LOGGER.info(
+                "Long-term statistics in a unit their sensor no longer reports are cleared: %s",
+                ", ".join(stale),
+            )
+            get_instance(hass).async_clear_statistics(stale)
+
+    async def async_shutdown(self) -> None:
+        if self._mend is not None:
+            self._mend()
+            self._mend = None
+        await super().async_shutdown()
 
     async def _async_base_changed(self, before: str) -> None:
         """Another base currency: every figure that was in the old one is in
@@ -538,6 +617,7 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
             any_open=any(q.market_state != STATE_CLOSED for q in quotes.values())
         )
         self._check_alerts(quotes)
+        self._note_trends(previous, quotes)
         return MarketData(
             quotes=quotes, sources=sources, fetched_at=dt_util.utcnow(), error=failure
         )
@@ -630,6 +710,34 @@ class MarketTickerUltraCoordinator(DataUpdateCoordinator[MarketData]):
             low=column(history.low),
             close=column(history.close),
         )
+
+    # ----------------------------------------------------------- the trend
+
+    def _note_trends(self, previous: MarketData | None, quotes: dict[str, Quote]) -> None:
+        """Which way each price went with its last update - against the
+        price before that update, not against yesterday's close.
+
+        An update is a quote the source has stamped anew, or a new price. A
+        poll that brings the same quote again - the market is closed, the
+        source has nothing newer - is no update, and the trend stays what
+        the last one made it. A quote in another currency than the one
+        before (the instrument was switched to the base currency) starts
+        without a trend."""
+        before = previous.quotes if previous else {}
+        for key in [key for key in self.trends if key not in quotes]:
+            del self.trends[key]
+        for key, quote in quotes.items():
+            old = before.get(key)
+            if old is None:
+                continue
+            if old.currency != quote.currency:
+                self.trends.pop(key, None)
+                continue
+            if old.quote_time == quote.quote_time and old.price == quote.price:
+                continue
+            difference = quote.price - old.price
+            direction = "up" if difference > 0 else "down" if difference < 0 else "flat"
+            self.trends[key] = (direction, difference)
 
     # ---------------------------------------------------------- the alerts
 

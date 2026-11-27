@@ -128,6 +128,46 @@ def ledger_from_lots(raw: Any) -> Ledger:
     return Ledger(realized=round(realized, 6), fees=round(fees, 6), taxes=round(taxes, 6))
 
 
+def oversold(lots: list[dict[str, Any]]) -> bool:
+    """Whether a sale takes out more than is held when its turn comes."""
+    quantity = 0.0
+    for lot in in_order(lots):
+        quantity += lot[LOT_QUANTITY]
+        if quantity < -1e-9:
+            return True
+    return False
+
+
+def trades_from_lots(raw: Any) -> list[dict[str, Any]]:
+    """Each purchase and sale in the order of their days - a sale with what
+    it realised against the average price paid until then. Each says where
+    it stands among the purchases as stored: what a change of it names."""
+    trades = []
+    quantity = cost = 0.0
+    lots = clean_lots(raw)
+    places = {id(lot): index for index, lot in enumerate(lots)}
+    for lot in in_order(lots):
+        amount = lot[LOT_QUANTITY]
+        trade: dict[str, Any] = {
+            "index": places[id(lot)],
+            "date": lot[LOT_DATE],
+            "quantity": amount,
+            "price": lot[LOT_PRICE],
+        }
+        if amount > 0:
+            quantity += amount
+            cost += amount * lot[LOT_PRICE]
+        else:
+            sold = min(-amount, quantity)
+            if quantity > 0:
+                average = cost / quantity
+                trade["realized"] = round(sold * (lot[LOT_PRICE] - average), 6)
+                cost -= sold * average
+            quantity -= sold
+        trades.append(trade)
+    return trades
+
+
 def holding_from_lots(raw: Any) -> Holding | None:
     """What the purchases add up to - None where nothing is held.
 

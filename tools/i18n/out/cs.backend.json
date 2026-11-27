@@ -188,6 +188,7 @@
                         "move": "📂 Přesunout do jiné skupiny",
                         "add_lot": "➕ Přidat nákup",
                         "sell_lot": "➖ Přidat prodej",
+                        "edit_lot": "✏️ Změnit nákup nebo prodej",
                         "remove_lots": "🗑️ Odebrat nákupy a prodeje",
                         "alerts": "🔔 Cenové alarmy",
                         "color": "🎨 Barva",
@@ -257,6 +258,53 @@
                         "date": "Prázdné znamená dnes. Určuje pořadí, v jakém se nákupy a prodeje započítávají.",
                         "fees": "Volitelné. Kolik stál prodej na poplatcích.",
                         "taxes": "Volitelné. Kolik se z toho zaplatilo na daních."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Změnit nákup nebo prodej",
+                    "description": "{name}: vyberte záznam, který chcete změnit.",
+                    "data": {
+                        "lot": "Zadáno"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Změnit nákup",
+                    "description": "{name} - jak bylo zadáno: {entry}.",
+                    "data": {
+                        "quantity": "Nakoupené množství",
+                        "price": "Nákupní cena za kus ({currency})",
+                        "date": "Datum nákupu",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Daně ({currency})",
+                        "remove_lot": "Odebrat tento nákup"
+                    },
+                    "data_description": {
+                        "quantity": "Kolik akcií, podílů nebo mincí bylo nakoupeno.",
+                        "price": "Kolik stál jeden kus, v měně, ve které se tato kotace obchoduje.",
+                        "date": "Volitelné. Určuje jen pořadí, v jakém se nákupy a prodeje započítávají.",
+                        "fees": "Volitelné. Kolik stál nákup na poplatcích.",
+                        "taxes": "Volitelné. Kolik se z toho zaplatilo na daních.",
+                        "remove_lot": "Místo změny tento nákup odebere."
+                    }
+                },
+                "change_sale": {
+                    "title": "Změnit prodej",
+                    "description": "{name} - jak bylo zadáno: {entry}.",
+                    "data": {
+                        "quantity": "Prodané množství",
+                        "price": "Prodejní cena za kus ({currency})",
+                        "date": "Datum prodeje",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Daně ({currency})",
+                        "remove_lot": "Odebrat tento prodej"
+                    },
+                    "data_description": {
+                        "quantity": "Kolik kusů bylo prodáno. Odcházejí z pozice za její dosavadní průměrnou cenu.",
+                        "price": "Kolik jeden kus vynesl, v měně, ve které se tato kotace obchoduje.",
+                        "date": "Určuje pořadí, v jakém se nákupy a prodeje započítávají.",
+                        "fees": "Volitelné. Kolik stál prodej na poplatcích.",
+                        "taxes": "Volitelné. Kolik se z toho zaplatilo na daních.",
+                        "remove_lot": "Místo změny tento prodej odebere."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Vyberte jednu z barev, nebo zadejte hodnotu jako #009999.",
                 "group_exists": "Skupina s tímto názvem už existuje.",
                 "sell_too_many": "To je víc, než držíte.",
-                "no_rate": "Pro měnu této kotace ECB nezveřejňuje referenční kurz, proto ji nelze přepočítat."
+                "no_rate": "Pro měnu této kotace ECB nezveřejňuje referenční kurz, proto ji nelze přepočítat.",
+                "lots_oversold": "Po této změně by prodej odebral víc, než je v jeho den v držení."
             },
             "abort": {
                 "reconfigure_successful": "Instrument byl aktualizován."

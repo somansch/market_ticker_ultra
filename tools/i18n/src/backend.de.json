@@ -188,6 +188,7 @@
                         "move": "📂 In eine andere Gruppe verschieben",
                         "add_lot": "➕ Kauf hinzufügen",
                         "sell_lot": "➖ Verkauf hinzufügen",
+                        "edit_lot": "✏️ Kauf oder Verkauf ändern",
                         "remove_lots": "🗑️ Käufe und Verkäufe entfernen",
                         "alerts": "🔔 Kursalarme",
                         "color": "🎨 Farbe",
@@ -257,6 +258,53 @@
                         "date": "Leer gilt heute. Es bestimmt die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
                         "fees": "Optional. Was der Verkauf an Gebühren gekostet hat.",
                         "taxes": "Optional. Was darauf an Steuern gezahlt wurde."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Kauf oder Verkauf ändern",
+                    "description": "{name}: Wähle den Eintrag, der geändert werden soll.",
+                    "data": {
+                        "lot": "Eingetragen"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Kauf ändern",
+                    "description": "{name} - eingetragen: {entry}.",
+                    "data": {
+                        "quantity": "Gekaufte Stückzahl",
+                        "price": "Kaufpreis je Stück ({currency})",
+                        "date": "Kaufdatum",
+                        "fees": "Gebühren ({currency})",
+                        "taxes": "Steuern ({currency})",
+                        "remove_lot": "Diesen Kauf entfernen"
+                    },
+                    "data_description": {
+                        "quantity": "Wie viele Aktien, Anteile oder Coins gekauft wurden.",
+                        "price": "Was eines davon gekostet hat, in der Währung, in der dieser Handelsplatz notiert.",
+                        "date": "Optional. Es bestimmt nur die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
+                        "fees": "Optional. Was der Kauf an Gebühren gekostet hat.",
+                        "taxes": "Optional. Was darauf an Steuern gezahlt wurde.",
+                        "remove_lot": "Nimmt diesen Kauf heraus, statt ihn zu ändern."
+                    }
+                },
+                "change_sale": {
+                    "title": "Verkauf ändern",
+                    "description": "{name} - eingetragen: {entry}.",
+                    "data": {
+                        "quantity": "Verkaufte Stückzahl",
+                        "price": "Verkaufspreis je Stück ({currency})",
+                        "date": "Verkaufsdatum",
+                        "fees": "Gebühren ({currency})",
+                        "taxes": "Steuern ({currency})",
+                        "remove_lot": "Diesen Verkauf entfernen"
+                    },
+                    "data_description": {
+                        "quantity": "Wie viele verkauft wurden. Sie gehen zum bisherigen Durchschnittspreis aus dem Bestand.",
+                        "price": "Was eines davon erlöst hat, in der Währung, in der dieser Handelsplatz notiert.",
+                        "date": "Es bestimmt die Reihenfolge, in der Käufe und Verkäufe gezählt werden.",
+                        "fees": "Optional. Was der Verkauf an Gebühren gekostet hat.",
+                        "taxes": "Optional. Was darauf an Steuern gezahlt wurde.",
+                        "remove_lot": "Nimmt diesen Verkauf heraus, statt ihn zu ändern."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Wähle eine der Farben oder tippe einen Wert wie #009999.",
                 "group_exists": "Eine Gruppe mit diesem Namen gibt es schon.",
                 "sell_too_many": "Das ist mehr, als im Bestand ist.",
-                "no_rate": "Für die Währung dieser Notierung veröffentlicht die EZB keinen Referenzkurs, sie lässt sich deshalb nicht umrechnen."
+                "no_rate": "Für die Währung dieser Notierung veröffentlicht die EZB keinen Referenzkurs, sie lässt sich deshalb nicht umrechnen.",
+                "lots_oversold": "Mit dieser Änderung würde ein Verkauf mehr herausnehmen, als an seinem Tag im Bestand ist."
             },
             "abort": {
                 "reconfigure_successful": "Der Wert wurde aktualisiert."

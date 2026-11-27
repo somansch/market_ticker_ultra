@@ -188,6 +188,7 @@
                         "move": "📂 Mover a otro grupo",
                         "add_lot": "➕ Añadir una compra",
                         "sell_lot": "➖ Añadir una venta",
+                        "edit_lot": "✏️ Cambiar una compra o venta",
                         "remove_lots": "🗑️ Eliminar compras y ventas",
                         "alerts": "🔔 Alertas de precio",
                         "color": "🎨 Color",
@@ -257,6 +258,53 @@
                         "date": "Vacío significa hoy. Fija el orden en el que se cuentan compras y ventas.",
                         "fees": "Opcional. Lo que costó la venta en comisiones.",
                         "taxes": "Opcional. Lo que se pagó en impuestos por ella."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Cambiar una compra o venta",
+                    "description": "{name}: elige la entrada que quieres cambiar.",
+                    "data": {
+                        "lot": "Introducidas"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Cambiar una compra",
+                    "description": "{name} - tal como se introdujo: {entry}.",
+                    "data": {
+                        "quantity": "Cantidad comprada",
+                        "price": "Precio de compra por unidad ({currency})",
+                        "date": "Fecha de compra",
+                        "fees": "Comisiones ({currency})",
+                        "taxes": "Impuestos ({currency})",
+                        "remove_lot": "Eliminar esta compra"
+                    },
+                    "data_description": {
+                        "quantity": "Cuántas acciones, participaciones o criptomonedas se compraron.",
+                        "price": "Lo que costó cada una, en la moneda de esta cotización.",
+                        "date": "Opcional. Solo decide el orden en el que se cuentan compras y ventas.",
+                        "fees": "Opcional. Lo que costó la compra en comisiones.",
+                        "taxes": "Opcional. Lo que se pagó en impuestos por ella.",
+                        "remove_lot": "Quita esta compra en lugar de cambiarla."
+                    }
+                },
+                "change_sale": {
+                    "title": "Cambiar una venta",
+                    "description": "{name} - tal como se introdujo: {entry}.",
+                    "data": {
+                        "quantity": "Cantidad vendida",
+                        "price": "Precio de venta por unidad ({currency})",
+                        "date": "Fecha de venta",
+                        "fees": "Comisiones ({currency})",
+                        "taxes": "Impuestos ({currency})",
+                        "remove_lot": "Eliminar esta venta"
+                    },
+                    "data_description": {
+                        "quantity": "Cuántas se vendieron. Salen de la posición a su precio medio hasta ahora.",
+                        "price": "Lo que se obtuvo por cada una, en la moneda de esta cotización.",
+                        "date": "Fija el orden en el que se cuentan compras y ventas.",
+                        "fees": "Opcional. Lo que costó la venta en comisiones.",
+                        "taxes": "Opcional. Lo que se pagó en impuestos por ella.",
+                        "remove_lot": "Quita esta venta en lugar de cambiarla."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Elige uno de los colores o escribe un valor como #009999.",
                 "group_exists": "Ya existe un grupo con este nombre.",
                 "sell_too_many": "Eso es más de lo que tienes.",
-                "no_rate": "El BCE no publica un tipo de referencia para la moneda de esta cotización, por lo que no se puede convertir."
+                "no_rate": "El BCE no publica un tipo de referencia para la moneda de esta cotización, por lo que no se puede convertir.",
+                "lots_oversold": "Con este cambio, una venta sacaría más de lo que se tenía ese día."
             },
             "abort": {
                 "reconfigure_successful": "El activo se ha actualizado."

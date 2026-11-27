@@ -188,6 +188,7 @@
                         "move": "📂 Przenieś do innej grupy",
                         "add_lot": "➕ Dodaj zakup",
                         "sell_lot": "➖ Dodaj sprzedaż",
+                        "edit_lot": "✏️ Zmień zakup lub sprzedaż",
                         "remove_lots": "🗑️ Usuń zakupy i sprzedaże",
                         "alerts": "🔔 Alerty cenowe",
                         "color": "🎨 Kolor",
@@ -257,6 +258,53 @@
                         "date": "Puste pole oznacza dzisiaj. Ustala kolejność liczenia zakupów i sprzedaży.",
                         "fees": "Opcjonalnie. Ile wyniosły opłaty za sprzedaż.",
                         "taxes": "Opcjonalnie. Ile podatku od tego zapłacono."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Zmień zakup lub sprzedaż",
+                    "description": "{name}: wybierz wpis, który ma zostać zmieniony.",
+                    "data": {
+                        "lot": "Wprowadzone"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Zmień zakup",
+                    "description": "{name} - wprowadzono: {entry}.",
+                    "data": {
+                        "quantity": "Kupiona ilość",
+                        "price": "Cena zakupu za sztukę ({currency})",
+                        "date": "Data zakupu",
+                        "fees": "Opłaty ({currency})",
+                        "taxes": "Podatki ({currency})",
+                        "remove_lot": "Usuń ten zakup"
+                    },
+                    "data_description": {
+                        "quantity": "Ile akcji, jednostek lub monet kupiono.",
+                        "price": "Ile kosztowała jedna sztuka, w walucie tego notowania.",
+                        "date": "Opcjonalnie. Decyduje tylko o kolejności liczenia zakupów i sprzedaży.",
+                        "fees": "Opcjonalnie. Ile wyniosły opłaty za zakup.",
+                        "taxes": "Opcjonalnie. Ile podatku od tego zapłacono.",
+                        "remove_lot": "Usuwa ten zakup, zamiast go zmieniać."
+                    }
+                },
+                "change_sale": {
+                    "title": "Zmień sprzedaż",
+                    "description": "{name} - wprowadzono: {entry}.",
+                    "data": {
+                        "quantity": "Sprzedana ilość",
+                        "price": "Cena sprzedaży za sztukę ({currency})",
+                        "date": "Data sprzedaży",
+                        "fees": "Opłaty ({currency})",
+                        "taxes": "Podatki ({currency})",
+                        "remove_lot": "Usuń tę sprzedaż"
+                    },
+                    "data_description": {
+                        "quantity": "Ile sprzedano. Opuszczają pozycję po jej dotychczasowej średniej cenie.",
+                        "price": "Ile uzyskano za jedną sztukę, w walucie tego notowania.",
+                        "date": "Ustala kolejność liczenia zakupów i sprzedaży.",
+                        "fees": "Opcjonalnie. Ile wyniosły opłaty za sprzedaż.",
+                        "taxes": "Opcjonalnie. Ile podatku od tego zapłacono.",
+                        "remove_lot": "Usuwa tę sprzedaż, zamiast ją zmieniać."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Wybierz jeden z kolorów lub wpisz wartość, np. #009999.",
                 "group_exists": "Grupa o tej nazwie już istnieje.",
                 "sell_too_many": "To więcej, niż posiadasz.",
-                "no_rate": "EBC nie publikuje kursu referencyjnego dla waluty tego notowania, więc nie można jej przeliczyć."
+                "no_rate": "EBC nie publikuje kursu referencyjnego dla waluty tego notowania, więc nie można jej przeliczyć.",
+                "lots_oversold": "Po tej zmianie sprzedaż obejmowałaby więcej, niż w jej dniu jest w pozycji."
             },
             "abort": {
                 "reconfigure_successful": "Instrument został zaktualizowany."

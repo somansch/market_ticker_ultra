@@ -188,6 +188,7 @@
                         "move": "📂 Déplacer vers un autre groupe",
                         "add_lot": "➕ Ajouter un achat",
                         "sell_lot": "➖ Ajouter une vente",
+                        "edit_lot": "✏️ Modifier un achat ou une vente",
                         "remove_lots": "🗑️ Supprimer des achats et ventes",
                         "alerts": "🔔 Alertes de cours",
                         "color": "🎨 Couleur",
@@ -257,6 +258,53 @@
                         "date": "Vide signifie aujourd'hui. Détermine l'ordre dans lequel les achats et les ventes sont comptabilisés.",
                         "fees": "Facultatif. Les frais de la vente.",
                         "taxes": "Facultatif. Les taxes payées à cette occasion."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Modifier un achat ou une vente",
+                    "description": "{name} : choisissez l'entrée à modifier.",
+                    "data": {
+                        "lot": "Saisis"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Modifier un achat",
+                    "description": "{name} - tel que saisi : {entry}.",
+                    "data": {
+                        "quantity": "Quantité achetée",
+                        "price": "Prix d'achat unitaire ({currency})",
+                        "date": "Date d'achat",
+                        "fees": "Frais ({currency})",
+                        "taxes": "Taxes ({currency})",
+                        "remove_lot": "Supprimer cet achat"
+                    },
+                    "data_description": {
+                        "quantity": "Combien d'actions, de parts ou de cryptomonnaies ont été achetées.",
+                        "price": "Le prix d'une unité, dans la devise de cette cotation.",
+                        "date": "Facultatif. Détermine seulement l'ordre dans lequel les achats et les ventes sont comptabilisés.",
+                        "fees": "Facultatif. Les frais de l'achat.",
+                        "taxes": "Facultatif. Les taxes payées à cette occasion.",
+                        "remove_lot": "Retire cet achat au lieu de le modifier."
+                    }
+                },
+                "change_sale": {
+                    "title": "Modifier une vente",
+                    "description": "{name} - tel que saisi : {entry}.",
+                    "data": {
+                        "quantity": "Quantité vendue",
+                        "price": "Prix de vente unitaire ({currency})",
+                        "date": "Date de vente",
+                        "fees": "Frais ({currency})",
+                        "taxes": "Taxes ({currency})",
+                        "remove_lot": "Supprimer cette vente"
+                    },
+                    "data_description": {
+                        "quantity": "Combien d'unités ont été vendues. Elles quittent la position à son prix moyen actuel.",
+                        "price": "Ce qu'une unité a rapporté, dans la devise de cette cotation.",
+                        "date": "Détermine l'ordre dans lequel les achats et les ventes sont comptabilisés.",
+                        "fees": "Facultatif. Les frais de la vente.",
+                        "taxes": "Facultatif. Les taxes payées à cette occasion.",
+                        "remove_lot": "Retire cette vente au lieu de la modifier."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Choisissez une des couleurs, ou saisissez une valeur comme #009999.",
                 "group_exists": "Un groupe portant ce nom existe déjà.",
                 "sell_too_many": "C'est plus que ce qui est détenu.",
-                "no_rate": "La BCE ne publie pas de taux de référence pour la devise de cette cotation ; elle ne peut donc pas être convertie."
+                "no_rate": "La BCE ne publie pas de taux de référence pour la devise de cette cotation ; elle ne peut donc pas être convertie.",
+                "lots_oversold": "Avec cette modification, une vente retirerait plus que ce qui est détenu à sa date."
             },
             "abort": {
                 "reconfigure_successful": "L'instrument a été mis à jour."

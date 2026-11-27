@@ -50,7 +50,10 @@
       sortName: "By name",
       sortChange: "By change",
       edTap: "On click",
-      edTapHelp: "What a click on an instrument opens: its details pop-up or its TradingView page. Without a TradingView symbol it is always the pop-up.",
+      edTapHelp: "What a click on an instrument does: opens its details pop-up or its TradingView page, or leads to another view. Without a TradingView symbol it is the pop-up.",
+      tapNavigate: "Navigate",
+      edTapPath: "Path",
+      edTapPathHelp: "Where a click leads: a dashboard or a view, e.g. /lovelace/home.",
       tapPopup: "Details pop-up",
       tapTradingView: "TradingView",
       close: "Close",
@@ -86,6 +89,9 @@
       edElCardBg: "Card background",
       edElCardBgHelp: "A colour and an image of your own behind the whole card.",
       edCardBgEnable: "Show background",
+      edCardInset: "Distance to the frame",
+      edCardInsetHelp: "How far the card's content stays from its edge, in pixels. Empty follows the theme: where it draws a rim inside the card, the content ends before it.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Draws the colour and the image below.",
       edCardBgColor: "Colour",
       edCardBgColorHelp: "Background colour for the card.",
@@ -222,6 +228,15 @@
       fAlertBelow: "Alert below",
       fAlertAbove: "Alert above",
       posRealized: "Realised",
+      tradeBuy: "Buy",
+      tradeSell: "Sale",
+      tradesTitle: "Purchases and sales",
+      tradesMore: (count) => `Show all ${count}`,
+      tradesLess: "Show fewer",
+      edChartTrades: "Purchases and sales",
+      edChartTradesHelp: "Marks each purchase and sale in the chart at its day and price, and draws a line at the average price.",
+      edDetailTrades: "List of purchases and sales",
+      edDetailTradesHelp: "Each purchase and sale with its day, quantity, price and amount. A sale shows what it realised.",
       posCosts: "Fees and taxes",
       edGroup: "Group",
       edGroupHelp: "The group whose instruments the card shows - a portfolio or a watchlist of the integration.",
@@ -250,6 +265,176 @@
       formatDetail: "Details",
       formatAlloc: "Portfolio",
       formatAlerts: "Price alerts",
+      formatTable: "Table",
+      tbCol_name: "Name",
+      tbCol_name_only: "Name",
+      tbName_name: "Name & logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Exchange",
+      tbCol_symbol_exchange: "Symbol · exchange",
+      tbCol_price: "Price",
+      tbCol_previous_close: "Previous close",
+      tbCol_change: "Change",
+      tbCol_change_percent: "Day %",
+      tbHeadAlerts: "Alerts",
+      tbHeadHighLow: "Day high/low",
+      tbHeadWeek: "Week",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Day high",
+      tbCol_day_low: "Day low",
+      tbCol_year_low: "52-week low",
+      tbCol_year_high: "52-week high",
+      tbCol_volume: "Volume",
+      tbCol_spark: "Curve, day",
+      tbCol_spark_week: "Curve, week",
+      tbCol_spark_month: "Curve, month",
+      tbCol_news: "News",
+      tbCol_week: "Week %",
+      tbCol_time: "Updated",
+      tbCol_alert: "Alert",
+      tbCol_quantity: "Quantity",
+      tbCol_average: "Average price",
+      tbCol_holding: "Holding",
+      tbCol_value: "Value",
+      tbCol_share: "Share",
+      tbCol_day_gain: "Today",
+      tbCol_day_gain_percent: "Today %",
+      tbCol_week_change: "Week",
+      tbCol_gain: "Gain",
+      tbCol_gain_percent: "Gain %",
+      tbTotal: "Total",
+      tbNone: "None",
+      tbHolding: (quantity, average) => `${quantity} at ${average}`,
+      tbTrendUp: "Up with the last update",
+      tbTrendDown: "Down with the last update",
+      tbTrendFlat: "Unchanged with the last update",
+      tbPresetAuto: "Automatic",
+      tbPresetCompact: "Compact",
+      tbPresetClassic: "Classic",
+      edBlockTableHelp: "What the table shows, column by column.",
+      edTablePreset: "Starting point",
+      edTablePresetHelp: "The columns the table starts with. Automatic takes Portfolio for a portfolio and Compact for a watchlist. Choosing one puts its columns back.",
+      edTableColumns: "Columns",
+      edTableColumnsHelp: "Each column's value, a second value under it if you like, and its heading. The arrows move a column, the cross removes it.",
+      edTableHeading: "Heading",
+      edTableHeadingHelp: "The name over the column. Empty takes the value's name.",
+      edTableSubNoneHelp: "A second, smaller value under the value.",
+      tbInfo_name: "The instrument's name with its logo.",
+      tbInfo_name_only: "The instrument's name.",
+      tbInfo_symbol: "Its symbol at the source, e.g. AAPL.",
+      tbInfo_exchange: "The exchange its price comes from.",
+      tbInfo_symbol_exchange: "Symbol and exchange in one.",
+      tbInfo_price: "The latest price.",
+      tbInfo_previous_close: "The closing price of the day before.",
+      tbInfo_change: "The change since the previous close, as an amount.",
+      tbInfo_change_percent: "The change since the previous close, in percent.",
+      tbInfo_trend: "An arrow: whether the price rose, fell or stayed with the last update.",
+      tbInfo_day_high: "The day's highest price.",
+      tbInfo_day_low: "The day's lowest price.",
+      tbInfo_year_low: "The lowest price of the last 52 weeks.",
+      tbInfo_year_high: "The highest price of the last 52 weeks.",
+      tbInfo_volume: "The volume traded today.",
+      tbInfo_spark: "A small curve of the price over the day.",
+      tbInfo_spark_week: "A small curve of the price over the last five trading days.",
+      tbInfo_spark_month: "A small curve of the price over the last month.",
+      tbInfo_news: "A symbol where there are new headlines. A click shows them.",
+      tbInfo_week: "The change over the last five trading days, in percent.",
+      tbInfo_week_change: "The change over the last five trading days, as an amount.",
+      tbInfo_day_gain_percent: "What the holding gained or lost today, in percent.",
+      tbInfo_time: "The time of the latest price.",
+      tbInfo_alert: "The price alerts' bell. A click sets them.",
+      tbInfo_quantity: "How many units are held.",
+      tbInfo_average: "The average price paid per unit.",
+      tbInfo_holding: "Quantity and average price in one.",
+      tbInfo_value: "What the holding is worth now.",
+      tbInfo_share: "The holding's share of everything the table shows, in percent.",
+      tbInfo_day_gain: "What the holding gained or lost today, as an amount.",
+      tbInfo_gain: "Gain or loss since the purchase, as an amount.",
+      tbInfo_gain_percent: "Gain or loss since the purchase, in percent.",
+      edTableValue: "Value",
+      edTableSub: "Subtitle",
+      edTableAdd: "Add column",
+      edTableRemove: "Remove column",
+      edTablePill: "As a pill",
+      edTablePillHelp: "Draws the value in a pill of the gain or loss colour.",
+      // The values' names in the menus, where the heading's short word
+      // alone would not say which change or gain it is.
+      tbName_change: "Change, day",
+      tbName_change_percent: "Change, day %",
+      tbName_week: "Change, week %",
+      tbName_week_change: "Change, week",
+      tbName_day_gain_percent: "Gain, day %",
+      tbName_day_gain: "Gain, day",
+      tbName_gain: "Gain, total",
+      tbName_gain_percent: "Gain, total %",
+      edTableHeader: "Show the column headings",
+      edTableHeaderHelp: "The line with the columns' names. A click on a name sorts by that column.",
+      edTableTotal: "Show the total",
+      edTableTotalHelp: "A last line with the sums of the portfolio: its value, today's change and the gain, where the table has a column for them.",
+      edElTableHead: "Column headings",
+      edElTableHeadHelp: "The names over the table's columns.",
+      edElTableCell: "Values",
+      edElTableCellHelp: "The table's values.",
+      edElTableSub: "Subtitles",
+      edElTableSubHelp: "The second value under a column's value.",
+      refreshNow: "Fetch the prices again",
+      agoNever: "not yet",
+      agoNow: "just now",
+      agoMin: (n) => `${n} min ago`,
+      agoHours: (n) => `${n} h ago`,
+      tbSearch: "Search",
+      edEntries: "Entries",
+      edEntriesHelp: "What an entry is: an instrument, or a whole portfolio with its value and today's change. A click on a portfolio opens the details of its positions.",
+      tbRows: "Rows",
+      tbRowsHelp: "What a row is: an instrument, or a whole portfolio with its sums. A click on a portfolio shows its instruments.",
+      tbRowsItems: "Instruments",
+      tbRowsGroups: "Portfolios",
+      edTableGroupColumns: "Portfolio columns",
+      edTableGroupColumnsHelp: "The columns of the portfolios' overview. The list under Columns is for the instruments of a portfolio.",
+      tbBack: "Back to the portfolios",
+      tbCol_positions: "Positions",
+      tbPositions: (count) => (count === 1 ? "1 position" : `${count} positions`),
+      tbNameG_name: "Name",
+      tbInfoG_name: "The portfolio's name.",
+      tbInfoG_positions: "How many positions the portfolio holds.",
+      tbInfoG_value: "What the portfolio is worth now.",
+      tbInfoG_share: "The portfolio's share of all portfolios shown, in percent.",
+      tbInfoG_day_gain: "What the portfolio gained or lost today, as an amount.",
+      tbInfoG_day_gain_percent: "What the portfolio gained or lost today, in percent.",
+      tbInfoG_gain: "The portfolio's gain or loss since the purchases, as an amount.",
+      tbInfoG_gain_percent: "The portfolio's gain or loss since the purchases, in percent.",
+      tbInfoG_spark: "A small curve of the portfolio's performance over the day.",
+      tbInfoG_spark_week: "A small curve of the portfolio's performance over the last five trading days.",
+      tbInfoG_spark_month: "A small curve of the portfolio's performance over the last month.",
+      edTableSearch: "Show the search field",
+      edTableSearchHelp: "A field beside the name's heading that filters the rows by name or symbol.",
+      edTableRefresh: "Show the refresh button",
+      edTableRefreshHelp: "A button at the top right that fetches the prices again and says when they were last fetched.",
+      edElTableRefresh: "Refresh button",
+      edElTableRefreshHelp: "The button at the top right, with the time since the last fetch.",
+      edRefreshBg: "Background",
+      edRefreshBgHelp: "Draws the button on a pill.",
+      edRefreshBgColor: "Background colour",
+      edRefreshBgColorHelp: "Colour of the pill. Empty keeps the theme's.",
+      edElTableDivider: "Dividing lines",
+      edElTableDividerHelp: "The lines between the table's rows.",
+      edShowTableLinesHelp: "Draws the lines between the rows.",
+      edElTableTotal: "Total line",
+      edElTableTotalHelp: "The last line with the sums.",
+      edElTablePill: "Pills",
+      edElTablePillHelp: "The pill around a value. Its colour is the gain or loss colour.",
+      edPillRadius: "Corner radius",
+      edPillRadiusHelp: "How round the pill's corners are, e.g. 6px. Empty is fully round.",
+      edPillFill: "Fill",
+      edPillFillHelp: "How strongly the gain or loss colour fills the pill, in percent.",
+      edElTableArrow: "Arrows",
+      edElTableArrowHelp: "The trend's arrows. Their colour is the gain or loss colour.",
+      edTrendUpIcon: "Symbol, risen",
+      edTrendDownIcon: "Symbol, fallen",
+      edTrendFlatIcon: "Symbol, unchanged",
+      edTrendIconHelp: "The symbol the Trend column shows for this.",
+      edArrowSize: "Size",
+      edArrowSizeHelp: "Size of the arrows, e.g. 18px.",
       perfTitle: "Performance",
       perfChoose: "There is no portfolio yet whose performance could be shown.",
       perfEmpty: "Not enough prices yet for this period.",
@@ -355,6 +540,8 @@
       editInstrument: "Change instrument",
       removeInstrument: "Remove instrument",
       editAlerts: "Price alerts",
+      editPurchase: "Change purchase",
+      editSale: "Change sale",
       alertSet: "A price alert is set",
       alertOn: "A price alert is on",
       fAlertNone: "Price alert",
@@ -452,7 +639,7 @@
       edElGainHelp: "The colours of gains, losses and new headlines, everywhere on the card.",
       edGainColorHelp: "Colour for a rise. Empty keeps the card's green.",
       edLossColorHelp: "Colour for a fall. Empty keeps the card's red.",
-      edElLogo: "Logo",
+      edElLogo: "Logos",
       edElLogoHelp: "The round logo of an entry.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "The instrument's symbol in an entry.",
@@ -591,7 +778,10 @@
       sortName: "Nach Name",
       sortChange: "Nach Veränderung",
       edTap: "Beim Klick",
-      edTapHelp: "Was ein Klick auf einen Wert öffnet: das Pop-up mit seinen Details oder seine TradingView-Seite. Ohne TradingView-Symbol ist es immer das Pop-up.",
+      edTapHelp: "Was ein Klick auf einen Wert tut: Er öffnet das Pop-up mit seinen Details oder seine TradingView-Seite, oder er führt zu einer anderen Ansicht. Ohne TradingView-Symbol ist es das Pop-up.",
+      tapNavigate: "Navigieren",
+      edTapPath: "Pfad",
+      edTapPathHelp: "Wohin ein Klick führt: ein Dashboard oder eine Ansicht, z. B. /lovelace/home.",
       tapPopup: "Details-Pop-up",
       tapTradingView: "TradingView",
       close: "Schließen",
@@ -627,6 +817,9 @@
       edElCardBg: "Kartenhintergrund",
       edElCardBgHelp: "Eine eigene Farbe und ein eigenes Bild hinter der ganzen Karte.",
       edCardBgEnable: "Hintergrund anzeigen",
+      edCardInset: "Abstand zum Rahmen",
+      edCardInsetHelp: "Wie weit der Inhalt der Karte von ihrem Rand entfernt bleibt, in Pixeln. Leer richtet sich nach dem Theme: Zeichnet es eine Kante in die Karte, endet der Inhalt davor.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Zeichnet die Farbe und das Bild darunter.",
       edCardBgColor: "Farbe",
       edCardBgColorHelp: "Hintergrundfarbe der Karte.",
@@ -763,6 +956,15 @@
       fAlertBelow: "Alarm unter",
       fAlertAbove: "Alarm über",
       posRealized: "Realisiert",
+      tradeBuy: "Kauf",
+      tradeSell: "Verkauf",
+      tradesTitle: "Käufe und Verkäufe",
+      tradesMore: (count) => `Alle ${count} anzeigen`,
+      tradesLess: "Weniger anzeigen",
+      edChartTrades: "Käufe und Verkäufe",
+      edChartTradesHelp: "Markiert jeden Kauf und Verkauf im Diagramm an seinem Tag und Kurs und zeichnet eine Linie am Durchschnittspreis.",
+      edDetailTrades: "Liste der Käufe und Verkäufe",
+      edDetailTradesHelp: "Jeder Kauf und Verkauf mit Tag, Stückzahl, Kurs und Betrag. Ein Verkauf zeigt, was er realisiert hat.",
       posCosts: "Gebühren und Steuern",
       edGroup: "Gruppe",
       edGroupHelp: "Die Gruppe, deren Werte die Karte zeigt - ein Depot oder eine Watchlist der Integration.",
@@ -791,6 +993,174 @@
       formatDetail: "Details",
       formatAlloc: "Depot",
       formatAlerts: "Kursalarme",
+      formatTable: "Tabelle",
+      tbCol_name: "Name",
+      tbCol_name_only: "Name",
+      tbName_name: "Name & Logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Börse",
+      tbCol_symbol_exchange: "Symbol · Börse",
+      tbCol_price: "Kurs",
+      tbCol_previous_close: "Vortag",
+      tbCol_change: "Änderung",
+      tbCol_change_percent: "Tag %",
+      tbHeadAlerts: "Alarme",
+      tbHeadHighLow: "Tageshoch/-tief",
+      tbHeadWeek: "Woche",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Tageshoch",
+      tbCol_day_low: "Tagestief",
+      tbCol_year_low: "52-Wochen-Tief",
+      tbCol_year_high: "52-Wochen-Hoch",
+      tbCol_volume: "Volumen",
+      tbCol_spark: "Kurve Tag",
+      tbCol_spark_week: "Kurve Woche",
+      tbCol_spark_month: "Kurve Monat",
+      tbCol_news: "News",
+      tbCol_week: "Woche %",
+      tbCol_time: "Aktualisiert",
+      tbCol_alert: "Alarm",
+      tbCol_quantity: "Stück",
+      tbCol_average: "Ø Kaufkurs",
+      tbCol_holding: "Bestand",
+      tbCol_value: "Wert",
+      tbCol_share: "Anteil",
+      tbCol_day_gain: "Heute",
+      tbCol_day_gain_percent: "Heute %",
+      tbCol_week_change: "Woche",
+      tbCol_gain: "Gewinn",
+      tbCol_gain_percent: "Gewinn %",
+      tbTotal: "Gesamt",
+      tbNone: "Keiner",
+      tbHolding: (quantity, average) => `${quantity} Stück · Ø ${average}`,
+      tbTrendUp: "Mit der letzten Aktualisierung gestiegen",
+      tbTrendDown: "Mit der letzten Aktualisierung gefallen",
+      tbTrendFlat: "Mit der letzten Aktualisierung unverändert",
+      tbPresetAuto: "Automatisch",
+      tbPresetCompact: "Kompakt",
+      tbPresetClassic: "Klassisch",
+      edBlockTableHelp: "Was die Tabelle zeigt, Spalte für Spalte.",
+      edTablePreset: "Ausgangspunkt",
+      edTablePresetHelp: "Die Spalten, mit denen die Tabelle beginnt. Automatisch nimmt Depot für ein Depot und Kompakt für eine Watchlist. Eine Auswahl stellt deren Spalten wieder her.",
+      edTableColumns: "Spalten",
+      edTableColumnsHelp: "Je Spalte ihr Wert, wenn gewünscht ein zweiter Wert darunter, und ihre Überschrift. Die Pfeile verschieben eine Spalte, das Kreuz entfernt sie.",
+      edTableHeading: "Überschrift",
+      edTableHeadingHelp: "Der Name über der Spalte. Leer übernimmt den Namen des Werts.",
+      edTableSubNoneHelp: "Ein zweiter, kleinerer Wert unter dem Wert.",
+      tbInfo_name: "Der Name des Werts mit seinem Logo.",
+      tbInfo_name_only: "Der Name des Werts.",
+      tbInfo_symbol: "Sein Symbol bei der Quelle, z. B. AAPL.",
+      tbInfo_exchange: "Die Börse, von der der Kurs stammt.",
+      tbInfo_symbol_exchange: "Symbol und Börse zusammen.",
+      tbInfo_price: "Der letzte Kurs.",
+      tbInfo_previous_close: "Der Schlusskurs des Vortags.",
+      tbInfo_change: "Die Änderung zum Vortagesschluss als Betrag.",
+      tbInfo_change_percent: "Die Änderung zum Vortagesschluss in Prozent.",
+      tbInfo_trend: "Ein Pfeil: ob der Kurs mit der letzten Aktualisierung gestiegen, gefallen oder gleich geblieben ist.",
+      tbInfo_day_high: "Der höchste Kurs des Tages.",
+      tbInfo_day_low: "Der niedrigste Kurs des Tages.",
+      tbInfo_year_low: "Der niedrigste Kurs der letzten 52 Wochen.",
+      tbInfo_year_high: "Der höchste Kurs der letzten 52 Wochen.",
+      tbInfo_volume: "Das heute gehandelte Volumen.",
+      tbInfo_spark: "Eine kleine Kurve des Kurses über den Tag.",
+      tbInfo_spark_week: "Eine kleine Kurve des Kurses über die letzten fünf Handelstage.",
+      tbInfo_spark_month: "Eine kleine Kurve des Kurses über den letzten Monat.",
+      tbInfo_news: "Ein Symbol, wo es neue Meldungen gibt. Ein Klick zeigt sie.",
+      tbInfo_week: "Die Änderung über die letzten fünf Handelstage in Prozent.",
+      tbInfo_week_change: "Die Änderung über die letzten fünf Handelstage als Betrag.",
+      tbInfo_day_gain_percent: "Was der Bestand heute gewonnen oder verloren hat, in Prozent.",
+      tbInfo_time: "Die Uhrzeit des letzten Kurses.",
+      tbInfo_alert: "Die Glocke der Kursalarme. Ein Klick stellt sie ein.",
+      tbInfo_quantity: "Wie viele Stück gehalten werden.",
+      tbInfo_average: "Der durchschnittlich gezahlte Kurs je Stück.",
+      tbInfo_holding: "Stückzahl und Durchschnittskurs zusammen.",
+      tbInfo_value: "Was der Bestand jetzt wert ist.",
+      tbInfo_share: "Der Anteil des Bestands an allem, was die Tabelle zeigt, in Prozent.",
+      tbInfo_day_gain: "Was der Bestand heute gewonnen oder verloren hat, als Betrag.",
+      tbInfo_gain: "Gewinn oder Verlust seit dem Kauf als Betrag.",
+      tbInfo_gain_percent: "Gewinn oder Verlust seit dem Kauf in Prozent.",
+      edTableValue: "Wert",
+      edTableSub: "Untertitel",
+      edTableAdd: "Spalte hinzufügen",
+      edTableRemove: "Spalte entfernen",
+      edTablePill: "Als Pille",
+      edTablePillHelp: "Zeichnet den Wert in einer Pille in der Gewinn- oder Verlustfarbe.",
+      tbName_change: "Änderung Tag",
+      tbName_change_percent: "Änderung Tag %",
+      tbName_week: "Änderung Woche %",
+      tbName_week_change: "Änderung Woche",
+      tbName_day_gain_percent: "Gewinn Tag %",
+      tbName_day_gain: "Gewinn Tag",
+      tbName_gain: "Gewinn gesamt",
+      tbName_gain_percent: "Gewinn gesamt %",
+      edTableHeader: "Spaltenüberschriften anzeigen",
+      edTableHeaderHelp: "Die Zeile mit den Namen der Spalten. Ein Klick auf einen Namen sortiert nach dieser Spalte.",
+      edTableTotal: "Summe anzeigen",
+      edTableTotalHelp: "Eine letzte Zeile mit den Summen des Depots: Wert, heutige Änderung und Gewinn, soweit die Tabelle eine Spalte dafür hat.",
+      edElTableHead: "Spaltenüberschriften",
+      edElTableHeadHelp: "Die Namen über den Spalten der Tabelle.",
+      edElTableCell: "Werte",
+      edElTableCellHelp: "Die Werte der Tabelle.",
+      edElTableSub: "Untertitel",
+      edElTableSubHelp: "Der zweite Wert unter dem Wert einer Spalte.",
+      refreshNow: "Kurse neu abrufen",
+      agoNever: "noch nicht",
+      agoNow: "gerade eben",
+      agoMin: (n) => `vor ${n} Min.`,
+      agoHours: (n) => `vor ${n} Std.`,
+      tbSearch: "Suchen",
+      edEntries: "Einträge",
+      edEntriesHelp: "Was ein Eintrag ist: ein Wert oder ein ganzes Depot mit seinem Wert und der heutigen Änderung. Ein Klick auf ein Depot öffnet die Details seiner Positionen.",
+      tbRows: "Zeilen",
+      tbRowsHelp: "Was eine Zeile ist: ein Wert oder ein ganzes Depot mit seinen Summen. Ein Klick auf ein Depot zeigt seine Werte.",
+      tbRowsItems: "Werte",
+      tbRowsGroups: "Depots",
+      edTableGroupColumns: "Spalten der Depots",
+      edTableGroupColumnsHelp: "Die Spalten der Depot-Übersicht. Die Liste unter Spalten gilt für die Werte eines Depots.",
+      tbBack: "Zurück zu den Depots",
+      tbCol_positions: "Positionen",
+      tbPositions: (count) => (count === 1 ? "1 Position" : `${count} Positionen`),
+      tbNameG_name: "Name",
+      tbInfoG_name: "Der Name des Depots.",
+      tbInfoG_positions: "Wie viele Positionen das Depot hält.",
+      tbInfoG_value: "Was das Depot jetzt wert ist.",
+      tbInfoG_share: "Der Anteil des Depots an allen gezeigten Depots in Prozent.",
+      tbInfoG_day_gain: "Was das Depot heute gewonnen oder verloren hat, als Betrag.",
+      tbInfoG_day_gain_percent: "Was das Depot heute gewonnen oder verloren hat, in Prozent.",
+      tbInfoG_gain: "Gewinn oder Verlust des Depots seit den Käufen als Betrag.",
+      tbInfoG_gain_percent: "Gewinn oder Verlust des Depots seit den Käufen in Prozent.",
+      tbInfoG_spark: "Eine kleine Kurve der Wertentwicklung des Depots über den Tag.",
+      tbInfoG_spark_week: "Eine kleine Kurve der Wertentwicklung des Depots über die letzten fünf Handelstage.",
+      tbInfoG_spark_month: "Eine kleine Kurve der Wertentwicklung des Depots über den letzten Monat.",
+      edTableSearch: "Suchfeld anzeigen",
+      edTableSearchHelp: "Ein Feld neben der Überschrift des Namens, das die Zeilen nach Name oder Symbol filtert.",
+      edTableRefresh: "Aktualisieren-Schaltfläche anzeigen",
+      edTableRefreshHelp: "Eine Schaltfläche oben rechts, die die Kurse neu abruft und zeigt, wann sie zuletzt abgerufen wurden.",
+      edElTableRefresh: "Aktualisieren-Schaltfläche",
+      edElTableRefreshHelp: "Die Schaltfläche oben rechts, mit der Zeit seit dem letzten Abruf.",
+      edRefreshBg: "Hintergrund",
+      edRefreshBgHelp: "Zeichnet die Schaltfläche auf einer Pille.",
+      edRefreshBgColor: "Hintergrundfarbe",
+      edRefreshBgColorHelp: "Farbe der Pille. Leer behält die des Themes.",
+      edElTableDivider: "Trennlinien",
+      edElTableDividerHelp: "Die Linien zwischen den Zeilen der Tabelle.",
+      edShowTableLinesHelp: "Zeichnet die Linien zwischen den Zeilen.",
+      edElTableTotal: "Summenzeile",
+      edElTableTotalHelp: "Die letzte Zeile mit den Summen.",
+      edElTablePill: "Pillen",
+      edElTablePillHelp: "Die Pille um einen Wert. Ihre Farbe ist die Gewinn- oder Verlustfarbe.",
+      edPillRadius: "Eckenradius",
+      edPillRadiusHelp: "Wie rund die Ecken der Pille sind, z. B. 6px. Leer ist ganz rund.",
+      edPillFill: "Füllung",
+      edPillFillHelp: "Wie stark die Gewinn- oder Verlustfarbe die Pille füllt, in Prozent.",
+      edElTableArrow: "Pfeile",
+      edElTableArrowHelp: "Die Pfeile des Trends. Ihre Farbe ist die Gewinn- oder Verlustfarbe.",
+      edTrendUpIcon: "Symbol, gestiegen",
+      edTrendDownIcon: "Symbol, gefallen",
+      edTrendFlatIcon: "Symbol, unverändert",
+      edTrendIconHelp: "Das Symbol, das die Spalte Trend dafür zeigt.",
+      edArrowSize: "Größe",
+      edArrowSizeHelp: "Größe der Pfeile, z. B. 18px.",
       perfTitle: "Wertentwicklung",
       perfChoose: "Es gibt noch kein Depot, dessen Wertentwicklung sich zeigen ließe.",
       perfEmpty: "Für diesen Zeitraum gibt es noch nicht genug Kurse.",
@@ -896,6 +1266,8 @@
       editInstrument: "Wert ändern",
       removeInstrument: "Wert entfernen",
       editAlerts: "Kursalarme",
+      editPurchase: "Kauf ändern",
+      editSale: "Verkauf ändern",
       alertSet: "Ein Kursalarm ist gesetzt",
       alertOn: "Ein Kursalarm ist ausgelöst",
       fAlertNone: "Kursalarm",
@@ -993,7 +1365,7 @@
       edElGainHelp: "Die Farben für Gewinn, Verlust und neue Meldungen, überall auf der Karte.",
       edGainColorHelp: "Farbe für einen Anstieg. Leer behält das Grün der Karte.",
       edLossColorHelp: "Farbe für einen Rückgang. Leer behält das Rot der Karte.",
-      edElLogo: "Logo",
+      edElLogo: "Logos",
       edElLogoHelp: "Das runde Logo eines Eintrags.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Das Symbol des Werts in einem Eintrag.",
@@ -1133,7 +1505,10 @@
       sortName: "Podle názvu",
       sortChange: "Podle změny",
       edTap: "Při kliknutí",
-      edTapHelp: "Co otevře kliknutí na instrument: vyskakovací okno s detaily, nebo jeho stránku na TradingView. Bez symbolu TradingView je to vždy vyskakovací okno.",
+      edTapHelp: "Co udělá kliknutí na instrument: otevře vyskakovací okno s detaily nebo jeho stránku na TradingView, nebo vede na jiný pohled. Bez symbolu TradingView je to vyskakovací okno.",
+      tapNavigate: "Navigace",
+      edTapPath: "Cesta",
+      edTapPathHelp: "Kam kliknutí vede: na ovládací panel nebo pohled, např. /lovelace/home.",
       tapPopup: "Okno s detaily",
       tapTradingView: "TradingView",
       close: "Zavřít",
@@ -1169,6 +1544,9 @@
       edElCardBg: "Pozadí karty",
       edElCardBgHelp: "Vlastní barva a obrázek za celou kartou.",
       edCardBgEnable: "Zobrazit pozadí",
+      edCardInset: "Odstup od rámečku",
+      edCardInsetHelp: "Jak daleko zůstává obsah karty od jejího okraje, v pixelech. Prázdné se řídí motivem: kde motiv kreslí uvnitř karty lem, obsah končí před ním.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Vykreslí barvu a obrázek níže.",
       edCardBgColor: "Barva",
       edCardBgColorHelp: "Barva pozadí karty.",
@@ -1315,6 +1693,15 @@
       fAlertBelow: "Alarm pod",
       fAlertAbove: "Alarm nad",
       posRealized: "Realizováno",
+      tradeBuy: "Nákup",
+      tradeSell: "Prodej",
+      tradesTitle: "Nákupy a prodeje",
+      tradesMore: (count) => `Zobrazit vše (${count})`,
+      tradesLess: "Zobrazit méně",
+      edChartTrades: "Nákupy a prodeje",
+      edChartTradesHelp: "Vyznačí v grafu každý nákup a prodej podle jeho dne a ceny a vykreslí čáru na úrovni průměrné ceny.",
+      edDetailTrades: "Seznam nákupů a prodejů",
+      edDetailTradesHelp: "Každý nákup a prodej s jeho dnem, množstvím, cenou a částkou. Prodej ukazuje, co realizoval.",
       posCosts: "Poplatky a daně",
       edGroup: "Skupina",
       edGroupHelp: "Skupina, jejíž instrumenty karta zobrazuje - portfolio nebo watchlist integrace.",
@@ -1343,6 +1730,174 @@
       formatDetail: "Detaily",
       formatAlloc: "Portfolio",
       formatAlerts: "Cenové alarmy",
+      formatTable: "Tabulka",
+      tbCol_name: "Název",
+      tbCol_name_only: "Název",
+      tbName_name: "Název a logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Burza",
+      tbCol_symbol_exchange: "Symbol · burza",
+      tbCol_price: "Cena",
+      tbCol_previous_close: "Předch. závěr",
+      tbCol_change: "Změna",
+      tbCol_change_percent: "Den %",
+      tbHeadAlerts: "Alarmy",
+      tbHeadHighLow: "Denní max/min",
+      tbHeadWeek: "Týden",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Denní max.",
+      tbCol_day_low: "Denní min.",
+      tbCol_year_low: "52týd. min.",
+      tbCol_year_high: "52týd. max.",
+      tbCol_volume: "Objem",
+      tbCol_spark: "Křivka, den",
+      tbCol_spark_week: "Křivka, týden",
+      tbCol_spark_month: "Křivka, měsíc",
+      tbCol_news: "Zprávy",
+      tbCol_week: "Týden %",
+      tbCol_time: "Aktualizace",
+      tbCol_alert: "Alarm",
+      tbCol_quantity: "Množství",
+      tbCol_average: "Průměrná cena",
+      tbCol_holding: "Pozice",
+      tbCol_value: "Hodnota",
+      tbCol_share: "Podíl",
+      tbCol_day_gain: "Dnes",
+      tbCol_day_gain_percent: "Dnes %",
+      tbCol_week_change: "Týden",
+      tbCol_gain: "Zisk",
+      tbCol_gain_percent: "Zisk %",
+      tbTotal: "Celkem",
+      tbNone: "Žádný",
+      tbHolding: (quantity, average) => `${quantity} ks · Ø ${average}`,
+      tbTrendUp: "Růst při poslední aktualizaci",
+      tbTrendDown: "Pokles při poslední aktualizaci",
+      tbTrendFlat: "Beze změny při poslední aktualizaci",
+      tbPresetAuto: "Automaticky",
+      tbPresetCompact: "Kompaktní",
+      tbPresetClassic: "Klasická",
+      edBlockTableHelp: "Co tabulka zobrazuje, sloupec po sloupci.",
+      edTablePreset: "Výchozí sestava",
+      edTablePresetHelp: "Sloupce, se kterými tabulka začíná. Automaticky použije Portfolio pro portfolio a Kompaktní pro watchlist. Výběrem se sloupce dané sestavy obnoví.",
+      edTableColumns: "Sloupce",
+      edTableColumnsHelp: "Hodnota každého sloupce, případně druhá hodnota pod ní, a jeho záhlaví. Šipky sloupec přesunou, křížek jej odebere.",
+      edTableHeading: "Záhlaví",
+      edTableHeadingHelp: "Název nad sloupcem. Prázdné použije název hodnoty.",
+      edTableSubNoneHelp: "Druhá, menší hodnota pod hodnotou.",
+      tbInfo_name: "Název instrumentu s jeho logem.",
+      tbInfo_name_only: "Název instrumentu.",
+      tbInfo_symbol: "Jeho symbol u zdroje, např. AAPL.",
+      tbInfo_exchange: "Burza, ze které pochází jeho cena.",
+      tbInfo_symbol_exchange: "Symbol a burza v jednom.",
+      tbInfo_price: "Poslední cena.",
+      tbInfo_previous_close: "Závěrečná cena předchozího dne.",
+      tbInfo_change: "Změna od předchozího závěru, jako částka.",
+      tbInfo_change_percent: "Změna od předchozího závěru, v procentech.",
+      tbInfo_trend: "Šipka: zda cena při poslední aktualizaci vzrostla, klesla, nebo zůstala stejná.",
+      tbInfo_day_high: "Nejvyšší cena dne.",
+      tbInfo_day_low: "Nejnižší cena dne.",
+      tbInfo_year_low: "Nejnižší cena za posledních 52 týdnů.",
+      tbInfo_year_high: "Nejvyšší cena za posledních 52 týdnů.",
+      tbInfo_volume: "Dnes zobchodovaný objem.",
+      tbInfo_spark: "Malá křivka ceny během dne.",
+      tbInfo_spark_week: "Malá křivka ceny za posledních pět obchodních dní.",
+      tbInfo_spark_month: "Malá křivka ceny za poslední měsíc.",
+      tbInfo_news: "Symbol tam, kde jsou nové titulky. Kliknutím se zobrazí.",
+      tbInfo_week: "Změna za posledních pět obchodních dní, v procentech.",
+      tbInfo_week_change: "Změna za posledních pět obchodních dní, jako částka.",
+      tbInfo_day_gain_percent: "Kolik pozice dnes získala nebo ztratila, v procentech.",
+      tbInfo_time: "Čas poslední ceny.",
+      tbInfo_alert: "Zvonek cenových alarmů. Kliknutím se nastaví.",
+      tbInfo_quantity: "Kolik kusů je v držení.",
+      tbInfo_average: "Průměrná cena zaplacená za kus.",
+      tbInfo_holding: "Množství a průměrná cena v jednom.",
+      tbInfo_value: "Jakou hodnotu má pozice nyní.",
+      tbInfo_share: "Podíl pozice na všem, co tabulka zobrazuje, v procentech.",
+      tbInfo_day_gain: "Kolik pozice dnes získala nebo ztratila, jako částka.",
+      tbInfo_gain: "Zisk nebo ztráta od nákupu, jako částka.",
+      tbInfo_gain_percent: "Zisk nebo ztráta od nákupu, v procentech.",
+      edTableValue: "Hodnota",
+      edTableSub: "Podtitulek",
+      edTableAdd: "Přidat sloupec",
+      edTableRemove: "Odebrat sloupec",
+      edTablePill: "Jako štítek",
+      edTablePillHelp: "Vykreslí hodnotu ve štítku v barvě zisku nebo ztráty.",
+      tbName_change: "Změna, den",
+      tbName_change_percent: "Změna, den %",
+      tbName_week: "Změna, týden %",
+      tbName_week_change: "Změna, týden",
+      tbName_day_gain_percent: "Zisk, den %",
+      tbName_day_gain: "Zisk, den",
+      tbName_gain: "Zisk, celkem",
+      tbName_gain_percent: "Zisk, celkem %",
+      edTableHeader: "Zobrazit záhlaví sloupců",
+      edTableHeaderHelp: "Řádek s názvy sloupců. Kliknutí na název seřadí podle daného sloupce.",
+      edTableTotal: "Zobrazit součet",
+      edTableTotalHelp: "Poslední řádek se součty portfolia: jeho hodnota, dnešní změna a zisk, pokud pro ně tabulka má sloupec.",
+      edElTableHead: "Záhlaví sloupců",
+      edElTableHeadHelp: "Názvy nad sloupci tabulky.",
+      edElTableCell: "Hodnoty",
+      edElTableCellHelp: "Hodnoty tabulky.",
+      edElTableSub: "Podtitulky",
+      edElTableSubHelp: "Druhá hodnota pod hodnotou sloupce.",
+      refreshNow: "Načíst ceny znovu",
+      agoNever: "zatím ne",
+      agoNow: "právě teď",
+      agoMin: (n) => `před ${n} min`,
+      agoHours: (n) => `před ${n} h`,
+      tbSearch: "Hledat",
+      edEntries: "Položky",
+      edEntriesHelp: "Co je položka: instrument, nebo celé portfolio s jeho hodnotou a dnešní změnou. Kliknutí na portfolio otevře detaily jeho pozic.",
+      tbRows: "Řádky",
+      tbRowsHelp: "Co je řádek: instrument, nebo celé portfolio s jeho součty. Kliknutí na portfolio zobrazí jeho instrumenty.",
+      tbRowsItems: "Instrumenty",
+      tbRowsGroups: "Portfolia",
+      edTableGroupColumns: "Sloupce portfolií",
+      edTableGroupColumnsHelp: "Sloupce přehledu portfolií. Seznam pod položkou Sloupce platí pro instrumenty portfolia.",
+      tbBack: "Zpět na portfolia",
+      tbCol_positions: "Pozice",
+      tbPositions: (count) => (count >= 1 && count <= 4 ? `${count} pozice` : `${count} pozic`),
+      tbNameG_name: "Název",
+      tbInfoG_name: "Název portfolia.",
+      tbInfoG_positions: "Kolik pozic portfolio obsahuje.",
+      tbInfoG_value: "Jakou hodnotu má portfolio nyní.",
+      tbInfoG_share: "Podíl portfolia na všech zobrazených portfoliích, v procentech.",
+      tbInfoG_day_gain: "Kolik portfolio dnes získalo nebo ztratilo, jako částka.",
+      tbInfoG_day_gain_percent: "Kolik portfolio dnes získalo nebo ztratilo, v procentech.",
+      tbInfoG_gain: "Zisk nebo ztráta portfolia od nákupů, jako částka.",
+      tbInfoG_gain_percent: "Zisk nebo ztráta portfolia od nákupů, v procentech.",
+      tbInfoG_spark: "Malá křivka výkonnosti portfolia během dne.",
+      tbInfoG_spark_week: "Malá křivka výkonnosti portfolia za posledních pět obchodních dní.",
+      tbInfoG_spark_month: "Malá křivka výkonnosti portfolia za poslední měsíc.",
+      edTableSearch: "Zobrazit vyhledávací pole",
+      edTableSearchHelp: "Pole vedle záhlaví názvu, které filtruje řádky podle názvu nebo symbolu.",
+      edTableRefresh: "Zobrazit tlačítko aktualizace",
+      edTableRefreshHelp: "Tlačítko vpravo nahoře, které načte ceny znovu a ukazuje, kdy byly načteny naposledy.",
+      edElTableRefresh: "Tlačítko aktualizace",
+      edElTableRefreshHelp: "Tlačítko vpravo nahoře, s časem od posledního načtení.",
+      edRefreshBg: "Pozadí",
+      edRefreshBgHelp: "Vykreslí tlačítko na štítku.",
+      edRefreshBgColor: "Barva pozadí",
+      edRefreshBgColorHelp: "Barva štítku. Prázdné ponechá barvu motivu.",
+      edElTableDivider: "Oddělovače",
+      edElTableDividerHelp: "Čáry mezi řádky tabulky.",
+      edShowTableLinesHelp: "Vykreslí čáry mezi řádky.",
+      edElTableTotal: "Řádek součtu",
+      edElTableTotalHelp: "Poslední řádek se součty.",
+      edElTablePill: "Štítky",
+      edElTablePillHelp: "Štítek kolem hodnoty. Jeho barva je barva zisku nebo ztráty.",
+      edPillRadius: "Poloměr rohů",
+      edPillRadiusHelp: "Jak kulaté jsou rohy štítku, např. 6px. Prázdné je zcela kulaté.",
+      edPillFill: "Výplň",
+      edPillFillHelp: "Jak silně barva zisku nebo ztráty vyplňuje štítek, v procentech.",
+      edElTableArrow: "Šipky",
+      edElTableArrowHelp: "Šipky trendu. Jejich barva je barva zisku nebo ztráty.",
+      edTrendUpIcon: "Symbol, růst",
+      edTrendDownIcon: "Symbol, pokles",
+      edTrendFlatIcon: "Symbol, beze změny",
+      edTrendIconHelp: "Symbol, který pro tento stav zobrazí sloupec Trend.",
+      edArrowSize: "Velikost",
+      edArrowSizeHelp: "Velikost šipek, např. 18px.",
       perfTitle: "Výkonnost",
       perfChoose: "Zatím neexistuje portfolio, jehož výkonnost by se dala zobrazit.",
       perfEmpty: "Pro toto období zatím není dost cen.",
@@ -1448,6 +2003,8 @@
       editInstrument: "Změnit instrument",
       removeInstrument: "Odebrat instrument",
       editAlerts: "Cenové alarmy",
+      editPurchase: "Změnit nákup",
+      editSale: "Změnit prodej",
       alertSet: "Cenový alarm je nastaven",
       alertOn: "Cenový alarm je spuštěn",
       fAlertNone: "Cenový alarm",
@@ -1545,7 +2102,7 @@
       edElGainHelp: "Barvy zisků, ztrát a nových titulků, všude na kartě.",
       edGainColorHelp: "Barva pro růst. Prázdné ponechá zelenou karty.",
       edLossColorHelp: "Barva pro pokles. Prázdné ponechá červenou karty.",
-      edElLogo: "Logo",
+      edElLogo: "Loga",
       edElLogoHelp: "Kulaté logo položky.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Symbol instrumentu v položce.",
@@ -1684,7 +2241,10 @@
       sortName: "Efter navn",
       sortChange: "Efter ændring",
       edTap: "Ved klik",
-      edTapHelp: "Hvad et klik på et instrument åbner: dets detalje-pop-up eller dets side på TradingView. Uden et TradingView-symbol er det altid pop-up'en.",
+      edTapHelp: "Hvad et klik på et instrument gør: åbner dets detalje-pop-up eller dets side på TradingView, eller fører til en anden visning. Uden et TradingView-symbol er det pop-up'en.",
+      tapNavigate: "Gå til",
+      edTapPath: "Sti",
+      edTapPathHelp: "Hvor et klik fører hen: et betjeningspanel eller en visning, f.eks. /lovelace/home.",
       tapPopup: "Detalje-pop-up",
       tapTradingView: "TradingView",
       close: "Luk",
@@ -1720,6 +2280,9 @@
       edElCardBg: "Kortbaggrund",
       edElCardBgHelp: "En farve og et billede efter eget valg bag hele kortet.",
       edCardBgEnable: "Vis baggrund",
+      edCardInset: "Afstand til rammen",
+      edCardInsetHelp: "Hvor langt kortets indhold holder sig fra kanten, i pixels. Tom følger temaet: tegner det en kant inde i kortet, slutter indholdet før den.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Tegner farven og billedet nedenfor.",
       edCardBgColor: "Farve",
       edCardBgColorHelp: "Baggrundsfarve for kortet.",
@@ -1866,6 +2429,15 @@
       fAlertBelow: "Alarm under",
       fAlertAbove: "Alarm over",
       posRealized: "Realiseret",
+      tradeBuy: "Køb",
+      tradeSell: "Salg",
+      tradesTitle: "Køb og salg",
+      tradesMore: (count) => `Vis alle ${count}`,
+      tradesLess: "Vis færre",
+      edChartTrades: "Køb og salg",
+      edChartTradesHelp: "Markerer hvert køb og salg i grafen ved dets dag og kurs og tegner en linje ved gennemsnitskursen.",
+      edDetailTrades: "Liste over køb og salg",
+      edDetailTradesHelp: "Hvert køb og salg med dag, antal, kurs og beløb. Et salg viser, hvad det har realiseret.",
       posCosts: "Gebyrer og skat",
       edGroup: "Gruppe",
       edGroupHelp: "Den gruppe, hvis instrumenter kortet viser - en portefølje eller en watchlist i integrationen.",
@@ -1894,6 +2466,174 @@
       formatDetail: "Detaljer",
       formatAlloc: "Portefølje",
       formatAlerts: "Kursalarmer",
+      formatTable: "Tabel",
+      tbCol_name: "Navn",
+      tbCol_name_only: "Navn",
+      tbName_name: "Navn og logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Børs",
+      tbCol_symbol_exchange: "Symbol · børs",
+      tbCol_price: "Kurs",
+      tbCol_previous_close: "Forrige luk",
+      tbCol_change: "Ændring",
+      tbCol_change_percent: "Dag %",
+      tbHeadAlerts: "Alarmer",
+      tbHeadHighLow: "Dagens høj/lav",
+      tbHeadWeek: "Uge",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Dagens højeste",
+      tbCol_day_low: "Dagens laveste",
+      tbCol_year_low: "52 ugers laveste",
+      tbCol_year_high: "52 ugers højeste",
+      tbCol_volume: "Volumen",
+      tbCol_spark: "Kurve, dag",
+      tbCol_spark_week: "Kurve, uge",
+      tbCol_spark_month: "Kurve, måned",
+      tbCol_news: "Nyheder",
+      tbCol_week: "Uge %",
+      tbCol_time: "Opdateret",
+      tbCol_alert: "Alarm",
+      tbCol_quantity: "Antal",
+      tbCol_average: "Gns. kurs",
+      tbCol_holding: "Beholdning",
+      tbCol_value: "Værdi",
+      tbCol_share: "Andel",
+      tbCol_day_gain: "I dag",
+      tbCol_day_gain_percent: "I dag %",
+      tbCol_week_change: "Uge",
+      tbCol_gain: "Gevinst",
+      tbCol_gain_percent: "Gevinst %",
+      tbTotal: "I alt",
+      tbNone: "Ingen",
+      tbHolding: (quantity, average) => `${quantity} stk. til ${average}`,
+      tbTrendUp: "Steget ved seneste opdatering",
+      tbTrendDown: "Faldet ved seneste opdatering",
+      tbTrendFlat: "Uændret ved seneste opdatering",
+      tbPresetAuto: "Automatisk",
+      tbPresetCompact: "Kompakt",
+      tbPresetClassic: "Klassisk",
+      edBlockTableHelp: "Hvad tabellen viser, kolonne for kolonne.",
+      edTablePreset: "Udgangspunkt",
+      edTablePresetHelp: "De kolonner, tabellen begynder med. Automatisk tager Portefølje til en portefølje og Kompakt til en watchlist. Vælger du et, gendannes dets kolonner.",
+      edTableColumns: "Kolonner",
+      edTableColumnsHelp: "Hver kolonnes værdi, en ekstra værdi under den, hvis du vil, og dens overskrift. Pilene flytter en kolonne, krydset fjerner den.",
+      edTableHeading: "Overskrift",
+      edTableHeadingHelp: "Navnet over kolonnen. Tom tager værdiens navn.",
+      edTableSubNoneHelp: "En ekstra, mindre værdi under værdien.",
+      tbInfo_name: "Instrumentets navn med dets logo.",
+      tbInfo_name_only: "Instrumentets navn.",
+      tbInfo_symbol: "Dets symbol hos kilden, f.eks. AAPL.",
+      tbInfo_exchange: "Den børs, kursen kommer fra.",
+      tbInfo_symbol_exchange: "Symbol og børs i ét.",
+      tbInfo_price: "Den seneste kurs.",
+      tbInfo_previous_close: "Lukkekursen dagen før.",
+      tbInfo_change: "Ændringen siden forrige luk, som beløb.",
+      tbInfo_change_percent: "Ændringen siden forrige luk, i procent.",
+      tbInfo_trend: "En pil: om kursen steg, faldt eller blev stående ved seneste opdatering.",
+      tbInfo_day_high: "Dagens højeste kurs.",
+      tbInfo_day_low: "Dagens laveste kurs.",
+      tbInfo_year_low: "Den laveste kurs i de seneste 52 uger.",
+      tbInfo_year_high: "Den højeste kurs i de seneste 52 uger.",
+      tbInfo_volume: "Den volumen, der er handlet i dag.",
+      tbInfo_spark: "En lille kurve over kursen i løbet af dagen.",
+      tbInfo_spark_week: "En lille kurve over kursen de seneste fem handelsdage.",
+      tbInfo_spark_month: "En lille kurve over kursen den seneste måned.",
+      tbInfo_news: "Et symbol, hvor der er nye nyheder. Et klik viser dem.",
+      tbInfo_week: "Ændringen over de seneste fem handelsdage, i procent.",
+      tbInfo_week_change: "Ændringen over de seneste fem handelsdage, som beløb.",
+      tbInfo_day_gain_percent: "Hvad beholdningen har vundet eller tabt i dag, i procent.",
+      tbInfo_time: "Tidspunktet for den seneste kurs.",
+      tbInfo_alert: "Kursalarmernes klokke. Et klik indstiller dem.",
+      tbInfo_quantity: "Hvor mange stk. der ejes.",
+      tbInfo_average: "Den gennemsnitlige kurs, der er betalt pr. stk.",
+      tbInfo_holding: "Antal og gennemsnitskurs i ét.",
+      tbInfo_value: "Hvad beholdningen er værd nu.",
+      tbInfo_share: "Beholdningens andel af alt det, tabellen viser, i procent.",
+      tbInfo_day_gain: "Hvad beholdningen har vundet eller tabt i dag, som beløb.",
+      tbInfo_gain: "Gevinst eller tab siden købet, som beløb.",
+      tbInfo_gain_percent: "Gevinst eller tab siden købet, i procent.",
+      edTableValue: "Værdi",
+      edTableSub: "Undertekst",
+      edTableAdd: "Tilføj kolonne",
+      edTableRemove: "Fjern kolonne",
+      edTablePill: "Som mærkat",
+      edTablePillHelp: "Tegner værdien i en mærkat i gevinst- eller tabsfarven.",
+      tbName_change: "Ændring, dag",
+      tbName_change_percent: "Ændring, dag %",
+      tbName_week: "Ændring, uge %",
+      tbName_week_change: "Ændring, uge",
+      tbName_day_gain_percent: "Gevinst, dag %",
+      tbName_day_gain: "Gevinst, dag",
+      tbName_gain: "Gevinst, i alt",
+      tbName_gain_percent: "Gevinst, i alt %",
+      edTableHeader: "Vis kolonneoverskrifter",
+      edTableHeaderHelp: "Linjen med kolonnernes navne. Et klik på et navn sorterer efter den kolonne.",
+      edTableTotal: "Vis summen",
+      edTableTotalHelp: "En sidste linje med porteføljens summer: værdi, dagens ændring og gevinst, hvor tabellen har en kolonne til dem.",
+      edElTableHead: "Kolonneoverskrifter",
+      edElTableHeadHelp: "Navnene over tabellens kolonner.",
+      edElTableCell: "Værdier",
+      edElTableCellHelp: "Tabellens værdier.",
+      edElTableSub: "Undertekster",
+      edElTableSubHelp: "Den ekstra værdi under en kolonnes værdi.",
+      refreshNow: "Hent kurserne igen",
+      agoNever: "endnu ikke",
+      agoNow: "lige nu",
+      agoMin: (n) => `for ${n} min. siden`,
+      agoHours: (n) => `for ${n} t. siden`,
+      tbSearch: "Søg",
+      edEntries: "Poster",
+      edEntriesHelp: "Hvad en post er: et instrument eller en hel portefølje med dens værdi og dagens ændring. Et klik på en portefølje åbner detaljerne for dens positioner.",
+      tbRows: "Rækker",
+      tbRowsHelp: "Hvad en række er: et instrument eller en hel portefølje med dens summer. Et klik på en portefølje viser dens instrumenter.",
+      tbRowsItems: "Instrumenter",
+      tbRowsGroups: "Porteføljer",
+      edTableGroupColumns: "Porteføljekolonner",
+      edTableGroupColumnsHelp: "Kolonnerne i oversigten over porteføljerne. Listen under Kolonner gælder for en porteføljes instrumenter.",
+      tbBack: "Tilbage til porteføljerne",
+      tbCol_positions: "Positioner",
+      tbPositions: (count) => (count === 1 ? "1 position" : `${count} positioner`),
+      tbNameG_name: "Navn",
+      tbInfoG_name: "Porteføljens navn.",
+      tbInfoG_positions: "Hvor mange positioner porteføljen har.",
+      tbInfoG_value: "Hvad porteføljen er værd nu.",
+      tbInfoG_share: "Porteføljens andel af alle viste porteføljer, i procent.",
+      tbInfoG_day_gain: "Hvad porteføljen har vundet eller tabt i dag, som beløb.",
+      tbInfoG_day_gain_percent: "Hvad porteføljen har vundet eller tabt i dag, i procent.",
+      tbInfoG_gain: "Porteføljens gevinst eller tab siden købene, som beløb.",
+      tbInfoG_gain_percent: "Porteføljens gevinst eller tab siden købene, i procent.",
+      tbInfoG_spark: "En lille kurve over porteføljens udvikling i løbet af dagen.",
+      tbInfoG_spark_week: "En lille kurve over porteføljens udvikling de seneste fem handelsdage.",
+      tbInfoG_spark_month: "En lille kurve over porteføljens udvikling den seneste måned.",
+      edTableSearch: "Vis søgefeltet",
+      edTableSearchHelp: "Et felt ved siden af navnets overskrift, der filtrerer rækkerne efter navn eller symbol.",
+      edTableRefresh: "Vis opdateringsknappen",
+      edTableRefreshHelp: "En knap øverst til højre, der henter kurserne igen og viser, hvornår de sidst blev hentet.",
+      edElTableRefresh: "Opdateringsknap",
+      edElTableRefreshHelp: "Knappen øverst til højre, med tiden siden den seneste hentning.",
+      edRefreshBg: "Baggrund",
+      edRefreshBgHelp: "Tegner knappen på en afrundet baggrund.",
+      edRefreshBgColor: "Baggrundsfarve",
+      edRefreshBgColorHelp: "Baggrundens farve. Tom beholder temaets.",
+      edElTableDivider: "Skillelinjer",
+      edElTableDividerHelp: "Linjerne mellem tabellens rækker.",
+      edShowTableLinesHelp: "Tegner linjerne mellem rækkerne.",
+      edElTableTotal: "Sumlinje",
+      edElTableTotalHelp: "Den sidste linje med summerne.",
+      edElTablePill: "Mærkater",
+      edElTablePillHelp: "Mærkaten omkring en værdi. Dens farve er gevinst- eller tabsfarven.",
+      edPillRadius: "Hjørneradius",
+      edPillRadiusHelp: "Hvor runde mærkatens hjørner er, f.eks. 6px. Tom er helt rund.",
+      edPillFill: "Fyld",
+      edPillFillHelp: "Hvor kraftigt gevinst- eller tabsfarven fylder mærkaten, i procent.",
+      edElTableArrow: "Pile",
+      edElTableArrowHelp: "Trendens pile. Deres farve er gevinst- eller tabsfarven.",
+      edTrendUpIcon: "Symbol, steget",
+      edTrendDownIcon: "Symbol, faldet",
+      edTrendFlatIcon: "Symbol, uændret",
+      edTrendIconHelp: "Det symbol, kolonnen Trend viser for dette.",
+      edArrowSize: "Størrelse",
+      edArrowSizeHelp: "Pilenes størrelse, f.eks. 18px.",
       perfTitle: "Udvikling",
       perfChoose: "Der er endnu ingen portefølje, hvis udvikling kan vises.",
       perfEmpty: "Endnu ikke nok kurser for denne periode.",
@@ -1999,6 +2739,8 @@
       editInstrument: "Rediger instrument",
       removeInstrument: "Fjern instrument",
       editAlerts: "Kursalarmer",
+      editPurchase: "Ret køb",
+      editSale: "Ret salg",
       alertSet: "Der er sat en kursalarm",
       alertOn: "En kursalarm er udløst",
       fAlertNone: "Kursalarm",
@@ -2096,7 +2838,7 @@
       edElGainHelp: "Farverne for gevinst, tab og nye nyheder, overalt på kortet.",
       edGainColorHelp: "Farve for en stigning. Tom beholder kortets grønne.",
       edLossColorHelp: "Farve for et fald. Tom beholder kortets røde.",
-      edElLogo: "Logo",
+      edElLogo: "Logoer",
       edElLogoHelp: "En posts runde logo.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Instrumentets symbol i en post.",
@@ -2235,7 +2977,10 @@
       sortName: "Por nombre",
       sortChange: "Por variación",
       edTap: "Al hacer clic",
-      edTapHelp: "Lo que abre un clic en un activo: la ventana con sus detalles o su página de TradingView. Sin símbolo de TradingView siempre es la ventana.",
+      edTapHelp: "Lo que hace un clic en un activo: abre la ventana con sus detalles o su página de TradingView, o lleva a otra vista. Sin símbolo de TradingView es la ventana.",
+      tapNavigate: "Navegar",
+      edTapPath: "Ruta",
+      edTapPathHelp: "Adónde lleva un clic: un panel de control o una vista, p. ej. /lovelace/home.",
       tapPopup: "Ventana de detalles",
       tapTradingView: "TradingView",
       close: "Cerrar",
@@ -2271,6 +3016,9 @@
       edElCardBg: "Fondo de la tarjeta",
       edElCardBgHelp: "Un color y una imagen propios detrás de toda la tarjeta.",
       edCardBgEnable: "Mostrar fondo",
+      edCardInset: "Distancia al marco",
+      edCardInsetHelp: "Cuánto se separa el contenido de la tarjeta de su borde, en píxeles. Vacío sigue al tema: si dibuja un reborde dentro de la tarjeta, el contenido termina antes.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Dibuja el color y la imagen de abajo.",
       edCardBgColor: "Color",
       edCardBgColorHelp: "Color de fondo de la tarjeta.",
@@ -2417,6 +3165,15 @@
       fAlertBelow: "Alerta por debajo",
       fAlertAbove: "Alerta por encima",
       posRealized: "Realizado",
+      tradeBuy: "Compra",
+      tradeSell: "Venta",
+      tradesTitle: "Compras y ventas",
+      tradesMore: (count) => `Mostrar todas (${count})`,
+      tradesLess: "Mostrar menos",
+      edChartTrades: "Compras y ventas",
+      edChartTradesHelp: "Marca cada compra y venta en el gráfico en su día y precio, y dibuja una línea en el precio medio.",
+      edDetailTrades: "Lista de compras y ventas",
+      edDetailTradesHelp: "Cada compra y venta con su día, cantidad, precio e importe. Una venta muestra lo realizado con ella.",
       posCosts: "Comisiones e impuestos",
       edGroup: "Grupo",
       edGroupHelp: "El grupo cuyos activos muestra la tarjeta: una cartera o una lista de seguimiento de la integración.",
@@ -2445,6 +3202,174 @@
       formatDetail: "Detalles",
       formatAlloc: "Cartera",
       formatAlerts: "Alertas de precio",
+      formatTable: "Tabla",
+      tbCol_name: "Nombre",
+      tbCol_name_only: "Nombre",
+      tbName_name: "Nombre y logotipo",
+      tbCol_symbol: "Símbolo",
+      tbCol_exchange: "Bolsa",
+      tbCol_symbol_exchange: "Símbolo · bolsa",
+      tbCol_price: "Precio",
+      tbCol_previous_close: "Cierre anterior",
+      tbCol_change: "Variación",
+      tbCol_change_percent: "Día %",
+      tbHeadAlerts: "Alertas",
+      tbHeadHighLow: "Máx./mín. del día",
+      tbHeadWeek: "Semana",
+      tbCol_trend: "Tendencia",
+      tbCol_day_high: "Máx. del día",
+      tbCol_day_low: "Mín. del día",
+      tbCol_year_low: "Mín. 52 semanas",
+      tbCol_year_high: "Máx. 52 semanas",
+      tbCol_volume: "Volumen",
+      tbCol_spark: "Curva, día",
+      tbCol_spark_week: "Curva, semana",
+      tbCol_spark_month: "Curva, mes",
+      tbCol_news: "Noticias",
+      tbCol_week: "Semana %",
+      tbCol_time: "Actualizado",
+      tbCol_alert: "Alerta",
+      tbCol_quantity: "Cantidad",
+      tbCol_average: "Precio medio",
+      tbCol_holding: "Posición",
+      tbCol_value: "Valor",
+      tbCol_share: "Peso",
+      tbCol_day_gain: "Hoy",
+      tbCol_day_gain_percent: "Hoy %",
+      tbCol_week_change: "Semana",
+      tbCol_gain: "Ganancia",
+      tbCol_gain_percent: "Ganancia %",
+      tbTotal: "Total",
+      tbNone: "Ninguno",
+      tbHolding: (quantity, average) => `${quantity} a ${average}`,
+      tbTrendUp: "Al alza con la última actualización",
+      tbTrendDown: "A la baja con la última actualización",
+      tbTrendFlat: "Sin cambios con la última actualización",
+      tbPresetAuto: "Automático",
+      tbPresetCompact: "Compacto",
+      tbPresetClassic: "Clásico",
+      edBlockTableHelp: "Lo que muestra la tabla, columna por columna.",
+      edTablePreset: "Punto de partida",
+      edTablePresetHelp: "Las columnas con las que empieza la tabla. Automático toma Cartera para una cartera y Compacto para una lista de seguimiento. Al elegir uno se restablecen sus columnas.",
+      edTableColumns: "Columnas",
+      edTableColumnsHelp: "El valor de cada columna, un segundo valor debajo si quieres, y su encabezado. Las flechas mueven una columna, la cruz la quita.",
+      edTableHeading: "Encabezado",
+      edTableHeadingHelp: "El nombre sobre la columna. Vacío toma el nombre del valor.",
+      edTableSubNoneHelp: "Un segundo valor, más pequeño, bajo el valor.",
+      tbInfo_name: "El nombre del activo con su logotipo.",
+      tbInfo_name_only: "El nombre del activo.",
+      tbInfo_symbol: "Su símbolo en la fuente, p. ej. AAPL.",
+      tbInfo_exchange: "La bolsa de la que viene su precio.",
+      tbInfo_symbol_exchange: "Símbolo y bolsa en uno.",
+      tbInfo_price: "El último precio.",
+      tbInfo_previous_close: "El precio de cierre del día anterior.",
+      tbInfo_change: "La variación desde el cierre anterior, como importe.",
+      tbInfo_change_percent: "La variación desde el cierre anterior, en porcentaje.",
+      tbInfo_trend: "Una flecha: si el precio subió, bajó o se mantuvo con la última actualización.",
+      tbInfo_day_high: "El precio más alto del día.",
+      tbInfo_day_low: "El precio más bajo del día.",
+      tbInfo_year_low: "El precio más bajo de las últimas 52 semanas.",
+      tbInfo_year_high: "El precio más alto de las últimas 52 semanas.",
+      tbInfo_volume: "El volumen negociado hoy.",
+      tbInfo_spark: "Una pequeña curva del precio durante el día.",
+      tbInfo_spark_week: "Una pequeña curva del precio en las últimas cinco sesiones.",
+      tbInfo_spark_month: "Una pequeña curva del precio en el último mes.",
+      tbInfo_news: "Un símbolo donde hay titulares nuevos. Un clic los muestra.",
+      tbInfo_week: "La variación en las últimas cinco sesiones, en porcentaje.",
+      tbInfo_week_change: "La variación en las últimas cinco sesiones, como importe.",
+      tbInfo_day_gain_percent: "Lo que la posición ha ganado o perdido hoy, en porcentaje.",
+      tbInfo_time: "La hora del último precio.",
+      tbInfo_alert: "La campana de las alertas de precio. Un clic las fija.",
+      tbInfo_quantity: "Cuántas unidades se tienen.",
+      tbInfo_average: "El precio medio pagado por unidad.",
+      tbInfo_holding: "Cantidad y precio medio en uno.",
+      tbInfo_value: "Lo que vale ahora la posición.",
+      tbInfo_share: "El peso de la posición en todo lo que muestra la tabla, en porcentaje.",
+      tbInfo_day_gain: "Lo que la posición ha ganado o perdido hoy, como importe.",
+      tbInfo_gain: "Ganancia o pérdida desde la compra, como importe.",
+      tbInfo_gain_percent: "Ganancia o pérdida desde la compra, en porcentaje.",
+      edTableValue: "Valor",
+      edTableSub: "Subtítulo",
+      edTableAdd: "Añadir columna",
+      edTableRemove: "Quitar columna",
+      edTablePill: "Como píldora",
+      edTablePillHelp: "Dibuja el valor en una píldora del color de ganancia o pérdida.",
+      tbName_change: "Variación, día",
+      tbName_change_percent: "Variación, día %",
+      tbName_week: "Variación, semana %",
+      tbName_week_change: "Variación, semana",
+      tbName_day_gain_percent: "Ganancia, día %",
+      tbName_day_gain: "Ganancia, día",
+      tbName_gain: "Ganancia, total",
+      tbName_gain_percent: "Ganancia, total %",
+      edTableHeader: "Mostrar los encabezados de columna",
+      edTableHeaderHelp: "La línea con los nombres de las columnas. Un clic en un nombre ordena por esa columna.",
+      edTableTotal: "Mostrar el total",
+      edTableTotalHelp: "Una última línea con las sumas de la cartera: su valor, la variación de hoy y la ganancia, donde la tabla tiene una columna para ellas.",
+      edElTableHead: "Encabezados de columna",
+      edElTableHeadHelp: "Los nombres sobre las columnas de la tabla.",
+      edElTableCell: "Valores",
+      edElTableCellHelp: "Los valores de la tabla.",
+      edElTableSub: "Subtítulos",
+      edElTableSubHelp: "El segundo valor bajo el valor de una columna.",
+      refreshNow: "Volver a obtener los precios",
+      agoNever: "aún no",
+      agoNow: "ahora mismo",
+      agoMin: (n) => `hace ${n} min`,
+      agoHours: (n) => `hace ${n} h`,
+      tbSearch: "Buscar",
+      edEntries: "Entradas",
+      edEntriesHelp: "Qué es una entrada: un activo, o una cartera entera con su valor y la variación de hoy. Un clic en una cartera abre los detalles de sus posiciones.",
+      tbRows: "Filas",
+      tbRowsHelp: "Qué es una fila: un activo, o una cartera entera con sus sumas. Un clic en una cartera muestra sus activos.",
+      tbRowsItems: "Activos",
+      tbRowsGroups: "Carteras",
+      edTableGroupColumns: "Columnas de las carteras",
+      edTableGroupColumnsHelp: "Las columnas del resumen de las carteras. La lista bajo Columnas es para los activos de una cartera.",
+      tbBack: "Volver a las carteras",
+      tbCol_positions: "Posiciones",
+      tbPositions: (count) => (count === 1 ? "1 posición" : `${count} posiciones`),
+      tbNameG_name: "Nombre",
+      tbInfoG_name: "El nombre de la cartera.",
+      tbInfoG_positions: "Cuántas posiciones tiene la cartera.",
+      tbInfoG_value: "Lo que vale ahora la cartera.",
+      tbInfoG_share: "El peso de la cartera en todas las carteras mostradas, en porcentaje.",
+      tbInfoG_day_gain: "Lo que la cartera ha ganado o perdido hoy, como importe.",
+      tbInfoG_day_gain_percent: "Lo que la cartera ha ganado o perdido hoy, en porcentaje.",
+      tbInfoG_gain: "La ganancia o pérdida de la cartera desde las compras, como importe.",
+      tbInfoG_gain_percent: "La ganancia o pérdida de la cartera desde las compras, en porcentaje.",
+      tbInfoG_spark: "Una pequeña curva de la rentabilidad de la cartera durante el día.",
+      tbInfoG_spark_week: "Una pequeña curva de la rentabilidad de la cartera en las últimas cinco sesiones.",
+      tbInfoG_spark_month: "Una pequeña curva de la rentabilidad de la cartera en el último mes.",
+      edTableSearch: "Mostrar el campo de búsqueda",
+      edTableSearchHelp: "Un campo junto al encabezado del nombre que filtra las filas por nombre o símbolo.",
+      edTableRefresh: "Mostrar el botón de actualizar",
+      edTableRefreshHelp: "Un botón arriba a la derecha que vuelve a obtener los precios y dice cuándo se obtuvieron por última vez.",
+      edElTableRefresh: "Botón de actualizar",
+      edElTableRefreshHelp: "El botón arriba a la derecha, con el tiempo transcurrido desde la última actualización.",
+      edRefreshBg: "Fondo",
+      edRefreshBgHelp: "Dibuja el botón sobre una píldora.",
+      edRefreshBgColor: "Color de fondo",
+      edRefreshBgColorHelp: "Color de la píldora. Vacío mantiene el del tema.",
+      edElTableDivider: "Separadores",
+      edElTableDividerHelp: "Las líneas entre las filas de la tabla.",
+      edShowTableLinesHelp: "Dibuja las líneas entre las filas.",
+      edElTableTotal: "Línea de total",
+      edElTableTotalHelp: "La última línea con las sumas.",
+      edElTablePill: "Píldoras",
+      edElTablePillHelp: "La píldora alrededor de un valor. Su color es el de ganancia o pérdida.",
+      edPillRadius: "Radio de esquina",
+      edPillRadiusHelp: "Cómo de redondas son las esquinas de la píldora, p. ej. 6px. Vacío es totalmente redonda.",
+      edPillFill: "Relleno",
+      edPillFillHelp: "Con qué intensidad el color de ganancia o pérdida rellena la píldora, en porcentaje.",
+      edElTableArrow: "Flechas",
+      edElTableArrowHelp: "Las flechas de la tendencia. Su color es el de ganancia o pérdida.",
+      edTrendUpIcon: "Símbolo, al alza",
+      edTrendDownIcon: "Símbolo, a la baja",
+      edTrendFlatIcon: "Símbolo, sin cambios",
+      edTrendIconHelp: "El símbolo que la columna Tendencia muestra para esto.",
+      edArrowSize: "Tamaño",
+      edArrowSizeHelp: "Tamaño de las flechas, p. ej. 18px.",
       perfTitle: "Rentabilidad",
       perfChoose: "Aún no hay ninguna cartera cuya rentabilidad se pueda mostrar.",
       perfEmpty: "Aún no hay suficientes precios para este periodo.",
@@ -2550,6 +3475,8 @@
       editInstrument: "Cambiar activo",
       removeInstrument: "Eliminar activo",
       editAlerts: "Alertas de precio",
+      editPurchase: "Cambiar compra",
+      editSale: "Cambiar venta",
       alertSet: "Hay una alerta de precio fijada",
       alertOn: "Se ha disparado una alerta de precio",
       fAlertNone: "Alerta de precio",
@@ -2647,7 +3574,7 @@
       edElGainHelp: "Los colores de ganancias, pérdidas y titulares nuevos, en toda la tarjeta.",
       edGainColorHelp: "Color para una subida. Vacío mantiene el verde de la tarjeta.",
       edLossColorHelp: "Color para una bajada. Vacío mantiene el rojo de la tarjeta.",
-      edElLogo: "Logotipo",
+      edElLogo: "Logotipos",
       edElLogoHelp: "El logotipo redondo de una entrada.",
       edElRowSymbol: "Símbolo",
       edElRowSymbolHelp: "El símbolo del activo en una entrada.",
@@ -2786,7 +3713,10 @@
       sortName: "Nimen mukaan",
       sortChange: "Muutoksen mukaan",
       edTap: "Napsautettaessa",
-      edTapHelp: "Mitä arvopaperin napsautus avaa: sen tiedot ponnahdusikkunassa tai sen TradingView-sivun. Ilman TradingView-symbolia avautuu aina ponnahdusikkuna.",
+      edTapHelp: "Mitä arvopaperin napsautus tekee: avaa sen tiedot ponnahdusikkunassa tai sen TradingView-sivun tai vie toiseen näkymään. Ilman TradingView-symbolia avautuu ponnahdusikkuna.",
+      tapNavigate: "Siirry",
+      edTapPath: "Polku",
+      edTapPathHelp: "Minne napsautus vie: kojelautaan tai näkymään, esim. /lovelace/home.",
       tapPopup: "Tiedot-ikkuna",
       tapTradingView: "TradingView",
       close: "Sulje",
@@ -2822,6 +3752,9 @@
       edElCardBg: "Kortin tausta",
       edElCardBgHelp: "Oma väri ja kuva koko kortin taakse.",
       edCardBgEnable: "Näytä tausta",
+      edCardInset: "Etäisyys kehykseen",
+      edCardInsetHelp: "Kuinka kauas reunasta kortin sisältö jää, pikseleinä. Tyhjänä seuraa teemaa: jos teema piirtää kortin sisään reunuksen, sisältö päättyy ennen sitä.",
+      edCardInsetAuto: "autom.",
       edCardBgEnableHelp: "Piirtää alla olevan värin ja kuvan.",
       edCardBgColor: "Väri",
       edCardBgColorHelp: "Kortin taustaväri.",
@@ -2968,6 +3901,15 @@
       fAlertBelow: "Alarajan hälytys",
       fAlertAbove: "Ylärajan hälytys",
       posRealized: "Toteutunut",
+      tradeBuy: "Osto",
+      tradeSell: "Myynti",
+      tradesTitle: "Ostot ja myynnit",
+      tradesMore: (count) => `Näytä kaikki ${count}`,
+      tradesLess: "Näytä vähemmän",
+      edChartTrades: "Ostot ja myynnit",
+      edChartTradesHelp: "Merkitsee jokaisen oston ja myynnin kaavioon sen päivän ja hinnan kohdalle ja piirtää viivan keskihinnan kohdalle.",
+      edDetailTrades: "Ostojen ja myyntien lista",
+      edDetailTradesHelp: "Jokainen osto ja myynti: päivä, määrä, hinta ja summa. Myynnissä näkyy sen toteutunut voitto tai tappio.",
       posCosts: "Kulut ja verot",
       edGroup: "Ryhmä",
       edGroupHelp: "Ryhmä, jonka arvopaperit kortti näyttää - integraation salkku tai seurantalista.",
@@ -2996,6 +3938,174 @@
       formatDetail: "Tiedot",
       formatAlloc: "Salkku",
       formatAlerts: "Hintahälytykset",
+      formatTable: "Taulukko",
+      tbCol_name: "Nimi",
+      tbCol_name_only: "Nimi",
+      tbName_name: "Nimi ja logo",
+      tbCol_symbol: "Symboli",
+      tbCol_exchange: "Pörssi",
+      tbCol_symbol_exchange: "Symboli · pörssi",
+      tbCol_price: "Kurssi",
+      tbCol_previous_close: "Edell. päätös",
+      tbCol_change: "Muutos",
+      tbCol_change_percent: "Päivä %",
+      tbHeadAlerts: "Hälytykset",
+      tbHeadHighLow: "Päivän ylin/alin",
+      tbHeadWeek: "Viikko",
+      tbCol_trend: "Trendi",
+      tbCol_day_high: "Päivän ylin",
+      tbCol_day_low: "Päivän alin",
+      tbCol_year_low: "52 vk alin",
+      tbCol_year_high: "52 vk ylin",
+      tbCol_volume: "Vaihto",
+      tbCol_spark: "Käyrä, päivä",
+      tbCol_spark_week: "Käyrä, viikko",
+      tbCol_spark_month: "Käyrä, kuukausi",
+      tbCol_news: "Uutiset",
+      tbCol_week: "Viikko %",
+      tbCol_time: "Päivitetty",
+      tbCol_alert: "Hälytys",
+      tbCol_quantity: "Määrä",
+      tbCol_average: "Keskihinta",
+      tbCol_holding: "Omistus",
+      tbCol_value: "Arvo",
+      tbCol_share: "Osuus",
+      tbCol_day_gain: "Tänään",
+      tbCol_day_gain_percent: "Tänään %",
+      tbCol_week_change: "Viikko",
+      tbCol_gain: "Voitto",
+      tbCol_gain_percent: "Voitto %",
+      tbTotal: "Yhteensä",
+      tbNone: "Ei mitään",
+      tbHolding: (quantity, average) => `${quantity} hintaan ${average}`,
+      tbTrendUp: "Noussut viimeisimmässä päivityksessä",
+      tbTrendDown: "Laskenut viimeisimmässä päivityksessä",
+      tbTrendFlat: "Ennallaan viimeisimmässä päivityksessä",
+      tbPresetAuto: "Automaattinen",
+      tbPresetCompact: "Tiivis",
+      tbPresetClassic: "Klassinen",
+      edBlockTableHelp: "Mitä taulukko näyttää, sarake sarakkeelta.",
+      edTablePreset: "Lähtökohta",
+      edTablePresetHelp: "Sarakkeet, joilla taulukko alkaa. Automaattinen valitsee salkulle vaihtoehdon Salkku ja seurantalistalle vaihtoehdon Tiivis. Valinta palauttaa sen sarakkeet.",
+      edTableColumns: "Sarakkeet",
+      edTableColumnsHelp: "Jokaisen sarakkeen arvo, halutessasi toinen arvo sen alla ja sarakkeen otsikko. Nuolet siirtävät saraketta, risti poistaa sen.",
+      edTableHeading: "Otsikko",
+      edTableHeadingHelp: "Nimi sarakkeen yläpuolella. Tyhjänä käytetään arvon nimeä.",
+      edTableSubNoneHelp: "Toinen, pienempi arvo arvon alla.",
+      tbInfo_name: "Arvopaperin nimi logoineen.",
+      tbInfo_name_only: "Arvopaperin nimi.",
+      tbInfo_symbol: "Sen symboli lähteessä, esim. AAPL.",
+      tbInfo_exchange: "Pörssi, josta sen kurssi tulee.",
+      tbInfo_symbol_exchange: "Symboli ja pörssi yhdessä.",
+      tbInfo_price: "Viimeisin kurssi.",
+      tbInfo_previous_close: "Edellisen päivän päätöskurssi.",
+      tbInfo_change: "Muutos edellisestä päätöskurssista summana.",
+      tbInfo_change_percent: "Muutos edellisestä päätöskurssista prosentteina.",
+      tbInfo_trend: "Nuoli: nousiko, laskiko vai pysyikö kurssi ennallaan viimeisimmässä päivityksessä.",
+      tbInfo_day_high: "Päivän ylin kurssi.",
+      tbInfo_day_low: "Päivän alin kurssi.",
+      tbInfo_year_low: "Viimeisten 52 viikon alin kurssi.",
+      tbInfo_year_high: "Viimeisten 52 viikon ylin kurssi.",
+      tbInfo_volume: "Tänään vaihdettu määrä.",
+      tbInfo_spark: "Pieni kurssikäyrä päivän ajalta.",
+      tbInfo_spark_week: "Pieni kurssikäyrä viiden viime kaupankäyntipäivän ajalta.",
+      tbInfo_spark_month: "Pieni kurssikäyrä viime kuukauden ajalta.",
+      tbInfo_news: "Symboli, kun on uusia uutisotsikoita. Napsautus näyttää ne.",
+      tbInfo_week: "Muutos viiden viime kaupankäyntipäivän aikana prosentteina.",
+      tbInfo_week_change: "Muutos viiden viime kaupankäyntipäivän aikana summana.",
+      tbInfo_day_gain_percent: "Omistuksen voitto tai tappio tänään prosentteina.",
+      tbInfo_time: "Viimeisimmän kurssin aika.",
+      tbInfo_alert: "Hintahälytysten kello. Napsautus asettaa ne.",
+      tbInfo_quantity: "Montako kappaletta omistetaan.",
+      tbInfo_average: "Kappaleesta maksettu keskihinta.",
+      tbInfo_holding: "Määrä ja keskihinta yhdessä.",
+      tbInfo_value: "Omistuksen arvo nyt.",
+      tbInfo_share: "Omistuksen osuus kaikesta, mitä taulukko näyttää, prosentteina.",
+      tbInfo_day_gain: "Omistuksen voitto tai tappio tänään summana.",
+      tbInfo_gain: "Voitto tai tappio ostosta lähtien summana.",
+      tbInfo_gain_percent: "Voitto tai tappio ostosta lähtien prosentteina.",
+      edTableValue: "Arvo",
+      edTableSub: "Alarivi",
+      edTableAdd: "Lisää sarake",
+      edTableRemove: "Poista sarake",
+      edTablePill: "Kapselina",
+      edTablePillHelp: "Piirtää arvon kapseliin, jonka väri on voiton tai tappion väri.",
+      tbName_change: "Muutos, päivä",
+      tbName_change_percent: "Muutos, päivä %",
+      tbName_week: "Muutos, viikko %",
+      tbName_week_change: "Muutos, viikko",
+      tbName_day_gain_percent: "Voitto, päivä %",
+      tbName_day_gain: "Voitto, päivä",
+      tbName_gain: "Voitto, yhteensä",
+      tbName_gain_percent: "Voitto, yhteensä %",
+      edTableHeader: "Näytä sarakeotsikot",
+      edTableHeaderHelp: "Rivi, jossa on sarakkeiden nimet. Nimen napsautus järjestää sen sarakkeen mukaan.",
+      edTableTotal: "Näytä yhteensä-rivi",
+      edTableTotalHelp: "Viimeinen rivi, jossa on salkun summat: sen arvo, tämän päivän muutos ja voitto, jos taulukossa on niille sarake.",
+      edElTableHead: "Sarakeotsikot",
+      edElTableHeadHelp: "Nimet taulukon sarakkeiden yläpuolella.",
+      edElTableCell: "Arvot",
+      edElTableCellHelp: "Taulukon arvot.",
+      edElTableSub: "Alarivit",
+      edElTableSubHelp: "Toinen arvo sarakkeen arvon alla.",
+      refreshNow: "Hae kurssit uudelleen",
+      agoNever: "ei vielä",
+      agoNow: "juuri nyt",
+      agoMin: (n) => `${n} min sitten`,
+      agoHours: (n) => `${n} h sitten`,
+      tbSearch: "Haku",
+      edEntries: "Kohteet",
+      edEntriesHelp: "Mikä kohde on: arvopaperi tai kokonainen salkku arvoineen ja tämän päivän muutoksineen. Salkun napsautus avaa sen omistusten tiedot.",
+      tbRows: "Rivit",
+      tbRowsHelp: "Mikä rivi on: arvopaperi tai kokonainen salkku summineen. Salkun napsautus näyttää sen arvopaperit.",
+      tbRowsItems: "Arvopaperit",
+      tbRowsGroups: "Salkut",
+      edTableGroupColumns: "Salkkujen sarakkeet",
+      edTableGroupColumnsHelp: "Salkkujen yleisnäkymän sarakkeet. Kohdan Sarakkeet lista koskee salkun arvopapereita.",
+      tbBack: "Takaisin salkkuihin",
+      tbCol_positions: "Omistukset",
+      tbPositions: (count) => (count === 1 ? "1 omistus" : `${count} omistusta`),
+      tbNameG_name: "Nimi",
+      tbInfoG_name: "Salkun nimi.",
+      tbInfoG_positions: "Montako omistusta salkussa on.",
+      tbInfoG_value: "Salkun arvo nyt.",
+      tbInfoG_share: "Salkun osuus kaikista näytetyistä salkuista prosentteina.",
+      tbInfoG_day_gain: "Salkun voitto tai tappio tänään summana.",
+      tbInfoG_day_gain_percent: "Salkun voitto tai tappio tänään prosentteina.",
+      tbInfoG_gain: "Salkun voitto tai tappio ostoista lähtien summana.",
+      tbInfoG_gain_percent: "Salkun voitto tai tappio ostoista lähtien prosentteina.",
+      tbInfoG_spark: "Pieni käyrä salkun kehityksestä päivän aikana.",
+      tbInfoG_spark_week: "Pieni käyrä salkun kehityksestä viiden viime kaupankäyntipäivän ajalta.",
+      tbInfoG_spark_month: "Pieni käyrä salkun kehityksestä viime kuukauden ajalta.",
+      edTableSearch: "Näytä hakukenttä",
+      edTableSearchHelp: "Kenttä nimen otsikon vieressä; se suodattaa rivit nimen tai symbolin mukaan.",
+      edTableRefresh: "Näytä päivityspainike",
+      edTableRefreshHelp: "Painike oikeassa yläkulmassa; se hakee kurssit uudelleen ja kertoo, milloin ne viimeksi haettiin.",
+      edElTableRefresh: "Päivityspainike",
+      edElTableRefreshHelp: "Painike oikeassa yläkulmassa ja aika viimeisimmästä hausta.",
+      edRefreshBg: "Tausta",
+      edRefreshBgHelp: "Piirtää painikkeen kapselin päälle.",
+      edRefreshBgColor: "Taustaväri",
+      edRefreshBgColorHelp: "Kapselin väri. Tyhjänä säilyy teeman väri.",
+      edElTableDivider: "Erotinviivat",
+      edElTableDividerHelp: "Viivat taulukon rivien välillä.",
+      edShowTableLinesHelp: "Piirtää viivat rivien välille.",
+      edElTableTotal: "Yhteensä-rivi",
+      edElTableTotalHelp: "Viimeinen rivi, jossa on summat.",
+      edElTablePill: "Kapselit",
+      edElTablePillHelp: "Kapseli arvon ympärillä. Sen väri on voiton tai tappion väri.",
+      edPillRadius: "Kulmien pyöristys",
+      edPillRadiusHelp: "Kuinka pyöreät kapselin kulmat ovat, esim. 6px. Tyhjänä täysin pyöreät.",
+      edPillFill: "Täyttö",
+      edPillFillHelp: "Kuinka voimakkaasti voiton tai tappion väri täyttää kapselin, prosentteina.",
+      edElTableArrow: "Nuolet",
+      edElTableArrowHelp: "Trendin nuolet. Niiden väri on voiton tai tappion väri.",
+      edTrendUpIcon: "Symboli, noussut",
+      edTrendDownIcon: "Symboli, laskenut",
+      edTrendFlatIcon: "Symboli, ennallaan",
+      edTrendIconHelp: "Symboli, jonka Trendi-sarake näyttää tässä tapauksessa.",
+      edArrowSize: "Koko",
+      edArrowSizeHelp: "Nuolten koko, esim. 18px.",
       perfTitle: "Kehitys",
       perfChoose: "Vielä ei ole salkkua, jonka kehityksen voisi näyttää.",
       perfEmpty: "Tälle jaksolle ei vielä ole tarpeeksi kursseja.",
@@ -3101,6 +4211,8 @@
       editInstrument: "Muokkaa arvopaperia",
       removeInstrument: "Poista arvopaperi",
       editAlerts: "Hintahälytykset",
+      editPurchase: "Muuta ostoa",
+      editSale: "Muuta myyntiä",
       alertSet: "Hintahälytys on asetettu",
       alertOn: "Hintahälytys on lauennut",
       fAlertNone: "Hintahälytys",
@@ -3198,7 +4310,7 @@
       edElGainHelp: "Voittojen, tappioiden ja uusien uutisten värit kaikkialla kortilla.",
       edGainColorHelp: "Nousun väri. Tyhjänä säilyy kortin vihreä.",
       edLossColorHelp: "Laskun väri. Tyhjänä säilyy kortin punainen.",
-      edElLogo: "Logo",
+      edElLogo: "Logot",
       edElLogoHelp: "Kohteen pyöreä logo.",
       edElRowSymbol: "Symboli",
       edElRowSymbolHelp: "Arvopaperin symboli kohteessa.",
@@ -3337,7 +4449,10 @@
       sortName: "Par nom",
       sortChange: "Par variation",
       edTap: "Au clic",
-      edTapHelp: "Ce qu'ouvre un clic sur un instrument : son pop-up de détails ou sa page TradingView. Sans symbole TradingView, c'est toujours le pop-up.",
+      edTapHelp: "Ce que fait un clic sur un instrument : il ouvre son pop-up de détails ou sa page TradingView, ou mène à une autre vue. Sans symbole TradingView, c'est le pop-up.",
+      tapNavigate: "Naviguer",
+      edTapPath: "Chemin",
+      edTapPathHelp: "Où mène un clic : un tableau de bord ou une vue, p. ex. /lovelace/home.",
       tapPopup: "Pop-up de détails",
       tapTradingView: "TradingView",
       close: "Fermer",
@@ -3373,6 +4488,9 @@
       edElCardBg: "Fond de la carte",
       edElCardBgHelp: "Une couleur et une image personnelles derrière toute la carte.",
       edCardBgEnable: "Afficher le fond",
+      edCardInset: "Distance au cadre",
+      edCardInsetHelp: "La distance entre le contenu de la carte et son bord, en pixels. Vide, le thème décide : s'il dessine un liseré dans la carte, le contenu s'arrête avant.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Affiche la couleur et l'image ci-dessous.",
       edCardBgColor: "Couleur",
       edCardBgColorHelp: "Couleur de fond de la carte.",
@@ -3519,6 +4637,15 @@
       fAlertBelow: "Alerte basse",
       fAlertAbove: "Alerte haute",
       posRealized: "Réalisée",
+      tradeBuy: "Achat",
+      tradeSell: "Vente",
+      tradesTitle: "Achats et ventes",
+      tradesMore: (count) => `Afficher les ${count}`,
+      tradesLess: "Afficher moins",
+      edChartTrades: "Achats et ventes",
+      edChartTradesHelp: "Marque chaque achat et chaque vente dans le graphique, à son jour et à son cours, et trace une ligne au prix moyen.",
+      edDetailTrades: "Liste des achats et ventes",
+      edDetailTradesHelp: "Chaque achat et chaque vente avec son jour, sa quantité, son cours et son montant. Une vente indique ce qu'elle a réalisé.",
       posCosts: "Frais et taxes",
       edGroup: "Groupe",
       edGroupHelp: "Le groupe dont la carte affiche les instruments : un portefeuille ou une liste de suivi de l'intégration.",
@@ -3547,6 +4674,174 @@
       formatDetail: "Détails",
       formatAlloc: "Portefeuille",
       formatAlerts: "Alertes de cours",
+      formatTable: "Tableau",
+      tbCol_name: "Nom",
+      tbCol_name_only: "Nom",
+      tbName_name: "Nom et logo",
+      tbCol_symbol: "Symbole",
+      tbCol_exchange: "Bourse",
+      tbCol_symbol_exchange: "Symbole · bourse",
+      tbCol_price: "Cours",
+      tbCol_previous_close: "Clôture préc.",
+      tbCol_change: "Variation",
+      tbCol_change_percent: "Jour %",
+      tbHeadAlerts: "Alertes",
+      tbHeadHighLow: "Haut/bas du jour",
+      tbHeadWeek: "Semaine",
+      tbCol_trend: "Tendance",
+      tbCol_day_high: "Plus haut jour",
+      tbCol_day_low: "Plus bas jour",
+      tbCol_year_low: "Plus bas 52 sem.",
+      tbCol_year_high: "Plus haut 52 sem.",
+      tbCol_volume: "Volume",
+      tbCol_spark: "Courbe, jour",
+      tbCol_spark_week: "Courbe, semaine",
+      tbCol_spark_month: "Courbe, mois",
+      tbCol_news: "Actualités",
+      tbCol_week: "Semaine %",
+      tbCol_time: "Mis à jour",
+      tbCol_alert: "Alerte",
+      tbCol_quantity: "Quantité",
+      tbCol_average: "PRU",
+      tbCol_holding: "Position",
+      tbCol_value: "Valeur",
+      tbCol_share: "Part",
+      tbCol_day_gain: "Aujourd'hui",
+      tbCol_day_gain_percent: "Aujourd'hui %",
+      tbCol_week_change: "Semaine",
+      tbCol_gain: "Plus-value",
+      tbCol_gain_percent: "Plus-value %",
+      tbTotal: "Total",
+      tbNone: "Aucun",
+      tbHolding: (quantity, average) => `${quantity} à ${average}`,
+      tbTrendUp: "En hausse à la dernière mise à jour",
+      tbTrendDown: "En baisse à la dernière mise à jour",
+      tbTrendFlat: "Inchangé à la dernière mise à jour",
+      tbPresetAuto: "Automatique",
+      tbPresetCompact: "Compact",
+      tbPresetClassic: "Classique",
+      edBlockTableHelp: "Ce qu'affiche le tableau, colonne par colonne.",
+      edTablePreset: "Point de départ",
+      edTablePresetHelp: "Les colonnes de départ du tableau. Automatique prend Portefeuille pour un portefeuille et Compact pour une liste de suivi. En choisir un rétablit ses colonnes.",
+      edTableColumns: "Colonnes",
+      edTableColumnsHelp: "Pour chaque colonne : sa valeur, une seconde valeur en dessous si vous le souhaitez, et son en-tête. Les flèches déplacent une colonne, la croix la supprime.",
+      edTableHeading: "En-tête",
+      edTableHeadingHelp: "Le nom au-dessus de la colonne. Vide, le nom de la valeur est repris.",
+      edTableSubNoneHelp: "Une seconde valeur, plus petite, sous la valeur.",
+      tbInfo_name: "Le nom de l'instrument avec son logo.",
+      tbInfo_name_only: "Le nom de l'instrument.",
+      tbInfo_symbol: "Son symbole auprès de la source, p. ex. AAPL.",
+      tbInfo_exchange: "La bourse d'où provient son cours.",
+      tbInfo_symbol_exchange: "Symbole et bourse réunis.",
+      tbInfo_price: "Le dernier cours.",
+      tbInfo_previous_close: "Le cours de clôture de la veille.",
+      tbInfo_change: "La variation depuis la clôture précédente, en montant.",
+      tbInfo_change_percent: "La variation depuis la clôture précédente, en pourcentage.",
+      tbInfo_trend: "Une flèche : le cours a monté, baissé ou n'a pas bougé à la dernière mise à jour.",
+      tbInfo_day_high: "Le cours le plus haut du jour.",
+      tbInfo_day_low: "Le cours le plus bas du jour.",
+      tbInfo_year_low: "Le cours le plus bas des 52 dernières semaines.",
+      tbInfo_year_high: "Le cours le plus haut des 52 dernières semaines.",
+      tbInfo_volume: "Le volume échangé aujourd'hui.",
+      tbInfo_spark: "Une petite courbe du cours sur la journée.",
+      tbInfo_spark_week: "Une petite courbe du cours sur les cinq dernières séances.",
+      tbInfo_spark_month: "Une petite courbe du cours sur le dernier mois.",
+      tbInfo_news: "Un symbole là où il y a de nouveaux titres. Un clic les affiche.",
+      tbInfo_week: "La variation sur les cinq dernières séances, en pourcentage.",
+      tbInfo_week_change: "La variation sur les cinq dernières séances, en montant.",
+      tbInfo_day_gain_percent: "Ce que la position a gagné ou perdu aujourd'hui, en pourcentage.",
+      tbInfo_time: "L'heure du dernier cours.",
+      tbInfo_alert: "La cloche des alertes de cours. Un clic permet de les régler.",
+      tbInfo_quantity: "Le nombre d'unités détenues.",
+      tbInfo_average: "Le prix moyen payé par unité.",
+      tbInfo_holding: "Quantité et prix moyen réunis.",
+      tbInfo_value: "Ce que vaut la position maintenant.",
+      tbInfo_share: "La part de la position dans tout ce qu'affiche le tableau, en pourcentage.",
+      tbInfo_day_gain: "Ce que la position a gagné ou perdu aujourd'hui, en montant.",
+      tbInfo_gain: "Plus-value ou moins-value depuis l'achat, en montant.",
+      tbInfo_gain_percent: "Plus-value ou moins-value depuis l'achat, en pourcentage.",
+      edTableValue: "Valeur",
+      edTableSub: "Sous-titre",
+      edTableAdd: "Ajouter une colonne",
+      edTableRemove: "Supprimer la colonne",
+      edTablePill: "En pastille",
+      edTablePillHelp: "Affiche la valeur dans une pastille de la couleur de plus-value ou de moins-value.",
+      tbName_change: "Variation, jour",
+      tbName_change_percent: "Variation, jour %",
+      tbName_week: "Variation, semaine %",
+      tbName_week_change: "Variation, semaine",
+      tbName_day_gain_percent: "Plus-value, jour %",
+      tbName_day_gain: "Plus-value, jour",
+      tbName_gain: "Plus-value, totale",
+      tbName_gain_percent: "Plus-value, totale %",
+      edTableHeader: "Afficher les en-têtes de colonnes",
+      edTableHeaderHelp: "La ligne avec les noms des colonnes. Un clic sur un nom trie selon cette colonne.",
+      edTableTotal: "Afficher le total",
+      edTableTotalHelp: "Une dernière ligne avec les sommes du portefeuille : sa valeur, la variation du jour et la plus-value, là où le tableau a une colonne pour elles.",
+      edElTableHead: "En-têtes de colonnes",
+      edElTableHeadHelp: "Les noms au-dessus des colonnes du tableau.",
+      edElTableCell: "Valeurs",
+      edElTableCellHelp: "Les valeurs du tableau.",
+      edElTableSub: "Sous-titres",
+      edElTableSubHelp: "La seconde valeur sous la valeur d'une colonne.",
+      refreshNow: "Actualiser les cours",
+      agoNever: "pas encore",
+      agoNow: "à l'instant",
+      agoMin: (n) => `il y a ${n} min`,
+      agoHours: (n) => `il y a ${n} h`,
+      tbSearch: "Rechercher",
+      edEntries: "Entrées",
+      edEntriesHelp: "Ce qu'est une entrée : un instrument, ou un portefeuille entier avec sa valeur et la variation du jour. Un clic sur un portefeuille ouvre les détails de ses positions.",
+      tbRows: "Lignes",
+      tbRowsHelp: "Ce qu'est une ligne : un instrument, ou un portefeuille entier avec ses sommes. Un clic sur un portefeuille affiche ses instruments.",
+      tbRowsItems: "Instruments",
+      tbRowsGroups: "Portefeuilles",
+      edTableGroupColumns: "Colonnes des portefeuilles",
+      edTableGroupColumnsHelp: "Les colonnes de la vue d'ensemble des portefeuilles. La liste sous Colonnes vaut pour les instruments d'un portefeuille.",
+      tbBack: "Retour aux portefeuilles",
+      tbCol_positions: "Positions",
+      tbPositions: (count) => (count < 2 ? `${count} position` : `${count} positions`),
+      tbNameG_name: "Nom",
+      tbInfoG_name: "Le nom du portefeuille.",
+      tbInfoG_positions: "Le nombre de positions du portefeuille.",
+      tbInfoG_value: "Ce que vaut le portefeuille maintenant.",
+      tbInfoG_share: "La part du portefeuille dans tous les portefeuilles affichés, en pourcentage.",
+      tbInfoG_day_gain: "Ce que le portefeuille a gagné ou perdu aujourd'hui, en montant.",
+      tbInfoG_day_gain_percent: "Ce que le portefeuille a gagné ou perdu aujourd'hui, en pourcentage.",
+      tbInfoG_gain: "Plus-value ou moins-value du portefeuille depuis les achats, en montant.",
+      tbInfoG_gain_percent: "Plus-value ou moins-value du portefeuille depuis les achats, en pourcentage.",
+      tbInfoG_spark: "Une petite courbe de la performance du portefeuille sur la journée.",
+      tbInfoG_spark_week: "Une petite courbe de la performance du portefeuille sur les cinq dernières séances.",
+      tbInfoG_spark_month: "Une petite courbe de la performance du portefeuille sur le dernier mois.",
+      edTableSearch: "Afficher le champ de recherche",
+      edTableSearchHelp: "Un champ à côté de l'en-tête du nom, qui filtre les lignes par nom ou par symbole.",
+      edTableRefresh: "Afficher le bouton d'actualisation",
+      edTableRefreshHelp: "Un bouton en haut à droite qui actualise les cours et indique quand ils l'ont été pour la dernière fois.",
+      edElTableRefresh: "Bouton d'actualisation",
+      edElTableRefreshHelp: "Le bouton en haut à droite, avec le temps écoulé depuis la dernière actualisation.",
+      edRefreshBg: "Fond",
+      edRefreshBgHelp: "Affiche le bouton sur une pastille.",
+      edRefreshBgColor: "Couleur de fond",
+      edRefreshBgColorHelp: "Couleur de la pastille. Vide, celle du thème est conservée.",
+      edElTableDivider: "Séparateurs",
+      edElTableDividerHelp: "Les traits entre les lignes du tableau.",
+      edShowTableLinesHelp: "Affiche les séparateurs entre les lignes.",
+      edElTableTotal: "Ligne de total",
+      edElTableTotalHelp: "La dernière ligne avec les sommes.",
+      edElTablePill: "Pastilles",
+      edElTablePillHelp: "La pastille autour d'une valeur. Sa couleur est celle de la plus-value ou de la moins-value.",
+      edPillRadius: "Rayon des coins",
+      edPillRadiusHelp: "L'arrondi des coins de la pastille, p. ex. 6px. Vide, elle est entièrement ronde.",
+      edPillFill: "Remplissage",
+      edPillFillHelp: "L'intensité avec laquelle la couleur de plus-value ou de moins-value remplit la pastille, en pourcentage.",
+      edElTableArrow: "Flèches",
+      edElTableArrowHelp: "Les flèches de la tendance. Leur couleur est celle de la plus-value ou de la moins-value.",
+      edTrendUpIcon: "Symbole, en hausse",
+      edTrendDownIcon: "Symbole, en baisse",
+      edTrendFlatIcon: "Symbole, inchangé",
+      edTrendIconHelp: "Le symbole que la colonne Tendance affiche dans ce cas.",
+      edArrowSize: "Taille",
+      edArrowSizeHelp: "Taille des flèches, p. ex. 18px.",
       perfTitle: "Performance",
       perfChoose: "Il n'existe encore aucun portefeuille dont la performance pourrait être affichée.",
       perfEmpty: "Pas encore assez de cours pour cette période.",
@@ -3652,6 +4947,8 @@
       editInstrument: "Modifier l'instrument",
       removeInstrument: "Supprimer l'instrument",
       editAlerts: "Alertes de cours",
+      editPurchase: "Modifier l'achat",
+      editSale: "Modifier la vente",
       alertSet: "Une alerte de cours est définie",
       alertOn: "Une alerte de cours est déclenchée",
       fAlertNone: "Alerte de cours",
@@ -3749,7 +5046,7 @@
       edElGainHelp: "Les couleurs des plus-values, des moins-values et des nouveaux titres, partout sur la carte.",
       edGainColorHelp: "Couleur d'une hausse. Vide, le vert de la carte est conservé.",
       edLossColorHelp: "Couleur d'une baisse. Vide, le rouge de la carte est conservé.",
-      edElLogo: "Logo",
+      edElLogo: "Logos",
       edElLogoHelp: "Le logo rond d'une entrée.",
       edElRowSymbol: "Symbole",
       edElRowSymbolHelp: "Le symbole de l'instrument dans une entrée.",
@@ -3888,7 +5185,10 @@
       sortName: "Per nome",
       sortChange: "Per variazione",
       edTap: "Al clic",
-      edTapHelp: "Cosa apre un clic su un titolo: il pop-up dei dettagli o la sua pagina TradingView. Senza simbolo TradingView è sempre il pop-up.",
+      edTapHelp: "Cosa fa un clic su un titolo: apre il pop-up dei dettagli o la sua pagina TradingView, oppure porta a un'altra vista. Senza simbolo TradingView è il pop-up.",
+      tapNavigate: "Vai a",
+      edTapPath: "Percorso",
+      edTapPathHelp: "Dove porta un clic: una plancia o una vista, es. /lovelace/home.",
       tapPopup: "Pop-up dettagli",
       tapTradingView: "TradingView",
       close: "Chiudi",
@@ -3924,6 +5224,9 @@
       edElCardBg: "Sfondo della scheda",
       edElCardBgHelp: "Un colore e un'immagine a tua scelta dietro l'intera scheda.",
       edCardBgEnable: "Mostra sfondo",
+      edCardInset: "Distanza dal bordo",
+      edCardInsetHelp: "Quanto il contenuto della scheda resta distante dal suo bordo, in pixel. Vuoto segue il tema: se disegna una cornice dentro la scheda, il contenuto si ferma prima di essa.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Disegna il colore e l'immagine qui sotto.",
       edCardBgColor: "Colore",
       edCardBgColorHelp: "Colore di sfondo della scheda.",
@@ -4070,6 +5373,15 @@
       fAlertBelow: "Avviso sotto",
       fAlertAbove: "Avviso sopra",
       posRealized: "Realizzato",
+      tradeBuy: "Acquisto",
+      tradeSell: "Vendita",
+      tradesTitle: "Acquisti e vendite",
+      tradesMore: (count) => `Mostra tutti (${count})`,
+      tradesLess: "Mostra meno",
+      edChartTrades: "Acquisti e vendite",
+      edChartTradesHelp: "Segna ogni acquisto e vendita nel grafico al suo giorno e prezzo, e disegna una linea al prezzo medio di carico.",
+      edDetailTrades: "Elenco di acquisti e vendite",
+      edDetailTradesHelp: "Ogni acquisto e vendita con giorno, quantità, prezzo e importo. Una vendita mostra quanto ha realizzato.",
       posCosts: "Commissioni e tasse",
       edGroup: "Gruppo",
       edGroupHelp: "Il gruppo i cui titoli mostra la scheda - un portafoglio o una watchlist dell'integrazione.",
@@ -4098,6 +5410,174 @@
       formatDetail: "Dettagli",
       formatAlloc: "Portafoglio",
       formatAlerts: "Avvisi di prezzo",
+      formatTable: "Tabella",
+      tbCol_name: "Nome",
+      tbCol_name_only: "Nome",
+      tbName_name: "Nome e logo",
+      tbCol_symbol: "Simbolo",
+      tbCol_exchange: "Borsa",
+      tbCol_symbol_exchange: "Simbolo · borsa",
+      tbCol_price: "Prezzo",
+      tbCol_previous_close: "Chiusura prec.",
+      tbCol_change: "Variazione",
+      tbCol_change_percent: "Giorno %",
+      tbHeadAlerts: "Avvisi",
+      tbHeadHighLow: "Max/min giorno",
+      tbHeadWeek: "Settimana",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Max giorno",
+      tbCol_day_low: "Min giorno",
+      tbCol_year_low: "Min 52 sett.",
+      tbCol_year_high: "Max 52 sett.",
+      tbCol_volume: "Volume",
+      tbCol_spark: "Curva, giorno",
+      tbCol_spark_week: "Curva, settimana",
+      tbCol_spark_month: "Curva, mese",
+      tbCol_news: "Notizie",
+      tbCol_week: "Sett. %",
+      tbCol_time: "Aggiornato",
+      tbCol_alert: "Avviso",
+      tbCol_quantity: "Quantità",
+      tbCol_average: "PMC",
+      tbCol_holding: "Posizione",
+      tbCol_value: "Valore",
+      tbCol_share: "Peso",
+      tbCol_day_gain: "Oggi",
+      tbCol_day_gain_percent: "Oggi %",
+      tbCol_week_change: "Settimana",
+      tbCol_gain: "Guadagno",
+      tbCol_gain_percent: "Guadagno %",
+      tbTotal: "Totale",
+      tbNone: "Nessuno",
+      tbHolding: (quantity, average) => `${quantity} a ${average}`,
+      tbTrendUp: "In rialzo con l'ultimo aggiornamento",
+      tbTrendDown: "In ribasso con l'ultimo aggiornamento",
+      tbTrendFlat: "Invariato con l'ultimo aggiornamento",
+      tbPresetAuto: "Automatico",
+      tbPresetCompact: "Compatto",
+      tbPresetClassic: "Classico",
+      edBlockTableHelp: "Cosa mostra la tabella, colonna per colonna.",
+      edTablePreset: "Punto di partenza",
+      edTablePresetHelp: "Le colonne con cui parte la tabella. Automatico prende Portafoglio per un portafoglio e Compatto per una watchlist. Sceglierne uno ripristina le sue colonne.",
+      edTableColumns: "Colonne",
+      edTableColumnsHelp: "Per ogni colonna il suo valore, se vuoi un secondo valore sotto, e la sua intestazione. Le frecce spostano una colonna, la croce la rimuove.",
+      edTableHeading: "Intestazione",
+      edTableHeadingHelp: "Il nome sopra la colonna. Vuoto prende il nome del valore.",
+      edTableSubNoneHelp: "Un secondo valore, più piccolo, sotto il valore.",
+      tbInfo_name: "Il nome del titolo con il suo logo.",
+      tbInfo_name_only: "Il nome del titolo.",
+      tbInfo_symbol: "Il suo simbolo presso la fonte, es. AAPL.",
+      tbInfo_exchange: "La borsa da cui proviene il prezzo.",
+      tbInfo_symbol_exchange: "Simbolo e borsa insieme.",
+      tbInfo_price: "L'ultimo prezzo.",
+      tbInfo_previous_close: "Il prezzo di chiusura del giorno prima.",
+      tbInfo_change: "La variazione dalla chiusura precedente, come importo.",
+      tbInfo_change_percent: "La variazione dalla chiusura precedente, in percentuale.",
+      tbInfo_trend: "Una freccia: se con l'ultimo aggiornamento il prezzo è salito, sceso o rimasto fermo.",
+      tbInfo_day_high: "Il prezzo più alto della giornata.",
+      tbInfo_day_low: "Il prezzo più basso della giornata.",
+      tbInfo_year_low: "Il prezzo più basso delle ultime 52 settimane.",
+      tbInfo_year_high: "Il prezzo più alto delle ultime 52 settimane.",
+      tbInfo_volume: "Il volume scambiato oggi.",
+      tbInfo_spark: "Una piccola curva del prezzo nella giornata.",
+      tbInfo_spark_week: "Una piccola curva del prezzo negli ultimi cinque giorni di borsa.",
+      tbInfo_spark_month: "Una piccola curva del prezzo nell'ultimo mese.",
+      tbInfo_news: "Un simbolo dove ci sono nuove notizie. Un clic le mostra.",
+      tbInfo_week: "La variazione negli ultimi cinque giorni di borsa, in percentuale.",
+      tbInfo_week_change: "La variazione negli ultimi cinque giorni di borsa, come importo.",
+      tbInfo_day_gain_percent: "Quanto la posizione ha guadagnato o perso oggi, in percentuale.",
+      tbInfo_time: "L'ora dell'ultimo prezzo.",
+      tbInfo_alert: "La campanella degli avvisi di prezzo. Un clic li imposta.",
+      tbInfo_quantity: "Quante unità possiedi.",
+      tbInfo_average: "Il prezzo medio di carico: quanto hai pagato in media per unità.",
+      tbInfo_holding: "Quantità e prezzo medio di carico insieme.",
+      tbInfo_value: "Quanto vale ora la posizione.",
+      tbInfo_share: "Il peso della posizione su tutto ciò che la tabella mostra, in percentuale.",
+      tbInfo_day_gain: "Quanto la posizione ha guadagnato o perso oggi, come importo.",
+      tbInfo_gain: "Guadagno o perdita dall'acquisto, come importo.",
+      tbInfo_gain_percent: "Guadagno o perdita dall'acquisto, in percentuale.",
+      edTableValue: "Valore",
+      edTableSub: "Sottotitolo",
+      edTableAdd: "Aggiungi colonna",
+      edTableRemove: "Rimuovi colonna",
+      edTablePill: "Come badge",
+      edTablePillHelp: "Disegna il valore in un badge del colore del guadagno o della perdita.",
+      tbName_change: "Variazione, giorno",
+      tbName_change_percent: "Variazione, giorno %",
+      tbName_week: "Variazione, settimana %",
+      tbName_week_change: "Variazione, settimana",
+      tbName_day_gain_percent: "Guadagno, giorno %",
+      tbName_day_gain: "Guadagno, giorno",
+      tbName_gain: "Guadagno, totale",
+      tbName_gain_percent: "Guadagno, totale %",
+      edTableHeader: "Mostra le intestazioni delle colonne",
+      edTableHeaderHelp: "La riga con i nomi delle colonne. Un clic su un nome ordina per quella colonna.",
+      edTableTotal: "Mostra il totale",
+      edTableTotalHelp: "Un'ultima riga con le somme del portafoglio: valore, variazione di oggi e guadagno, dove la tabella ha una colonna per essi.",
+      edElTableHead: "Intestazioni delle colonne",
+      edElTableHeadHelp: "I nomi sopra le colonne della tabella.",
+      edElTableCell: "Valori",
+      edElTableCellHelp: "I valori della tabella.",
+      edElTableSub: "Sottotitoli",
+      edElTableSubHelp: "Il secondo valore sotto il valore di una colonna.",
+      refreshNow: "Aggiorna i prezzi",
+      agoNever: "non ancora",
+      agoNow: "proprio ora",
+      agoMin: (n) => `${n} min fa`,
+      agoHours: (n) => `${n} h fa`,
+      tbSearch: "Cerca",
+      edEntries: "Voci",
+      edEntriesHelp: "Cos'è una voce: un titolo, oppure un intero portafoglio con il suo valore e la variazione di oggi. Un clic su un portafoglio apre i dettagli delle sue posizioni.",
+      tbRows: "Righe",
+      tbRowsHelp: "Cos'è una riga: un titolo, oppure un intero portafoglio con le sue somme. Un clic su un portafoglio mostra i suoi titoli.",
+      tbRowsItems: "Titoli",
+      tbRowsGroups: "Portafogli",
+      edTableGroupColumns: "Colonne dei portafogli",
+      edTableGroupColumnsHelp: "Le colonne della panoramica dei portafogli. L'elenco sotto Colonne vale per i titoli di un portafoglio.",
+      tbBack: "Torna ai portafogli",
+      tbCol_positions: "Posizioni",
+      tbPositions: (count) => (count === 1 ? "1 posizione" : `${count} posizioni`),
+      tbNameG_name: "Nome",
+      tbInfoG_name: "Il nome del portafoglio.",
+      tbInfoG_positions: "Quante posizioni contiene il portafoglio.",
+      tbInfoG_value: "Quanto vale ora il portafoglio.",
+      tbInfoG_share: "Il peso del portafoglio su tutti i portafogli mostrati, in percentuale.",
+      tbInfoG_day_gain: "Quanto il portafoglio ha guadagnato o perso oggi, come importo.",
+      tbInfoG_day_gain_percent: "Quanto il portafoglio ha guadagnato o perso oggi, in percentuale.",
+      tbInfoG_gain: "Guadagno o perdita del portafoglio dagli acquisti, come importo.",
+      tbInfoG_gain_percent: "Guadagno o perdita del portafoglio dagli acquisti, in percentuale.",
+      tbInfoG_spark: "Una piccola curva della performance del portafoglio nella giornata.",
+      tbInfoG_spark_week: "Una piccola curva della performance del portafoglio negli ultimi cinque giorni di borsa.",
+      tbInfoG_spark_month: "Una piccola curva della performance del portafoglio nell'ultimo mese.",
+      edTableSearch: "Mostra il campo di ricerca",
+      edTableSearchHelp: "Un campo accanto all'intestazione del nome che filtra le righe per nome o simbolo.",
+      edTableRefresh: "Mostra il pulsante di aggiornamento",
+      edTableRefreshHelp: "Un pulsante in alto a destra che aggiorna i prezzi e indica quando sono stati aggiornati l'ultima volta.",
+      edElTableRefresh: "Pulsante di aggiornamento",
+      edElTableRefreshHelp: "Il pulsante in alto a destra, con il tempo trascorso dall'ultimo aggiornamento.",
+      edRefreshBg: "Sfondo",
+      edRefreshBgHelp: "Disegna il pulsante dentro un badge.",
+      edRefreshBgColor: "Colore di sfondo",
+      edRefreshBgColorHelp: "Colore del badge. Vuoto mantiene quello del tema.",
+      edElTableDivider: "Linee di separazione",
+      edElTableDividerHelp: "Le linee tra le righe della tabella.",
+      edShowTableLinesHelp: "Disegna le linee tra le righe.",
+      edElTableTotal: "Riga del totale",
+      edElTableTotalHelp: "L'ultima riga con le somme.",
+      edElTablePill: "Badge",
+      edElTablePillHelp: "Il badge intorno a un valore. Il suo colore è quello del guadagno o della perdita.",
+      edPillRadius: "Raggio degli angoli",
+      edPillRadiusHelp: "Quanto sono arrotondati gli angoli del badge, es. 6px. Vuoto è del tutto arrotondato.",
+      edPillFill: "Riempimento",
+      edPillFillHelp: "Con quale intensità il colore del guadagno o della perdita riempie il badge, in percentuale.",
+      edElTableArrow: "Frecce",
+      edElTableArrowHelp: "Le frecce del trend. Il loro colore è quello del guadagno o della perdita.",
+      edTrendUpIcon: "Simbolo, in rialzo",
+      edTrendDownIcon: "Simbolo, in ribasso",
+      edTrendFlatIcon: "Simbolo, invariato",
+      edTrendIconHelp: "Il simbolo che la colonna Trend mostra in questo caso.",
+      edArrowSize: "Dimensione",
+      edArrowSizeHelp: "Dimensione delle frecce, es. 18px.",
       perfTitle: "Performance",
       perfChoose: "Non c'è ancora nessun portafoglio di cui mostrare la performance.",
       perfEmpty: "Non ci sono ancora abbastanza prezzi per questo periodo.",
@@ -4203,6 +5683,8 @@
       editInstrument: "Modifica titolo",
       removeInstrument: "Rimuovi titolo",
       editAlerts: "Avvisi di prezzo",
+      editPurchase: "Modifica acquisto",
+      editSale: "Modifica vendita",
       alertSet: "È impostato un avviso di prezzo",
       alertOn: "Un avviso di prezzo è scattato",
       fAlertNone: "Avviso di prezzo",
@@ -4300,7 +5782,7 @@
       edElGainHelp: "I colori di guadagni, perdite e nuove notizie, ovunque sulla scheda.",
       edGainColorHelp: "Colore per un rialzo. Vuoto mantiene il verde della scheda.",
       edLossColorHelp: "Colore per un ribasso. Vuoto mantiene il rosso della scheda.",
-      edElLogo: "Logo",
+      edElLogo: "Loghi",
       edElLogoHelp: "Il logo rotondo di una voce.",
       edElRowSymbol: "Simbolo",
       edElRowSymbolHelp: "Il simbolo del titolo in una voce.",
@@ -4439,7 +5921,10 @@
       sortName: "名前順",
       sortChange: "騰落率順",
       edTap: "クリック時",
-      edTapHelp: "銘柄をクリックしたときに開くもの: 詳細ポップアップか TradingView のページです。TradingView シンボルがない場合は常にポップアップです。",
+      edTapHelp: "銘柄をクリックしたときの動作: 詳細ポップアップか TradingView のページを開くか、別のビューへ移動します。TradingView シンボルがない場合はポップアップです。",
+      tapNavigate: "ナビゲート",
+      edTapPath: "パス",
+      edTapPathHelp: "クリックで移動する先: ダッシュボードまたはビューです。例: /lovelace/home。",
       tapPopup: "詳細ポップアップ",
       tapTradingView: "TradingView",
       close: "閉じる",
@@ -4475,6 +5960,9 @@
       edElCardBg: "カードの背景",
       edElCardBgHelp: "カード全体の背後に置く独自の色と画像です。",
       edCardBgEnable: "背景を表示",
+      edCardInset: "枠までの余白",
+      edCardInsetHelp: "カードの内容を端からどれだけ離すかで、ピクセル単位です。空欄の場合はテーマに従い、テーマがカードの内側に縁を描く場合は、内容はその手前で終わります。",
+      edCardInsetAuto: "自動",
       edCardBgEnableHelp: "下の色と画像を描画します。",
       edCardBgColor: "色",
       edCardBgColorHelp: "カードの背景色です。",
@@ -4621,6 +6109,15 @@
       fAlertBelow: "下限アラート",
       fAlertAbove: "上限アラート",
       posRealized: "実現損益",
+      tradeBuy: "購入",
+      tradeSell: "売却",
+      tradesTitle: "購入と売却",
+      tradesMore: (count) => `${count} 件すべて表示`,
+      tradesLess: "表示を減らす",
+      edChartTrades: "購入と売却",
+      edChartTradesHelp: "各購入と売却をチャート上の日付と価格の位置に印で示し、平均取得価格に線を描画します。",
+      edDetailTrades: "購入と売却のリスト",
+      edDetailTradesHelp: "各購入と売却を、日付、数量、価格、金額とともに表示します。売却には実現損益を表示します。",
       posCosts: "手数料と税金",
       edGroup: "グループ",
       edGroupHelp: "カードに銘柄を表示するグループで、統合のポートフォリオまたはウォッチリストです。",
@@ -4649,6 +6146,174 @@
       formatDetail: "詳細",
       formatAlloc: "ポートフォリオ",
       formatAlerts: "価格アラート",
+      formatTable: "テーブル",
+      tbCol_name: "名前",
+      tbCol_name_only: "名前",
+      tbName_name: "名前とロゴ",
+      tbCol_symbol: "シンボル",
+      tbCol_exchange: "取引所",
+      tbCol_symbol_exchange: "シンボル · 取引所",
+      tbCol_price: "価格",
+      tbCol_previous_close: "前日終値",
+      tbCol_change: "前日比",
+      tbCol_change_percent: "前日比 %",
+      tbHeadAlerts: "アラート",
+      tbHeadHighLow: "高値/安値",
+      tbHeadWeek: "週間",
+      tbCol_trend: "トレンド",
+      tbCol_day_high: "高値",
+      tbCol_day_low: "安値",
+      tbCol_year_low: "52週安値",
+      tbCol_year_high: "52週高値",
+      tbCol_volume: "出来高",
+      tbCol_spark: "チャート (日)",
+      tbCol_spark_week: "チャート (週)",
+      tbCol_spark_month: "チャート (月)",
+      tbCol_news: "ニュース",
+      tbCol_week: "週間 %",
+      tbCol_time: "更新",
+      tbCol_alert: "アラート",
+      tbCol_quantity: "数量",
+      tbCol_average: "平均取得価格",
+      tbCol_holding: "保有",
+      tbCol_value: "評価額",
+      tbCol_share: "比率",
+      tbCol_day_gain: "本日",
+      tbCol_day_gain_percent: "本日 %",
+      tbCol_week_change: "週間",
+      tbCol_gain: "損益",
+      tbCol_gain_percent: "損益率",
+      tbTotal: "合計",
+      tbNone: "なし",
+      tbHolding: (quantity, average) => `${quantity} (平均 ${average})`,
+      tbTrendUp: "直近の更新で上昇",
+      tbTrendDown: "直近の更新で下落",
+      tbTrendFlat: "直近の更新で変わらず",
+      tbPresetAuto: "自動",
+      tbPresetCompact: "コンパクト",
+      tbPresetClassic: "クラシック",
+      edBlockTableHelp: "テーブルに表示する内容を列ごとに指定します。",
+      edTablePreset: "ひな形",
+      edTablePresetHelp: "テーブルの最初の列構成です。自動では、ポートフォリオには「ポートフォリオ」、ウォッチリストには「コンパクト」を使います。選ぶと、その列構成に戻ります。",
+      edTableColumns: "列",
+      edTableColumnsHelp: "各列の値、必要ならその下の2つ目の値、および見出しです。矢印で列を移動し、× で削除します。",
+      edTableHeading: "見出し",
+      edTableHeadingHelp: "列の上の名前です。空欄の場合は値の名前を使います。",
+      edTableSubNoneHelp: "値の下に表示する2つ目の小さな値です。",
+      tbInfo_name: "銘柄の名前とロゴです。",
+      tbInfo_name_only: "銘柄の名前です。",
+      tbInfo_symbol: "ソースでのシンボルです。例: AAPL。",
+      tbInfo_exchange: "価格の取得元の取引所です。",
+      tbInfo_symbol_exchange: "シンボルと取引所をまとめて表示します。",
+      tbInfo_price: "最新の価格です。",
+      tbInfo_previous_close: "前営業日の終値です。",
+      tbInfo_change: "前日終値からの騰落を金額で表示します。",
+      tbInfo_change_percent: "前日終値からの騰落をパーセントで表示します。",
+      tbInfo_trend: "矢印: 直近の更新で価格が上がったか、下がったか、変わらなかったかを示します。",
+      tbInfo_day_high: "本日の最高値です。",
+      tbInfo_day_low: "本日の最安値です。",
+      tbInfo_year_low: "過去52週の最安値です。",
+      tbInfo_year_high: "過去52週の最高値です。",
+      tbInfo_volume: "本日の出来高です。",
+      tbInfo_spark: "当日の価格の小さなチャートです。",
+      tbInfo_spark_week: "直近5営業日の価格の小さなチャートです。",
+      tbInfo_spark_month: "直近1か月の価格の小さなチャートです。",
+      tbInfo_news: "新着ヘッドラインがあるときのアイコンです。クリックすると表示します。",
+      tbInfo_week: "直近5営業日の騰落をパーセントで表示します。",
+      tbInfo_week_change: "直近5営業日の騰落を金額で表示します。",
+      tbInfo_day_gain_percent: "保有分の本日の損益をパーセントで表示します。",
+      tbInfo_time: "最新の価格の時刻です。",
+      tbInfo_alert: "価格アラートのベルです。クリックすると設定できます。",
+      tbInfo_quantity: "保有している数量です。",
+      tbInfo_average: "1単位あたりの平均取得価格です。",
+      tbInfo_holding: "数量と平均取得価格をまとめて表示します。",
+      tbInfo_value: "保有分の現在の評価額です。",
+      tbInfo_share: "テーブルに表示している全体に対する保有分の比率で、パーセントで表示します。",
+      tbInfo_day_gain: "保有分の本日の損益を金額で表示します。",
+      tbInfo_gain: "購入からの損益を金額で表示します。",
+      tbInfo_gain_percent: "購入からの損益をパーセントで表示します。",
+      edTableValue: "値",
+      edTableSub: "下段",
+      edTableAdd: "列を追加",
+      edTableRemove: "列を削除",
+      edTablePill: "バッジで表示",
+      edTablePillHelp: "値を利益または損失の色のバッジで表示します。",
+      tbName_change: "騰落 (当日)",
+      tbName_change_percent: "騰落 % (当日)",
+      tbName_week: "騰落 % (週間)",
+      tbName_week_change: "騰落 (週間)",
+      tbName_day_gain_percent: "損益 % (当日)",
+      tbName_day_gain: "損益 (当日)",
+      tbName_gain: "損益 (合計)",
+      tbName_gain_percent: "損益 % (合計)",
+      edTableHeader: "列の見出しを表示",
+      edTableHeaderHelp: "列の名前の行です。名前をクリックすると、その列で並べ替えます。",
+      edTableTotal: "合計を表示",
+      edTableTotalHelp: "ポートフォリオの合計を示す最後の行: 評価額、本日の騰落、損益で、テーブルにその列がある場合に表示します。",
+      edElTableHead: "列の見出し",
+      edElTableHeadHelp: "テーブルの列の上の名前です。",
+      edElTableCell: "値",
+      edElTableCellHelp: "テーブルの値です。",
+      edElTableSub: "下段の値",
+      edElTableSubHelp: "列の値の下に表示する2つ目の値です。",
+      refreshNow: "価格を再取得",
+      agoNever: "未取得",
+      agoNow: "たった今",
+      agoMin: (n) => `${n} 分前`,
+      agoHours: (n) => `${n} 時間前`,
+      tbSearch: "検索",
+      edEntries: "項目",
+      edEntriesHelp: "項目の単位: 銘柄、または評価額と本日の騰落を伴うポートフォリオ全体です。ポートフォリオをクリックすると、そのポジションの詳細を開きます。",
+      tbRows: "行",
+      tbRowsHelp: "行の単位: 銘柄、または合計を伴うポートフォリオ全体です。ポートフォリオをクリックすると、その銘柄を表示します。",
+      tbRowsItems: "銘柄",
+      tbRowsGroups: "ポートフォリオ",
+      edTableGroupColumns: "ポートフォリオの列",
+      edTableGroupColumnsHelp: "ポートフォリオ一覧の列です。「列」のリストは、ポートフォリオ内の銘柄用です。",
+      tbBack: "ポートフォリオ一覧に戻る",
+      tbCol_positions: "ポジション",
+      tbPositions: (count) => `${count} ポジション`,
+      tbNameG_name: "名前",
+      tbInfoG_name: "ポートフォリオの名前です。",
+      tbInfoG_positions: "ポートフォリオのポジション数です。",
+      tbInfoG_value: "ポートフォリオの現在の評価額です。",
+      tbInfoG_share: "表示しているすべてのポートフォリオに対する比率で、パーセントで表示します。",
+      tbInfoG_day_gain: "ポートフォリオの本日の損益を金額で表示します。",
+      tbInfoG_day_gain_percent: "ポートフォリオの本日の損益をパーセントで表示します。",
+      tbInfoG_gain: "購入からのポートフォリオの損益を金額で表示します。",
+      tbInfoG_gain_percent: "購入からのポートフォリオの損益をパーセントで表示します。",
+      tbInfoG_spark: "当日のポートフォリオのパフォーマンスの小さなチャートです。",
+      tbInfoG_spark_week: "直近5営業日のポートフォリオのパフォーマンスの小さなチャートです。",
+      tbInfoG_spark_month: "直近1か月のポートフォリオのパフォーマンスの小さなチャートです。",
+      edTableSearch: "検索欄を表示",
+      edTableSearchHelp: "名前の見出しの横にある欄で、行を名前またはシンボルで絞り込みます。",
+      edTableRefresh: "更新ボタンを表示",
+      edTableRefreshHelp: "右上のボタンで、価格を再取得し、最後に取得した時点を表示します。",
+      edElTableRefresh: "更新ボタン",
+      edElTableRefreshHelp: "右上のボタンで、最後の取得からの経過時間を表示します。",
+      edRefreshBg: "背景",
+      edRefreshBgHelp: "ボタンをバッジの上に描画します。",
+      edRefreshBgColor: "背景色",
+      edRefreshBgColorHelp: "バッジの色です。空欄の場合はテーマの色です。",
+      edElTableDivider: "区切り線",
+      edElTableDividerHelp: "テーブルの行の間の線です。",
+      edShowTableLinesHelp: "行の間に線を描画します。",
+      edElTableTotal: "合計行",
+      edElTableTotalHelp: "合計を示す最後の行です。",
+      edElTablePill: "バッジ",
+      edElTablePillHelp: "値を囲むバッジです。色は利益または損失の色になります。",
+      edPillRadius: "角の丸み",
+      edPillRadiusHelp: "バッジの角の丸みです。例: 6px。空欄の場合は完全に丸くなります。",
+      edPillFill: "塗り",
+      edPillFillHelp: "利益または損失の色でバッジを塗る濃さで、パーセントで指定します。",
+      edElTableArrow: "矢印",
+      edElTableArrowHelp: "トレンドの矢印です。色は利益または損失の色になります。",
+      edTrendUpIcon: "アイコン (上昇)",
+      edTrendDownIcon: "アイコン (下落)",
+      edTrendFlatIcon: "アイコン (変わらず)",
+      edTrendIconHelp: "この場合にトレンド列に表示するアイコンです。",
+      edArrowSize: "サイズ",
+      edArrowSizeHelp: "矢印のサイズです。例: 18px。",
       perfTitle: "パフォーマンス",
       perfChoose: "パフォーマンスを表示できるポートフォリオがまだありません。",
       perfEmpty: "この期間の価格がまだ足りません。",
@@ -4754,6 +6419,8 @@
       editInstrument: "銘柄を変更",
       removeInstrument: "銘柄を削除",
       editAlerts: "価格アラート",
+      editPurchase: "購入を変更",
+      editSale: "売却を変更",
       alertSet: "価格アラートが設定されています",
       alertOn: "価格アラートが発生しています",
       fAlertNone: "価格アラート",
@@ -4990,7 +6657,10 @@
       sortName: "Pagal pavadinimą",
       sortChange: "Pagal pokytį",
       edTap: "Spustelėjus",
-      edTapHelp: "Kas atsiveria spustelėjus priemonę: išsamios informacijos langas arba jos TradingView puslapis. Be TradingView simbolio visada atsiveria langas.",
+      edTapHelp: "Ką daro spustelėjimas ant priemonės: atveria jos išsamios informacijos langą arba jos TradingView puslapį, arba veda į kitą rodinį. Be TradingView simbolio atsiveria langas.",
+      tapNavigate: "Naršyti",
+      edTapPath: "Kelias",
+      edTapPathHelp: "Kur veda spustelėjimas: į prietaisų skydelį arba rodinį, pvz., /lovelace/home.",
       tapPopup: "Išsamios informacijos langas",
       tapTradingView: "TradingView",
       close: "Uždaryti",
@@ -5026,6 +6696,9 @@
       edElCardBg: "Kortelės fonas",
       edElCardBgHelp: "Jūsų pasirinkta spalva ir paveikslėlis už visos kortelės.",
       edCardBgEnable: "Rodyti foną",
+      edCardInset: "Atstumas iki rėmelio",
+      edCardInsetHelp: "Kiek kortelės turinys atitrauktas nuo jos krašto, pikseliais. Tuščia – pagal temą: jei ji piešia apvadą kortelės viduje, turinys baigiasi prieš jį.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Nupiešia toliau nurodytą spalvą ir paveikslėlį.",
       edCardBgColor: "Spalva",
       edCardBgColorHelp: "Kortelės fono spalva.",
@@ -5172,6 +6845,15 @@
       fAlertBelow: "Įspėjimas žemiau",
       fAlertAbove: "Įspėjimas aukščiau",
       posRealized: "Realizuota",
+      tradeBuy: "Pirkimas",
+      tradeSell: "Pardavimas",
+      tradesTitle: "Pirkimai ir pardavimai",
+      tradesMore: (count) => `Rodyti visus ${count}`,
+      tradesLess: "Rodyti mažiau",
+      edChartTrades: "Pirkimai ir pardavimai",
+      edChartTradesHelp: "Pažymi kiekvieną pirkimą ir pardavimą grafike ties jo diena ir kaina ir nubrėžia liniją ties vidutine kaina.",
+      edDetailTrades: "Pirkimų ir pardavimų sąrašas",
+      edDetailTradesHelp: "Kiekvienas pirkimas ir pardavimas su diena, kiekiu, kaina ir suma. Pardavimas rodo, kiek juo realizuota.",
       posCosts: "Komisiniai ir mokesčiai",
       edGroup: "Grupė",
       edGroupHelp: "Grupė, kurios priemones rodo kortelė – integracijos portfelis arba stebimų sąrašas.",
@@ -5200,6 +6882,174 @@
       formatDetail: "Išsami informacija",
       formatAlloc: "Portfelis",
       formatAlerts: "Kainos įspėjimai",
+      formatTable: "Lentelė",
+      tbCol_name: "Pavadinimas",
+      tbCol_name_only: "Pavadinimas",
+      tbName_name: "Pavadinimas ir logotipas",
+      tbCol_symbol: "Simbolis",
+      tbCol_exchange: "Birža",
+      tbCol_symbol_exchange: "Simbolis · birža",
+      tbCol_price: "Kaina",
+      tbCol_previous_close: "Ankst. uždarymas",
+      tbCol_change: "Pokytis",
+      tbCol_change_percent: "Diena %",
+      tbHeadAlerts: "Įspėjimai",
+      tbHeadHighLow: "Dienos maks./min.",
+      tbHeadWeek: "Savaitė",
+      tbCol_trend: "Tendencija",
+      tbCol_day_high: "Dienos maks.",
+      tbCol_day_low: "Dienos min.",
+      tbCol_year_low: "52 sav. min.",
+      tbCol_year_high: "52 sav. maks.",
+      tbCol_volume: "Apimtis",
+      tbCol_spark: "Kreivė, diena",
+      tbCol_spark_week: "Kreivė, savaitė",
+      tbCol_spark_month: "Kreivė, mėnuo",
+      tbCol_news: "Naujienos",
+      tbCol_week: "Savaitė %",
+      tbCol_time: "Atnaujinta",
+      tbCol_alert: "Įspėjimas",
+      tbCol_quantity: "Kiekis",
+      tbCol_average: "Vid. kaina",
+      tbCol_holding: "Pozicija",
+      tbCol_value: "Vertė",
+      tbCol_share: "Dalis",
+      tbCol_day_gain: "Šiandien",
+      tbCol_day_gain_percent: "Šiandien %",
+      tbCol_week_change: "Savaitė",
+      tbCol_gain: "Pelnas",
+      tbCol_gain_percent: "Pelnas %",
+      tbTotal: "Iš viso",
+      tbNone: "Nėra",
+      tbHolding: (quantity, average) => `${quantity} vnt. po ${average}`,
+      tbTrendUp: "Per paskutinį atnaujinimą pakilo",
+      tbTrendDown: "Per paskutinį atnaujinimą nukrito",
+      tbTrendFlat: "Per paskutinį atnaujinimą nepakito",
+      tbPresetAuto: "Automatiškai",
+      tbPresetCompact: "Kompaktiškas",
+      tbPresetClassic: "Klasikinis",
+      edBlockTableHelp: "Ką rodo lentelė, stulpelis po stulpelio.",
+      edTablePreset: "Pradinis rinkinys",
+      edTablePresetHelp: "Stulpeliai, nuo kurių lentelė pradeda. „Automatiškai“ portfeliui parenka „Portfelis“, o stebimų sąrašui – „Kompaktiškas“. Pasirinkus rinkinį, jo stulpeliai atkuriami.",
+      edTableColumns: "Stulpeliai",
+      edTableColumnsHelp: "Kiekvieno stulpelio reikšmė, jei norite – antra reikšmė po ja, ir jo antraštė. Rodyklės perkelia stulpelį, kryželis jį pašalina.",
+      edTableHeading: "Antraštė",
+      edTableHeadingHelp: "Pavadinimas virš stulpelio. Tuščia – imamas reikšmės pavadinimas.",
+      edTableSubNoneHelp: "Antra, mažesnė reikšmė po reikšme.",
+      tbInfo_name: "Priemonės pavadinimas su logotipu.",
+      tbInfo_name_only: "Priemonės pavadinimas.",
+      tbInfo_symbol: "Jos simbolis šaltinyje, pvz., AAPL.",
+      tbInfo_exchange: "Birža, iš kurios gaunama kaina.",
+      tbInfo_symbol_exchange: "Simbolis ir birža kartu.",
+      tbInfo_price: "Naujausia kaina.",
+      tbInfo_previous_close: "Ankstesnės dienos uždarymo kaina.",
+      tbInfo_change: "Pokytis nuo ankstesnio uždarymo, suma.",
+      tbInfo_change_percent: "Pokytis nuo ankstesnio uždarymo, procentais.",
+      tbInfo_trend: "Rodyklė: ar per paskutinį atnaujinimą kaina pakilo, nukrito ar nepakito.",
+      tbInfo_day_high: "Aukščiausia dienos kaina.",
+      tbInfo_day_low: "Žemiausia dienos kaina.",
+      tbInfo_year_low: "Žemiausia paskutinių 52 savaičių kaina.",
+      tbInfo_year_high: "Aukščiausia paskutinių 52 savaičių kaina.",
+      tbInfo_volume: "Šiandienos prekybos apimtis.",
+      tbInfo_spark: "Maža dienos kainos kreivė.",
+      tbInfo_spark_week: "Maža paskutinių penkių prekybos dienų kainos kreivė.",
+      tbInfo_spark_month: "Maža paskutinio mėnesio kainos kreivė.",
+      tbInfo_news: "Simbolis ten, kur yra naujų antraščių. Spustelėjus jos parodomos.",
+      tbInfo_week: "Pokytis per paskutines penkias prekybos dienas, procentais.",
+      tbInfo_week_change: "Pokytis per paskutines penkias prekybos dienas, suma.",
+      tbInfo_day_gain_percent: "Kiek pozicija šiandien uždirbo arba prarado, procentais.",
+      tbInfo_time: "Naujausios kainos laikas.",
+      tbInfo_alert: "Kainos įspėjimų varpelis. Spustelėjus jie nustatomi.",
+      tbInfo_quantity: "Kiek vienetų turima.",
+      tbInfo_average: "Vidutinė už vienetą sumokėta kaina.",
+      tbInfo_holding: "Kiekis ir vidutinė kaina kartu.",
+      tbInfo_value: "Kiek pozicija verta dabar.",
+      tbInfo_share: "Kiek procentų visko, ką rodo lentelė, sudaro pozicija.",
+      tbInfo_day_gain: "Kiek pozicija šiandien uždirbo arba prarado, suma.",
+      tbInfo_gain: "Pelnas arba nuostolis nuo pirkimo, suma.",
+      tbInfo_gain_percent: "Pelnas arba nuostolis nuo pirkimo, procentais.",
+      edTableValue: "Reikšmė",
+      edTableSub: "Paantraštė",
+      edTableAdd: "Pridėti stulpelį",
+      edTableRemove: "Pašalinti stulpelį",
+      edTablePill: "Kaip kapsulė",
+      edTablePillHelp: "Nupiešia reikšmę pelno arba nuostolio spalvos kapsulėje.",
+      tbName_change: "Pokytis, diena",
+      tbName_change_percent: "Pokytis, diena %",
+      tbName_week: "Pokytis, savaitė %",
+      tbName_week_change: "Pokytis, savaitė",
+      tbName_day_gain_percent: "Pelnas, diena %",
+      tbName_day_gain: "Pelnas, diena",
+      tbName_gain: "Pelnas, iš viso",
+      tbName_gain_percent: "Pelnas, iš viso %",
+      edTableHeader: "Rodyti stulpelių antraštes",
+      edTableHeaderHelp: "Eilutė su stulpelių pavadinimais. Spustelėjus pavadinimą rikiuojama pagal tą stulpelį.",
+      edTableTotal: "Rodyti sumą",
+      edTableTotalHelp: "Paskutinė eilutė su portfelio sumomis: verte, šiandienos pokyčiu ir pelnu, jei lentelėje yra jiems skirtas stulpelis.",
+      edElTableHead: "Stulpelių antraštės",
+      edElTableHeadHelp: "Pavadinimai virš lentelės stulpelių.",
+      edElTableCell: "Reikšmės",
+      edElTableCellHelp: "Lentelės reikšmės.",
+      edElTableSub: "Paantraštės",
+      edElTableSubHelp: "Antra reikšmė po stulpelio reikšme.",
+      refreshNow: "Gauti kainas iš naujo",
+      agoNever: "dar ne",
+      agoNow: "ką tik",
+      agoMin: (n) => `prieš ${n} min.`,
+      agoHours: (n) => `prieš ${n} val.`,
+      tbSearch: "Ieškoti",
+      edEntries: "Įrašai",
+      edEntriesHelp: "Kas yra įrašas: priemonė arba visas portfelis su jo verte ir šiandienos pokyčiu. Spustelėjus portfelį atsiveria jo pozicijų išsami informacija.",
+      tbRows: "Eilutės",
+      tbRowsHelp: "Kas yra eilutė: priemonė arba visas portfelis su jo sumomis. Spustelėjus portfelį parodomos jo priemonės.",
+      tbRowsItems: "Priemonės",
+      tbRowsGroups: "Portfeliai",
+      edTableGroupColumns: "Portfelių stulpeliai",
+      edTableGroupColumnsHelp: "Portfelių apžvalgos stulpeliai. Sąrašas skiltyje „Stulpeliai“ skirtas portfelio priemonėms.",
+      tbBack: "Atgal į portfelius",
+      tbCol_positions: "Pozicijos",
+      tbPositions: (count) => `${count} ${count % 10 === 1 && count % 100 !== 11 ? "pozicija" : count % 10 >= 2 && (count % 100 < 10 || count % 100 >= 20) ? "pozicijos" : "pozicijų"}`,
+      tbNameG_name: "Pavadinimas",
+      tbInfoG_name: "Portfelio pavadinimas.",
+      tbInfoG_positions: "Kiek pozicijų yra portfelyje.",
+      tbInfoG_value: "Kiek portfelis vertas dabar.",
+      tbInfoG_share: "Portfelio dalis tarp visų rodomų portfelių, procentais.",
+      tbInfoG_day_gain: "Kiek portfelis šiandien uždirbo arba prarado, suma.",
+      tbInfoG_day_gain_percent: "Kiek portfelis šiandien uždirbo arba prarado, procentais.",
+      tbInfoG_gain: "Portfelio pelnas arba nuostolis nuo pirkimų, suma.",
+      tbInfoG_gain_percent: "Portfelio pelnas arba nuostolis nuo pirkimų, procentais.",
+      tbInfoG_spark: "Maža portfelio dienos grąžos kreivė.",
+      tbInfoG_spark_week: "Maža portfelio grąžos per paskutines penkias prekybos dienas kreivė.",
+      tbInfoG_spark_month: "Maža portfelio paskutinio mėnesio grąžos kreivė.",
+      edTableSearch: "Rodyti paieškos lauką",
+      edTableSearchHelp: "Laukas šalia pavadinimo antraštės, kuris filtruoja eilutes pagal pavadinimą arba simbolį.",
+      edTableRefresh: "Rodyti atnaujinimo mygtuką",
+      edTableRefreshHelp: "Mygtukas viršuje dešinėje, kuris gauna kainas iš naujo ir parodo, kada jos gautos paskutinį kartą.",
+      edElTableRefresh: "Atnaujinimo mygtukas",
+      edElTableRefreshHelp: "Mygtukas viršuje dešinėje su laiku nuo paskutinio gavimo.",
+      edRefreshBg: "Fonas",
+      edRefreshBgHelp: "Nupiešia mygtuką ant kapsulės.",
+      edRefreshBgColor: "Fono spalva",
+      edRefreshBgColorHelp: "Kapsulės spalva. Tuščia palieka temos spalvą.",
+      edElTableDivider: "Skiriamosios linijos",
+      edElTableDividerHelp: "Linijos tarp lentelės eilučių.",
+      edShowTableLinesHelp: "Nupiešia linijas tarp eilučių.",
+      edElTableTotal: "Sumos eilutė",
+      edElTableTotalHelp: "Paskutinė eilutė su sumomis.",
+      edElTablePill: "Kapsulės",
+      edElTablePillHelp: "Kapsulė aplink reikšmę. Jos spalva yra pelno arba nuostolio spalva.",
+      edPillRadius: "Kampų spindulys",
+      edPillRadiusHelp: "Kiek apvalūs kapsulės kampai, pvz., 6px. Tuščia – visiškai apvalūs.",
+      edPillFill: "Užpildas",
+      edPillFillHelp: "Kaip stipriai pelno arba nuostolio spalva užpildo kapsulę, procentais.",
+      edElTableArrow: "Rodyklės",
+      edElTableArrowHelp: "Tendencijos rodyklės. Jų spalva yra pelno arba nuostolio spalva.",
+      edTrendUpIcon: "Simbolis, pakilo",
+      edTrendDownIcon: "Simbolis, nukrito",
+      edTrendFlatIcon: "Simbolis, nepakito",
+      edTrendIconHelp: "Simbolis, kurį tokiu atveju rodo stulpelis „Tendencija“.",
+      edArrowSize: "Dydis",
+      edArrowSizeHelp: "Rodyklių dydis, pvz., 18px.",
       perfTitle: "Grąža",
       perfChoose: "Dar nėra portfelio, kurio grąžą būtų galima parodyti.",
       perfEmpty: "Šiam laikotarpiui dar nepakanka kainų.",
@@ -5305,6 +7155,8 @@
       editInstrument: "Keisti priemonę",
       removeInstrument: "Pašalinti priemonę",
       editAlerts: "Kainos įspėjimai",
+      editPurchase: "Keisti pirkimą",
+      editSale: "Keisti pardavimą",
       alertSet: "Kainos įspėjimas nustatytas",
       alertOn: "Kainos įspėjimas suveikęs",
       fAlertNone: "Kainos įspėjimas",
@@ -5402,7 +7254,7 @@
       edElGainHelp: "Pelno, nuostolio ir naujų antraščių spalvos visoje kortelėje.",
       edGainColorHelp: "Kilimo spalva. Tuščia palieka kortelės žalią.",
       edLossColorHelp: "Kritimo spalva. Tuščia palieka kortelės raudoną.",
-      edElLogo: "Logotipas",
+      edElLogo: "Logotipai",
       edElLogoHelp: "Apvalus įrašo logotipas.",
       edElRowSymbol: "Simbolis",
       edElRowSymbolHelp: "Priemonės simbolis įraše.",
@@ -5541,7 +7393,10 @@
       sortName: "Etter navn",
       sortChange: "Etter endring",
       edTap: "Ved klikk",
-      edTapHelp: "Hva et klikk på et instrument åpner: detaljpopupen eller siden i TradingView. Uten TradingView-symbol er det alltid popupen.",
+      edTapHelp: "Hva et klikk på et instrument gjør: åpner detaljpopupen eller siden i TradingView, eller fører til en annen visning. Uten TradingView-symbol er det popupen.",
+      tapNavigate: "Navigere",
+      edTapPath: "Navigasjonsbane",
+      edTapPathHelp: "Hvor et klikk fører: et dashbord eller en visning, f.eks. /lovelace/home.",
       tapPopup: "Detaljpopup",
       tapTradingView: "TradingView",
       close: "Lukk",
@@ -5577,6 +7432,9 @@
       edElCardBg: "Kortbakgrunn",
       edElCardBgHelp: "En egen farge og et eget bilde bak hele kortet.",
       edCardBgEnable: "Vis bakgrunn",
+      edCardInset: "Avstand til rammen",
+      edCardInsetHelp: "Hvor langt kortets innhold holder seg fra kanten, i piksler. Tom følger temaet: der det tegner en kant inne i kortet, slutter innholdet før den.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Tegner fargen og bildet nedenfor.",
       edCardBgColor: "Farge",
       edCardBgColorHelp: "Bakgrunnsfarge for kortet.",
@@ -5723,6 +7581,15 @@
       fAlertBelow: "Varsel under",
       fAlertAbove: "Varsel over",
       posRealized: "Realisert",
+      tradeBuy: "Kjøp",
+      tradeSell: "Salg",
+      tradesTitle: "Kjøp og salg",
+      tradesMore: (count) => `Vis alle ${count}`,
+      tradesLess: "Vis færre",
+      edChartTrades: "Kjøp og salg",
+      edChartTradesHelp: "Merker hvert kjøp og salg i diagrammet på sin dag og kurs, og tegner en linje ved snittkursen.",
+      edDetailTrades: "Liste over kjøp og salg",
+      edDetailTradesHelp: "Hvert kjøp og salg med dag, antall, kurs og beløp. Et salg viser hva det realiserte.",
       posCosts: "Gebyrer og skatt",
       edGroup: "Gruppe",
       edGroupHelp: "Gruppen kortet viser instrumentene fra – en portefølje eller en favorittliste i integrasjonen.",
@@ -5751,6 +7618,174 @@
       formatDetail: "Detaljer",
       formatAlloc: "Portefølje",
       formatAlerts: "Kursvarsler",
+      formatTable: "Tabell",
+      tbCol_name: "Navn",
+      tbCol_name_only: "Navn",
+      tbName_name: "Navn og logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Børs",
+      tbCol_symbol_exchange: "Symbol · børs",
+      tbCol_price: "Kurs",
+      tbCol_previous_close: "Forrige slutt",
+      tbCol_change: "Endring",
+      tbCol_change_percent: "Dag %",
+      tbHeadAlerts: "Varsler",
+      tbHeadHighLow: "Dagens høy/lav",
+      tbHeadWeek: "Uke",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Dagens høy",
+      tbCol_day_low: "Dagens lav",
+      tbCol_year_low: "52-ukers lav",
+      tbCol_year_high: "52-ukers høy",
+      tbCol_volume: "Volum",
+      tbCol_spark: "Kurve, dag",
+      tbCol_spark_week: "Kurve, uke",
+      tbCol_spark_month: "Kurve, måned",
+      tbCol_news: "Nyheter",
+      tbCol_week: "Uke %",
+      tbCol_time: "Oppdatert",
+      tbCol_alert: "Varsel",
+      tbCol_quantity: "Antall",
+      tbCol_average: "Snittkurs",
+      tbCol_holding: "Beholdning",
+      tbCol_value: "Verdi",
+      tbCol_share: "Andel",
+      tbCol_day_gain: "I dag",
+      tbCol_day_gain_percent: "I dag %",
+      tbCol_week_change: "Uke",
+      tbCol_gain: "Gevinst",
+      tbCol_gain_percent: "Gevinst %",
+      tbTotal: "Totalt",
+      tbNone: "Ingen",
+      tbHolding: (quantity, average) => `${quantity} til snitt ${average}`,
+      tbTrendUp: "Opp ved siste oppdatering",
+      tbTrendDown: "Ned ved siste oppdatering",
+      tbTrendFlat: "Uendret ved siste oppdatering",
+      tbPresetAuto: "Automatisk",
+      tbPresetCompact: "Kompakt",
+      tbPresetClassic: "Klassisk",
+      edBlockTableHelp: "Hva tabellen viser, kolonne for kolonne.",
+      edTablePreset: "Utgangspunkt",
+      edTablePresetHelp: "Kolonnene tabellen starter med. Automatisk velger Portefølje for en portefølje og Kompakt for en favorittliste. Et valg tilbakestiller kolonnene til det utgangspunktet.",
+      edTableColumns: "Kolonner",
+      edTableColumnsHelp: "Hver kolonnes verdi, en ekstra verdi under den om du vil, og overskriften. Pilene flytter en kolonne, krysset fjerner den.",
+      edTableHeading: "Overskrift",
+      edTableHeadingHelp: "Navnet over kolonnen. Tom bruker verdiens navn.",
+      edTableSubNoneHelp: "En ekstra, mindre verdi under verdien.",
+      tbInfo_name: "Instrumentets navn med logoen.",
+      tbInfo_name_only: "Instrumentets navn.",
+      tbInfo_symbol: "Symbolet hos kilden, f.eks. AAPL.",
+      tbInfo_exchange: "Børsen kursen kommer fra.",
+      tbInfo_symbol_exchange: "Symbol og børs i ett.",
+      tbInfo_price: "Den siste kursen.",
+      tbInfo_previous_close: "Sluttkursen fra dagen før.",
+      tbInfo_change: "Endringen siden forrige sluttkurs, som beløp.",
+      tbInfo_change_percent: "Endringen siden forrige sluttkurs, i prosent.",
+      tbInfo_trend: "En pil: om kursen steg, falt eller sto stille ved siste oppdatering.",
+      tbInfo_day_high: "Dagens høyeste kurs.",
+      tbInfo_day_low: "Dagens laveste kurs.",
+      tbInfo_year_low: "Den laveste kursen de siste 52 ukene.",
+      tbInfo_year_high: "Den høyeste kursen de siste 52 ukene.",
+      tbInfo_volume: "Volumet som er handlet i dag.",
+      tbInfo_spark: "En liten kurve over kursen gjennom dagen.",
+      tbInfo_spark_week: "En liten kurve over kursen de siste fem handelsdagene.",
+      tbInfo_spark_month: "En liten kurve over kursen den siste måneden.",
+      tbInfo_news: "Et symbol der det finnes nye nyhetsoverskrifter. Et klikk viser dem.",
+      tbInfo_week: "Endringen over de siste fem handelsdagene, i prosent.",
+      tbInfo_week_change: "Endringen over de siste fem handelsdagene, som beløp.",
+      tbInfo_day_gain_percent: "Hva beholdningen har vunnet eller tapt i dag, i prosent.",
+      tbInfo_time: "Tidspunktet for den siste kursen.",
+      tbInfo_alert: "Kursvarslenes bjelle. Et klikk stiller dem inn.",
+      tbInfo_quantity: "Hvor mange enheter som eies.",
+      tbInfo_average: "Snittkursen som er betalt per enhet.",
+      tbInfo_holding: "Antall og snittkurs i ett.",
+      tbInfo_value: "Hva beholdningen er verdt nå.",
+      tbInfo_share: "Beholdningens andel av alt tabellen viser, i prosent.",
+      tbInfo_day_gain: "Hva beholdningen har vunnet eller tapt i dag, som beløp.",
+      tbInfo_gain: "Gevinst eller tap siden kjøpet, som beløp.",
+      tbInfo_gain_percent: "Gevinst eller tap siden kjøpet, i prosent.",
+      edTableValue: "Verdi",
+      edTableSub: "Undertekst",
+      edTableAdd: "Legg til kolonne",
+      edTableRemove: "Fjern kolonne",
+      edTablePill: "Som brikke",
+      edTablePillHelp: "Tegner verdien i en brikke i gevinst- eller tapsfargen.",
+      tbName_change: "Endring, dag",
+      tbName_change_percent: "Endring, dag %",
+      tbName_week: "Endring, uke %",
+      tbName_week_change: "Endring, uke",
+      tbName_day_gain_percent: "Gevinst, dag %",
+      tbName_day_gain: "Gevinst, dag",
+      tbName_gain: "Gevinst, totalt",
+      tbName_gain_percent: "Gevinst, totalt %",
+      edTableHeader: "Vis kolonneoverskriftene",
+      edTableHeaderHelp: "Raden med kolonnenes navn. Et klikk på et navn sorterer etter den kolonnen.",
+      edTableTotal: "Vis totalen",
+      edTableTotalHelp: "En siste rad med porteføljens summer: verdien, dagens endring og gevinsten, der tabellen har en kolonne for dem.",
+      edElTableHead: "Kolonneoverskrifter",
+      edElTableHeadHelp: "Navnene over tabellens kolonner.",
+      edElTableCell: "Verdier",
+      edElTableCellHelp: "Tabellens verdier.",
+      edElTableSub: "Undertekster",
+      edElTableSubHelp: "Den ekstra verdien under en kolonnes verdi.",
+      refreshNow: "Hent kursene på nytt",
+      agoNever: "ikke ennå",
+      agoNow: "akkurat nå",
+      agoMin: (n) => `${n} min siden`,
+      agoHours: (n) => `${n} t siden`,
+      tbSearch: "Søk",
+      edEntries: "Oppføringer",
+      edEntriesHelp: "Hva en oppføring er: et instrument, eller en hel portefølje med verdien og dagens endring. Et klikk på en portefølje åpner detaljene for posisjonene.",
+      tbRows: "Rader",
+      tbRowsHelp: "Hva en rad er: et instrument, eller en hel portefølje med summene. Et klikk på en portefølje viser instrumentene i den.",
+      tbRowsItems: "Instrumenter",
+      tbRowsGroups: "Porteføljer",
+      edTableGroupColumns: "Porteføljekolonner",
+      edTableGroupColumnsHelp: "Kolonnene i oversikten over porteføljene. Listen under Kolonner gjelder instrumentene i en portefølje.",
+      tbBack: "Tilbake til porteføljene",
+      tbCol_positions: "Posisjoner",
+      tbPositions: (count) => (count === 1 ? "1 posisjon" : `${count} posisjoner`),
+      tbNameG_name: "Navn",
+      tbInfoG_name: "Porteføljens navn.",
+      tbInfoG_positions: "Hvor mange posisjoner porteføljen har.",
+      tbInfoG_value: "Hva porteføljen er verdt nå.",
+      tbInfoG_share: "Porteføljens andel av alle porteføljene som vises, i prosent.",
+      tbInfoG_day_gain: "Hva porteføljen har vunnet eller tapt i dag, som beløp.",
+      tbInfoG_day_gain_percent: "Hva porteføljen har vunnet eller tapt i dag, i prosent.",
+      tbInfoG_gain: "Porteføljens gevinst eller tap siden kjøpene, som beløp.",
+      tbInfoG_gain_percent: "Porteføljens gevinst eller tap siden kjøpene, i prosent.",
+      tbInfoG_spark: "En liten kurve over porteføljens avkastning gjennom dagen.",
+      tbInfoG_spark_week: "En liten kurve over porteføljens avkastning de siste fem handelsdagene.",
+      tbInfoG_spark_month: "En liten kurve over porteføljens avkastning den siste måneden.",
+      edTableSearch: "Vis søkefeltet",
+      edTableSearchHelp: "Et felt ved siden av navnekolonnens overskrift. Det filtrerer radene etter navn eller symbol.",
+      edTableRefresh: "Vis oppdateringsknappen",
+      edTableRefreshHelp: "En knapp øverst til høyre som henter kursene på nytt og viser når de sist ble hentet.",
+      edElTableRefresh: "Oppdateringsknapp",
+      edElTableRefreshHelp: "Knappen øverst til høyre, med tiden siden siste henting.",
+      edRefreshBg: "Bakgrunn",
+      edRefreshBgHelp: "Tegner knappen på en brikke.",
+      edRefreshBgColor: "Bakgrunnsfarge",
+      edRefreshBgColorHelp: "Fargen på brikken. Tom beholder temaets.",
+      edElTableDivider: "Skillelinjer",
+      edElTableDividerHelp: "Linjene mellom tabellens rader.",
+      edShowTableLinesHelp: "Tegner linjene mellom radene.",
+      edElTableTotal: "Totalrad",
+      edElTableTotalHelp: "Den siste raden med summene.",
+      edElTablePill: "Brikker",
+      edElTablePillHelp: "Brikken rundt en verdi. Fargen er gevinst- eller tapsfargen.",
+      edPillRadius: "Hjørneradius",
+      edPillRadiusHelp: "Hvor runde hjørnene på brikken er, f.eks. 6px. Tom er helt rund.",
+      edPillFill: "Fyll",
+      edPillFillHelp: "Hvor sterkt gevinst- eller tapsfargen fyller brikken, i prosent.",
+      edElTableArrow: "Piler",
+      edElTableArrowHelp: "Trendens piler. Fargen er gevinst- eller tapsfargen.",
+      edTrendUpIcon: "Symbol, steget",
+      edTrendDownIcon: "Symbol, falt",
+      edTrendFlatIcon: "Symbol, uendret",
+      edTrendIconHelp: "Symbolet kolonnen Trend viser for dette.",
+      edArrowSize: "Størrelse",
+      edArrowSizeHelp: "Størrelsen på pilene, f.eks. 18px.",
       perfTitle: "Avkastning",
       perfChoose: "Det finnes ennå ingen portefølje å vise avkastning for.",
       perfEmpty: "Ikke nok kurser ennå for denne perioden.",
@@ -5856,6 +7891,8 @@
       editInstrument: "Endre instrument",
       removeInstrument: "Fjern instrument",
       editAlerts: "Kursvarsler",
+      editPurchase: "Endre kjøp",
+      editSale: "Endre salg",
       alertSet: "Et kursvarsel er satt",
       alertOn: "Et kursvarsel er utløst",
       fAlertNone: "Kursvarsel",
@@ -5953,7 +7990,7 @@
       edElGainHelp: "Fargene for gevinster, tap og nye overskrifter, overalt på kortet.",
       edGainColorHelp: "Farge for oppgang. Tom beholder kortets grønne.",
       edLossColorHelp: "Farge for nedgang. Tom beholder kortets røde.",
-      edElLogo: "Logo",
+      edElLogo: "Logoer",
       edElLogoHelp: "Den runde logoen i en oppføring.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Instrumentets symbol i en oppføring.",
@@ -6092,7 +8129,10 @@
       sortName: "Op naam",
       sortChange: "Op verandering",
       edTap: "Bij klikken",
-      edTapHelp: "Wat een klik op een instrument opent: de pop-up met details of de TradingView-pagina. Zonder TradingView-symbool is het altijd de pop-up.",
+      edTapHelp: "Wat een klik op een instrument doet: de pop-up met details of de TradingView-pagina openen, of naar een andere weergave navigeren. Zonder TradingView-symbool is het de pop-up.",
+      tapNavigate: "Navigeer",
+      edTapPath: "Pad",
+      edTapPathHelp: "Waar een klik naartoe leidt: een dashboard of een weergave, bijv. /lovelace/home.",
       tapPopup: "Details-pop-up",
       tapTradingView: "TradingView",
       close: "Sluiten",
@@ -6128,6 +8168,9 @@
       edElCardBg: "Kaartachtergrond",
       edElCardBgHelp: "Een eigen kleur en afbeelding achter de hele kaart.",
       edCardBgEnable: "Achtergrond tonen",
+      edCardInset: "Afstand tot het kader",
+      edCardInsetHelp: "Hoe ver de inhoud van de kaart van de rand blijft, in pixels. Leeg volgt het thema: tekent dat een rand binnen de kaart, dan eindigt de inhoud daarvoor.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Tekent de kleur en de afbeelding hieronder.",
       edCardBgColor: "Kleur",
       edCardBgColorHelp: "Achtergrondkleur van de kaart.",
@@ -6274,6 +8317,15 @@
       fAlertBelow: "Alarm onder",
       fAlertAbove: "Alarm boven",
       posRealized: "Gerealiseerd",
+      tradeBuy: "Aankoop",
+      tradeSell: "Verkoop",
+      tradesTitle: "Aankopen en verkopen",
+      tradesMore: (count) => `Alle ${count} tonen`,
+      tradesLess: "Minder tonen",
+      edChartTrades: "Aankopen en verkopen",
+      edChartTradesHelp: "Markeert elke aankoop en verkoop in de grafiek op zijn dag en koers, en tekent een lijn bij de gemiddelde prijs.",
+      edDetailTrades: "Lijst met aankopen en verkopen",
+      edDetailTradesHelp: "Elke aankoop en verkoop met dag, aantal, koers en bedrag. Een verkoop toont wat ermee gerealiseerd is.",
       posCosts: "Kosten en belastingen",
       edGroup: "Groep",
       edGroupHelp: "De groep waarvan de kaart de instrumenten toont - een portefeuille of een watchlist van de integratie.",
@@ -6302,6 +8354,174 @@
       formatDetail: "Details",
       formatAlloc: "Portefeuille",
       formatAlerts: "Koersalarmen",
+      formatTable: "Tabel",
+      tbCol_name: "Naam",
+      tbCol_name_only: "Naam",
+      tbName_name: "Naam & logo",
+      tbCol_symbol: "Symbool",
+      tbCol_exchange: "Beurs",
+      tbCol_symbol_exchange: "Symbool · beurs",
+      tbCol_price: "Koers",
+      tbCol_previous_close: "Vorig slot",
+      tbCol_change: "Verandering",
+      tbCol_change_percent: "Dag %",
+      tbHeadAlerts: "Alarmen",
+      tbHeadHighLow: "Dag hoog/laag",
+      tbHeadWeek: "Week",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Dag hoog",
+      tbCol_day_low: "Dag laag",
+      tbCol_year_low: "52-weeks laag",
+      tbCol_year_high: "52-weeks hoog",
+      tbCol_volume: "Volume",
+      tbCol_spark: "Curve, dag",
+      tbCol_spark_week: "Curve, week",
+      tbCol_spark_month: "Curve, maand",
+      tbCol_news: "Nieuws",
+      tbCol_week: "Week %",
+      tbCol_time: "Bijgewerkt",
+      tbCol_alert: "Alarm",
+      tbCol_quantity: "Aantal",
+      tbCol_average: "Gem. prijs",
+      tbCol_holding: "Positie",
+      tbCol_value: "Waarde",
+      tbCol_share: "Weging",
+      tbCol_day_gain: "Vandaag",
+      tbCol_day_gain_percent: "Vandaag %",
+      tbCol_week_change: "Week",
+      tbCol_gain: "Winst",
+      tbCol_gain_percent: "Winst %",
+      tbTotal: "Totaal",
+      tbNone: "Geen",
+      tbHolding: (quantity, average) => `${quantity} st. · gem. ${average}`,
+      tbTrendUp: "Gestegen bij de laatste update",
+      tbTrendDown: "Gedaald bij de laatste update",
+      tbTrendFlat: "Onveranderd bij de laatste update",
+      tbPresetAuto: "Automatisch",
+      tbPresetCompact: "Compact",
+      tbPresetClassic: "Klassiek",
+      edBlockTableHelp: "Wat de tabel toont, kolom voor kolom.",
+      edTablePreset: "Uitgangspunt",
+      edTablePresetHelp: "De kolommen waarmee de tabel begint. Automatisch neemt Portefeuille voor een portefeuille en Compact voor een watchlist. Een keuze zet de bijbehorende kolommen terug.",
+      edTableColumns: "Kolommen",
+      edTableColumnsHelp: "Per kolom de waarde, als je wilt een tweede waarde eronder, en de kop. De pijlen verplaatsen een kolom, het kruis verwijdert hem.",
+      edTableHeading: "Kop",
+      edTableHeadingHelp: "De naam boven de kolom. Leeg neemt de naam van de waarde.",
+      edTableSubNoneHelp: "Een tweede, kleinere waarde onder de waarde.",
+      tbInfo_name: "De naam van het instrument met zijn logo.",
+      tbInfo_name_only: "De naam van het instrument.",
+      tbInfo_symbol: "Het symbool bij de bron, bijv. AAPL.",
+      tbInfo_exchange: "De beurs waar de koers vandaan komt.",
+      tbInfo_symbol_exchange: "Symbool en beurs in één.",
+      tbInfo_price: "De laatste koers.",
+      tbInfo_previous_close: "De slotkoers van de dag ervoor.",
+      tbInfo_change: "De verandering sinds het vorige slot, als bedrag.",
+      tbInfo_change_percent: "De verandering sinds het vorige slot, in procent.",
+      tbInfo_trend: "Een pijl: of de koers bij de laatste update gestegen, gedaald of gelijk gebleven is.",
+      tbInfo_day_high: "De hoogste koers van de dag.",
+      tbInfo_day_low: "De laagste koers van de dag.",
+      tbInfo_year_low: "De laagste koers van de laatste 52 weken.",
+      tbInfo_year_high: "De hoogste koers van de laatste 52 weken.",
+      tbInfo_volume: "Het volume dat vandaag verhandeld is.",
+      tbInfo_spark: "Een kleine curve van de koers over de dag.",
+      tbInfo_spark_week: "Een kleine curve van de koers over de laatste vijf handelsdagen.",
+      tbInfo_spark_month: "Een kleine curve van de koers over de laatste maand.",
+      tbInfo_news: "Een symbool waar nieuwe berichten zijn. Een klik toont ze.",
+      tbInfo_week: "De verandering over de laatste vijf handelsdagen, in procent.",
+      tbInfo_week_change: "De verandering over de laatste vijf handelsdagen, als bedrag.",
+      tbInfo_day_gain_percent: "Wat de positie vandaag gewonnen of verloren heeft, in procent.",
+      tbInfo_time: "Het tijdstip van de laatste koers.",
+      tbInfo_alert: "De bel van de koersalarmen. Een klik stelt ze in.",
+      tbInfo_quantity: "Hoeveel stuks er in bezit zijn.",
+      tbInfo_average: "De gemiddeld betaalde prijs per stuk.",
+      tbInfo_holding: "Aantal en gemiddelde prijs in één.",
+      tbInfo_value: "Wat de positie nu waard is.",
+      tbInfo_share: "De weging van de positie in alles wat de tabel toont, in procent.",
+      tbInfo_day_gain: "Wat de positie vandaag gewonnen of verloren heeft, als bedrag.",
+      tbInfo_gain: "Winst of verlies sinds de aankoop, als bedrag.",
+      tbInfo_gain_percent: "Winst of verlies sinds de aankoop, in procent.",
+      edTableValue: "Waarde",
+      edTableSub: "Ondertitel",
+      edTableAdd: "Kolom toevoegen",
+      edTableRemove: "Kolom verwijderen",
+      edTablePill: "Als badge",
+      edTablePillHelp: "Tekent de waarde in een badge in de winst- of verlieskleur.",
+      tbName_change: "Verandering, dag",
+      tbName_change_percent: "Verandering, dag %",
+      tbName_week: "Verandering, week %",
+      tbName_week_change: "Verandering, week",
+      tbName_day_gain_percent: "Winst, dag %",
+      tbName_day_gain: "Winst, dag",
+      tbName_gain: "Winst, totaal",
+      tbName_gain_percent: "Winst, totaal %",
+      edTableHeader: "Kolomkoppen tonen",
+      edTableHeaderHelp: "De regel met de namen van de kolommen. Een klik op een naam sorteert op die kolom.",
+      edTableTotal: "Totaal tonen",
+      edTableTotalHelp: "Een laatste regel met de totalen van de portefeuille: de waarde, de verandering van vandaag en de winst, waar de tabel er een kolom voor heeft.",
+      edElTableHead: "Kolomkoppen",
+      edElTableHeadHelp: "De namen boven de kolommen van de tabel.",
+      edElTableCell: "Waarden",
+      edElTableCellHelp: "De waarden van de tabel.",
+      edElTableSub: "Ondertitels",
+      edElTableSubHelp: "De tweede waarde onder de waarde van een kolom.",
+      refreshNow: "Koersen opnieuw ophalen",
+      agoNever: "nog niet",
+      agoNow: "zojuist",
+      agoMin: (n) => `${n} min geleden`,
+      agoHours: (n) => `${n} uur geleden`,
+      tbSearch: "Zoeken",
+      edEntries: "Items",
+      edEntriesHelp: "Wat een item is: een instrument, of een hele portefeuille met zijn waarde en de verandering van vandaag. Een klik op een portefeuille opent de details van zijn posities.",
+      tbRows: "Rijen",
+      tbRowsHelp: "Wat een rij is: een instrument, of een hele portefeuille met zijn totalen. Een klik op een portefeuille toont zijn instrumenten.",
+      tbRowsItems: "Instrumenten",
+      tbRowsGroups: "Portefeuilles",
+      edTableGroupColumns: "Portefeuillekolommen",
+      edTableGroupColumnsHelp: "De kolommen van het overzicht van de portefeuilles. De lijst onder Kolommen geldt voor de instrumenten van een portefeuille.",
+      tbBack: "Terug naar de portefeuilles",
+      tbCol_positions: "Posities",
+      tbPositions: (count) => (count === 1 ? "1 positie" : `${count} posities`),
+      tbNameG_name: "Naam",
+      tbInfoG_name: "De naam van de portefeuille.",
+      tbInfoG_positions: "Hoeveel posities de portefeuille bevat.",
+      tbInfoG_value: "Wat de portefeuille nu waard is.",
+      tbInfoG_share: "De weging van de portefeuille in alle getoonde portefeuilles, in procent.",
+      tbInfoG_day_gain: "Wat de portefeuille vandaag gewonnen of verloren heeft, als bedrag.",
+      tbInfoG_day_gain_percent: "Wat de portefeuille vandaag gewonnen of verloren heeft, in procent.",
+      tbInfoG_gain: "Winst of verlies van de portefeuille sinds de aankopen, als bedrag.",
+      tbInfoG_gain_percent: "Winst of verlies van de portefeuille sinds de aankopen, in procent.",
+      tbInfoG_spark: "Een kleine curve van het rendement van de portefeuille over de dag.",
+      tbInfoG_spark_week: "Een kleine curve van het rendement van de portefeuille over de laatste vijf handelsdagen.",
+      tbInfoG_spark_month: "Een kleine curve van het rendement van de portefeuille over de laatste maand.",
+      edTableSearch: "Zoekveld tonen",
+      edTableSearchHelp: "Een veld naast de kop van de naam dat de rijen filtert op naam of symbool.",
+      edTableRefresh: "Vernieuwknop tonen",
+      edTableRefreshHelp: "Een knop rechtsboven die de koersen opnieuw ophaalt en toont wanneer ze voor het laatst zijn opgehaald.",
+      edElTableRefresh: "Vernieuwknop",
+      edElTableRefreshHelp: "De knop rechtsboven, met de tijd sinds de laatste keer ophalen.",
+      edRefreshBg: "Achtergrond",
+      edRefreshBgHelp: "Tekent de knop op een badge.",
+      edRefreshBgColor: "Achtergrondkleur",
+      edRefreshBgColorHelp: "Kleur van de badge. Leeg behoudt die van het thema.",
+      edElTableDivider: "Scheidingslijnen",
+      edElTableDividerHelp: "De lijnen tussen de rijen van de tabel.",
+      edShowTableLinesHelp: "Tekent de lijnen tussen de rijen.",
+      edElTableTotal: "Totaalregel",
+      edElTableTotalHelp: "De laatste regel met de totalen.",
+      edElTablePill: "Badges",
+      edElTablePillHelp: "De badge rond een waarde. De kleur is de winst- of verlieskleur.",
+      edPillRadius: "Hoekradius",
+      edPillRadiusHelp: "Hoe rond de hoeken van de badge zijn, bijv. 6px. Leeg is helemaal rond.",
+      edPillFill: "Vulling",
+      edPillFillHelp: "Hoe sterk de winst- of verlieskleur de badge vult, in procent.",
+      edElTableArrow: "Pijlen",
+      edElTableArrowHelp: "De pijlen van de trend. De kleur is de winst- of verlieskleur.",
+      edTrendUpIcon: "Symbool, gestegen",
+      edTrendDownIcon: "Symbool, gedaald",
+      edTrendFlatIcon: "Symbool, onveranderd",
+      edTrendIconHelp: "Het symbool dat de kolom Trend hiervoor toont.",
+      edArrowSize: "Grootte",
+      edArrowSizeHelp: "Grootte van de pijlen, bijv. 18px.",
       perfTitle: "Rendement",
       perfChoose: "Er is nog geen portefeuille waarvan het rendement getoond kan worden.",
       perfEmpty: "Nog niet genoeg koersen voor deze periode.",
@@ -6407,6 +8627,8 @@
       editInstrument: "Instrument wijzigen",
       removeInstrument: "Instrument verwijderen",
       editAlerts: "Koersalarmen",
+      editPurchase: "Aankoop wijzigen",
+      editSale: "Verkoop wijzigen",
       alertSet: "Er is een koersalarm ingesteld",
       alertOn: "Er is een koersalarm afgegaan",
       fAlertNone: "Koersalarm",
@@ -6504,7 +8726,7 @@
       edElGainHelp: "De kleuren van winst, verlies en nieuwe berichten, overal op de kaart.",
       edGainColorHelp: "Kleur voor een stijging. Leeg behoudt het groen van de kaart.",
       edLossColorHelp: "Kleur voor een daling. Leeg behoudt het rood van de kaart.",
-      edElLogo: "Logo",
+      edElLogo: "Logo's",
       edElLogoHelp: "Het ronde logo van een item.",
       edElRowSymbol: "Symbool",
       edElRowSymbolHelp: "Het symbool van het instrument in een item.",
@@ -6643,7 +8865,10 @@
       sortName: "Według nazwy",
       sortChange: "Według zmiany",
       edTap: "Po kliknięciu",
-      edTapHelp: "Co otwiera kliknięcie instrumentu: okno szczegółów lub jego stronę w TradingView. Bez symbolu TradingView zawsze otwiera się okno.",
+      edTapHelp: "Co robi kliknięcie instrumentu: otwiera okno szczegółów lub jego stronę w TradingView albo prowadzi do innego widoku. Bez symbolu TradingView otwiera się okno.",
+      tapNavigate: "Przejdź",
+      edTapPath: "Ścieżka",
+      edTapPathHelp: "Dokąd prowadzi kliknięcie: panel lub widok, np. /lovelace/home.",
       tapPopup: "Okno szczegółów",
       tapTradingView: "TradingView",
       close: "Zamknij",
@@ -6679,6 +8904,9 @@
       edElCardBg: "Tło karty",
       edElCardBgHelp: "Własny kolor i obraz za całą kartą.",
       edCardBgEnable: "Pokaż tło",
+      edCardInset: "Odstęp od ramki",
+      edCardInsetHelp: "Jak daleko zawartość karty pozostaje od jej krawędzi, w pikselach. Przy pustym polu decyduje motyw: gdy rysuje on obwódkę wewnątrz karty, zawartość kończy się przed nią.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Rysuje poniższy kolor i obraz.",
       edCardBgColor: "Kolor",
       edCardBgColorHelp: "Kolor tła karty.",
@@ -6825,6 +9053,15 @@
       fAlertBelow: "Alert poniżej",
       fAlertAbove: "Alert powyżej",
       posRealized: "Zrealizowano",
+      tradeBuy: "Zakup",
+      tradeSell: "Sprzedaż",
+      tradesTitle: "Zakupy i sprzedaże",
+      tradesMore: (count) => `Pokaż wszystkie (${count})`,
+      tradesLess: "Pokaż mniej",
+      edChartTrades: "Zakupy i sprzedaże",
+      edChartTradesHelp: "Zaznacza na wykresie każdy zakup i każdą sprzedaż w dniu i przy cenie transakcji oraz rysuje linię na poziomie średniej ceny.",
+      edDetailTrades: "Lista zakupów i sprzedaży",
+      edDetailTradesHelp: "Każdy zakup i każda sprzedaż z dniem, ilością, ceną i kwotą. Sprzedaż pokazuje zrealizowany zysk lub stratę.",
       posCosts: "Opłaty i podatki",
       edGroup: "Grupa",
       edGroupHelp: "Grupa, której instrumenty pokazuje karta - portfel lub lista obserwowanych integracji.",
@@ -6853,6 +9090,174 @@
       formatDetail: "Szczegóły",
       formatAlloc: "Portfel",
       formatAlerts: "Alerty cenowe",
+      formatTable: "Tabela",
+      tbCol_name: "Nazwa",
+      tbCol_name_only: "Nazwa",
+      tbName_name: "Nazwa i logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Giełda",
+      tbCol_symbol_exchange: "Symbol · giełda",
+      tbCol_price: "Cena",
+      tbCol_previous_close: "Poprz. zamknięcie",
+      tbCol_change: "Zmiana",
+      tbCol_change_percent: "Dzień %",
+      tbHeadAlerts: "Alerty",
+      tbHeadHighLow: "Maks./min. dnia",
+      tbHeadWeek: "Tydzień",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Maks. dnia",
+      tbCol_day_low: "Min. dnia",
+      tbCol_year_low: "Min. 52 tyg.",
+      tbCol_year_high: "Maks. 52 tyg.",
+      tbCol_volume: "Wolumen",
+      tbCol_spark: "Krzywa, dzień",
+      tbCol_spark_week: "Krzywa, tydzień",
+      tbCol_spark_month: "Krzywa, miesiąc",
+      tbCol_news: "Wiadomości",
+      tbCol_week: "Tydzień %",
+      tbCol_time: "Aktualizacja",
+      tbCol_alert: "Alert",
+      tbCol_quantity: "Ilość",
+      tbCol_average: "Średnia cena",
+      tbCol_holding: "Pozycja",
+      tbCol_value: "Wartość",
+      tbCol_share: "Udział",
+      tbCol_day_gain: "Dziś",
+      tbCol_day_gain_percent: "Dziś %",
+      tbCol_week_change: "Tydzień",
+      tbCol_gain: "Zysk",
+      tbCol_gain_percent: "Zysk %",
+      tbTotal: "Suma",
+      tbNone: "Brak",
+      tbHolding: (quantity, average) => `${quantity} po ${average}`,
+      tbTrendUp: "Wzrost przy ostatniej aktualizacji",
+      tbTrendDown: "Spadek przy ostatniej aktualizacji",
+      tbTrendFlat: "Bez zmian przy ostatniej aktualizacji",
+      tbPresetAuto: "Automatycznie",
+      tbPresetCompact: "Kompaktowa",
+      tbPresetClassic: "Klasyczna",
+      edBlockTableHelp: "Co pokazuje tabela, kolumna po kolumnie.",
+      edTablePreset: "Punkt wyjścia",
+      edTablePresetHelp: "Kolumny, od których tabela zaczyna. „Automatycznie” wybiera „Portfel” dla portfela i „Kompaktowa” dla listy obserwowanych. Wybranie jednego z nich przywraca jego kolumny.",
+      edTableColumns: "Kolumny",
+      edTableColumnsHelp: "Wartość każdej kolumny, w razie potrzeby druga wartość pod nią, oraz jej nagłówek. Strzałki przesuwają kolumnę, krzyżyk ją usuwa.",
+      edTableHeading: "Nagłówek",
+      edTableHeadingHelp: "Nazwa nad kolumną. Puste pole przyjmuje nazwę wartości.",
+      edTableSubNoneHelp: "Druga, mniejsza wartość pod wartością.",
+      tbInfo_name: "Nazwa instrumentu z jego logo.",
+      tbInfo_name_only: "Nazwa instrumentu.",
+      tbInfo_symbol: "Symbol instrumentu w źródle, np. AAPL.",
+      tbInfo_exchange: "Giełda, z której pochodzi cena.",
+      tbInfo_symbol_exchange: "Symbol i giełda razem.",
+      tbInfo_price: "Ostatnia cena.",
+      tbInfo_previous_close: "Cena zamknięcia z poprzedniego dnia.",
+      tbInfo_change: "Zmiana od poprzedniego zamknięcia, jako kwota.",
+      tbInfo_change_percent: "Zmiana od poprzedniego zamknięcia, w procentach.",
+      tbInfo_trend: "Strzałka: czy przy ostatniej aktualizacji cena wzrosła, spadła, czy się nie zmieniła.",
+      tbInfo_day_high: "Najwyższa cena dnia.",
+      tbInfo_day_low: "Najniższa cena dnia.",
+      tbInfo_year_low: "Najniższa cena z ostatnich 52 tygodni.",
+      tbInfo_year_high: "Najwyższa cena z ostatnich 52 tygodni.",
+      tbInfo_volume: "Dzisiejszy wolumen obrotu.",
+      tbInfo_spark: "Mała krzywa ceny w ciągu dnia.",
+      tbInfo_spark_week: "Mała krzywa ceny z ostatnich pięciu dni sesyjnych.",
+      tbInfo_spark_month: "Mała krzywa ceny z ostatniego miesiąca.",
+      tbInfo_news: "Symbol tam, gdzie są nowe nagłówki. Kliknięcie je pokazuje.",
+      tbInfo_week: "Zmiana z ostatnich pięciu dni sesyjnych, w procentach.",
+      tbInfo_week_change: "Zmiana z ostatnich pięciu dni sesyjnych, jako kwota.",
+      tbInfo_day_gain_percent: "Ile pozycja dziś zyskała lub straciła, w procentach.",
+      tbInfo_time: "Godzina ostatniej ceny.",
+      tbInfo_alert: "Dzwonek alertów cenowych. Kliknięcie je ustawia.",
+      tbInfo_quantity: "Liczba posiadanych sztuk.",
+      tbInfo_average: "Średnia cena zapłacona za sztukę.",
+      tbInfo_holding: "Ilość i średnia cena razem.",
+      tbInfo_value: "Ile pozycja jest teraz warta.",
+      tbInfo_share: "Udział pozycji we wszystkim, co pokazuje tabela, w procentach.",
+      tbInfo_day_gain: "Ile pozycja dziś zyskała lub straciła, jako kwota.",
+      tbInfo_gain: "Zysk lub strata od zakupu, jako kwota.",
+      tbInfo_gain_percent: "Zysk lub strata od zakupu, w procentach.",
+      edTableValue: "Wartość",
+      edTableSub: "Podtytuł",
+      edTableAdd: "Dodaj kolumnę",
+      edTableRemove: "Usuń kolumnę",
+      edTablePill: "Jako plakietka",
+      edTablePillHelp: "Rysuje wartość na plakietce w kolorze zysku lub straty.",
+      tbName_change: "Zmiana, dzień",
+      tbName_change_percent: "Zmiana, dzień %",
+      tbName_week: "Zmiana, tydzień %",
+      tbName_week_change: "Zmiana, tydzień",
+      tbName_day_gain_percent: "Zysk, dzień %",
+      tbName_day_gain: "Zysk, dzień",
+      tbName_gain: "Zysk, łącznie",
+      tbName_gain_percent: "Zysk, łącznie %",
+      edTableHeader: "Pokaż nagłówki kolumn",
+      edTableHeaderHelp: "Wiersz z nazwami kolumn. Kliknięcie nazwy sortuje według tej kolumny.",
+      edTableTotal: "Pokaż sumę",
+      edTableTotalHelp: "Ostatni wiersz z sumami portfela: jego wartością, dzisiejszą zmianą i zyskiem, o ile tabela ma dla nich kolumnę.",
+      edElTableHead: "Nagłówki kolumn",
+      edElTableHeadHelp: "Nazwy nad kolumnami tabeli.",
+      edElTableCell: "Wartości",
+      edElTableCellHelp: "Wartości tabeli.",
+      edElTableSub: "Podtytuły",
+      edElTableSubHelp: "Druga wartość pod wartością kolumny.",
+      refreshNow: "Pobierz ceny ponownie",
+      agoNever: "jeszcze nie",
+      agoNow: "przed chwilą",
+      agoMin: (n) => `${n} min temu`,
+      agoHours: (n) => `${n} godz. temu`,
+      tbSearch: "Szukaj",
+      edEntries: "Wpisy",
+      edEntriesHelp: "Czym jest wpis: instrumentem albo całym portfelem z jego wartością i dzisiejszą zmianą. Kliknięcie portfela otwiera szczegóły jego pozycji.",
+      tbRows: "Wiersze",
+      tbRowsHelp: "Czym jest wiersz: instrumentem albo całym portfelem z jego sumami. Kliknięcie portfela pokazuje jego instrumenty.",
+      tbRowsItems: "Instrumenty",
+      tbRowsGroups: "Portfele",
+      edTableGroupColumns: "Kolumny portfeli",
+      edTableGroupColumnsHelp: "Kolumny przeglądu portfeli. Lista w sekcji „Kolumny” dotyczy instrumentów portfela.",
+      tbBack: "Wróć do portfeli",
+      tbCol_positions: "Pozycje",
+      tbPositions: (count) => { const f = count % 10, h = count % 100; const w = count === 1 ? 'pozycja' : (f >= 2 && f <= 4 && (h < 12 || h > 14)) ? 'pozycje' : 'pozycji'; return `${count} ${w}`; },
+      tbNameG_name: "Nazwa",
+      tbInfoG_name: "Nazwa portfela.",
+      tbInfoG_positions: "Ile pozycji zawiera portfel.",
+      tbInfoG_value: "Ile portfel jest teraz wart.",
+      tbInfoG_share: "Udział portfela we wszystkich pokazanych portfelach, w procentach.",
+      tbInfoG_day_gain: "Ile portfel dziś zyskał lub stracił, jako kwota.",
+      tbInfoG_day_gain_percent: "Ile portfel dziś zyskał lub stracił, w procentach.",
+      tbInfoG_gain: "Zysk lub strata portfela od zakupów, jako kwota.",
+      tbInfoG_gain_percent: "Zysk lub strata portfela od zakupów, w procentach.",
+      tbInfoG_spark: "Mała krzywa wyników portfela w ciągu dnia.",
+      tbInfoG_spark_week: "Mała krzywa wyników portfela z ostatnich pięciu dni sesyjnych.",
+      tbInfoG_spark_month: "Mała krzywa wyników portfela z ostatniego miesiąca.",
+      edTableSearch: "Pokaż pole wyszukiwania",
+      edTableSearchHelp: "Pole obok nagłówka nazwy, które filtruje wiersze według nazwy lub symbolu.",
+      edTableRefresh: "Pokaż przycisk odświeżania",
+      edTableRefreshHelp: "Przycisk w prawym górnym rogu, który ponownie pobiera ceny i pokazuje, kiedy pobrano je ostatnio.",
+      edElTableRefresh: "Przycisk odświeżania",
+      edElTableRefreshHelp: "Przycisk w prawym górnym rogu, z czasem od ostatniego pobrania.",
+      edRefreshBg: "Tło",
+      edRefreshBgHelp: "Rysuje przycisk na plakietce.",
+      edRefreshBgColor: "Kolor tła",
+      edRefreshBgColorHelp: "Kolor plakietki. Puste pole zachowuje kolor motywu.",
+      edElTableDivider: "Linie oddzielające",
+      edElTableDividerHelp: "Linie między wierszami tabeli.",
+      edShowTableLinesHelp: "Rysuje linie między wierszami.",
+      edElTableTotal: "Wiersz sumy",
+      edElTableTotalHelp: "Ostatni wiersz z sumami.",
+      edElTablePill: "Plakietki",
+      edElTablePillHelp: "Plakietka wokół wartości. Jej kolor to kolor zysku lub straty.",
+      edPillRadius: "Promień narożników",
+      edPillRadiusHelp: "Jak zaokrąglone są narożniki plakietki, np. 6px. Puste pole oznacza pełne zaokrąglenie.",
+      edPillFill: "Wypełnienie",
+      edPillFillHelp: "Jak mocno kolor zysku lub straty wypełnia plakietkę, w procentach.",
+      edElTableArrow: "Strzałki",
+      edElTableArrowHelp: "Strzałki trendu. Ich kolor to kolor zysku lub straty.",
+      edTrendUpIcon: "Symbol, wzrost",
+      edTrendDownIcon: "Symbol, spadek",
+      edTrendFlatIcon: "Symbol, bez zmian",
+      edTrendIconHelp: "Symbol, który kolumna Trend pokazuje w tym przypadku.",
+      edArrowSize: "Rozmiar",
+      edArrowSizeHelp: "Rozmiar strzałek, np. 18px.",
       perfTitle: "Wyniki",
       perfChoose: "Nie ma jeszcze portfela, którego wyniki można pokazać.",
       perfEmpty: "Na razie za mało cen dla tego okresu.",
@@ -6958,6 +9363,8 @@
       editInstrument: "Zmień instrument",
       removeInstrument: "Usuń instrument",
       editAlerts: "Alerty cenowe",
+      editPurchase: "Zmień zakup",
+      editSale: "Zmień sprzedaż",
       alertSet: "Alert cenowy jest ustawiony",
       alertOn: "Alert cenowy jest wyzwolony",
       fAlertNone: "Alert cenowy",
@@ -7194,7 +9601,10 @@
       sortName: "Por nome",
       sortChange: "Por variação",
       edTap: "Ao clicar",
-      edTapHelp: "O que um clique num ativo abre: o pop-up de detalhes ou a página dele no TradingView. Sem símbolo do TradingView, é sempre o pop-up.",
+      edTapHelp: "O que um clique num ativo faz: abre o pop-up de detalhes ou a página dele no TradingView, ou leva a outra vista. Sem símbolo do TradingView, é o pop-up.",
+      tapNavigate: "Navegar",
+      edTapPath: "Caminho",
+      edTapPathHelp: "Aonde um clique leva: um dashboard ou uma vista, ex.: /lovelace/home.",
       tapPopup: "Pop-up de detalhes",
       tapTradingView: "TradingView",
       close: "Fechar",
@@ -7230,6 +9640,9 @@
       edElCardBg: "Fundo do cartão",
       edElCardBgHelp: "Uma cor e uma imagem próprias atrás do cartão inteiro.",
       edCardBgEnable: "Mostrar fundo",
+      edCardInset: "Distância até a borda",
+      edCardInsetHelp: "A que distância da borda fica o conteúdo do cartão, em pixels. Vazio segue o tema: onde ele desenha uma moldura dentro do cartão, o conteúdo termina antes dela.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Desenha a cor e a imagem abaixo.",
       edCardBgColor: "Cor",
       edCardBgColorHelp: "Cor de fundo do cartão.",
@@ -7376,6 +9789,15 @@
       fAlertBelow: "Alerta abaixo",
       fAlertAbove: "Alerta acima",
       posRealized: "Realizado",
+      tradeBuy: "Compra",
+      tradeSell: "Venda",
+      tradesTitle: "Compras e vendas",
+      tradesMore: (count) => `Mostrar todas as ${count}`,
+      tradesLess: "Mostrar menos",
+      edChartTrades: "Compras e vendas",
+      edChartTradesHelp: "Marca cada compra e venda no gráfico, no dia e no preço dela, e desenha uma linha no preço médio.",
+      edDetailTrades: "Lista de compras e vendas",
+      edDetailTradesHelp: "Cada compra e venda com dia, quantidade, preço e valor. Uma venda mostra o que realizou.",
       posCosts: "Taxas e impostos",
       edGroup: "Grupo",
       edGroupHelp: "O grupo cujos ativos o cartão mostra - uma carteira ou uma watchlist da integração.",
@@ -7404,6 +9826,174 @@
       formatDetail: "Detalhes",
       formatAlloc: "Carteira",
       formatAlerts: "Alertas de preço",
+      formatTable: "Tabela",
+      tbCol_name: "Nome",
+      tbCol_name_only: "Nome",
+      tbName_name: "Nome e logo",
+      tbCol_symbol: "Símbolo",
+      tbCol_exchange: "Bolsa",
+      tbCol_symbol_exchange: "Símbolo · bolsa",
+      tbCol_price: "Preço",
+      tbCol_previous_close: "Fech. anterior",
+      tbCol_change: "Variação",
+      tbCol_change_percent: "Dia %",
+      tbHeadAlerts: "Alertas",
+      tbHeadHighLow: "Máx./mín. do dia",
+      tbHeadWeek: "Semana",
+      tbCol_trend: "Tendência",
+      tbCol_day_high: "Máx. do dia",
+      tbCol_day_low: "Mín. do dia",
+      tbCol_year_low: "Mín. 52 sem.",
+      tbCol_year_high: "Máx. 52 sem.",
+      tbCol_volume: "Volume",
+      tbCol_spark: "Curva, dia",
+      tbCol_spark_week: "Curva, semana",
+      tbCol_spark_month: "Curva, mês",
+      tbCol_news: "Notícias",
+      tbCol_week: "Semana %",
+      tbCol_time: "Atualizado",
+      tbCol_alert: "Alerta",
+      tbCol_quantity: "Quantidade",
+      tbCol_average: "Preço médio",
+      tbCol_holding: "Posição",
+      tbCol_value: "Valor",
+      tbCol_share: "Participação",
+      tbCol_day_gain: "Hoje",
+      tbCol_day_gain_percent: "Hoje %",
+      tbCol_week_change: "Semana",
+      tbCol_gain: "Ganho",
+      tbCol_gain_percent: "Ganho %",
+      tbTotal: "Total",
+      tbNone: "Nenhum",
+      tbHolding: (quantity, average) => `${quantity} a ${average}`,
+      tbTrendUp: "Em alta na última atualização",
+      tbTrendDown: "Em queda na última atualização",
+      tbTrendFlat: "Inalterado na última atualização",
+      tbPresetAuto: "Automático",
+      tbPresetCompact: "Compacto",
+      tbPresetClassic: "Clássico",
+      edBlockTableHelp: "O que a tabela mostra, coluna por coluna.",
+      edTablePreset: "Ponto de partida",
+      edTablePresetHelp: "As colunas com que a tabela começa. Automático usa Carteira para uma carteira e Compacto para uma watchlist. Escolher um deles restaura as colunas dele.",
+      edTableColumns: "Colunas",
+      edTableColumnsHelp: "O valor de cada coluna, um segundo valor abaixo dele, se quiser, e o título. As setas movem uma coluna, o X a remove.",
+      edTableHeading: "Título",
+      edTableHeadingHelp: "O nome acima da coluna. Vazio usa o nome do valor.",
+      edTableSubNoneHelp: "Um segundo valor, menor, abaixo do valor.",
+      tbInfo_name: "O nome do ativo com o logo.",
+      tbInfo_name_only: "O nome do ativo.",
+      tbInfo_symbol: "O símbolo dele na fonte, ex.: AAPL.",
+      tbInfo_exchange: "A bolsa de onde vem o preço.",
+      tbInfo_symbol_exchange: "Símbolo e bolsa juntos.",
+      tbInfo_price: "O preço mais recente.",
+      tbInfo_previous_close: "O preço de fechamento do dia anterior.",
+      tbInfo_change: "A variação desde o fechamento anterior, em valor.",
+      tbInfo_change_percent: "A variação desde o fechamento anterior, em percentual.",
+      tbInfo_trend: "Uma seta: se o preço subiu, caiu ou ficou igual na última atualização.",
+      tbInfo_day_high: "O maior preço do dia.",
+      tbInfo_day_low: "O menor preço do dia.",
+      tbInfo_year_low: "O menor preço das últimas 52 semanas.",
+      tbInfo_year_high: "O maior preço das últimas 52 semanas.",
+      tbInfo_volume: "O volume negociado hoje.",
+      tbInfo_spark: "Uma pequena curva do preço ao longo do dia.",
+      tbInfo_spark_week: "Uma pequena curva do preço nos últimos cinco pregões.",
+      tbInfo_spark_month: "Uma pequena curva do preço no último mês.",
+      tbInfo_news: "Um símbolo onde houver manchetes novas. Um clique as mostra.",
+      tbInfo_week: "A variação nos últimos cinco pregões, em percentual.",
+      tbInfo_week_change: "A variação nos últimos cinco pregões, em valor.",
+      tbInfo_day_gain_percent: "Quanto a posição ganhou ou perdeu hoje, em percentual.",
+      tbInfo_time: "O horário do preço mais recente.",
+      tbInfo_alert: "O sino dos alertas de preço. Um clique os define.",
+      tbInfo_quantity: "Quantas unidades você possui.",
+      tbInfo_average: "O preço médio pago por unidade.",
+      tbInfo_holding: "Quantidade e preço médio juntos.",
+      tbInfo_value: "Quanto a posição vale agora.",
+      tbInfo_share: "A participação da posição em tudo o que a tabela mostra, em percentual.",
+      tbInfo_day_gain: "Quanto a posição ganhou ou perdeu hoje, em valor.",
+      tbInfo_gain: "Ganho ou perda desde a compra, em valor.",
+      tbInfo_gain_percent: "Ganho ou perda desde a compra, em percentual.",
+      edTableValue: "Valor",
+      edTableSub: "Subtítulo",
+      edTableAdd: "Adicionar coluna",
+      edTableRemove: "Remover coluna",
+      edTablePill: "Como pílula",
+      edTablePillHelp: "Desenha o valor numa pílula na cor de ganho ou de perda.",
+      tbName_change: "Variação, dia",
+      tbName_change_percent: "Variação, dia %",
+      tbName_week: "Variação, semana %",
+      tbName_week_change: "Variação, semana",
+      tbName_day_gain_percent: "Ganho, dia %",
+      tbName_day_gain: "Ganho, dia",
+      tbName_gain: "Ganho, total",
+      tbName_gain_percent: "Ganho, total %",
+      edTableHeader: "Mostrar os títulos das colunas",
+      edTableHeaderHelp: "A linha com os nomes das colunas. Um clique num nome ordena por essa coluna.",
+      edTableTotal: "Mostrar o total",
+      edTableTotalHelp: "Uma última linha com as somas da carteira: o valor, a variação de hoje e o ganho, onde a tabela tiver uma coluna para eles.",
+      edElTableHead: "Títulos das colunas",
+      edElTableHeadHelp: "Os nomes acima das colunas da tabela.",
+      edElTableCell: "Valores",
+      edElTableCellHelp: "Os valores da tabela.",
+      edElTableSub: "Subtítulos",
+      edElTableSubHelp: "O segundo valor abaixo do valor de uma coluna.",
+      refreshNow: "Buscar os preços de novo",
+      agoNever: "ainda não",
+      agoNow: "agora mesmo",
+      agoMin: (n) => `há ${n} min`,
+      agoHours: (n) => `há ${n} h`,
+      tbSearch: "Buscar",
+      edEntries: "Entradas",
+      edEntriesHelp: "O que é uma entrada: um ativo, ou uma carteira inteira com seu valor e a variação de hoje. Um clique numa carteira abre os detalhes das posições dela.",
+      tbRows: "Linhas",
+      tbRowsHelp: "O que é uma linha: um ativo, ou uma carteira inteira com suas somas. Um clique numa carteira mostra os ativos dela.",
+      tbRowsItems: "Ativos",
+      tbRowsGroups: "Carteiras",
+      edTableGroupColumns: "Colunas das carteiras",
+      edTableGroupColumnsHelp: "As colunas da visão geral das carteiras. A lista em Colunas vale para os ativos de uma carteira.",
+      tbBack: "Voltar às carteiras",
+      tbCol_positions: "Posições",
+      tbPositions: (count) => (count === 1 ? "1 posição" : `${count} posições`),
+      tbNameG_name: "Nome",
+      tbInfoG_name: "O nome da carteira.",
+      tbInfoG_positions: "Quantas posições a carteira tem.",
+      tbInfoG_value: "Quanto a carteira vale agora.",
+      tbInfoG_share: "A participação da carteira em todas as carteiras mostradas, em percentual.",
+      tbInfoG_day_gain: "Quanto a carteira ganhou ou perdeu hoje, em valor.",
+      tbInfoG_day_gain_percent: "Quanto a carteira ganhou ou perdeu hoje, em percentual.",
+      tbInfoG_gain: "O ganho ou a perda da carteira desde as compras, em valor.",
+      tbInfoG_gain_percent: "O ganho ou a perda da carteira desde as compras, em percentual.",
+      tbInfoG_spark: "Uma pequena curva do desempenho da carteira ao longo do dia.",
+      tbInfoG_spark_week: "Uma pequena curva do desempenho da carteira nos últimos cinco pregões.",
+      tbInfoG_spark_month: "Uma pequena curva do desempenho da carteira no último mês.",
+      edTableSearch: "Mostrar o campo de busca",
+      edTableSearchHelp: "Um campo ao lado do título da coluna Nome que filtra as linhas por nome ou símbolo.",
+      edTableRefresh: "Mostrar o botão de atualizar",
+      edTableRefreshHelp: "Um botão no canto superior direito que busca os preços de novo e diz quando foram buscados pela última vez.",
+      edElTableRefresh: "Botão de atualizar",
+      edElTableRefreshHelp: "O botão no canto superior direito, com o tempo desde a última busca.",
+      edRefreshBg: "Fundo",
+      edRefreshBgHelp: "Desenha o botão sobre uma pílula.",
+      edRefreshBgColor: "Cor de fundo",
+      edRefreshBgColorHelp: "Cor da pílula. Vazio mantém a do tema.",
+      edElTableDivider: "Divisórias",
+      edElTableDividerHelp: "Os traços que separam as linhas da tabela.",
+      edShowTableLinesHelp: "Desenha as divisórias entre as linhas.",
+      edElTableTotal: "Linha do total",
+      edElTableTotalHelp: "A última linha, com as somas.",
+      edElTablePill: "Pílulas",
+      edElTablePillHelp: "A pílula em volta de um valor. A cor dela é a cor de ganho ou de perda.",
+      edPillRadius: "Raio dos cantos",
+      edPillRadiusHelp: "Quão arredondados são os cantos da pílula, ex.: 6px. Vazio é totalmente redondo.",
+      edPillFill: "Preenchimento",
+      edPillFillHelp: "Com que intensidade a cor de ganho ou de perda preenche a pílula, em percentual.",
+      edElTableArrow: "Setas",
+      edElTableArrowHelp: "As setas da tendência. A cor delas é a cor de ganho ou de perda.",
+      edTrendUpIcon: "Símbolo, em alta",
+      edTrendDownIcon: "Símbolo, em queda",
+      edTrendFlatIcon: "Símbolo, inalterado",
+      edTrendIconHelp: "O símbolo que a coluna Tendência mostra neste caso.",
+      edArrowSize: "Tamanho",
+      edArrowSizeHelp: "Tamanho das setas, ex.: 18px.",
       perfTitle: "Desempenho",
       perfChoose: "Ainda não há carteira cujo desempenho possa ser mostrado.",
       perfEmpty: "Ainda não há preços suficientes para este período.",
@@ -7509,6 +10099,8 @@
       editInstrument: "Alterar ativo",
       removeInstrument: "Remover ativo",
       editAlerts: "Alertas de preço",
+      editPurchase: "Alterar compra",
+      editSale: "Alterar venda",
       alertSet: "Há um alerta de preço definido",
       alertOn: "Um alerta de preço está ativo",
       fAlertNone: "Alerta de preço",
@@ -7606,7 +10198,7 @@
       edElGainHelp: "As cores de ganhos, perdas e manchetes novas, em todo o cartão.",
       edGainColorHelp: "Cor para uma alta. Vazio mantém o verde do cartão.",
       edLossColorHelp: "Cor para uma queda. Vazio mantém o vermelho do cartão.",
-      edElLogo: "Logo",
+      edElLogo: "Logos",
       edElLogoHelp: "O logo redondo de uma entrada.",
       edElRowSymbol: "Símbolo",
       edElRowSymbolHelp: "O símbolo do ativo numa entrada.",
@@ -7745,7 +10337,10 @@
       sortName: "По названию",
       sortChange: "По изменению",
       edTap: "При нажатии",
-      edTapHelp: "Что открывает нажатие на инструмент: всплывающее окно с подробностями или его страницу в TradingView. Без символа TradingView всегда открывается окно.",
+      edTapHelp: "Что делает нажатие на инструмент: открывает всплывающее окно с подробностями или его страницу в TradingView либо ведёт на другую вкладку. Без символа TradingView открывается окно.",
+      tapNavigate: "Перейти на страницу",
+      edTapPath: "Путь",
+      edTapPathHelp: "Куда ведёт нажатие: панель или вкладка, напр. /lovelace/home.",
       tapPopup: "Окно подробностей",
       tapTradingView: "TradingView",
       close: "Закрыть",
@@ -7781,6 +10376,9 @@
       edElCardBg: "Фон карточки",
       edElCardBgHelp: "Свой цвет и своё изображение за всей карточкой.",
       edCardBgEnable: "Показывать фон",
+      edCardInset: "Отступ от рамки",
+      edCardInsetHelp: "Насколько содержимое карточки отстоит от её края, в пикселях. Пусто — как в теме: если она рисует кайму внутри карточки, содержимое заканчивается перед ней.",
+      edCardInsetAuto: "авто",
       edCardBgEnableHelp: "Рисует цвет и изображение ниже.",
       edCardBgColor: "Цвет",
       edCardBgColorHelp: "Цвет фона карточки.",
@@ -7927,6 +10525,15 @@
       fAlertBelow: "Оповещение ниже",
       fAlertAbove: "Оповещение выше",
       posRealized: "Реализовано",
+      tradeBuy: "Покупка",
+      tradeSell: "Продажа",
+      tradesTitle: "Покупки и продажи",
+      tradesMore: (count) => `Показать все ${count}`,
+      tradesLess: "Показать меньше",
+      edChartTrades: "Покупки и продажи",
+      edChartTradesHelp: "Отмечает на графике каждую покупку и продажу по её дню и цене и рисует линию на уровне средней цены.",
+      edDetailTrades: "Список покупок и продаж",
+      edDetailTradesHelp: "Каждая покупка и продажа с днём, количеством, ценой и суммой. У продажи показано, сколько по ней реализовано.",
       posCosts: "Комиссии и налоги",
       edGroup: "Группа",
       edGroupHelp: "Группа, инструменты которой показывает карточка, — портфель или список наблюдения интеграции.",
@@ -7955,6 +10562,174 @@
       formatDetail: "Подробности",
       formatAlloc: "Портфель",
       formatAlerts: "Ценовые оповещения",
+      formatTable: "Таблица",
+      tbCol_name: "Название",
+      tbCol_name_only: "Название",
+      tbName_name: "Название и логотип",
+      tbCol_symbol: "Символ",
+      tbCol_exchange: "Биржа",
+      tbCol_symbol_exchange: "Символ · биржа",
+      tbCol_price: "Цена",
+      tbCol_previous_close: "Пред. закрытие",
+      tbCol_change: "Изменение",
+      tbCol_change_percent: "День %",
+      tbHeadAlerts: "Оповещения",
+      tbHeadHighLow: "Макс./мин. дня",
+      tbHeadWeek: "Неделя",
+      tbCol_trend: "Тренд",
+      tbCol_day_high: "Макс. дня",
+      tbCol_day_low: "Мин. дня",
+      tbCol_year_low: "Мин. за 52 нед.",
+      tbCol_year_high: "Макс. за 52 нед.",
+      tbCol_volume: "Объём",
+      tbCol_spark: "Кривая, день",
+      tbCol_spark_week: "Кривая, неделя",
+      tbCol_spark_month: "Кривая, месяц",
+      tbCol_news: "Новости",
+      tbCol_week: "Неделя %",
+      tbCol_time: "Обновлено",
+      tbCol_alert: "Оповещение",
+      tbCol_quantity: "Количество",
+      tbCol_average: "Средняя цена",
+      tbCol_holding: "Позиция",
+      tbCol_value: "Стоимость",
+      tbCol_share: "Доля",
+      tbCol_day_gain: "Сегодня",
+      tbCol_day_gain_percent: "Сегодня %",
+      tbCol_week_change: "Неделя",
+      tbCol_gain: "Прибыль",
+      tbCol_gain_percent: "Прибыль %",
+      tbTotal: "Итого",
+      tbNone: "Нет",
+      tbHolding: (quantity, average) => `${quantity} шт. по ${average}`,
+      tbTrendUp: "Рост с последним обновлением",
+      tbTrendDown: "Падение с последним обновлением",
+      tbTrendFlat: "Без изменений с последним обновлением",
+      tbPresetAuto: "Автоматически",
+      tbPresetCompact: "Компактный",
+      tbPresetClassic: "Классический",
+      edBlockTableHelp: "Что показывает таблица, столбец за столбцом.",
+      edTablePreset: "Исходный набор",
+      edTablePresetHelp: "Столбцы, с которых начинается таблица. «Автоматически» берёт «Портфель» для портфеля и «Компактный» для списка наблюдения. Выбор набора возвращает его столбцы.",
+      edTableColumns: "Столбцы",
+      edTableColumnsHelp: "Для каждого столбца — его значение, при желании второе значение под ним и его заголовок. Стрелки перемещают столбец, крестик удаляет его.",
+      edTableHeading: "Заголовок",
+      edTableHeadingHelp: "Название над столбцом. Пусто — название значения.",
+      edTableSubNoneHelp: "Второе значение, помельче, под основным.",
+      tbInfo_name: "Название инструмента с его логотипом.",
+      tbInfo_name_only: "Название инструмента.",
+      tbInfo_symbol: "Его символ в источнике, напр. AAPL.",
+      tbInfo_exchange: "Биржа, с которой приходит его цена.",
+      tbInfo_symbol_exchange: "Символ и биржа вместе.",
+      tbInfo_price: "Последняя цена.",
+      tbInfo_previous_close: "Цена закрытия предыдущего дня.",
+      tbInfo_change: "Изменение с предыдущего закрытия, в деньгах.",
+      tbInfo_change_percent: "Изменение с предыдущего закрытия, в процентах.",
+      tbInfo_trend: "Стрелка: выросла цена, упала или не изменилась с последним обновлением.",
+      tbInfo_day_high: "Самая высокая цена дня.",
+      tbInfo_day_low: "Самая низкая цена дня.",
+      tbInfo_year_low: "Самая низкая цена за последние 52 недели.",
+      tbInfo_year_high: "Самая высокая цена за последние 52 недели.",
+      tbInfo_volume: "Объём торгов за сегодня.",
+      tbInfo_spark: "Маленькая кривая цены за день.",
+      tbInfo_spark_week: "Маленькая кривая цены за последние пять торговых дней.",
+      tbInfo_spark_month: "Маленькая кривая цены за последний месяц.",
+      tbInfo_news: "Значок там, где есть новые заголовки. Нажатие показывает их.",
+      tbInfo_week: "Изменение за последние пять торговых дней, в процентах.",
+      tbInfo_week_change: "Изменение за последние пять торговых дней, в деньгах.",
+      tbInfo_day_gain_percent: "Сколько позиция прибавила или потеряла сегодня, в процентах.",
+      tbInfo_time: "Время последней цены.",
+      tbInfo_alert: "Колокольчик ценовых оповещений. Нажатие задаёт их.",
+      tbInfo_quantity: "Сколько единиц в позиции.",
+      tbInfo_average: "Средняя цена, уплаченная за единицу.",
+      tbInfo_holding: "Количество и средняя цена вместе.",
+      tbInfo_value: "Сколько позиция стоит сейчас.",
+      tbInfo_share: "Доля позиции во всём, что показывает таблица, в процентах.",
+      tbInfo_day_gain: "Сколько позиция прибавила или потеряла сегодня, в деньгах.",
+      tbInfo_gain: "Прибыль или убыток с момента покупки, в деньгах.",
+      tbInfo_gain_percent: "Прибыль или убыток с момента покупки, в процентах.",
+      edTableValue: "Значение",
+      edTableSub: "Подпись",
+      edTableAdd: "Добавить столбец",
+      edTableRemove: "Удалить столбец",
+      edTablePill: "В плашке",
+      edTablePillHelp: "Рисует значение в плашке цвета прибыли или убытка.",
+      tbName_change: "Изменение, день",
+      tbName_change_percent: "Изменение, день %",
+      tbName_week: "Изменение, неделя %",
+      tbName_week_change: "Изменение, неделя",
+      tbName_day_gain_percent: "Прибыль, день %",
+      tbName_day_gain: "Прибыль, день",
+      tbName_gain: "Прибыль, всего",
+      tbName_gain_percent: "Прибыль, всего %",
+      edTableHeader: "Показывать заголовки столбцов",
+      edTableHeaderHelp: "Строка с названиями столбцов. Нажатие на название сортирует по этому столбцу.",
+      edTableTotal: "Показывать итог",
+      edTableTotalHelp: "Последняя строка с суммами портфеля: его стоимость, изменение за сегодня и прибыль — если в таблице есть столбец для них.",
+      edElTableHead: "Заголовки столбцов",
+      edElTableHeadHelp: "Названия над столбцами таблицы.",
+      edElTableCell: "Значения",
+      edElTableCellHelp: "Значения таблицы.",
+      edElTableSub: "Подписи",
+      edElTableSubHelp: "Второе значение под значением столбца.",
+      refreshNow: "Запросить цены заново",
+      agoNever: "ещё нет",
+      agoNow: "только что",
+      agoMin: (n) => `${n} мин назад`,
+      agoHours: (n) => `${n} ч назад`,
+      tbSearch: "Поиск",
+      edEntries: "Записи",
+      edEntriesHelp: "Что является записью: инструмент или целый портфель с его стоимостью и изменением за сегодня. Нажатие на портфель открывает подробности его позиций.",
+      tbRows: "Строки",
+      tbRowsHelp: "Что является строкой: инструмент или целый портфель с его суммами. Нажатие на портфель показывает его инструменты.",
+      tbRowsItems: "Инструменты",
+      tbRowsGroups: "Портфели",
+      edTableGroupColumns: "Столбцы портфелей",
+      edTableGroupColumnsHelp: "Столбцы обзора портфелей. Список в разделе «Столбцы» относится к инструментам портфеля.",
+      tbBack: "Назад к портфелям",
+      tbCol_positions: "Позиции",
+      tbPositions: (count) => `${count} ${count % 10 === 1 && count % 100 !== 11 ? "позиция" : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 12 || count % 100 > 14) ? "позиции" : "позиций"}`,
+      tbNameG_name: "Название",
+      tbInfoG_name: "Название портфеля.",
+      tbInfoG_positions: "Сколько позиций в портфеле.",
+      tbInfoG_value: "Сколько портфель стоит сейчас.",
+      tbInfoG_share: "Доля портфеля во всех показанных портфелях, в процентах.",
+      tbInfoG_day_gain: "Сколько портфель прибавил или потерял сегодня, в деньгах.",
+      tbInfoG_day_gain_percent: "Сколько портфель прибавил или потерял сегодня, в процентах.",
+      tbInfoG_gain: "Прибыль или убыток портфеля с момента покупок, в деньгах.",
+      tbInfoG_gain_percent: "Прибыль или убыток портфеля с момента покупок, в процентах.",
+      tbInfoG_spark: "Маленькая кривая доходности портфеля за день.",
+      tbInfoG_spark_week: "Маленькая кривая доходности портфеля за последние пять торговых дней.",
+      tbInfoG_spark_month: "Маленькая кривая доходности портфеля за последний месяц.",
+      edTableSearch: "Показывать поле поиска",
+      edTableSearchHelp: "Поле рядом с заголовком столбца «Название», отбирающее строки по названию или символу.",
+      edTableRefresh: "Показывать кнопку обновления",
+      edTableRefreshHelp: "Кнопка вверху справа, которая запрашивает цены заново и показывает, когда они запрашивались в последний раз.",
+      edElTableRefresh: "Кнопка обновления",
+      edElTableRefreshHelp: "Кнопка вверху справа с указанием времени, прошедшего с последнего запроса.",
+      edRefreshBg: "Фон",
+      edRefreshBgHelp: "Рисует кнопку на плашке.",
+      edRefreshBgColor: "Цвет фона",
+      edRefreshBgColorHelp: "Цвет плашки. Пусто — цвет темы.",
+      edElTableDivider: "Разделители",
+      edElTableDividerHelp: "Линии между строками таблицы.",
+      edShowTableLinesHelp: "Рисует линии между строками.",
+      edElTableTotal: "Строка итога",
+      edElTableTotalHelp: "Последняя строка с суммами.",
+      edElTablePill: "Плашки",
+      edElTablePillHelp: "Плашка вокруг значения. Её цвет — цвет прибыли или убытка.",
+      edPillRadius: "Радиус углов",
+      edPillRadiusHelp: "Насколько скруглены углы плашки, напр. 6px. Пусто — полностью круглые.",
+      edPillFill: "Заливка",
+      edPillFillHelp: "Насколько сильно цвет прибыли или убытка заполняет плашку, в процентах.",
+      edElTableArrow: "Стрелки",
+      edElTableArrowHelp: "Стрелки тренда. Их цвет — цвет прибыли или убытка.",
+      edTrendUpIcon: "Значок, рост",
+      edTrendDownIcon: "Значок, падение",
+      edTrendFlatIcon: "Значок, без изменений",
+      edTrendIconHelp: "Значок, который столбец «Тренд» показывает в этом случае.",
+      edArrowSize: "Размер",
+      edArrowSizeHelp: "Размер стрелок, напр. 18px.",
       perfTitle: "Доходность",
       perfChoose: "Пока нет портфеля, доходность которого можно показать.",
       perfEmpty: "Пока недостаточно цен за этот период.",
@@ -8060,6 +10835,8 @@
       editInstrument: "Изменить инструмент",
       removeInstrument: "Удалить инструмент",
       editAlerts: "Ценовые оповещения",
+      editPurchase: "Изменить покупку",
+      editSale: "Изменить продажу",
       alertSet: "Ценовое оповещение задано",
       alertOn: "Ценовое оповещение сработало",
       fAlertNone: "Ценовое оповещение",
@@ -8157,7 +10934,7 @@
       edElGainHelp: "Цвета прибыли, убытков и новых заголовков по всей карточке.",
       edGainColorHelp: "Цвет роста. Пусто — зелёный цвет карточки.",
       edLossColorHelp: "Цвет падения. Пусто — красный цвет карточки.",
-      edElLogo: "Логотип",
+      edElLogo: "Логотипы",
       edElLogoHelp: "Круглый логотип записи.",
       edElRowSymbol: "Символ",
       edElRowSymbolHelp: "Символ инструмента в записи.",
@@ -8296,7 +11073,10 @@
       sortName: "Podľa názvu",
       sortChange: "Podľa zmeny",
       edTap: "Po kliknutí",
-      edTapHelp: "Čo otvorí kliknutie na inštrument: okno s detailmi alebo jeho stránku na TradingView. Bez symbolu TradingView je to vždy okno s detailmi.",
+      edTapHelp: "Čo urobí kliknutie na inštrument: otvorí okno s detailmi alebo jeho stránku na TradingView, alebo vedie na iné zobrazenie. Bez symbolu TradingView je to okno s detailmi.",
+      tapNavigate: "Navigovať",
+      edTapPath: "Cesta",
+      edTapPathHelp: "Kam kliknutie vedie: na panel alebo zobrazenie, napr. /lovelace/home.",
       tapPopup: "Okno s detailmi",
       tapTradingView: "TradingView",
       close: "Zavrieť",
@@ -8332,6 +11112,9 @@
       edElCardBg: "Pozadie karty",
       edElCardBgHelp: "Vlastná farba a obrázok za celou kartou.",
       edCardBgEnable: "Zobraziť pozadie",
+      edCardInset: "Odstup od okraja",
+      edCardInsetHelp: "Ako ďaleko zostáva obsah karty od jej okraja, v pixeloch. Prázdne pole sa riadi témou: kde téma kreslí lem vnútri karty, obsah končí pred ním.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Vykreslí farbu a obrázok nastavené nižšie.",
       edCardBgColor: "Farba",
       edCardBgColorHelp: "Farba pozadia karty.",
@@ -8478,6 +11261,15 @@
       fAlertBelow: "Upozornenie pod",
       fAlertAbove: "Upozornenie nad",
       posRealized: "Realizované",
+      tradeBuy: "Nákup",
+      tradeSell: "Predaj",
+      tradesTitle: "Nákupy a predaje",
+      tradesMore: (count) => `Zobraziť všetky (${count})`,
+      tradesLess: "Zobraziť menej",
+      edChartTrades: "Nákupy a predaje",
+      edChartTradesHelp: "Vyznačí v grafe každý nákup a predaj v jeho deň a pri jeho cene a nakreslí čiaru na priemernej cene.",
+      edDetailTrades: "Zoznam nákupov a predajov",
+      edDetailTradesHelp: "Každý nákup a predaj s dňom, množstvom, cenou a sumou. Predaj ukazuje, čo realizoval.",
       posCosts: "Poplatky a dane",
       edGroup: "Skupina",
       edGroupHelp: "Skupina, ktorej inštrumenty karta zobrazuje – portfólio alebo zoznam sledovaných z integrácie.",
@@ -8506,6 +11298,174 @@
       formatDetail: "Detaily",
       formatAlloc: "Portfólio",
       formatAlerts: "Cenové upozornenia",
+      formatTable: "Tabuľka",
+      tbCol_name: "Názov",
+      tbCol_name_only: "Názov",
+      tbName_name: "Názov a logo",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Burza",
+      tbCol_symbol_exchange: "Symbol · burza",
+      tbCol_price: "Cena",
+      tbCol_previous_close: "Pred. záver",
+      tbCol_change: "Zmena",
+      tbCol_change_percent: "Deň %",
+      tbHeadAlerts: "Upozornenia",
+      tbHeadHighLow: "Denné max./min.",
+      tbHeadWeek: "Týždeň",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Denné max.",
+      tbCol_day_low: "Denné min.",
+      tbCol_year_low: "52-týž. min.",
+      tbCol_year_high: "52-týž. max.",
+      tbCol_volume: "Objem",
+      tbCol_spark: "Krivka, deň",
+      tbCol_spark_week: "Krivka, týždeň",
+      tbCol_spark_month: "Krivka, mesiac",
+      tbCol_news: "Správy",
+      tbCol_week: "Týždeň %",
+      tbCol_time: "Aktualizované",
+      tbCol_alert: "Upozornenie",
+      tbCol_quantity: "Množstvo",
+      tbCol_average: "Priem. cena",
+      tbCol_holding: "Pozícia",
+      tbCol_value: "Hodnota",
+      tbCol_share: "Podiel",
+      tbCol_day_gain: "Dnes",
+      tbCol_day_gain_percent: "Dnes %",
+      tbCol_week_change: "Týždeň",
+      tbCol_gain: "Zisk",
+      tbCol_gain_percent: "Zisk %",
+      tbTotal: "Spolu",
+      tbNone: "Žiadny",
+      tbHolding: (quantity, average) => `${quantity} ks po ${average}`,
+      tbTrendUp: "Pri poslednej aktualizácii rast",
+      tbTrendDown: "Pri poslednej aktualizácii pokles",
+      tbTrendFlat: "Pri poslednej aktualizácii bez zmeny",
+      tbPresetAuto: "Automaticky",
+      tbPresetCompact: "Kompaktné",
+      tbPresetClassic: "Klasické",
+      edBlockTableHelp: "Čo tabuľka zobrazuje, stĺpec po stĺpci.",
+      edTablePreset: "Východisko",
+      edTablePresetHelp: "Stĺpce, s ktorými tabuľka začína. Automaticky použije Portfólio pre portfólio a Kompaktné pre zoznam sledovaných. Výber východiska obnoví jeho stĺpce.",
+      edTableColumns: "Stĺpce",
+      edTableColumnsHelp: "Hodnota každého stĺpca, prípadne druhá hodnota pod ňou, a jeho nadpis. Šípky stĺpec presunú, krížik ho odstráni.",
+      edTableHeading: "Nadpis",
+      edTableHeadingHelp: "Názov nad stĺpcom. Prázdne pole použije názov hodnoty.",
+      edTableSubNoneHelp: "Druhá, menšia hodnota pod hodnotou.",
+      tbInfo_name: "Názov inštrumentu s jeho logom.",
+      tbInfo_name_only: "Názov inštrumentu.",
+      tbInfo_symbol: "Jeho symbol v zdroji, napr. AAPL.",
+      tbInfo_exchange: "Burza, z ktorej pochádza jeho cena.",
+      tbInfo_symbol_exchange: "Symbol a burza spolu.",
+      tbInfo_price: "Posledná cena.",
+      tbInfo_previous_close: "Záverečná cena predchádzajúceho dňa.",
+      tbInfo_change: "Zmena od predchádzajúceho záveru ako suma.",
+      tbInfo_change_percent: "Zmena od predchádzajúceho záveru v percentách.",
+      tbInfo_trend: "Šípka: či cena pri poslednej aktualizácii stúpla, klesla alebo sa nezmenila.",
+      tbInfo_day_high: "Najvyššia cena dňa.",
+      tbInfo_day_low: "Najnižšia cena dňa.",
+      tbInfo_year_low: "Najnižšia cena za posledných 52 týždňov.",
+      tbInfo_year_high: "Najvyššia cena za posledných 52 týždňov.",
+      tbInfo_volume: "Dnes zobchodovaný objem.",
+      tbInfo_spark: "Malá krivka ceny počas dňa.",
+      tbInfo_spark_week: "Malá krivka ceny za posledných päť obchodných dní.",
+      tbInfo_spark_month: "Malá krivka ceny za posledný mesiac.",
+      tbInfo_news: "Symbol tam, kde sú nové titulky. Kliknutie ich zobrazí.",
+      tbInfo_week: "Zmena za posledných päť obchodných dní v percentách.",
+      tbInfo_week_change: "Zmena za posledných päť obchodných dní ako suma.",
+      tbInfo_day_gain_percent: "Koľko pozícia dnes získala alebo stratila, v percentách.",
+      tbInfo_time: "Čas poslednej ceny.",
+      tbInfo_alert: "Zvonček cenových upozornení. Kliknutím ich nastavíte.",
+      tbInfo_quantity: "Koľko kusov držíte.",
+      tbInfo_average: "Priemerná cena zaplatená za kus.",
+      tbInfo_holding: "Množstvo a priemerná cena spolu.",
+      tbInfo_value: "Akú hodnotu má pozícia teraz.",
+      tbInfo_share: "Podiel pozície na všetkom, čo tabuľka zobrazuje, v percentách.",
+      tbInfo_day_gain: "Koľko pozícia dnes získala alebo stratila, ako suma.",
+      tbInfo_gain: "Zisk alebo strata od nákupu ako suma.",
+      tbInfo_gain_percent: "Zisk alebo strata od nákupu v percentách.",
+      edTableValue: "Hodnota",
+      edTableSub: "Podtitul",
+      edTableAdd: "Pridať stĺpec",
+      edTableRemove: "Odstrániť stĺpec",
+      edTablePill: "Ako štítok",
+      edTablePillHelp: "Vykreslí hodnotu v zaoblenom štítku vo farbe zisku alebo straty.",
+      tbName_change: "Zmena, deň",
+      tbName_change_percent: "Zmena, deň %",
+      tbName_week: "Zmena, týždeň %",
+      tbName_week_change: "Zmena, týždeň",
+      tbName_day_gain_percent: "Zisk, deň %",
+      tbName_day_gain: "Zisk, deň",
+      tbName_gain: "Zisk, spolu",
+      tbName_gain_percent: "Zisk, spolu %",
+      edTableHeader: "Zobraziť nadpisy stĺpcov",
+      edTableHeaderHelp: "Riadok s názvami stĺpcov. Kliknutie na názov zoradí podľa daného stĺpca.",
+      edTableTotal: "Zobraziť súčet",
+      edTableTotalHelp: "Posledný riadok so súčtami portfólia: hodnota, dnešná zmena a zisk, ak má tabuľka pre ne stĺpec.",
+      edElTableHead: "Nadpisy stĺpcov",
+      edElTableHeadHelp: "Názvy nad stĺpcami tabuľky.",
+      edElTableCell: "Hodnoty",
+      edElTableCellHelp: "Hodnoty tabuľky.",
+      edElTableSub: "Podtituly",
+      edElTableSubHelp: "Druhá hodnota pod hodnotou stĺpca.",
+      refreshNow: "Znova načítať ceny",
+      agoNever: "zatiaľ nie",
+      agoNow: "práve teraz",
+      agoMin: (n) => `pred ${n} min`,
+      agoHours: (n) => `pred ${n} h`,
+      tbSearch: "Hľadať",
+      edEntries: "Položky",
+      edEntriesHelp: "Čo je položka: inštrument alebo celé portfólio s jeho hodnotou a dnešnou zmenou. Kliknutie na portfólio otvorí detaily jeho pozícií.",
+      tbRows: "Riadky",
+      tbRowsHelp: "Čo je riadok: inštrument alebo celé portfólio s jeho súčtami. Kliknutie na portfólio zobrazí jeho inštrumenty.",
+      tbRowsItems: "Inštrumenty",
+      tbRowsGroups: "Portfóliá",
+      edTableGroupColumns: "Stĺpce portfólií",
+      edTableGroupColumnsHelp: "Stĺpce prehľadu portfólií. Zoznam v časti Stĺpce platí pre inštrumenty portfólia.",
+      tbBack: "Späť na portfóliá",
+      tbCol_positions: "Pozície",
+      tbPositions: (count) => (count === 1 ? "1 pozícia" : count >= 2 && count <= 4 ? `${count} pozície` : `${count} pozícií`),
+      tbNameG_name: "Názov",
+      tbInfoG_name: "Názov portfólia.",
+      tbInfoG_positions: "Koľko pozícií portfólio obsahuje.",
+      tbInfoG_value: "Akú hodnotu má portfólio teraz.",
+      tbInfoG_share: "Podiel portfólia na všetkých zobrazených portfóliách, v percentách.",
+      tbInfoG_day_gain: "Koľko portfólio dnes získalo alebo stratilo, ako suma.",
+      tbInfoG_day_gain_percent: "Koľko portfólio dnes získalo alebo stratilo, v percentách.",
+      tbInfoG_gain: "Zisk alebo strata portfólia od nákupov ako suma.",
+      tbInfoG_gain_percent: "Zisk alebo strata portfólia od nákupov v percentách.",
+      tbInfoG_spark: "Malá krivka výkonnosti portfólia počas dňa.",
+      tbInfoG_spark_week: "Malá krivka výkonnosti portfólia za posledných päť obchodných dní.",
+      tbInfoG_spark_month: "Malá krivka výkonnosti portfólia za posledný mesiac.",
+      edTableSearch: "Zobraziť vyhľadávacie pole",
+      edTableSearchHelp: "Pole vedľa nadpisu stĺpca Názov, ktoré filtruje riadky podľa názvu alebo symbolu.",
+      edTableRefresh: "Zobraziť tlačidlo obnovenia",
+      edTableRefreshHelp: "Tlačidlo vpravo hore, ktoré znova načíta ceny a ukazuje, kedy boli načítané naposledy.",
+      edElTableRefresh: "Tlačidlo obnovenia",
+      edElTableRefreshHelp: "Tlačidlo vpravo hore s časom od posledného načítania.",
+      edRefreshBg: "Pozadie",
+      edRefreshBgHelp: "Vykreslí tlačidlo na zaoblenom štítku.",
+      edRefreshBgColor: "Farba pozadia",
+      edRefreshBgColorHelp: "Farba štítka. Prázdne pole ponechá farbu témy.",
+      edElTableDivider: "Oddeľovacie čiary",
+      edElTableDividerHelp: "Čiary medzi riadkami tabuľky.",
+      edShowTableLinesHelp: "Vykreslí čiary medzi riadkami.",
+      edElTableTotal: "Riadok súčtu",
+      edElTableTotalHelp: "Posledný riadok so súčtami.",
+      edElTablePill: "Štítky",
+      edElTablePillHelp: "Zaoblený štítok okolo hodnoty. Jeho farba je farba zisku alebo straty.",
+      edPillRadius: "Zaoblenie rohov",
+      edPillRadiusHelp: "Ako veľmi sú rohy štítka zaoblené, napr. 6px. Prázdne pole znamená úplne oblé.",
+      edPillFill: "Výplň",
+      edPillFillHelp: "Ako silno farba zisku alebo straty vypĺňa štítok, v percentách.",
+      edElTableArrow: "Šípky",
+      edElTableArrowHelp: "Šípky trendu. Ich farba je farba zisku alebo straty.",
+      edTrendUpIcon: "Symbol, rast",
+      edTrendDownIcon: "Symbol, pokles",
+      edTrendFlatIcon: "Symbol, bez zmeny",
+      edTrendIconHelp: "Symbol, ktorý v tomto prípade zobrazí stĺpec Trend.",
+      edArrowSize: "Veľkosť",
+      edArrowSizeHelp: "Veľkosť šípok, napr. 18px.",
       perfTitle: "Výkonnosť",
       perfChoose: "Zatiaľ neexistuje portfólio, ktorého výkonnosť by sa dala zobraziť.",
       perfEmpty: "Pre toto obdobie zatiaľ nie je dosť cien.",
@@ -8611,6 +11571,8 @@
       editInstrument: "Zmeniť inštrument",
       removeInstrument: "Odstrániť inštrument",
       editAlerts: "Cenové upozornenia",
+      editPurchase: "Zmeniť nákup",
+      editSale: "Zmeniť predaj",
       alertSet: "Cenové upozornenie je nastavené",
       alertOn: "Cenové upozornenie je spustené",
       fAlertNone: "Cenové upozornenie",
@@ -8708,7 +11670,7 @@
       edElGainHelp: "Farby ziskov, strát a nových titulkov všade na karte.",
       edGainColorHelp: "Farba pre rast. Prázdne pole ponechá zelenú karty.",
       edLossColorHelp: "Farba pre pokles. Prázdne pole ponechá červenú karty.",
-      edElLogo: "Logo",
+      edElLogo: "Logá",
       edElLogoHelp: "Okrúhle logo položky.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Symbol inštrumentu v položke.",
@@ -8847,7 +11809,10 @@
       sortName: "Efter namn",
       sortChange: "Efter förändring",
       edTap: "Vid klick",
-      edTapHelp: "Vad ett klick på ett instrument öppnar: dess detaljpopup eller dess sida på TradingView. Utan TradingView-symbol är det alltid popupen.",
+      edTapHelp: "Vad ett klick på ett instrument gör: öppnar dess detaljpopup eller dess sida på TradingView, eller leder till en annan vy. Utan TradingView-symbol är det popupen.",
+      tapNavigate: "Navigera",
+      edTapPath: "Sökväg",
+      edTapPathHelp: "Vart ett klick leder: en kontrollpanel eller en vy, t.ex. /lovelace/home.",
       tapPopup: "Detaljpopup",
       tapTradingView: "TradingView",
       close: "Stäng",
@@ -8883,6 +11848,9 @@
       edElCardBg: "Kortbakgrund",
       edElCardBgHelp: "En egen färg och en egen bild bakom hela kortet.",
       edCardBgEnable: "Visa bakgrund",
+      edCardInset: "Avstånd till ramen",
+      edCardInsetHelp: "Hur långt kortets innehåll håller sig från kanten, i pixlar. Tomt följer temat: där det ritar en ram inuti kortet slutar innehållet före den.",
+      edCardInsetAuto: "auto",
       edCardBgEnableHelp: "Ritar färgen och bilden nedan.",
       edCardBgColor: "Färg",
       edCardBgColorHelp: "Kortets bakgrundsfärg.",
@@ -9029,6 +11997,15 @@
       fAlertBelow: "Larm under",
       fAlertAbove: "Larm över",
       posRealized: "Realiserat",
+      tradeBuy: "Köp",
+      tradeSell: "Försäljning",
+      tradesTitle: "Köp och försäljningar",
+      tradesMore: (count) => `Visa alla ${count}`,
+      tradesLess: "Visa färre",
+      edChartTrades: "Köp och försäljningar",
+      edChartTradesHelp: "Markerar varje köp och försäljning i diagrammet vid dess dag och kurs, och ritar en linje vid snittkursen.",
+      edDetailTrades: "Lista över köp och försäljningar",
+      edDetailTradesHelp: "Varje köp och försäljning med dag, antal, kurs och belopp. En försäljning visar vad den realiserade.",
       posCosts: "Avgifter och skatter",
       edGroup: "Grupp",
       edGroupHelp: "Gruppen vars instrument kortet visar - en portfölj eller en bevakningslista i integrationen.",
@@ -9057,6 +12034,174 @@
       formatDetail: "Detaljer",
       formatAlloc: "Portfölj",
       formatAlerts: "Kurslarm",
+      formatTable: "Tabell",
+      tbCol_name: "Namn",
+      tbCol_name_only: "Namn",
+      tbName_name: "Namn och logotyp",
+      tbCol_symbol: "Symbol",
+      tbCol_exchange: "Börs",
+      tbCol_symbol_exchange: "Symbol · börs",
+      tbCol_price: "Kurs",
+      tbCol_previous_close: "Föreg. stängning",
+      tbCol_change: "Förändring",
+      tbCol_change_percent: "Dag %",
+      tbHeadAlerts: "Larm",
+      tbHeadHighLow: "Dag högst/lägst",
+      tbHeadWeek: "Vecka",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Dag högst",
+      tbCol_day_low: "Dag lägst",
+      tbCol_year_low: "52 v lägst",
+      tbCol_year_high: "52 v högst",
+      tbCol_volume: "Volym",
+      tbCol_spark: "Kurva, dag",
+      tbCol_spark_week: "Kurva, vecka",
+      tbCol_spark_month: "Kurva, månad",
+      tbCol_news: "Nyheter",
+      tbCol_week: "Vecka %",
+      tbCol_time: "Uppdaterad",
+      tbCol_alert: "Larm",
+      tbCol_quantity: "Antal",
+      tbCol_average: "Snittkurs",
+      tbCol_holding: "Innehav",
+      tbCol_value: "Värde",
+      tbCol_share: "Andel",
+      tbCol_day_gain: "I dag",
+      tbCol_day_gain_percent: "I dag %",
+      tbCol_week_change: "Vecka",
+      tbCol_gain: "Vinst",
+      tbCol_gain_percent: "Vinst %",
+      tbTotal: "Totalt",
+      tbNone: "Ingen",
+      tbHolding: (quantity, average) => `${quantity} à ${average}`,
+      tbTrendUp: "Upp vid senaste uppdateringen",
+      tbTrendDown: "Ned vid senaste uppdateringen",
+      tbTrendFlat: "Oförändrad vid senaste uppdateringen",
+      tbPresetAuto: "Automatisk",
+      tbPresetCompact: "Kompakt",
+      tbPresetClassic: "Klassisk",
+      edBlockTableHelp: "Vad tabellen visar, kolumn för kolumn.",
+      edTablePreset: "Utgångsläge",
+      edTablePresetHelp: "Kolumnerna som tabellen börjar med. Automatisk tar Portfölj för en portfölj och Kompakt för en bevakningslista. Väljer du ett läge återställs dess kolumner.",
+      edTableColumns: "Kolumner",
+      edTableColumnsHelp: "Varje kolumns värde, ett andra värde under det om du vill, och dess överskrift. Pilarna flyttar en kolumn, krysset tar bort den.",
+      edTableHeading: "Överskrift",
+      edTableHeadingHelp: "Namnet ovanför kolumnen. Tomt tar värdets namn.",
+      edTableSubNoneHelp: "Ett andra, mindre värde under värdet.",
+      tbInfo_name: "Instrumentets namn med dess logotyp.",
+      tbInfo_name_only: "Instrumentets namn.",
+      tbInfo_symbol: "Dess symbol hos källan, t.ex. AAPL.",
+      tbInfo_exchange: "Börsen som kursen kommer från.",
+      tbInfo_symbol_exchange: "Symbol och börs i ett.",
+      tbInfo_price: "Den senaste kursen.",
+      tbInfo_previous_close: "Stängningskursen dagen innan.",
+      tbInfo_change: "Förändringen sedan föregående stängning, som belopp.",
+      tbInfo_change_percent: "Förändringen sedan föregående stängning, i procent.",
+      tbInfo_trend: "En pil: om kursen steg, föll eller stod still vid senaste uppdateringen.",
+      tbInfo_day_high: "Dagens högsta kurs.",
+      tbInfo_day_low: "Dagens lägsta kurs.",
+      tbInfo_year_low: "Den lägsta kursen de senaste 52 veckorna.",
+      tbInfo_year_high: "Den högsta kursen de senaste 52 veckorna.",
+      tbInfo_volume: "Volymen som handlats i dag.",
+      tbInfo_spark: "En liten kurva över kursen under dagen.",
+      tbInfo_spark_week: "En liten kurva över kursen de senaste fem handelsdagarna.",
+      tbInfo_spark_month: "En liten kurva över kursen den senaste månaden.",
+      tbInfo_news: "En symbol där det finns nya rubriker. Ett klick visar dem.",
+      tbInfo_week: "Förändringen de senaste fem handelsdagarna, i procent.",
+      tbInfo_week_change: "Förändringen de senaste fem handelsdagarna, som belopp.",
+      tbInfo_day_gain_percent: "Vad innehavet har vunnit eller förlorat i dag, i procent.",
+      tbInfo_time: "Tiden för den senaste kursen.",
+      tbInfo_alert: "Kurslarmens klocka. Ett klick ställer in dem.",
+      tbInfo_quantity: "Hur många enheter som ägs.",
+      tbInfo_average: "Den genomsnittliga kursen som betalats per enhet.",
+      tbInfo_holding: "Antal och snittkurs i ett.",
+      tbInfo_value: "Vad innehavet är värt nu.",
+      tbInfo_share: "Innehavets andel av allt som tabellen visar, i procent.",
+      tbInfo_day_gain: "Vad innehavet har vunnit eller förlorat i dag, som belopp.",
+      tbInfo_gain: "Vinst eller förlust sedan köpet, som belopp.",
+      tbInfo_gain_percent: "Vinst eller förlust sedan köpet, i procent.",
+      edTableValue: "Värde",
+      edTableSub: "Underrad",
+      edTableAdd: "Lägg till kolumn",
+      edTableRemove: "Ta bort kolumn",
+      edTablePill: "Som bricka",
+      edTablePillHelp: "Ritar värdet i en bricka i vinst- eller förlustfärgen.",
+      tbName_change: "Förändring, dag",
+      tbName_change_percent: "Förändring, dag %",
+      tbName_week: "Förändring, vecka %",
+      tbName_week_change: "Förändring, vecka",
+      tbName_day_gain_percent: "Vinst, dag %",
+      tbName_day_gain: "Vinst, dag",
+      tbName_gain: "Vinst, totalt",
+      tbName_gain_percent: "Vinst, totalt %",
+      edTableHeader: "Visa kolumnöverskrifterna",
+      edTableHeaderHelp: "Raden med kolumnernas namn. Ett klick på ett namn sorterar efter den kolumnen.",
+      edTableTotal: "Visa summan",
+      edTableTotalHelp: "En sista rad med portföljens summor: dess värde, dagens förändring och vinsten, där tabellen har en kolumn för dem.",
+      edElTableHead: "Kolumnöverskrifter",
+      edElTableHeadHelp: "Namnen ovanför tabellens kolumner.",
+      edElTableCell: "Värden",
+      edElTableCellHelp: "Tabellens värden.",
+      edElTableSub: "Underrader",
+      edElTableSubHelp: "Det andra värdet under en kolumns värde.",
+      refreshNow: "Hämta kurserna igen",
+      agoNever: "inte än",
+      agoNow: "just nu",
+      agoMin: (n) => `för ${n} min sedan`,
+      agoHours: (n) => `för ${n} tim sedan`,
+      tbSearch: "Sök",
+      edEntries: "Poster",
+      edEntriesHelp: "Vad en post är: ett instrument, eller en hel portfölj med dess värde och dagens förändring. Ett klick på en portfölj öppnar detaljerna för dess innehav.",
+      tbRows: "Rader",
+      tbRowsHelp: "Vad en rad är: ett instrument, eller en hel portfölj med dess summor. Ett klick på en portfölj visar dess instrument.",
+      tbRowsItems: "Instrument",
+      tbRowsGroups: "Portföljer",
+      edTableGroupColumns: "Portföljkolumner",
+      edTableGroupColumnsHelp: "Kolumnerna i portföljernas översikt. Listan under Kolumner gäller instrumenten i en portfölj.",
+      tbBack: "Tillbaka till portföljerna",
+      tbCol_positions: "Antal innehav",
+      tbPositions: (count) => (count === 1 ? "1 innehav" : `${count} innehav`),
+      tbNameG_name: "Namn",
+      tbInfoG_name: "Portföljens namn.",
+      tbInfoG_positions: "Hur många innehav portföljen har.",
+      tbInfoG_value: "Vad portföljen är värd nu.",
+      tbInfoG_share: "Portföljens andel av alla visade portföljer, i procent.",
+      tbInfoG_day_gain: "Vad portföljen har vunnit eller förlorat i dag, som belopp.",
+      tbInfoG_day_gain_percent: "Vad portföljen har vunnit eller förlorat i dag, i procent.",
+      tbInfoG_gain: "Portföljens vinst eller förlust sedan köpen, som belopp.",
+      tbInfoG_gain_percent: "Portföljens vinst eller förlust sedan köpen, i procent.",
+      tbInfoG_spark: "En liten kurva över portföljens utveckling under dagen.",
+      tbInfoG_spark_week: "En liten kurva över portföljens utveckling de senaste fem handelsdagarna.",
+      tbInfoG_spark_month: "En liten kurva över portföljens utveckling den senaste månaden.",
+      edTableSearch: "Visa sökfältet",
+      edTableSearchHelp: "Ett fält bredvid namnets överskrift som filtrerar raderna efter namn eller symbol.",
+      edTableRefresh: "Visa uppdateringsknappen",
+      edTableRefreshHelp: "En knapp uppe till höger som hämtar kurserna igen och visar när de senast hämtades.",
+      edElTableRefresh: "Uppdateringsknapp",
+      edElTableRefreshHelp: "Knappen uppe till höger, med tiden sedan senaste hämtningen.",
+      edRefreshBg: "Bakgrund",
+      edRefreshBgHelp: "Ritar knappen på en bricka.",
+      edRefreshBgColor: "Bakgrundsfärg",
+      edRefreshBgColorHelp: "Brickans färg. Tomt behåller temats.",
+      edElTableDivider: "Skiljelinjer",
+      edElTableDividerHelp: "Linjerna mellan tabellens rader.",
+      edShowTableLinesHelp: "Ritar linjerna mellan raderna.",
+      edElTableTotal: "Summarad",
+      edElTableTotalHelp: "Den sista raden med summorna.",
+      edElTablePill: "Brickor",
+      edElTablePillHelp: "Brickan runt ett värde. Dess färg är vinst- eller förlustfärgen.",
+      edPillRadius: "Hörnradie",
+      edPillRadiusHelp: "Hur runda brickans hörn är, t.ex. 6px. Tomt är helt rund.",
+      edPillFill: "Fyllning",
+      edPillFillHelp: "Hur starkt vinst- eller förlustfärgen fyller brickan, i procent.",
+      edElTableArrow: "Pilar",
+      edElTableArrowHelp: "Trendens pilar. Deras färg är vinst- eller förlustfärgen.",
+      edTrendUpIcon: "Symbol, stigit",
+      edTrendDownIcon: "Symbol, fallit",
+      edTrendFlatIcon: "Symbol, oförändrad",
+      edTrendIconHelp: "Symbolen som kolumnen Trend visar för detta.",
+      edArrowSize: "Storlek",
+      edArrowSizeHelp: "Pilarnas storlek, t.ex. 18px.",
       perfTitle: "Utveckling",
       perfChoose: "Det finns ännu ingen portfölj vars utveckling kan visas.",
       perfEmpty: "Inte tillräckligt med kurser ännu för den här perioden.",
@@ -9162,6 +12307,8 @@
       editInstrument: "Ändra instrument",
       removeInstrument: "Ta bort instrument",
       editAlerts: "Kurslarm",
+      editPurchase: "Ändra köp",
+      editSale: "Ändra försäljning",
       alertSet: "Ett kurslarm är inställt",
       alertOn: "Ett kurslarm har utlösts",
       fAlertNone: "Kurslarm",
@@ -9259,7 +12406,7 @@
       edElGainHelp: "Färgerna för vinster, förluster och nya rubriker, överallt på kortet.",
       edGainColorHelp: "Färg för en uppgång. Tomt behåller kortets gröna.",
       edLossColorHelp: "Färg för en nedgång. Tomt behåller kortets röda.",
-      edElLogo: "Logotyp",
+      edElLogo: "Logotyper",
       edElLogoHelp: "En posts runda logotyp.",
       edElRowSymbol: "Symbol",
       edElRowSymbolHelp: "Instrumentets symbol i en post.",
@@ -9398,7 +12545,10 @@
       sortName: "Ada göre",
       sortChange: "Değişime göre",
       edTap: "Tıklayınca",
-      edTapHelp: "Bir enstrümana tıklamanın açtığı şey: ayrıntılar penceresi veya TradingView sayfası. TradingView sembolü yoksa her zaman pencere açılır.",
+      edTapHelp: "Bir enstrümana tıklamanın yaptığı şey: ayrıntılar penceresini veya TradingView sayfasını açar ya da başka bir görünüme götürür. TradingView sembolü yoksa pencere açılır.",
+      tapNavigate: "Gezinme",
+      edTapPath: "Yol",
+      edTapPathHelp: "Tıklamanın götürdüğü yer: bir gösterge paneli veya görünüm, örn. /lovelace/home.",
       tapPopup: "Ayrıntılar penceresi",
       tapTradingView: "TradingView",
       close: "Kapat",
@@ -9434,6 +12584,9 @@
       edElCardBg: "Kart arka planı",
       edElCardBgHelp: "Tüm kartın arkasında kendi renginiz ve görseliniz.",
       edCardBgEnable: "Arka planı göster",
+      edCardInset: "Çerçeveye uzaklık",
+      edCardInsetHelp: "Kart içeriğinin kenardan piksel olarak ne kadar uzak durduğu. Boş bırakılırsa temaya uyar: tema kartın içine bir kenarlık çiziyorsa içerik ondan önce biter.",
+      edCardInsetAuto: "otomatik",
       edCardBgEnableHelp: "Aşağıdaki rengi ve görseli çizer.",
       edCardBgColor: "Renk",
       edCardBgColorHelp: "Kartın arka plan rengi.",
@@ -9580,6 +12733,15 @@
       fAlertBelow: "Alt alarm",
       fAlertAbove: "Üst alarm",
       posRealized: "Gerçekleşen",
+      tradeBuy: "Alış",
+      tradeSell: "Satış",
+      tradesTitle: "Alış ve satışlar",
+      tradesMore: (count) => `${count} kaydın tümünü göster`,
+      tradesLess: "Daha az göster",
+      edChartTrades: "Alış ve satışlar",
+      edChartTradesHelp: "Her alış ve satışı grafikte kendi gününde ve fiyatında işaretler, ortalama fiyat düzeyine de bir çizgi çizer.",
+      edDetailTrades: "Alış ve satış listesi",
+      edDetailTradesHelp: "Her alış ve satış; günü, miktarı, fiyatı ve tutarıyla. Satışta gerçekleşen kâr da görünür.",
       posCosts: "Ücretler ve vergiler",
       edGroup: "Grup",
       edGroupHelp: "Kartın enstrümanlarını gösterdiği grup - entegrasyonun bir portföyü veya izleme listesi.",
@@ -9608,6 +12770,174 @@
       formatDetail: "Ayrıntılar",
       formatAlloc: "Portföy",
       formatAlerts: "Fiyat alarmları",
+      formatTable: "Tablo",
+      tbCol_name: "Ad",
+      tbCol_name_only: "Ad",
+      tbName_name: "Ad ve logo",
+      tbCol_symbol: "Sembol",
+      tbCol_exchange: "Borsa",
+      tbCol_symbol_exchange: "Sembol · borsa",
+      tbCol_price: "Fiyat",
+      tbCol_previous_close: "Önceki kapanış",
+      tbCol_change: "Değişim",
+      tbCol_change_percent: "Gün %",
+      tbHeadAlerts: "Alarmlar",
+      tbHeadHighLow: "Günlük yüksek/düşük",
+      tbHeadWeek: "Hafta",
+      tbCol_trend: "Trend",
+      tbCol_day_high: "Günlük en yüksek",
+      tbCol_day_low: "Günlük en düşük",
+      tbCol_year_low: "52 hafta en düşük",
+      tbCol_year_high: "52 hafta en yüksek",
+      tbCol_volume: "Hacim",
+      tbCol_spark: "Eğri, gün",
+      tbCol_spark_week: "Eğri, hafta",
+      tbCol_spark_month: "Eğri, ay",
+      tbCol_news: "Haberler",
+      tbCol_week: "Hafta %",
+      tbCol_time: "Güncelleme",
+      tbCol_alert: "Alarm",
+      tbCol_quantity: "Miktar",
+      tbCol_average: "Ortalama fiyat",
+      tbCol_holding: "Pozisyon",
+      tbCol_value: "Değer",
+      tbCol_share: "Pay",
+      tbCol_day_gain: "Bugün",
+      tbCol_day_gain_percent: "Bugün %",
+      tbCol_week_change: "Hafta",
+      tbCol_gain: "Kâr",
+      tbCol_gain_percent: "Kâr %",
+      tbTotal: "Toplam",
+      tbNone: "Yok",
+      tbHolding: (quantity, average) => `${quantity}, ort. ${average}`,
+      tbTrendUp: "Son güncellemeyle yükseldi",
+      tbTrendDown: "Son güncellemeyle düştü",
+      tbTrendFlat: "Son güncellemeyle değişmedi",
+      tbPresetAuto: "Otomatik",
+      tbPresetCompact: "Kompakt",
+      tbPresetClassic: "Klasik",
+      edBlockTableHelp: "Tablonun sütun sütun gösterdikleri.",
+      edTablePreset: "Başlangıç noktası",
+      edTablePresetHelp: "Tablonun başlangıç sütunları. Otomatik, portföy için Portföy'ü, izleme listesi için Kompakt'ı alır. Birini seçmek onun sütunlarını geri getirir.",
+      edTableColumns: "Sütunlar",
+      edTableColumnsHelp: "Her sütunun değeri, isterseniz altında ikinci bir değer ve başlığı. Oklar sütunu taşır, çarpı kaldırır.",
+      edTableHeading: "Başlık",
+      edTableHeadingHelp: "Sütunun üstündeki ad. Boş bırakılırsa değerin adı kullanılır.",
+      edTableSubNoneHelp: "Değerin altında ikinci, daha küçük bir değer.",
+      tbInfo_name: "Enstrümanın adı ve logosu.",
+      tbInfo_name_only: "Enstrümanın adı.",
+      tbInfo_symbol: "Kaynaktaki sembolü, örn. AAPL.",
+      tbInfo_exchange: "Fiyatının geldiği borsa.",
+      tbInfo_symbol_exchange: "Sembol ve borsa bir arada.",
+      tbInfo_price: "En son fiyat.",
+      tbInfo_previous_close: "Önceki günün kapanış fiyatı.",
+      tbInfo_change: "Önceki kapanıştan bu yana değişim, tutar olarak.",
+      tbInfo_change_percent: "Önceki kapanıştan bu yana değişim, yüzde olarak.",
+      tbInfo_trend: "Fiyatın son güncellemeyle yükseldiğini, düştüğünü veya aynı kaldığını gösteren bir ok.",
+      tbInfo_day_high: "Günün en yüksek fiyatı.",
+      tbInfo_day_low: "Günün en düşük fiyatı.",
+      tbInfo_year_low: "Son 52 haftanın en düşük fiyatı.",
+      tbInfo_year_high: "Son 52 haftanın en yüksek fiyatı.",
+      tbInfo_volume: "Bugünkü işlem hacmi.",
+      tbInfo_spark: "Fiyatın gün içindeki küçük eğrisi.",
+      tbInfo_spark_week: "Fiyatın son beş işlem günündeki küçük eğrisi.",
+      tbInfo_spark_month: "Fiyatın son aydaki küçük eğrisi.",
+      tbInfo_news: "Yeni haber başlıkları varken bir simge. Tıklama onları gösterir.",
+      tbInfo_week: "Son beş işlem günündeki değişim, yüzde olarak.",
+      tbInfo_week_change: "Son beş işlem günündeki değişim, tutar olarak.",
+      tbInfo_day_gain_percent: "Pozisyonun bugünkü kârı veya zararı, yüzde olarak.",
+      tbInfo_time: "En son fiyatın zamanı.",
+      tbInfo_alert: "Fiyat alarmlarının zili. Tıklama onları ayarlar.",
+      tbInfo_quantity: "Elde kaç adet olduğu.",
+      tbInfo_average: "Adet başına ödenen ortalama fiyat.",
+      tbInfo_holding: "Miktar ve ortalama fiyat bir arada.",
+      tbInfo_value: "Pozisyonun şimdiki değeri.",
+      tbInfo_share: "Pozisyonun, tablonun gösterdiği her şey içindeki payı, yüzde olarak.",
+      tbInfo_day_gain: "Pozisyonun bugünkü kârı veya zararı, tutar olarak.",
+      tbInfo_gain: "Alıştan bu yana kâr veya zarar, tutar olarak.",
+      tbInfo_gain_percent: "Alıştan bu yana kâr veya zarar, yüzde olarak.",
+      edTableValue: "Değer",
+      edTableSub: "Alt değer",
+      edTableAdd: "Sütun ekle",
+      edTableRemove: "Sütunu kaldır",
+      edTablePill: "Rozet olarak",
+      edTablePillHelp: "Değeri kâr veya zarar renginde bir rozetin içinde çizer.",
+      tbName_change: "Değişim, gün",
+      tbName_change_percent: "Değişim, gün %",
+      tbName_week: "Değişim, hafta %",
+      tbName_week_change: "Değişim, hafta",
+      tbName_day_gain_percent: "Kâr, gün %",
+      tbName_day_gain: "Kâr, gün",
+      tbName_gain: "Kâr, toplam",
+      tbName_gain_percent: "Kâr, toplam %",
+      edTableHeader: "Sütun başlıklarını göster",
+      edTableHeaderHelp: "Sütunların adlarını içeren satır. Bir ada tıklamak o sütuna göre sıralar.",
+      edTableTotal: "Toplamı göster",
+      edTableTotalHelp: "Portföyün toplamlarını içeren son satır: değeri, bugünkü değişimi ve kârı; tabloda bunlar için bir sütun varsa.",
+      edElTableHead: "Sütun başlıkları",
+      edElTableHeadHelp: "Tablonun sütunlarının üstündeki adlar.",
+      edElTableCell: "Değerler",
+      edElTableCellHelp: "Tablonun değerleri.",
+      edElTableSub: "Alt değerler",
+      edElTableSubHelp: "Bir sütunun değerinin altındaki ikinci değer.",
+      refreshNow: "Fiyatları yenile",
+      agoNever: "henüz yok",
+      agoNow: "az önce",
+      agoMin: (n) => `${n} dk önce`,
+      agoHours: (n) => `${n} sa önce`,
+      tbSearch: "Ara",
+      edEntries: "Öğeler",
+      edEntriesHelp: "Bir öğenin ne olduğu: bir enstrüman ya da değeri ve bugünkü değişimiyle bütün bir portföy. Bir portföye tıklamak pozisyonlarının ayrıntılarını açar.",
+      tbRows: "Satırlar",
+      tbRowsHelp: "Bir satırın ne olduğu: bir enstrüman ya da toplamlarıyla bütün bir portföy. Bir portföye tıklamak enstrümanlarını gösterir.",
+      tbRowsItems: "Enstrümanlar",
+      tbRowsGroups: "Portföyler",
+      edTableGroupColumns: "Portföy sütunları",
+      edTableGroupColumnsHelp: "Portföyler özetinin sütunları. Sütunlar altındaki liste, bir portföyün enstrümanları içindir.",
+      tbBack: "Portföylere dön",
+      tbCol_positions: "Pozisyonlar",
+      tbPositions: (count) => `${count} pozisyon`,
+      tbNameG_name: "Ad",
+      tbInfoG_name: "Portföyün adı.",
+      tbInfoG_positions: "Portföyde kaç pozisyon olduğu.",
+      tbInfoG_value: "Portföyün şimdiki değeri.",
+      tbInfoG_share: "Portföyün, gösterilen tüm portföyler içindeki payı, yüzde olarak.",
+      tbInfoG_day_gain: "Portföyün bugünkü kârı veya zararı, tutar olarak.",
+      tbInfoG_day_gain_percent: "Portföyün bugünkü kârı veya zararı, yüzde olarak.",
+      tbInfoG_gain: "Portföyün alışlardan bu yana kârı veya zararı, tutar olarak.",
+      tbInfoG_gain_percent: "Portföyün alışlardan bu yana kârı veya zararı, yüzde olarak.",
+      tbInfoG_spark: "Portföy performansının gün içindeki küçük eğrisi.",
+      tbInfoG_spark_week: "Portföy performansının son beş işlem günündeki küçük eğrisi.",
+      tbInfoG_spark_month: "Portföy performansının son aydaki küçük eğrisi.",
+      edTableSearch: "Arama alanını göster",
+      edTableSearchHelp: "Ad başlığının yanında, satırları ada veya sembole göre süzen bir alan.",
+      edTableRefresh: "Yenileme düğmesini göster",
+      edTableRefreshHelp: "Sağ üstte, fiyatları yenileyen ve en son ne zaman yenilendiklerini gösteren bir düğme.",
+      edElTableRefresh: "Yenileme düğmesi",
+      edElTableRefreshHelp: "Sağ üstteki düğme, son yenilemeden bu yana geçen süreyle.",
+      edRefreshBg: "Arka plan",
+      edRefreshBgHelp: "Düğmeyi bir rozetin üzerine çizer.",
+      edRefreshBgColor: "Arka plan rengi",
+      edRefreshBgColorHelp: "Rozetin rengi. Boş bırakılırsa temanınki kalır.",
+      edElTableDivider: "Ayırıcı çizgiler",
+      edElTableDividerHelp: "Tablonun satırları arasındaki çizgiler.",
+      edShowTableLinesHelp: "Satırlar arasındaki çizgileri çizer.",
+      edElTableTotal: "Toplam satırı",
+      edElTableTotalHelp: "Toplamları içeren son satır.",
+      edElTablePill: "Rozetler",
+      edElTablePillHelp: "Bir değerin etrafındaki rozet. Rengi kâr veya zarar rengidir.",
+      edPillRadius: "Köşe yarıçapı",
+      edPillRadiusHelp: "Rozetin köşelerinin ne kadar yuvarlak olduğu, örn. 6px. Boş bırakılırsa tam yuvarlaktır.",
+      edPillFill: "Dolgu",
+      edPillFillHelp: "Kâr veya zarar renginin rozeti yüzde olarak ne kadar doldurduğu.",
+      edElTableArrow: "Oklar",
+      edElTableArrowHelp: "Trend okları. Renkleri kâr veya zarar rengidir.",
+      edTrendUpIcon: "Simge, yükseldi",
+      edTrendDownIcon: "Simge, düştü",
+      edTrendFlatIcon: "Simge, değişmedi",
+      edTrendIconHelp: "Trend sütununun bunun için gösterdiği simge.",
+      edArrowSize: "Boyut",
+      edArrowSizeHelp: "Okların boyutu, örn. 18px.",
       perfTitle: "Performans",
       perfChoose: "Henüz performansı gösterilebilecek bir portföy yok.",
       perfEmpty: "Bu dönem için henüz yeterli fiyat yok.",
@@ -9713,6 +13043,8 @@
       editInstrument: "Enstrümanı değiştir",
       removeInstrument: "Enstrümanı kaldır",
       editAlerts: "Fiyat alarmları",
+      editPurchase: "Alışı değiştir",
+      editSale: "Satışı değiştir",
       alertSet: "Bir fiyat alarmı ayarlı",
       alertOn: "Bir fiyat alarmı tetiklendi",
       fAlertNone: "Fiyat alarmı",
@@ -9810,7 +13142,7 @@
       edElGainHelp: "Kartın her yerinde kârların, zararların ve yeni başlıkların renkleri.",
       edGainColorHelp: "Yükseliş rengi. Boş bırakılırsa kartın yeşili kalır.",
       edLossColorHelp: "Düşüş rengi. Boş bırakılırsa kartın kırmızısı kalır.",
-      edElLogo: "Logo",
+      edElLogo: "Logolar",
       edElLogoHelp: "Bir öğenin yuvarlak logosu.",
       edElRowSymbol: "Sembol",
       edElRowSymbolHelp: "Bir öğedeki enstrüman sembolü.",
@@ -9949,7 +13281,10 @@
       sortName: "按名称",
       sortChange: "按涨跌幅",
       edTap: "点击时",
-      edTapHelp: "点击标的时打开的内容：详情弹窗或其 TradingView 页面。没有 TradingView 代码时始终打开弹窗。",
+      edTapHelp: "点击标的时的操作：打开其详情弹窗或 TradingView 页面，或前往其他视图。没有 TradingView 代码时打开弹窗。",
+      tapNavigate: "前往",
+      edTapPath: "路径",
+      edTapPathHelp: "点击后前往的位置：仪表盘或视图，例如 /lovelace/home。",
       tapPopup: "详情弹窗",
       tapTradingView: "TradingView",
       close: "关闭",
@@ -9985,6 +13320,9 @@
       edElCardBg: "卡片背景",
       edElCardBgHelp: "整个卡片背后的自定义颜色和图片。",
       edCardBgEnable: "显示背景",
+      edCardInset: "与边框的距离",
+      edCardInsetHelp: "卡片内容与卡片边缘的距离，单位为像素。留空则跟随主题：主题在卡片内绘制边线时，内容止于边线之前。",
+      edCardInsetAuto: "自动",
       edCardBgEnableHelp: "绘制下方的颜色和图片。",
       edCardBgColor: "颜色",
       edCardBgColorHelp: "卡片的背景颜色。",
@@ -10131,6 +13469,15 @@
       fAlertBelow: "低于提醒",
       fAlertAbove: "高于提醒",
       posRealized: "已实现",
+      tradeBuy: "买入",
+      tradeSell: "卖出",
+      tradesTitle: "买入和卖出",
+      tradesMore: (count) => `显示全部 ${count} 条`,
+      tradesLess: "收起",
+      edChartTrades: "买入和卖出",
+      edChartTradesHelp: "在图表中按日期和价格标出每笔买入和卖出，并在均价处绘制一条线。",
+      edDetailTrades: "买入和卖出列表",
+      edDetailTradesHelp: "每笔买入和卖出的日期、数量、价格和金额。卖出还显示其已实现收益。",
       posCosts: "费用和税费",
       edGroup: "分组",
       edGroupHelp: "卡片显示其标的的分组：集成中的一个投资组合或自选列表。",
@@ -10159,6 +13506,174 @@
       formatDetail: "详情",
       formatAlloc: "投资组合",
       formatAlerts: "价格提醒",
+      formatTable: "表格",
+      tbCol_name: "名称",
+      tbCol_name_only: "名称",
+      tbName_name: "名称和标志",
+      tbCol_symbol: "代码",
+      tbCol_exchange: "交易所",
+      tbCol_symbol_exchange: "代码 · 交易所",
+      tbCol_price: "价格",
+      tbCol_previous_close: "昨收",
+      tbCol_change: "涨跌额",
+      tbCol_change_percent: "日涨跌幅",
+      tbHeadAlerts: "提醒",
+      tbHeadHighLow: "日最高/最低",
+      tbHeadWeek: "周",
+      tbCol_trend: "趋势",
+      tbCol_day_high: "日最高",
+      tbCol_day_low: "日最低",
+      tbCol_year_low: "52 周最低",
+      tbCol_year_high: "52 周最高",
+      tbCol_volume: "成交量",
+      tbCol_spark: "日走势",
+      tbCol_spark_week: "周走势",
+      tbCol_spark_month: "月走势",
+      tbCol_news: "新闻",
+      tbCol_week: "周涨跌幅",
+      tbCol_time: "更新时间",
+      tbCol_alert: "提醒",
+      tbCol_quantity: "数量",
+      tbCol_average: "均价",
+      tbCol_holding: "持仓",
+      tbCol_value: "市值",
+      tbCol_share: "占比",
+      tbCol_day_gain: "今日",
+      tbCol_day_gain_percent: "今日 %",
+      tbCol_week_change: "周涨跌额",
+      tbCol_gain: "收益",
+      tbCol_gain_percent: "收益 %",
+      tbTotal: "总计",
+      tbNone: "无",
+      tbHolding: (quantity, average) => `${quantity}，均价 ${average}`,
+      tbTrendUp: "最近一次更新时上涨",
+      tbTrendDown: "最近一次更新时下跌",
+      tbTrendFlat: "最近一次更新时持平",
+      tbPresetAuto: "自动",
+      tbPresetCompact: "紧凑",
+      tbPresetClassic: "经典",
+      edBlockTableHelp: "表格逐列显示的内容。",
+      edTablePreset: "初始方案",
+      edTablePresetHelp: "表格最初使用的列。自动模式下投资组合使用“投资组合”，自选列表使用“紧凑”。选择其中一项会恢复其列。",
+      edTableColumns: "列",
+      edTableColumnsHelp: "每列的数值、可选的下方第二个数值，以及列标题。箭头用于移动列，叉号用于移除列。",
+      edTableHeading: "列标题",
+      edTableHeadingHelp: "列上方的名称。留空则使用数值的名称。",
+      edTableSubNoneHelp: "数值下方较小的第二个数值。",
+      tbInfo_name: "标的的名称及其标志。",
+      tbInfo_name_only: "标的的名称。",
+      tbInfo_symbol: "标的在来源处的代码，例如 AAPL。",
+      tbInfo_exchange: "价格所来自的交易所。",
+      tbInfo_symbol_exchange: "代码和交易所合为一项。",
+      tbInfo_price: "最新价格。",
+      tbInfo_previous_close: "上一个交易日的收盘价。",
+      tbInfo_change: "相对昨收的涨跌，以金额表示。",
+      tbInfo_change_percent: "相对昨收的涨跌，以百分比表示。",
+      tbInfo_trend: "箭头：最近一次更新时价格是上涨、下跌还是持平。",
+      tbInfo_day_high: "当日最高价。",
+      tbInfo_day_low: "当日最低价。",
+      tbInfo_year_low: "过去 52 周的最低价。",
+      tbInfo_year_high: "过去 52 周的最高价。",
+      tbInfo_volume: "今日的成交量。",
+      tbInfo_spark: "当日价格的小走势线。",
+      tbInfo_spark_week: "最近五个交易日价格的小走势线。",
+      tbInfo_spark_month: "最近一个月价格的小走势线。",
+      tbInfo_news: "有新的新闻标题时显示的图标。点击即可查看。",
+      tbInfo_week: "最近五个交易日的涨跌，以百分比表示。",
+      tbInfo_week_change: "最近五个交易日的涨跌，以金额表示。",
+      tbInfo_day_gain_percent: "持仓今日的收益或亏损，以百分比表示。",
+      tbInfo_time: "最新价格的时间。",
+      tbInfo_alert: "价格提醒的铃铛。点击即可设置。",
+      tbInfo_quantity: "持有的数量。",
+      tbInfo_average: "每单位的平均买入价。",
+      tbInfo_holding: "数量和均价合为一项。",
+      tbInfo_value: "持仓当前的市值。",
+      tbInfo_share: "持仓在表格所示全部内容中的占比，以百分比表示。",
+      tbInfo_day_gain: "持仓今日的收益或亏损，以金额表示。",
+      tbInfo_gain: "买入以来的收益或亏损，以金额表示。",
+      tbInfo_gain_percent: "买入以来的收益或亏损，以百分比表示。",
+      edTableValue: "数值",
+      edTableSub: "副标题",
+      edTableAdd: "添加列",
+      edTableRemove: "移除列",
+      edTablePill: "显示为胶囊",
+      edTablePillHelp: "将数值绘制在收益或亏损颜色的胶囊中。",
+      tbName_change: "涨跌额（日）",
+      tbName_change_percent: "涨跌幅（日）",
+      tbName_week: "涨跌幅（周）",
+      tbName_week_change: "涨跌额（周）",
+      tbName_day_gain_percent: "收益（日）%",
+      tbName_day_gain: "收益（日）",
+      tbName_gain: "收益（累计）",
+      tbName_gain_percent: "收益（累计）%",
+      edTableHeader: "显示列标题",
+      edTableHeaderHelp: "显示各列名称的一行。点击名称可按该列排序。",
+      edTableTotal: "显示总计",
+      edTableTotalHelp: "最后一行显示投资组合的合计：市值、今日涨跌和收益，前提是表格中有相应的列。",
+      edElTableHead: "列标题",
+      edElTableHeadHelp: "表格各列上方的名称。",
+      edElTableCell: "数值",
+      edElTableCellHelp: "表格中的数值。",
+      edElTableSub: "副标题",
+      edElTableSubHelp: "列数值下方的第二个数值。",
+      refreshNow: "重新获取价格",
+      agoNever: "尚未获取",
+      agoNow: "刚刚",
+      agoMin: (n) => `${n} 分钟前`,
+      agoHours: (n) => `${n} 小时前`,
+      tbSearch: "搜索",
+      edEntries: "条目",
+      edEntriesHelp: "条目的内容：一个标的，或整个投资组合及其市值和今日涨跌。点击投资组合可打开其持仓的详情。",
+      tbRows: "行",
+      tbRowsHelp: "行的内容：一个标的，或整个投资组合及其合计。点击投资组合可显示其标的。",
+      tbRowsItems: "标的",
+      tbRowsGroups: "投资组合",
+      edTableGroupColumns: "投资组合列",
+      edTableGroupColumnsHelp: "投资组合概览的列。“列”下方的列表用于投资组合中的标的。",
+      tbBack: "返回投资组合列表",
+      tbCol_positions: "持仓数",
+      tbPositions: (count) => `${count} 个持仓`,
+      tbNameG_name: "名称",
+      tbInfoG_name: "投资组合的名称。",
+      tbInfoG_positions: "投资组合中的持仓数量。",
+      tbInfoG_value: "投资组合当前的市值。",
+      tbInfoG_share: "投资组合在所示全部投资组合中的占比，以百分比表示。",
+      tbInfoG_day_gain: "投资组合今日的收益或亏损，以金额表示。",
+      tbInfoG_day_gain_percent: "投资组合今日的收益或亏损，以百分比表示。",
+      tbInfoG_gain: "投资组合自买入以来的收益或亏损，以金额表示。",
+      tbInfoG_gain_percent: "投资组合自买入以来的收益或亏损，以百分比表示。",
+      tbInfoG_spark: "投资组合当日业绩的小走势线。",
+      tbInfoG_spark_week: "投资组合最近五个交易日业绩的小走势线。",
+      tbInfoG_spark_month: "投资组合最近一个月业绩的小走势线。",
+      edTableSearch: "显示搜索框",
+      edTableSearchHelp: "名称列标题旁的输入框，按名称或代码筛选行。",
+      edTableRefresh: "显示刷新按钮",
+      edTableRefreshHelp: "右上角的按钮，用于重新获取价格，并显示上次获取的时间。",
+      edElTableRefresh: "刷新按钮",
+      edElTableRefreshHelp: "右上角的按钮，附带距上次获取的时间。",
+      edRefreshBg: "背景",
+      edRefreshBgHelp: "在按钮下方绘制胶囊形背景。",
+      edRefreshBgColor: "背景颜色",
+      edRefreshBgColorHelp: "胶囊的颜色。留空则使用主题颜色。",
+      edElTableDivider: "分隔线",
+      edElTableDividerHelp: "表格各行之间的线。",
+      edShowTableLinesHelp: "绘制各行之间的线。",
+      edElTableTotal: "总计行",
+      edElTableTotalHelp: "显示合计的最后一行。",
+      edElTablePill: "胶囊",
+      edElTablePillHelp: "数值周围的胶囊。其颜色为收益或亏损颜色。",
+      edPillRadius: "圆角半径",
+      edPillRadiusHelp: "胶囊四角的圆润程度，例如 6px。留空则为全圆角。",
+      edPillFill: "填充",
+      edPillFillHelp: "收益或亏损颜色填充胶囊的强度，以百分比表示。",
+      edElTableArrow: "箭头",
+      edElTableArrowHelp: "趋势的箭头。其颜色为收益或亏损颜色。",
+      edTrendUpIcon: "图标（上涨）",
+      edTrendDownIcon: "图标（下跌）",
+      edTrendFlatIcon: "图标（持平）",
+      edTrendIconHelp: "“趋势”列在此情况下显示的图标。",
+      edArrowSize: "大小",
+      edArrowSizeHelp: "箭头的大小，例如 18px。",
       perfTitle: "业绩",
       perfChoose: "还没有可以显示业绩的投资组合。",
       perfEmpty: "此期间的价格还不够。",
@@ -10264,6 +13779,8 @@
       editInstrument: "更改标的",
       removeInstrument: "移除标的",
       editAlerts: "价格提醒",
+      editPurchase: "更改买入",
+      editSale: "更改卖出",
       alertSet: "已设置价格提醒",
       alertOn: "价格提醒已触发",
       fAlertNone: "价格提醒",
@@ -10586,6 +14103,48 @@
     alerts_mark_color: "",
     alerts_track_height: 6,
     alerts_mark_width: 3,
+    // The Table format: where its columns start from, the columns once
+    // they are changed (each a value and, if wanted, a second one under
+    // it), and how it is drawn.
+    table_preset: "auto",
+    table_columns: [],
+    show_table_header: true,
+    show_table_total: true,
+    ...look("table_head"),
+    ...look("table_cell"),
+    ...look("table_sub"),
+    // What an entry of the three ticker formats is: "instruments", or
+    // "portfolios" - one entry per portfolio.
+    tk_entries: "instruments",
+    // What a row is: "instruments", or "portfolios" - one line per
+    // portfolio with its sums, and its own columns.
+    table_rows: "instruments",
+    table_group_columns: [],
+    // The field beside the name's heading that filters the rows.
+    show_table_search: true,
+    // The button in the title line that fetches the prices again.
+    show_table_refresh: true,
+    ...look("table_refresh", {
+      table_refresh_icon: "mdi:refresh",
+      table_refresh_icon_size: "",
+      table_refresh_background: true,
+      table_refresh_background_color: "",
+    }),
+    // The lines between the table's rows.
+    table_divider: true,
+    table_divider_color: "",
+    table_divider_style: "solid",
+    table_divider_width: 1,
+    ...look("table_total"),
+    // The sums stand in bold unless that is switched off.
+    table_total_bold: true,
+    ...look("table_pill"),
+    table_pill_radius: "",
+    table_pill_opacity: 16,
+    table_trend_up_icon: "mdi:arrow-up-bold",
+    table_trend_down_icon: "mdi:arrow-down-bold",
+    table_trend_flat_icon: "mdi:minus",
+    table_arrow_size: "",
     ...look("alloc_gain_amount"),
     ...look("alloc_tile_name"),
     ...look("alloc_tile_facts"),
@@ -10605,10 +14164,13 @@
     perf_index_width: 1,
     // How the index's line is drawn: solid, dashed or dotted.
     perf_index_style: "solid",
-    sort: "listed",
+    // Empty: as the format has it by itself - see sortOf.
+    sort: "",
     // What a click on an instrument opens: "popup", its details over the
     // dashboard, or "tradingview", its page at TradingView in a new tab.
     tap_action: "popup",
+    // Where a click leads with "navigate": a path inside Home Assistant.
+    navigation_path: "",
     // Nothing that says how much is held: see _positionHtml.
     hide_amounts: false,
     // What an entry is made of.
@@ -10622,6 +14184,10 @@
     show_detail_logo: true,
     show_detail_tradingview: true,
     show_detail_position: true,
+    // The single purchases and sales: listed under the position, and
+    // marked in the chart.
+    show_detail_trades: true,
+    show_chart_trades: true,
     show_detail_chart: true,
     show_detail_volume: true,
     show_detail_sma: true,
@@ -10679,6 +14245,9 @@
     effect_duration: 400,
     // A background of the user's own behind the whole card. Off by default:
     // the card keeps the background its theme gives it until asked.
+    // How far the content stays from the card's edge, in pixels. Empty:
+    // as far as the theme's own rim inside the card reaches (see _fitFrame).
+    card_inset: "",
     card_background: false,
     card_background_color: "",
     card_background_image: "",
@@ -11733,6 +15302,10 @@
       position: instrument.position && typeof instrument.position === "object" ? instrument.position : null,
       // What sales realised and what was paid in fees and taxes.
       ledger: instrument.ledger && typeof instrument.ledger === "object" ? instrument.ledger : null,
+      // The single purchases and sales, oldest first.
+      trades: Array.isArray(instrument.trades)
+        ? instrument.trades.filter((trade) => trade && isNumber(trade.quantity) && trade.quantity && isNumber(trade.price))
+        : [],
       group: typeof instrument.group === "string" ? instrument.group : "",
       // The colour it is given in the integration, for a portfolio's shares.
       color: ownColor(instrument.color),
@@ -11754,6 +15327,10 @@
       yearHigh: toNumber(attrs.fifty_two_week_high),
       volume: toNumber(attrs.volume),
       marketState: typeof attrs.market_state === "string" ? attrs.market_state : "",
+      quoteTime: typeof attrs.quote_time === "string" ? attrs.quote_time : "",
+      // Which way the price went with its last update, and by how much.
+      trend: price === null || typeof attrs.trend !== "string" ? "" : attrs.trend,
+      trendChange: toNumber(attrs.trend_change),
       stamp: state ? `${state.state}|${state.last_updated || ""}` : "",
     };
   }
@@ -12430,6 +16007,64 @@
     };
   }
 
+  // The day a purchase or a sale was made, as the local midnight it began
+  // with - null where it has no day.
+  function tradeDay(trade) {
+    const parts = /^(\d{4})-(\d{2})-(\d{2})/.exec(trade.date || "");
+    return parts ? new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3])).getTime() : null;
+  }
+
+  // The bar a purchase or a sale belongs to: the first one of its day, or -
+  // where the bars are longer than a day, or the day had no trading - the
+  // last one before it. -1 for a day outside the period drawn.
+  function tradeBar(bars, day) {
+    const DAY = 86400000;
+    if (day === null || !bars.length || day + DAY <= bars[0].t) return -1;
+    let first = bars.findIndex((bar) => bar.t >= day);
+    if (first >= 0 && bars[first].t < day + DAY) return first;
+    const before = first < 0 ? bars.length - 1 : first - 1;
+    if (before < 0) return -1;
+    if (before === bars.length - 1) {
+      // After the last bar: its own while that bar still runs.
+      const step = bars.length > 1 ? bars[before].t - bars[before - 1].t : DAY;
+      if (day > bars[before].t + Math.max(step, DAY)) return -1;
+    }
+    return before;
+  }
+
+  // The frame the last card was found to have - [width, inner radius] in
+  // pixels: what a new card wears until it has looked for itself.
+  let FRAME_LAST = null;
+
+  // When the sources last answered: the state of the integration's "Last
+  // update" sensor - a moment, or nothing while it is not known.
+  function lastFetch(hass) {
+    const entities = (hass && hass.entities) || {};
+    for (const id in entities) {
+      const entry = entities[id];
+      if (entry && entry.platform === DOMAIN && entry.translation_key === "last_update") {
+        const state = hass.states[id];
+        const at = state ? Date.parse(state.state) : NaN;
+        return Number.isNaN(at) ? null : at;
+      }
+    }
+    return null;
+  }
+
+  // How long ago that was, in the refresh button's own words.
+  function agoText(str, at) {
+    if (at === null) return str.agoNever;
+    const mins = Math.floor((Date.now() - at) / 60000);
+    if (mins < 1) return str.agoNow;
+    if (mins < 60) return str.agoMin(mins);
+    return str.agoHours(Math.floor(mins / 60));
+  }
+
+  // The order of a card's instruments: the one chosen, or the format's own -
+  // a table starts sorted by name, everything else as listed.
+  const sortDefault = (config) => (config && config.layout === "table" ? "name" : "listed");
+  const sortOf = (config) => (config && config.sort) || sortDefault(config);
+
   // Whether the device asks for less motion.
   const lessMotion = () => !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
@@ -12480,6 +16115,144 @@
       marks.push({ t, at });
     }
     return marks;
+  }
+
+  // ----------------------------------------------------------------- table
+  //
+  // The Table format: one line per instrument, one column per value. What
+  // a column can hold, and what may stand under it as a second value.
+  const TABLE_VALUES = [
+    "name", "name_only", "symbol", "exchange", "symbol_exchange", "price", "previous_close", "change", "change_percent",
+    "trend", "day_high", "day_low", "year_low", "year_high", "volume", "spark", "spark_week", "spark_month", "week_change", "week", "time", "alert", "news",
+    "quantity", "average", "holding", "value", "share", "day_gain", "day_gain_percent", "gain", "gain_percent",
+  ];
+  // What can stand under a value: everything but the name, the trend's
+  // arrow and the charts. The two symbols can - the bell under the news'
+  // symbol, say.
+  const TABLE_SUBS = TABLE_VALUES.filter((value) => !["name", "trend", "spark", "spark_week", "spark_month"].includes(value));
+  const TABLE_LEFT = ["name", "name_only", "symbol", "exchange", "symbol_exchange", "holding"];
+  // The name, with its logo or without: the column that takes the room the
+  // others leave and shortens its text to it.
+  const TABLE_NAMES = ["name", "name_only"];
+  // What only a holding has: offered where the card shows a portfolio.
+  const TABLE_HELD = ["quantity", "average", "holding", "value", "share", "day_gain", "day_gain_percent", "gain", "gain_percent"];
+  // The figures drawn in the gain or loss colour: each can stand in a pill.
+  // The day's change in percent does unless that is switched off.
+  const TABLE_PILLS = ["change", "change_percent", "week_change", "week", "day_gain", "day_gain_percent", "gain", "gain_percent"];
+  const pillByDefault = (value) => value === "change_percent";
+  const TABLE_CENTRE = ["trend", "spark", "spark_week", "spark_month", "alert", "news"];
+  // Where a table starts from: few columns with second values under them,
+  // every value in a column of its own, or what is held and what it gained.
+  const TABLE_PRESETS = {
+    // `heading` names a heading of the preset's own, where the value's
+    // name does not say what the column shows with its subtitle.
+    compact: [
+      { value: "name", sub: "symbol_exchange" },
+      { value: "price", sub: "time" },
+      { value: "change_percent" },
+      { value: "week" },
+      { value: "alert", sub: "news", heading: "tbHeadAlerts" },
+    ],
+    // Wide: for a card across the dashboard. What is held stands in it
+    // where the card shows a portfolio - see tableColumns.
+    classic: [
+      { value: "name", sub: "symbol_exchange" },
+      { value: "value" },
+      { value: "gain", sub: "gain_percent" },
+      { value: "previous_close" },
+      { value: "price" },
+      { value: "trend", sub: "time" },
+      { value: "change_percent" },
+      { value: "day_high", sub: "day_low", heading: "tbHeadHighLow" },
+      { value: "spark_week", heading: "tbHeadWeek" },
+      { value: "alert" },
+    ],
+    portfolio: [
+      // Five columns, so that it fits a card of usual width (about 500 px)
+      // without moving sideways: today's change stands under the price.
+      { value: "name", sub: "holding" },
+      { value: "price", sub: "change_percent" },
+      { value: "alert", sub: "news" },
+      { value: "value", sub: "day_gain" },
+      { value: "gain", sub: "gain_percent", pill: true },
+    ],
+  };
+  // Whether the card's groups are all portfolios: then "Automatic" starts
+  // from the portfolio's columns, and the table can have a total.
+  function tableIsPortfolio(config) {
+    const chosen = groupsOf(config);
+    const groups = (INSTRUMENTS.groups || []).filter((group) => !chosen.length || chosen.includes(group.id));
+    return groups.length > 0 && groups.every((group) => group.kind === "portfolio");
+  }
+  // Whether any of the card's groups is a portfolio: then there are
+  // holdings to show.
+  function tableHasPortfolio(config) {
+    const chosen = groupsOf(config);
+    return (INSTRUMENTS.groups || []).some((group) => (!chosen.length || chosen.includes(group.id)) && group.kind === "portfolio");
+  }
+  // The portfolios a card shows, and whether its table lists them instead
+  // of their instruments.
+  function tableGroups(config) {
+    const chosen = groupsOf(config);
+    return (INSTRUMENTS.groups || []).filter((group) => (!chosen.length || chosen.includes(group.id)) && group.kind === "portfolio");
+  }
+  function tableByGroup(config) {
+    return config.table_rows === "portfolios" && tableGroups(config).length > 0;
+  }
+  function tickerByGroup(config) {
+    return ["ticker", "line", "carousel"].includes(config.layout) && config.tk_entries === "portfolios" && tableGroups(config).length > 0;
+  }
+  // What a line of portfolios can show, and what it starts with.
+  const GROUP_VALUES = [
+    "name", "positions", "value", "share", "day_gain", "day_gain_percent", "gain", "gain_percent",
+    "spark", "spark_week", "spark_month",
+  ];
+  // A portfolio's small charts are its performance over the period.
+  const GROUP_SPARKS = { spark: "1d", spark_week: "5d", spark_month: "1mo" };
+  const GROUP_SUBS = GROUP_VALUES.filter((value) => value !== "name" && !(value in GROUP_SPARKS));
+  const GROUP_PRESET = [
+    { value: "name", sub: "positions" },
+    { value: "value", sub: "day_gain" },
+    { value: "gain", sub: "gain_percent" },
+    { value: "share" },
+  ];
+  function groupColumns(config) {
+    const own = (Array.isArray(config.table_group_columns) ? config.table_group_columns : []).filter(
+      (column) => column && GROUP_VALUES.includes(column.value)
+    );
+    return (own.length ? own : GROUP_PRESET).map((column) => ({
+      value: column.value,
+      sub: GROUP_SUBS.includes(column.sub) && column.sub !== column.value ? column.sub : "",
+      label: typeof column.label === "string" ? column.label.trim() : "",
+      pill: TABLE_PILLS.includes(column.value) && column.pill === true,
+    }));
+  }
+  // The table's columns: the ones set, or those of where it starts from.
+  function tableColumns(config, portfolio) {
+    const own = (Array.isArray(config.table_columns) ? config.table_columns : []).filter(
+      (column) => column && TABLE_VALUES.includes(column.value)
+    );
+    let from = own;
+    if (!own.length) {
+      from = TABLE_PRESETS[config.table_preset] || (portfolio ? TABLE_PRESETS.portfolio : TABLE_PRESETS.compact);
+      // A starting point's columns for what is held are for a card with a
+      // portfolio: a watchlist's would stand empty.
+      if (!tableHasPortfolio(config)) {
+        from = from
+          .filter((column) => !TABLE_HELD.includes(column.value))
+          .map((column) => (TABLE_HELD.includes(column.sub) ? { ...column, sub: "" } : column));
+      }
+    }
+    return from.map((column) => ({
+      value: column.value,
+      sub: TABLE_SUBS.includes(column.sub) && column.sub !== column.value ? column.sub : "",
+      // A starting point's own heading - only as long as the columns are
+      // the starting point's.
+      heading: !own.length && typeof column.heading === "string" ? column.heading : "",
+      // The heading, where it is not to be the value's name.
+      label: typeof column.label === "string" ? column.label.trim() : "",
+      pill: TABLE_PILLS.includes(column.value) && (typeof column.pill === "boolean" ? column.pill : pillByDefault(column.value)),
+    }));
   }
 
   // What is held of an instrument, worked out: the integration says how
@@ -12694,6 +16467,13 @@
       const first = !this._hass;
       this._hass = hass;
       watchInstruments(hass);
+      // Another theme, or its dark side: the frame it draws may be another.
+      // Its styles arrive a moment later, and may fade in.
+      const theme = JSON.stringify([hass.themes && hass.themes.theme, hass.themes && hass.themes.darkMode, hass.selectedTheme || null]);
+      if (theme !== this._themeSeen) {
+        this._themeSeen = theme;
+        for (const wait of [150, 800, 2500]) setTimeout(() => this._fitFrame(), wait);
+      }
       // Home Assistant hands over a new object on every change of any
       // entity. Only the instruments' own sensors, the language and the
       // formats are worth a redraw.
@@ -12725,7 +16505,7 @@
     getCardSize() {
       const config = this._config || {};
       if (config.layout === "allocation") return 4;
-      if (config.layout === "alerts") return 3;
+      if (config.layout === "alerts" || config.layout === "table") return 3;
       if (config.layout !== "detail") return config.layout === "carousel" ? 3 : 1;
       // Two columns side by side where the card is wide enough for them,
       // which makes it much less tall; a card not yet on the page is taken
@@ -12766,10 +16546,31 @@
       if (this._hass) watchInstruments(this._hass);
       this._restartAuto();
       this._render();
+      // The refresh button's "5 min ago" grows old by itself: the card is
+      // drawn again only when a price changes, and over a night or a
+      // weekend none does. So its words are looked at on the clock.
+      if (this._agoTimer) clearInterval(this._agoTimer);
+      this._agoTimer = setInterval(() => this._tickAgo(), 20000);
+    }
+
+    // The refresh button's words as they are now - only the words, so that
+    // the button itself stays the one that may be under the pointer.
+    _tickAgo() {
+      const ago = this._root && this._root.querySelector(".mt-refresh .ago");
+      if (!ago || !this._hass) return;
+      const text = agoText(t(this._hass), lastFetch(this._hass));
+      if (ago.textContent !== text) {
+        // The head as built says the old words: built anew with the next
+        // drawing, which finds these in it.
+        this._headBuilt = null;
+        ago.textContent = text;
+      }
     }
 
     disconnectedCallback() {
       LISTENERS.delete(this);
+      if (this._agoTimer) clearInterval(this._agoTimer);
+      this._agoTimer = null;
       if (this._tkTimer) clearInterval(this._tkTimer);
       this._tkTimer = null;
       this._tkStopGlide();
@@ -12791,9 +16592,56 @@
       const picked = pickInstruments(instrumentsOf(config), config.instruments);
       return sortItems(
         picked.map((instrument) => quoteOf(this._hass, instrument)),
-        config.sort,
+        sortOf(config),
         localeOf(this._hass)
       );
+    }
+
+    // What the three ticker formats draw: the instruments - or, where the
+    // entries are the portfolios, one entry each, made like an instrument:
+    // its name, what it is worth as its price, and what the day did to it
+    // as its change, in the base currency. A portfolio that holds nothing
+    // with a price stands greyed, as an instrument without one does.
+    _tkEntries(items) {
+      const config = this._config;
+      const list = items || this._tkItems();
+      if (!tickerByGroup(config)) return list;
+      const entries = tableGroups(config).map((group) => {
+        const sum = { value: 0, today: 0, count: 0 };
+        for (const item of list) {
+          if (item.group !== group.id) continue;
+          const held = positionFigures(item);
+          const rate = item.baseRate;
+          if (!held || !isNumber(held.value) || !isNumber(rate)) continue;
+          sum.count += 1;
+          sum.value += held.value * rate;
+          sum.today += (isNumber(held.today) ? held.today : 0) * rate;
+        }
+        const before = sum.value - sum.today;
+        return {
+          id: group.id,
+          group: group.id,
+          isGroup: true,
+          name: group.name || "",
+          symbol: "",
+          price: sum.count ? sum.value : null,
+          currency: INSTRUMENTS.base,
+          digits: 2,
+          change: sum.count ? sum.today : null,
+          changePct: sum.count && before ? (sum.today / before) * 100 : null,
+          unavailable: !sum.count,
+        };
+      });
+      return sortItems(entries, sortOf(config), localeOf(this._hass));
+    }
+
+    // The instruments the pop-up leafs through: all of the card's - or,
+    // opened from a portfolio's entry, that portfolio's.
+    _popItems(items) {
+      const list = items || this._tkItems();
+      if (!this._popGroup || !tickerByGroup(this._config)) return list;
+      const own = list.filter((item) => item.group === this._popGroup);
+      return own.length ? own : list;
     }
 
     // --------------------------------------------------------- allocation
@@ -13044,6 +16892,423 @@
       return html ? `<div class="pf-box nw-box">${html}</div>` : "";
     }
 
+    // The Table format: one line per instrument, the columns the card is
+    // set to show. A click on a line opens the details, a click on a
+    // heading sorts. Wider than the card, it is moved sideways.
+    _tableHtml(items, str) {
+      const hass = this._hass;
+      const config = this._config;
+      const hide = config.hide_amounts === true;
+      const portfolio = tableIsPortfolio(config);
+      // A table of portfolios: one line each - or, once one of them was
+      // clicked, that portfolio's instruments, as any table of a portfolio.
+      const drill = this._tableDrill();
+      const byGroup = tableByGroup(config) && !drill;
+      if (drill) items = items.filter((item) => item.group === drill.id);
+      const columns = byGroup ? groupColumns(config) : tableColumns(config, drill ? true : portfolio);
+      const base = INSTRUMENTS.base;
+      const figures = new Map(items.map((item) => [item.id, positionFigures(item)]));
+      const inBase = (item, amount) => (isNumber(amount) && isNumber(item.baseRate) ? amount * item.baseRate : null);
+      const total = { value: 0, today: 0, gain: 0, cost: 0, count: 0 };
+      for (const item of items) {
+        const held = figures.get(item.id);
+        const value = held ? inBase(item, held.value) : null;
+        if (value === null) continue;
+        total.value += value;
+        total.today += inBase(item, held.today) || 0;
+        total.gain += inBase(item, held.gain) || 0;
+        total.cost += inBase(item, held.cost) || 0;
+        total.count += 1;
+      }
+      const amount = (value, currency, signed, digits) =>
+        !isNumber(value) ? "" : hide ? "•••" : escapeHtml(money(hass, value, currency, signed, digits));
+      const price = (value, item) => (isNumber(value) ? escapeHtml(money(hass, value, item.currency, false, item.digits)) : "");
+      // A figure in the gain or loss colour - in a pill while the column
+      // being drawn asks for one (see where the cells are put together).
+      let inPill = false;
+      const pillLook = elementStyle(config, "table_pill");
+      const coloured = (text, value) =>
+        !text
+          ? ""
+          : inPill
+            ? `<span class="tb-pill ${gainClass(value)}" style="${pillLook}"><span class="pill-text">${text}</span></span>`
+            : `<span class="${gainClass(value)}">${text}</span>`;
+      const share = (value) => (isNumber(value) ? escapeHtml(percent(hass, value, false)) : "");
+      // The week: the price against the last close before the five days.
+      // What the price did over a period, in percent: from the last close
+      // before it - or its first price - to the price now.
+      const moveOver = (item, range) => {
+        const history = historyOf(item.id, range).data;
+        if (!history || !history.bars.length) return null;
+        const from = history.lead && history.lead.length ? history.lead[history.lead.length - 1].c : history.bars[0].c;
+        const to = isNumber(item.price) ? item.price : history.bars[history.bars.length - 1].c;
+        return from ? ((to - from) / from) * 100 : null;
+      };
+      const weekOf = (item) => moveOver(item, "5d");
+      // The same week as an amount, in the instrument's currency.
+      const weekAmount = (item) => {
+        const history = historyOf(item.id, "5d").data;
+        if (!history || !history.bars.length) return null;
+        const from = history.lead && history.lead.length ? history.lead[history.lead.length - 1].c : history.bars[0].c;
+        const to = isNumber(item.price) ? item.price : history.bars[history.bars.length - 1].c;
+        return isNumber(from) && isNumber(to) ? to - from : null;
+      };
+      // What a holding did today in percent of what it was worth before.
+      const todayPct = (today, value) => (isNumber(today) && isNumber(value) && value - today ? (today / (value - today)) * 100 : null);
+      const timeOf = (item) => {
+        if (!item.quoteTime) return "";
+        const stamp = new Date(item.quoteTime);
+        if (Number.isNaN(stamp.getTime())) return "";
+        const day = { year: "numeric", month: "2-digit", day: "2-digit" };
+        const today = dateTime(hass, stamp, day) === dateTime(hass, new Date(), day);
+        return escapeHtml(dateTime(hass, stamp, today ? { hour: "2-digit", minute: "2-digit" } : { day: "numeric", month: "short" }));
+      };
+      // One value of one instrument: what is written, and what it sorts by.
+      const cell = (value, item, main) => {
+        const held = figures.get(item.id);
+        switch (value) {
+          case "name":
+          case "name_only":
+            // Under another value it is plain text, as every subtitle is.
+            return { html: main ? `<b>${escapeHtml(item.name)}</b>` : escapeHtml(item.name), sort: String(item.name).toLowerCase() };
+          case "symbol":
+            return { html: escapeHtml(item.symbol), sort: String(item.symbol).toLowerCase() };
+          case "exchange":
+            return { html: escapeHtml(item.exchange), sort: String(item.exchange).toLowerCase() };
+          case "symbol_exchange":
+            return {
+              html: escapeHtml([item.symbol, item.exchange].filter(Boolean).join(" · ")),
+              sort: String(item.symbol).toLowerCase(),
+            };
+          case "price":
+            return { html: price(item.price, item), sort: item.price };
+          case "previous_close":
+            return { html: price(item.previousClose, item), sort: item.previousClose };
+          case "day_high":
+            return { html: price(item.dayHigh, item), sort: item.dayHigh };
+          case "day_low":
+            return { html: price(item.dayLow, item), sort: item.dayLow };
+          case "year_low":
+            return { html: price(item.yearLow, item), sort: item.yearLow };
+          case "year_high":
+            return { html: price(item.yearHigh, item), sort: item.yearHigh };
+          case "change":
+            return {
+              html: coloured(isNumber(item.change) ? escapeHtml(money(hass, item.change, item.currency, true, item.digits)) : "", item.change),
+              sort: item.change,
+            };
+          case "change_percent": {
+            const text = isNumber(item.changePct) ? escapeHtml(percent(hass, item.changePct)) : "";
+            return { html: coloured(text, item.changePct), sort: text ? item.changePct : null };
+          }
+          case "trend": {
+            if (!item.trend) return { html: "", sort: null };
+            const [icon, cls, label] =
+              item.trend === "up"
+                ? [config.table_trend_up_icon || "mdi:arrow-up-bold", "gain", str.tbTrendUp]
+                : item.trend === "down"
+                  ? [config.table_trend_down_icon || "mdi:arrow-down-bold", "loss", str.tbTrendDown]
+                  : [config.table_trend_flat_icon || "mdi:minus", "", str.tbTrendFlat];
+            const by = isNumber(item.trendChange) && item.trendChange ? ` (${money(hass, item.trendChange, item.currency, true, item.digits)})` : "";
+            return {
+              html: `<span class="tb-trend ${cls}" title="${escapeHtml(label + by)}" aria-label="${escapeHtml(label + by)}"><ha-icon icon="${escapeHtml(icon)}"></ha-icon></span>`,
+              sort: isNumber(item.trendChange) ? item.trendChange : item.trend === "up" ? 1 : item.trend === "down" ? -1 : 0,
+            };
+          }
+          case "volume":
+            return { html: isNumber(item.volume) ? escapeHtml(compact(hass, item.volume, "", 1)) : "", sort: item.volume };
+          case "spark":
+            return { html: `<span class="tb-spark">${this._tkSpark(item)}</span>`, sort: item.changePct };
+          case "spark_week":
+          case "spark_month": {
+            // The same small line over a longer period, sorted by what the
+            // price did over it.
+            const range = value === "spark_week" ? "5d" : "1mo";
+            return { html: `<span class="tb-spark">${this._tkSpark(item, range)}</span>`, sort: moveOver(item, range) };
+          }
+          case "news": {
+            // The symbol for new headlines, as the entries of a ticker have
+            // it: there while there are any, and a click shows them.
+            const fresh = this._tkNewsNew(item, true);
+            const label = fresh ? str.newsNewTitle(fresh) : "";
+            return {
+              html: fresh
+                ? `<span class="tk-news" data-action="tk-news" data-id="${escapeHtml(item.id)}" title="${escapeHtml(label)}"` +
+                  ` aria-label="${escapeHtml(label)}"><ha-icon icon="mdi:newspaper-variant-outline"></ha-icon></span>`
+                : "",
+              sort: fresh,
+            };
+          }
+          case "week_change": {
+            const moved = weekAmount(item);
+            return {
+              html: coloured(isNumber(moved) ? escapeHtml(money(hass, moved, item.currency, true, item.digits)) : "", moved),
+              sort: moved,
+            };
+          }
+          case "week": {
+            const moved = weekOf(item);
+            return { html: coloured(isNumber(moved) ? escapeHtml(percent(hass, moved)) : "", moved), sort: moved };
+          }
+          case "time":
+            return { html: timeOf(item), sort: item.quoteTime || null };
+          case "alert": {
+            const state = alertState(item);
+            const label = state === "on" ? str.alertOn : state === "set" ? str.alertSet : str.editAlerts;
+            return {
+              html:
+                `<span class="tk-alert ${state || "none"}" data-action="alerts" data-id="${escapeHtml(item.id)}" title="${escapeHtml(label)}"` +
+                ` aria-label="${escapeHtml(label)}"><ha-icon icon="${escapeHtml(alertIcon(config, state))}"></ha-icon></span>`,
+              sort: state === "on" ? 2 : state === "set" ? 1 : 0,
+            };
+          }
+          case "quantity":
+            return {
+              html: held && isNumber(held.held) ? (hide ? "•••" : escapeHtml(plain(hass, held.held, held.held % 1 ? 4 : 0))) : "",
+              sort: held ? held.held : null,
+            };
+          case "average":
+            return { html: held ? amount(held.average, item.currency, false, item.digits) : "", sort: held ? held.average : null };
+          case "holding":
+            return {
+              html:
+                held && isNumber(held.held) && held.held
+                  ? hide
+                    ? "•••"
+                    : escapeHtml(
+                        str.tbHolding(
+                          plain(hass, held.held, held.held % 1 ? 4 : 0),
+                          isNumber(held.average) ? money(hass, held.average, item.currency, false, item.digits) : "–"
+                        )
+                      )
+                  : "",
+              sort: held ? held.held : null,
+            };
+          case "value":
+            return { html: held ? amount(held.value, held.currency) : "", sort: held ? inBase(item, held.value) : null };
+          case "share": {
+            const mine = held ? inBase(item, held.value) : null;
+            const part = mine !== null && total.value ? (mine / total.value) * 100 : null;
+            return { html: share(part), sort: part };
+          }
+          case "day_gain":
+            return { html: held ? coloured(amount(held.today, held.currency, true), held.today) : "", sort: held ? inBase(item, held.today) : null };
+          case "day_gain_percent": {
+            const part = held ? todayPct(held.today, held.value) : null;
+            return { html: isNumber(part) ? coloured(escapeHtml(percent(hass, part)), part) : "", sort: part };
+          }
+          case "gain":
+            return { html: held ? coloured(amount(held.gain, held.currency, true), held.gain) : "", sort: held ? inBase(item, held.gain) : null };
+          case "gain_percent":
+            return {
+              html: held && isNumber(held.gainPct) ? coloured(escapeHtml(percent(hass, held.gainPct)), held.gainPct) : "",
+              sort: held ? held.gainPct : null,
+            };
+          default:
+            return { html: "", sort: null };
+        }
+      };
+      // The name's column takes the room the others leave and shortens its
+      // text to it, instead of pushing the table wider than the card.
+      // A column of pills stands on its middle - heading, pills, what is
+      // under them and the sum: pills of different widths set to the right
+      // would form a ragged left edge.
+      const side = (value, pill) =>
+        (TABLE_LEFT.includes(value) ? " l" : pill || TABLE_CENTRE.includes(value) ? " c" : "") + (TABLE_NAMES.includes(value) ? " grow" : "");
+      // The portfolios as lines: what each holds, added up in the base
+      // currency - the same sums the total's line has for all of them.
+      const groupRows = !byGroup
+        ? []
+        : tableGroups(config).map((group) => {
+            const row = { id: group.id, name: group.name || "", count: 0, value: 0, today: 0, gain: 0, cost: 0 };
+            for (const item of items) {
+              if (item.group !== group.id) continue;
+              const held = figures.get(item.id);
+              const value = held ? inBase(item, held.value) : null;
+              if (value === null) continue;
+              row.count += 1;
+              row.value += value;
+              row.today += inBase(item, held.today) || 0;
+              row.gain += inBase(item, held.gain) || 0;
+              row.cost += inBase(item, held.cost) || 0;
+            }
+            return row;
+          });
+      if (byGroup && sortOf(config) === "name") {
+        groupRows.sort((a, b) => String(a.name).localeCompare(String(b.name), localeOf(hass)));
+      }
+      const groupCell = (value, row, main) => {
+        switch (value) {
+          case "name":
+            return { html: main ? `<b>${escapeHtml(row.name)}</b>` : escapeHtml(row.name), sort: String(row.name).toLowerCase() };
+          case "positions":
+            return { html: escapeHtml(main ? String(row.count) : str.tbPositions(row.count)), sort: row.count };
+          case "value":
+            return { html: row.count ? amount(row.value, base) : "", sort: row.count ? row.value : null };
+          case "share": {
+            const part = row.count && total.value ? (row.value / total.value) * 100 : null;
+            return { html: share(part), sort: part };
+          }
+          case "day_gain":
+            return { html: row.count ? coloured(amount(row.today, base, true), row.today) : "", sort: row.count ? row.today : null };
+          case "day_gain_percent": {
+            const part = row.count ? todayPct(row.today, row.value) : null;
+            return { html: isNumber(part) ? coloured(escapeHtml(percent(hass, part)), part) : "", sort: part };
+          }
+          case "gain":
+            return { html: row.count ? coloured(amount(row.gain, base, true), row.gain) : "", sort: row.count ? row.gain : null };
+          case "gain_percent": {
+            const part = row.cost ? (row.gain / row.cost) * 100 : null;
+            return { html: isNumber(part) ? coloured(escapeHtml(percent(hass, part)), part) : "", sort: part };
+          }
+          case "spark":
+          case "spark_week":
+          case "spark_month": {
+            // The portfolio's performance over the period, as the Portfolio
+            // format draws it large: its return in percent, from nought.
+            const data = performanceOf(row.id, GROUP_SPARKS[value]).data;
+            const own = data && Array.isArray(data.portfolio) ? data.portfolio.filter(isNumber) : [];
+            return {
+              html: `<span class="tb-spark">${own.length > 1 ? chartSvg(own, { height: 30, reference: 0, lineWidth: 1.25 }) : ""}</span>`,
+              sort: own.length ? own[own.length - 1] : null,
+            };
+          }
+          default:
+            return { html: "", sort: null };
+        }
+      };
+      const cellOf = byGroup ? groupCell : cell;
+      // The lines in the order a heading was clicked into - one without a
+      // value for that column goes last either way.
+      let lines = byGroup ? groupRows : items;
+      const sorted = this._tableSort && columns.some((column) => column.value === this._tableSort.key) ? this._tableSort : null;
+      if (sorted) {
+        const keyOf = (item) => cellOf(sorted.key, item, true).sort;
+        const missing = (value) => value === null || value === undefined || value === "";
+        lines = lines.slice().sort((a, b) => {
+          const x = keyOf(a);
+          const y = keyOf(b);
+          if (missing(x) || missing(y)) return missing(x) === missing(y) ? 0 : missing(x) ? 1 : -1;
+          const order = typeof x === "string" || typeof y === "string" ? String(x).localeCompare(String(y)) : x - y;
+          return sorted.desc ? -order : order;
+        });
+      }
+      const headLook = elementStyle(config, "table_head");
+      // The search field stands in the heading of the name's column - the
+      // first of them - and filters the rows as it is typed into (see
+      // _filterTable): the rows are not drawn anew for it.
+      const searchColumn =
+        config.show_table_search === false ? null : columns.find((column) => TABLE_NAMES.includes(column.value)) || null;
+      if (!searchColumn) this._tableFilter = "";
+      const cellLook = elementStyle(config, "table_cell");
+      const subLook = elementStyle(config, "table_sub");
+      // The sums' line: the values' look, and over it its own.
+      const totalLook = elementStyle(config, "table_total");
+      const logos = config.show_row_logo !== false;
+      const head =
+        config.show_table_header === false
+          ? ""
+          : `<thead><tr>` +
+            columns
+              .map((column) => {
+                const on = sorted && sorted.key === column.value;
+                const mark = on ? `<ha-icon icon="${sorted.desc ? "mdi:menu-down" : "mdi:menu-up"}"></ha-icon>` : "";
+                return (
+                  `<th class="${side(column.value, column.pill).trim()}" style="${headLook}" data-action="table-sort" data-key="${column.value}"` +
+                  ` tabindex="0" role="button" aria-sort="${on ? (sorted.desc ? "descending" : "ascending") : "none"}">` +
+                  `<span class="tb-th">${escapeHtml(column.label || str[column.heading] || str[`tbCol_${column.value}`] || column.value)}${mark}</span>` +
+                  (column === searchColumn
+                    ? `<input type="search" class="tb-search" placeholder="${escapeHtml(str.tbSearch)}" aria-label="${escapeHtml(str.tbSearch)}"` +
+                      ` value="${escapeHtml(this._tableFilter || "")}" autocomplete="off" spellcheck="false">`
+                    : "") +
+                  `</th>`
+                );
+              })
+              .join("") +
+            `</tr></thead>`;
+      const body = lines
+        .map((item) => {
+          const cells = columns
+            .map((column) => {
+              // The value in a pill where the column has one; what stands
+              // under it never.
+              inPill = column.pill;
+              const main = cellOf(column.value, item, true).html;
+              inPill = false;
+              const under = column.sub ? cellOf(column.sub, item, false).html : "";
+              const sub = under ? `<span class="tb-sub" style="${subLook}">${under}</span>` : "";
+              const inner =
+                TABLE_NAMES.includes(column.value)
+                  ? `<span class="tb-name">${logos && !byGroup && column.value === "name" ? logoHtml(item) : ""}<span>${main}${sub}</span></span>`
+                  : column.pill && main && sub
+                    ? // Under a pill the second value stands on the pill's middle.
+                      `<span class="tb-piled">${main}${sub}</span>`
+                    : `${main}${sub}`;
+              return `<td class="${side(column.value, column.pill).trim()}" style="${cellLook}">${inner}</td>`;
+            })
+            .join("");
+          return (
+            // A portfolio's line opens its instruments, an instrument's its details.
+            `<tr class="${item.unavailable ? "na" : ""}" data-action="${byGroup ? "table-group" : "tk-open"}" data-id="${escapeHtml(item.id)}" tabindex="0" role="button"` +
+            ` data-find="${escapeHtml(`${item.name || ""} ${item.symbol || ""}`.toLowerCase())}"` +
+            ` aria-label="${escapeHtml(item.name)}">${cells}</tr>`
+          );
+        })
+        .join("");
+      // The sums, in the currency positions are added up in.
+      let foot = "";
+      // Wherever something is held: a card may show a portfolio beside a
+      // watchlist, and the sums are the portfolio's then.
+      if (config.show_table_total !== false && total.count) {
+        const sums = {
+          name: escapeHtml(str.tbTotal),
+          value: amount(total.value, base),
+          day_gain: coloured(amount(total.today, base, true), total.today),
+          day_gain_percent: isNumber(todayPct(total.today, total.value))
+            ? coloured(escapeHtml(percent(hass, todayPct(total.today, total.value))), total.today)
+            : "",
+          gain: coloured(amount(total.gain, base, true), total.gain),
+          gain_percent: total.cost ? coloured(escapeHtml(percent(hass, (total.gain / total.cost) * 100)), total.gain) : "",
+        };
+        // The day's change in percent of everything held is the same figure
+        // as today's gain in percent: it stands under a column of either.
+        sums.change_percent = sums.day_gain_percent;
+        // The word for the line stands in the name's column - the first of
+        // them - or, without one, in the first column.
+        const totalAt = Math.max(0, columns.findIndex((column) => TABLE_NAMES.includes(column.value)));
+        // A table without a column for the value - the classic one - says
+        // what everything is worth under the word, so that the line is
+        // never the word alone.
+        const valued = columns.some((column) => column.value === "value" || column.sub === "value");
+        {
+          foot =
+            `<tfoot><tr>` +
+            columns
+              .map((column, at) => {
+                const main = at === totalAt ? sums.name : TABLE_NAMES.includes(column.value) ? "" : sums[column.value] || "";
+                const under =
+                  at === totalAt
+                    ? column.sub === "positions"
+                      ? escapeHtml(str.tbPositions(total.count))
+                      : valued
+                      ? ""
+                      : sums.value
+                    : sums[column.value] && ["day_gain", "day_gain_percent", "change_percent", "gain", "gain_percent"].includes(column.sub)
+                      ? sums[column.sub]
+                      : "";
+                const sub = under ? `<span class="tb-sub" style="${subLook}">${under}</span>` : "";
+                return `<td class="${side(column.value, column.pill).trim()}" style="${cellLook}; ${totalLook}">${main}${sub}</td>`;
+              })
+              .join("") +
+            `</tr></tfoot>`;
+        }
+      }
+      // How the lines between the rows are drawn - see the styles.
+      const drawn =
+        config.table_divider === false ? "none" : ["dashed", "dotted"].includes(config.table_divider_style) ? config.table_divider_style : "solid";
+      return `<div class="tb-wrap"><table class="tb dv-${drawn}">${head}<tbody>${body}</tbody>${foot}</table></div>`;
+    }
+
     // The price alerts of the card's instruments, one line each: its lower
     // limit, a track with the price as a mark between the two, its upper
     // limit. With one limit only the track is the fifth of that limit next
@@ -13277,7 +17542,7 @@
       this._tkTimer = null;
       this._tkStopGlide();
       if (!this._config || !this.isConnected) return;
-      if (this._config.auto_advance === false || ["ticker", "detail", "allocation", "alerts"].includes(this._config.layout)) return;
+      if (this._config.auto_advance === false || ["ticker", "detail", "allocation", "alerts", "table"].includes(this._config.layout)) return;
       if (this._tkEffect() === "glide") {
         this._tkStartGlide();
         return;
@@ -13504,7 +17769,7 @@
     }
 
     _tkStep(direction) {
-      const items = this._tkItems();
+      const items = this._tkEntries();
       if (!items.length) return;
       const effect = this._tkEffect();
       if (this._config.layout === "line" && effect !== "slide") {
@@ -13625,6 +17890,7 @@
       // Once what follows is drawn (see _fitSymbols).
       this._fitSymbolsSoon();
       this._applyCardLook();
+      this._fitFrame();
       const config = this._config;
       const head = this._root.querySelector(".mt-head");
       // The title line. A title is the Details format's: a ticker has no
@@ -13634,10 +17900,29 @@
       // in the details' line of buttons (see _drawPage).
       const drawHead = (inButtons) => {
         const adds = !inButtons && config.show_add_button !== false && this._isAdmin(this._hass);
-        const named = ["detail", "allocation", "alerts"].includes(config.layout) ? config.title || "" : "";
+        // A portfolio opened from a table of portfolios: its name is the
+        // title, with the way back before it.
+        const opened = this._tableDrill();
+        const named = opened ? opened.name || "" : ["detail", "allocation", "alerts", "table"].includes(config.layout) ? config.title || "" : "";
+        const back = opened
+          ? `<button type="button" class="mt-back" data-action="table-back" title="${escapeHtml(str.tbBack)}"` +
+            ` aria-label="${escapeHtml(str.tbBack)}"><ha-icon icon="mdi:arrow-left"></ha-icon></button>`
+          : "";
+        // A table's refresh: a pill at the end of the title line, with how
+        // long ago the prices were fetched - there without a title too.
+        const refresh =
+          config.layout === "table" && config.show_table_refresh !== false
+            ? `<button type="button" class="mt-refresh${this._refreshing ? " spinning" : ""}" data-action="refresh"` +
+              `${this._refreshing ? " disabled" : ""} title="${escapeHtml(str.refreshNow)}" aria-label="${escapeHtml(str.refreshNow)}"` +
+              ` style="${elementStyle(config, "table_refresh")}"><ha-icon icon="${escapeHtml(config.table_refresh_icon || "mdi:refresh")}"` +
+              `${CSS.supports("width", config.table_refresh_icon_size) ? ` style="--mdc-icon-size: ${escapeHtml(config.table_refresh_icon_size)}"` : ""}></ha-icon>` +
+              `<span class="ago">${escapeHtml(agoText(str, lastFetch(this._hass)))}</span></button>`
+            : "";
         const title =
-          named || adds
-            ? `<div class="mt-title" style="${elementStyle(config, "title")}">${escapeHtml(named)}</div>` +
+          named || adds || refresh || back
+            ? back +
+              `<div class="mt-title" style="${elementStyle(config, "title")}">${escapeHtml(named)}</div>` +
+              refresh +
               (adds
                 ? `<button type="button" class="mt-add" data-action="add" title="${escapeHtml(str.addInstrument)}"` +
                   ` aria-label="${escapeHtml(str.addInstrument)}"><ha-icon icon="${escapeHtml(toolIcon(config, "add"))}"></ha-icon></button>`
@@ -13683,20 +17968,48 @@
             this._tkBuilt = html;
             strip.innerHTML = html;
           }
+        } else if (config.layout === "table") {
+          const html = this._tableHtml(items, str);
+          if (html !== this._tkBuilt) {
+            // The table keeps where it was scrolled to sideways - and the
+            // search field the keyboard, with the caret where it stood.
+            const wrap = strip.querySelector(".tb-wrap");
+            const left = wrap ? wrap.scrollLeft : 0;
+            const typing = this.shadowRoot.activeElement;
+            const caret = typing && typing.matches(".tb-search") ? [typing.selectionStart, typing.selectionEnd] : null;
+            this._tkBuilt = html;
+            strip.innerHTML = html;
+            const next = strip.querySelector(".tb-wrap");
+            if (next && left) next.scrollLeft = left;
+            const field = strip.querySelector(".tb-search");
+            if (field && caret) {
+              field.focus();
+              try {
+                field.setSelectionRange(caret[0], caret[1]);
+              } catch (err) {
+                // A field that takes no selection: the keyboard is enough.
+              }
+            }
+            this._filterTable();
+          }
         } else {
+          const entries = this._tkEntries(items);
           const built = JSON.stringify([
             config,
-            items.map((item) => [item.id, item.unavailable, this._tkNewsNew(item) > 0, alertState(item)]),
+            // Who the entries are and in which order - not whether one has
+            // a price just now, new headlines or an alert that is on: those
+            // change on the entry itself (see _tkUpdate). And not how often
+            // the list was asked for: the same list builds nothing anew.
+            entries.map((item) => [item.id, item.name, item.symbol, hasLogo(item) ? item.logo : ""]),
             this._hass.language,
             this._hass.locale || null,
-            INSTRUMENTS.version,
             LOGO_FAILED.size,
           ]);
           if (built !== this._tkBuilt) {
             this._tkBuilt = built;
-            this._tkBuild(strip, items, str);
+            this._tkBuild(strip, entries, str);
           } else {
-            this._tkUpdate(strip, items);
+            this._tkUpdate(strip, entries);
           }
         }
       }
@@ -13704,12 +18017,13 @@
       // pop-up in every other. Never both.
       const shown = detail && items.length ? this._pageItem(items) : null;
       drawHead(items.length > 0);
-      this._toolsDraw(str, detail || ["allocation", "alerts"].includes(config.layout) ? [] : items);
+      // No buttons over a portfolio's entry: they change an instrument.
+      this._toolsDraw(str, detail || ["allocation", "alerts", "table"].includes(config.layout) || tickerByGroup(config) ? [] : items);
       strip.hidden = !!shown;
       page.hidden = !shown;
       if (detail) this._detail = null;
       if (shown) this._drawPage(page, shown, items, str, false);
-      this._tkRenderPopup(str, items);
+      this._tkRenderPopup(str, this._popItems(items));
     }
 
     // The buttons over the instrument under the pointer, in the three
@@ -13793,6 +18107,51 @@
 
     // Colours, sizes and the backgrounds - everything the config says about
     // the whole card, written onto it as variables.
+    // How far the content has to stay from the card's edge: the number set,
+    // or as far as the theme draws inside the card. A theme can give a card
+    // a rim that is no border - hard shadows towards the inside, or an
+    // outline on a layer of its own a few pixels in - and a ticker, a
+    // carousel or a table moved sideways would run across it, cut off at
+    // the card's edge only. Soft inner shadows are a glow, not a rim, and
+    // are left alone.
+    _fitFrame() {
+      const card = this._root;
+      // Not before the card has been painted once (see where it is built).
+      if (!card || !card.isConnected || !this._config || !this._frameReady) return;
+      const set = this._config.card_inset;
+      let frame = 0;
+      const style = getComputedStyle(card);
+      if (set !== "" && set !== null && set !== undefined && Number.isFinite(Number(set))) {
+        frame = Math.max(0, Number(set));
+      } else {
+        for (const shadow of String(style.boxShadow || "").split(/,(?![^(]*\))/)) {
+          if (!/\binset\b/.test(shadow)) continue;
+          const lengths = (shadow.replace(/[a-z-]+\([^)]*\)|#[0-9a-f]+/gi, "").match(/-?\d*\.?\d+px/g) || []).map(parseFloat);
+          const [x = 0, y = 0, blur = 0, spread = 0] = lengths;
+          if (blur > 1) continue;
+          frame = Math.max(frame, Math.max(Math.abs(x), Math.abs(y)) + Math.max(0, spread) + blur);
+        }
+        for (const pseudo of ["::before", "::after"]) {
+          const layer = getComputedStyle(card, pseudo);
+          if (!layer || layer.content === "none" || layer.position !== "absolute") continue;
+          const width = parseFloat(layer.borderLeftWidth) || 0;
+          if (!(parseFloat(layer.opacity) > 0) || !width || layer.borderLeftStyle === "none") continue;
+          const left = parseFloat(layer.left);
+          if (Number.isFinite(left) && left >= 0) frame = Math.max(frame, left + width);
+        }
+        frame = Math.min(frame, 12);
+      }
+      const radius = Math.max(0, (parseFloat(style.borderTopLeftRadius) || 0) - (parseFloat(style.borderTopWidth) || 0) - frame);
+      // Whole pixels: a value read half way through a fade is no frame.
+      frame = Math.round(frame);
+      const fit = `${frame}|${radius}`;
+      FRAME_LAST = [frame, radius];
+      if (fit === this._frameFit) return;
+      this._frameFit = fit;
+      card.style.setProperty("--mt-frame", `${frame}px`);
+      card.style.setProperty("--mt-frame-radius", `${radius}px`);
+    }
+
     _applyCardLook() {
       const card = this._root;
       const config = this._config;
@@ -13870,7 +18229,19 @@
         "--mt-div-style",
         config.fact_divider === false ? "none" : ["dashed", "dotted"].includes(config.fact_divider_style) ? config.fact_divider_style : ""
       );
+      // The lines between a table's rows; switched off, none.
+      setVar("--mt-tb-div", config.table_divider_color || "");
+      setVar("--mt-tb-div-line", px(config.table_divider_width));
+      setVar(
+        "--mt-tb-div-style",
+        config.table_divider === false ? "none" : ["dashed", "dotted"].includes(config.table_divider_style) ? config.table_divider_style : ""
+      );
       setVar("--mt-logo-size", CSS.supports("width", config.logo_size) ? config.logo_size : "");
+      // The table's pills and arrows.
+      setVar("--mt-pill-radius", CSS.supports("border-radius", config.table_pill_radius) ? config.table_pill_radius : "");
+      const fill = Number(config.table_pill_opacity);
+      setVar("--mt-pill-fill", Number.isFinite(fill) && fill !== 16 ? `${Math.max(0, Math.min(100, fill))}%` : "");
+      setVar("--mt-tb-arrow", CSS.supports("width", config.table_arrow_size) ? config.table_arrow_size : "");
       this._applyBackground();
       const style = card.style;
       for (const name of ["base", "color", "image", "size", "repeat", "opacity"]) {
@@ -13923,18 +18294,65 @@
       if (this._tkResize) this._tkResize.disconnect();
       this.shadowRoot.innerHTML =
         `<style>${STYLE}${TICKER_STYLE}</style>` +
-        `<ha-card class="tkr"><div class="mt-head"></div><div class="tk-strip"></div><div class="tk-tools" hidden></div>` +
+        `<ha-card class="tkr"><div class="mt-bg"></div><div class="mt-in"><div class="mt-head"></div><div class="tk-strip"></div>` +
         // The details' page twice: on the card itself for the Details
         // format, and in the pop-up. One function draws both (_drawPage).
         `<div class="tk-wrap tk-inline" hidden><div class="tk-nav"></div><div class="tk-body"></div>` +
-        `</div>` +
+        `</div></div><div class="tk-tools" hidden></div>` +
         `<dialog class="tk-pop"><div class="tk-wrap"><div class="tk-nav"></div><div class="tk-body"></div>` +
         `</div></dialog></ha-card>`;
       this._root = this.shadowRoot.querySelector("ha-card");
+      // A theme's styles can arrive after the card is drawn: look at the
+      // frame again once they have.
+      this._frameFit = null;
+      // The frame is read off the card's computed style, and that must not
+      // be asked for while the card is being built: ha-card has not taken
+      // its look on yet, the question makes the browser work out that raw
+      // state - no background, a wide border in the text's colour - and
+      // ha-card's own "transition: all" then fades from it to the real one
+      // with every card that appears. So the first look comes after the
+      // first paint, and until then the card wears the frame the last card
+      // was found to have.
+      this._frameReady = false;
+      if (FRAME_LAST) {
+        this._root.style.setProperty("--mt-frame", `${FRAME_LAST[0]}px`);
+        this._root.style.setProperty("--mt-frame-radius", `${FRAME_LAST[1]}px`);
+      }
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          this._frameReady = true;
+          this._fitFrame();
+        })
+      );
+      for (const wait of [300, 1500, 4000]) setTimeout(() => this._fitFrame(), wait);
+      // A theme that fades its frame in: what was read on the way is not
+      // what it ends at.
+      this._root.addEventListener("transitionend", (ev) => {
+        if (ev.target === this._root) this._fitFrame();
+      });
       this._headBuilt = null;
       this._popBuilt = null;
       this._root.addEventListener("click", (ev) => this._onClick(ev));
+      // What is typed into the table's search field filters the rows.
+      this._root.addEventListener("input", (ev) => {
+        const field = ev.composedPath()[0];
+        if (!field || !field.classList || !field.classList.contains("tb-search")) return;
+        this._tableFilter = field.value;
+        this._filterTable();
+      });
       this._root.addEventListener("keydown", (ev) => {
+        const typed = ev.composedPath()[0];
+        if (typed && typed.classList && typed.classList.contains("tb-search")) {
+          // Its keys are its own - a space would sort the column - and
+          // Escape empties it.
+          if (ev.key === "Escape" && typed.value) {
+            ev.stopPropagation();
+            typed.value = "";
+            this._tableFilter = "";
+            this._filterTable();
+          }
+          return;
+        }
         if (ev.key !== "Enter" && ev.key !== " ") return;
         const el = ev.composedPath().find((node) => node.dataset && node.dataset.action);
         if (!el || el.tagName === "BUTTON") return;
@@ -14062,6 +18480,9 @@
         ? `<span class="tk-alert ${alarm}" data-action="alerts" data-id="${escapeHtml(item.id)}" title="${escapeHtml(alarmLabel)}" aria-label="${escapeHtml(alarmLabel)}"><ha-icon icon="${escapeHtml(alertIcon(config, alarm))}"></ha-icon></span>`
         : "";
       return {
+        // Which symbols it carries: what _tkUpdate looks at before it puts
+        // new ones in.
+        sig: `${fresh ? 1 : 0}|${alarm || ""}`,
         logo: config.show_row_logo ? logoHtml(item) : "",
         name: short || long || news || bell ? `<span class="tk-id">${short}${long}${bell}${news}</span>` : "",
         // For the carousel, where the buttons lie over the name's end: the
@@ -14077,9 +18498,13 @@
     // How many headlines about the instrument are new - of those its
     // details would show. Nought where the entries carry no such symbol,
     // or the details no news.
-    _tkNewsNew(item) {
+    // `chosen`: asked for by a table's column - the entries' own switch
+    // does not stand in its way.
+    _tkNewsNew(item, chosen) {
       const config = this._config;
-      if (config.show_row_news === false || config.show_detail_news === false) return 0;
+      // A portfolio's entry has no headlines of its own.
+      if (item.isGroup) return 0;
+      if ((config.show_row_news === false && !chosen) || config.show_detail_news === false) return 0;
       const entry = newsOf(item.id, this._hass.language);
       return newsShown(entry.data, config.detail_news_count, config.detail_news_days).filter((one) =>
         newsIsNew(one, item.id, newsSeen)
@@ -14101,13 +18526,22 @@
     }
 
     // The small curve of the day, against the close of the day before.
-    _tkSpark(item) {
+    // The small line of an entry: the day's, or - in a table - a longer
+    // period's. Measured against the close before the period.
+    _tkSpark(item, range = "1d") {
       if (item.unavailable) return "";
-      const history = historyOf(item.id, "1d").data;
+      if (item.isGroup) {
+        // A portfolio's: its performance over the period, from nought.
+        const data = performanceOf(item.id, range).data;
+        const own = data && Array.isArray(data.portfolio) ? data.portfolio.filter(isNumber) : [];
+        return own.length > 1 ? chartSvg(own, { height: 30, reference: 0, lineWidth: 1.25 }) : "";
+      }
+      const history = historyOf(item.id, range).data;
       if (!history || history.bars.length < 2) return "";
+      const before = history.lead && history.lead.length ? history.lead[history.lead.length - 1].c : undefined;
       return chartSvg(history.bars.map((bar) => bar.c), {
         height: 30,
-        reference: isNumber(history.previousClose) ? history.previousClose : undefined,
+        reference: range !== "1d" ? before : isNumber(history.previousClose) ? history.previousClose : undefined,
         lineWidth: 1.25,
       });
     }
@@ -14115,6 +18549,20 @@
     _tkBuild(strip, items) {
       const config = this._config;
       const effect = this._tkEffect();
+      // Where the entries stand now: how far the ticker has run, how far
+      // the carousel is moved. Built anew - an instrument added, another
+      // order - they go on from there instead of from the beginning.
+      const ran = (() => {
+        const run = strip.querySelector(".tk-run");
+        const going = run && typeof run.getAnimations === "function" ? run.getAnimations()[0] : null;
+        const timing = going && going.effect ? going.effect.getComputedTiming() : null;
+        const length = timing ? Number(timing.duration) : 0;
+        return going && length > 0 && isNumber(going.currentTime) ? (going.currentTime % length) / length : null;
+      })();
+      const moved = (() => {
+        const box = strip.querySelector(".tk-scroll");
+        return box ? { left: box.scrollLeft, tiles: box.querySelectorAll(".tk-mini").length } : null;
+      })();
       // Whatever was running ran on the elements about to be replaced.
       this._tkFxEnd = null;
       this._tkStopScroll();
@@ -14126,7 +18574,7 @@
         const slides = items.map((item) => {
           const parts = this._tkParts(item);
           return (
-            `<div class="tk-slide${item.unavailable ? " na" : ""}" data-id="${escapeHtml(item.id)}">${parts.logo}` +
+            `<div class="tk-slide${item.unavailable ? " na" : ""}" data-id="${escapeHtml(item.id)}" data-sig="${parts.sig}">${parts.logo}` +
             `<div class="tk-main">${parts.name}${parts.change}</div>` +
             (config.show_row_sparkline ? `<div class="tk-spark">${this._tkSpark(item)}</div>` : "") +
             `${this._tkPrice(item)}</div>`
@@ -14149,7 +18597,7 @@
             .map((item) => {
               const parts = this._tkParts(item);
               return (
-                `<div class="tk-mini${item.unavailable ? " na" : ""}" data-action="tk-open" data-id="${escapeHtml(item.id)}" tabindex="0" role="button" aria-label="${escapeHtml(item.name)}">` +
+                `<div class="tk-mini${item.unavailable ? " na" : ""}" data-action="tk-open" data-id="${escapeHtml(item.id)}" data-sig="${parts.sig}" tabindex="0" role="button" aria-label="${escapeHtml(item.name)}">` +
                 `${parts.nameOnly}<div class="tk-mini-mid"><div class="tk-mini-values">${this._tkPrice(item)}` +
                 (parts.change || parts.news ? `<div class="tk-mini-change">${parts.change}${parts.news}</div>` : "") +
                 `</div>${parts.logo}</div>` +
@@ -14169,6 +18617,9 @@
           : `<div class="tk-scroll" data-fx="${effect}">${tiles}</div>`;
         this._tkWireScroll(strip.querySelector(".tk-scroll"));
         this._tkFitCarousel();
+        // The same tiles as before: where they were moved to.
+        const box = strip.querySelector(".tk-scroll");
+        if (moved && box && box.querySelectorAll(".tk-mini").length === moved.tiles) box.scrollLeft = moved.left;
       } else {
         this._tkSet =
           `<div class="tk-set">` +
@@ -14176,7 +18627,7 @@
             .map((item) => {
               const parts = this._tkParts(item);
               return (
-                `<div class="tk-item${item.unavailable ? " na" : ""}" data-action="tk-open" data-id="${escapeHtml(item.id)}">` +
+                `<div class="tk-item${item.unavailable ? " na" : ""}" data-action="tk-open" data-id="${escapeHtml(item.id)}" data-sig="${parts.sig}">` +
                 `${parts.logo}${parts.name}${this._tkPrice(item, true)}${parts.change}</div>`
               );
             })
@@ -14192,6 +18643,13 @@
           `</div></div>`;
         this._tkNoScroll(strip.querySelector(".tk-marquee"));
         this._tkFitMarquee();
+        // On from the part of its round the ticker had run.
+        if (ran !== null) {
+          const run = strip.querySelector(".tk-run");
+          const going = run && typeof run.getAnimations === "function" ? run.getAnimations()[0] : null;
+          const timing = going && going.effect ? going.effect.getComputedTiming() : null;
+          if (going && timing && Number(timing.duration) > 0) going.currentTime = ran * Number(timing.duration);
+        }
       }
     }
 
@@ -14218,16 +18676,38 @@
     // its changes, its curves. This brings them up to now.
     _tkRefresh() {
       const strip = this._root && this._root.querySelector(".tk-strip");
-      if (strip && this._tkPrices && INSTRUMENTS.list) this._tkUpdate(strip, this._tkItems());
+      if (strip && this._tkPrices && INSTRUMENTS.list) this._tkUpdate(strip, this._tkEntries());
     }
 
     _tkUpdate(strip, items) {
       const byId = new Map(items.map((item) => [item.id, item]));
       const inline = this._config.layout === "ticker";
-      for (const el of strip.querySelectorAll("[data-id]")) {
+      let symbols = false;
+      for (const el of strip.querySelectorAll(".tk-item[data-id], .tk-slide[data-id], .tk-mini[data-id]")) {
         const item = byId.get(el.dataset.id);
         if (!item) continue;
         const parts = this._tkParts(item);
+        // Greyed while it has no price, and not a moment longer.
+        el.classList.toggle("na", !!item.unavailable);
+        // The alert's bell and the symbol for new headlines, put in or
+        // taken out where they stand: behind the name - in a tile, behind
+        // the change.
+        if (el.dataset.sig !== parts.sig) {
+          el.dataset.sig = parts.sig;
+          symbols = true;
+          if (el.classList.contains("tk-mini")) {
+            const line = el.querySelector(".tk-mini-change");
+            if (line) {
+              line.innerHTML = parts.change + parts.news;
+            } else if (parts.change || parts.news) {
+              const values = el.querySelector(".tk-mini-values");
+              if (values) values.insertAdjacentHTML("beforeend", `<div class="tk-mini-change">${parts.change}${parts.news}</div>`);
+            }
+          } else {
+            const id = el.querySelector(".tk-id");
+            if (id && parts.name) id.outerHTML = parts.name;
+          }
+        }
         const change = el.querySelector(".tk-change");
         if (change && parts.change) change.outerHTML = parts.change;
         const price = el.querySelector(".tk-price");
@@ -14243,6 +18723,8 @@
         if (spark) spark.innerHTML = this._tkSpark(item);
       }
       items.forEach((item) => (this._tkPrices[item.id] = this._tkFigure(item).amount));
+      // New symbols are set on the capitals of their word like the others.
+      if (symbols) this._fitSymbolsSoon();
     }
 
     _tkWireLine(line) {
@@ -14341,7 +18823,28 @@
     }
 
     // ------------------------------------------------------------ the pop-up
-    _tkOpen(id) {
+    // `inside`: asked for by a symbol of the card's own - the one for new
+    // headlines - which shows the details whatever a click on the row does.
+    _tkOpen(id, inside) {
+      // A portfolio's entry: the details of its first position - one that
+      // is held, where there is one - and the pop-up then leafs through
+      // that portfolio's positions alone.
+      this._popGroup = null;
+      if (tickerByGroup(this._config) && tableGroups(this._config).some((group) => group.id === id)) {
+        const own = this._tkItems().filter((item) => item.group === id);
+        const first = own.find((item) => positionFigures(item)) || own[0];
+        if (!first) return;
+        this._popGroup = id;
+        id = first.id;
+      }
+      // Set to lead elsewhere: another view of Home Assistant, without the
+      // page being loaded anew. Without a path it is the details as ever.
+      const path = String(this._config.navigation_path || "").trim();
+      if (!inside && this._config.tap_action === "navigate" && path.startsWith("/")) {
+        history.pushState(null, "", path);
+        window.dispatchEvent(new CustomEvent("location-changed", { detail: { replace: false } }));
+        return;
+      }
       // Set to open TradingView instead: the instrument's page there, in a
       // tab of its own. An instrument without a symbol there has no page -
       // its click opens the details as ever, rather than nothing.
@@ -14380,7 +18883,7 @@
     // or on the card in the Details format - where the place is the card's
     // own for as long as it stands on the page, and nothing of the config.
     _tkPopStep(direction) {
-      const items = this._tkItems();
+      const items = this._popItems();
       if (items.length < 2) return;
       const next = (now) => items[(now + direction + items.length) % items.length].id;
       if (this._detail) {
@@ -14644,6 +19147,13 @@
     _fitSymbol(holder) {
       const icon = holder.querySelector("ha-icon");
       if (!icon) return true;
+      // In a table a symbol is a cell's own value, or the one under it -
+      // not beside a word: moved onto the capitals of what stands under it,
+      // it lay across that.
+      if (holder.closest(".tb")) {
+        icon.style.transform = "";
+        return true;
+      }
       // The word it stands beside: the one after it, the one before it, or
       // what it stands in.
       const worded = (el) => el && el.nodeType === 1 && !el.matches(".tk-alert, .tk-news, .fact-bell, .logo") && el.textContent.trim();
@@ -14914,7 +19424,56 @@
         small.push(`${escapeHtml(str.posRealized)} <span class="${side}">${escapeHtml(hide ? mark : cash(figures.realized, true))}</span>`);
       }
       if (figures.costs !== null) small.push(`${escapeHtml(str.posCosts)} ${escapeHtml(hide ? mark : cash(figures.costs))}`);
-      if (!held && !gain && !small.length) return "";
+      // The single purchases and sales, the newest first: its day, what it
+      // was, how much at what price, and at the end what was paid - or,
+      // for a sale, what it realised. Five of them, and the rest behind a
+      // button; which of the two is on show stays as it was left.
+      let list = "";
+      if (config.show_detail_trades !== false && item.trades.length) {
+        // A click on a line changes that purchase or sale - for whoever may
+        // change instruments from the card at all (see show_edit_buttons).
+        const editable = config.show_edit_buttons !== false && this._isAdmin(hass) && item.trades.every((trade) => isNumber(trade.index));
+        const rows = item.trades
+          .slice()
+          .reverse()
+          .map((trade, at) => {
+            const buy = trade.quantity > 0;
+            const day = tradeDay(trade);
+            const when = day === null ? "" : dateTime(hass, day + 43200000, { day: "2-digit", month: "2-digit", year: "2-digit" });
+            const what = hide
+              ? mark
+              : `${quantity(hass, Math.abs(trade.quantity))} × ${money(hass, trade.price, figures.currency, false, item.digits)}`;
+            const sum = hide
+              ? ""
+              : buy
+                ? `<span class="pt-sum">${escapeHtml(cash(trade.quantity * trade.price))}</span>`
+                : isNumber(trade.realized)
+                  ? `<span class="pt-sum ${gainClass(trade.realized)}">${escapeHtml(cash(trade.realized, true))}</span>`
+                  : "";
+            return (
+              `<div class="pt-row${at >= 5 ? " more" : ""}${editable ? " edit" : ""}"` +
+              (editable
+                ? ` data-action="trade-edit" data-index="${trade.index}" data-id="${escapeHtml(item.id)}"${buy ? "" : ` data-sale=""`}` +
+                  ` title="${escapeHtml(buy ? str.editPurchase : str.editSale)}"`
+                : "") +
+              `><span class="pt-date">${escapeHtml(when)}</span>` +
+              `<span class="pt-kind ${buy ? "buy" : "sell"}"><span class="pill-text">${escapeHtml(buy ? str.tradeBuy : str.tradeSell)}</span></span>` +
+              // The line's one stop for the keyboard: a row laid out as
+              // "contents" has no box of its own to take the focus.
+              `<span class="pt-what"${editable ? ` tabindex="0" role="button" aria-label="${escapeHtml(`${buy ? str.editPurchase : str.editSale}: ${when} ${what}`)}"` : ""}>` +
+              `${escapeHtml(what)}</span>${sum}</div>`
+            );
+          });
+        const all = this._tradesAll === true;
+        list =
+          `<div class="pos-trades${all ? " all" : ""}" role="group" aria-label="${escapeHtml(str.tradesTitle)}">${rows.join("")}` +
+          (rows.length > 5
+            ? `<button type="button" class="pt-more" data-action="trades-more" data-more="${escapeHtml(str.tradesMore(rows.length))}"` +
+              ` data-less="${escapeHtml(str.tradesLess)}">${escapeHtml(all ? str.tradesLess : str.tradesMore(rows.length))}</button>`
+            : "") +
+          `</div>`;
+      }
+      if (!held && !gain && !small.length && !list) return "";
       return (
         `<div class="pos-box" role="group" aria-label="${escapeHtml(str.posTitle)}"` +
         `${config.pos_box_color ? ` style="${escapeHtml(`background: ${config.pos_box_color}`)}"` : ""}>` +
@@ -14922,6 +19481,7 @@
         (gain ? `<span class="pos-gain ${gainSide}" style="${elementStyle(config, "pos_gain")}">${gain}</span>` : "") +
         `</div>` +
         (small.length ? `<div class="pos-sub" style="${elementStyle(config, "pos_sub")}">${small.join(" · ")}</div>` : "") +
+        list +
         `</div>`
       );
     }
@@ -14968,6 +19528,36 @@
       };
       this._series.trend = trendOf(config);
       this._series.labels = { sma: str.legSma, sma50: str.legSma50, ema: str.legEma };
+      // The purchases and sales of the period: a mark each at its day's bar
+      // and its price - kept on the chart where the price lies beyond the
+      // scale - and what it was, for the box that follows the pointer.
+      // With amounts hidden a mark says only what it is and when.
+      const hide = config.hide_amounts === true;
+      let marks_ = "";
+      this._series.trades = {};
+      if (config.show_chart_trades !== false) {
+        for (const trade of item.trades) {
+          const day = tradeDay(trade);
+          const at = tradeBar(bars, day);
+          if (at < 0) continue;
+          const buy = trade.quantity > 0;
+          const what = `${buy ? str.tradeBuy : str.tradeSell}`;
+          const how = hide ? "" : `${quantity(hass, Math.abs(trade.quantity))} × ${money(hass, trade.price, item.currency, false, item.digits)}`;
+          const when = dateTime(hass, day + 43200000, { day: "2-digit", month: "2-digit", year: "numeric" });
+          const top = Math.max(3, Math.min(97, scale.top(trade.price)));
+          (this._series.trades[at] = this._series.trades[at] || []).push({ buy, what, how });
+          marks_ +=
+            `<span class="trade ${buy ? "buy" : "sell"}" style="left: ${chart.series.xs[at].toFixed(2)}%; top: ${top.toFixed(2)}%"` +
+            ` title="${escapeHtml([what, how, when].filter(Boolean).join(" · "))}"></span>`;
+        }
+        const held = hide ? null : positionFigures(item);
+        const average = held && held.average !== null ? scale.top(held.average) : null;
+        if (average !== null && average > 1 && average < 99 && item.trades.length) {
+          marks_ +=
+            `<div class="avg-line" style="top: ${average.toFixed(2)}%"><span>${escapeHtml(str.posAvg)} ` +
+            `${escapeHtml(money(hass, held.average, item.currency, false, item.digits))}</span></div>`;
+        }
+      }
 
       const near = (tick) => Math.abs(scale.top(tick) - chart.lastTop) < 8;
       const tickText = (tick) => plain(hass, tick, digits);
@@ -14995,7 +19585,7 @@
       const cursor = `<div class="cursor" hidden></div>`;
       let html =
         `<div class="chart-big with-axis" data-chart>` +
-        `<div class="plot price">${chart.price}<div class="cursor" hidden><span class="dot"></span></div>` +
+        `<div class="plot price">${chart.price}${marks_}<div class="cursor" hidden><span class="dot"></span></div>` +
         `<div class="tip" hidden></div></div>` +
         `<div style="${yLook}" class="y-axis"><i>${escapeHtml(widest)}</i>` +
         `<span class="now ${chart.up ? "up" : "down"}" style="top: ${chart.lastTop.toFixed(2)}%">${escapeHtml(figure(last))}</span>` +
@@ -15073,6 +19663,14 @@
                 )
                 .join("")
             : "") +
+          ((series.trades && series.trades[index]) || [])
+            .map(
+              (trade) =>
+                `<span class="avg ${trade.buy ? "buy" : "sell"}"><i></i>${escapeHtml(trade.what)}` +
+                (trade.how ? ` <b>${escapeHtml(trade.how)}</b>` : "") +
+                `</span>`
+            )
+            .join("") +
           (this._config.show_detail_volume !== false && isNumber(bar.v) && bar.v > 0
             ? `<span class="avg vol"><i></i>${escapeHtml(str.fVolume)} <b>${escapeHtml(compact(this._hass, bar.v, "", 1))}</b></span>`
             : "") +
@@ -15127,10 +19725,100 @@
       );
     }
 
+    // The portfolio whose instruments a table of portfolios shows after a
+    // click on its line - none while it shows the portfolios themselves.
+    _tableDrill() {
+      const config = this._config;
+      if (!config || config.layout !== "table" || !this._tableGroup || !tableByGroup(config)) return null;
+      return tableGroups(config).find((group) => group.id === this._tableGroup) || null;
+    }
+
+    // The rows whose name or symbol holds what the search field says; the
+    // others are put away. In place: a row stays the row it was.
+    _filterTable() {
+      const table = this._root && this._root.querySelector(".tb");
+      if (!table) return;
+      const words = String(this._tableFilter || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+      for (const row of table.querySelectorAll("tbody tr")) {
+        const text = row.dataset.find || "";
+        row.hidden = !words.every((word) => text.includes(word));
+      }
+    }
+
     _onClick(ev) {
+      // The search field is in a heading that sorts on a click: a click
+      // into the field is for the field.
+      if (ev.composedPath().some((node) => node.classList && node.classList.contains("tb-search"))) return;
       const el = ev.composedPath().find((node) => node.dataset && node.dataset.action);
       const action = el && el.dataset.action;
       if (!action) return;
+      if (action === "refresh") {
+        // Ask the sources again; the button turns until they have answered.
+        if (this._refreshing) return;
+        this._refreshing = true;
+        this._render();
+        // Turning for a moment at least: sources that answer at once would
+        // leave a click without anything to be seen.
+        const shown = new Promise((resolve) => setTimeout(resolve, 700));
+        this._hass.connection
+          .sendMessagePromise({ type: `${DOMAIN}/refresh` })
+          .catch((err) => console.error("market-ticker-ultra-card: refresh failed", err))
+          .then(() => shown)
+          .then(() => {
+            this._refreshing = false;
+            if (this.isConnected) this._render();
+          });
+        return;
+      }
+      if (action === "table-group") {
+        // A portfolio's line: its instruments in the same table - or, where
+        // a click is set to lead elsewhere, that.
+        const path = String(this._config.navigation_path || "").trim();
+        if (this._config.tap_action === "navigate" && path.startsWith("/")) {
+          history.pushState(null, "", path);
+          window.dispatchEvent(new CustomEvent("location-changed", { detail: { replace: false } }));
+          return;
+        }
+        this._tableGroup = el.dataset.id;
+        this._tableFilter = "";
+        this._tableSort = null;
+        this._render();
+        return;
+      }
+      if (action === "table-back") {
+        this._tableGroup = null;
+        this._tableFilter = "";
+        this._tableSort = null;
+        this._render();
+        return;
+      }
+      if (action === "trade-edit") {
+        // One purchase or sale: the integration's form for it, in the
+        // card's own dialog.
+        const index = Number(el.dataset.index);
+        if (el.dataset.id && Number.isInteger(index)) {
+          this._openFlowDialog({ kind: "lot", id: el.dataset.id, lot: index, sale: "sale" in el.dataset, opener: el });
+        }
+        return;
+      }
+      if (action === "trades-more") {
+        // All purchases and sales, or the newest five again. Switched in
+        // place: the box is not drawn anew for it.
+        this._tradesAll = this._tradesAll !== true;
+        const box = el.closest(".pos-trades");
+        if (box) box.classList.toggle("all", this._tradesAll);
+        el.textContent = this._tradesAll ? el.dataset.less : el.dataset.more;
+        return;
+      }
+      if (action === "table-sort") {
+        // A column's heading: sort by it, the other way round with the
+        // second click, and back to the card's own order with the third.
+        const key = el.dataset.key;
+        const now = this._tableSort;
+        this._tableSort = !now || now.key !== key ? { key, desc: true } : now.desc ? { key, desc: false } : null;
+        this._render();
+        return;
+      }
       if (action === "tk-news") {
         // The symbol for new headlines: the details, with the news
         // unfolded and in view - and seen with that.
@@ -15140,7 +19828,7 @@
         }
         const id = el.dataset.id;
         this._popNewsOpen = true;
-        this._tkOpen(id);
+        this._tkOpen(id, true);
         const show = (tries) => {
           const wrap = this._popBuilt && this._popBuilt.wrap;
           const news = wrap && wrap.isConnected ? wrap.querySelector(".d-news") : null;
@@ -15167,7 +19855,7 @@
           if (id) this._tkOpen(id);
         } else {
           this._tkSettleLine();
-          const item = this._tkItems()[this._tkIndex || 0];
+          const item = this._tkEntries()[this._tkIndex || 0];
           if (item) this._tkOpen(item.id);
         }
         return;
@@ -15232,7 +19920,7 @@
         const id = el.dataset.id || this._shownId();
         if (!id) return;
         if (this._isAdmin(this._hass)) this._openFlowDialog({ kind: "alerts", id, opener: el });
-        else this._tkOpen(id);
+        else this._tkOpen(id, true);
         return;
       }
       if (action === "add" || action === "edit" || action === "remove") {
@@ -15271,7 +19959,10 @@
       if (!hass || !this._isAdmin(hass)) return;
       // "remove" is the question "Remove X?" alone, without the menu.
       // "alerts" is a change that goes straight to one entry of the menu.
-      const jump = spec && spec.kind === "alerts" ? "alerts" : null;
+      // "lot" goes on to one purchase or sale: past the menu's entry for
+      // them and past the list that asks which.
+      const lot = spec && spec.kind === "lot" && Number.isInteger(spec.lot) ? spec.lot : null;
+      const jump = spec && spec.kind === "alerts" ? "alerts" : lot !== null ? "edit_lot" : null;
       const kind = jump ? "edit" : spec && (spec.kind === "edit" || spec.kind === "remove") ? spec.kind : "add";
       const strings = t(hass);
       // A native dialog, shown modal: the browser's top layer puts it above
@@ -15305,7 +19996,9 @@
         host,
         shadow,
         strings,
-        heading: jump
+        heading: lot !== null
+          ? spec.sale ? strings.editSale : strings.editPurchase
+          : jump
           ? strings.editAlerts
           : kind === "edit" ? strings.editInstrument : kind === "remove" ? strings.removeInstrument : strings.addInstrument,
         // Where the flow lives and what its words are called.
@@ -15443,6 +20136,15 @@
             if (this._flowDialog !== state) {
               if (step && step.flow_id) this._flowRequest("DELETE", `${state.api}/${step.flow_id}`).catch(() => {});
               return;
+            }
+            // The list of purchases and sales, answered with the one that
+            // was clicked.
+            if (lot !== null && step && step.type === "form" && step.step_id === "edit_lot" && step.flow_id) {
+              step = await this._flowRequest("POST", `${state.api}/${step.flow_id}`, { lot: String(lot) });
+              if (this._flowDialog !== state) {
+                if (step && step.flow_id) this._flowRequest("DELETE", `${state.api}/${step.flow_id}`).catch(() => {});
+                return;
+              }
             }
           }
         }
@@ -15949,7 +20651,7 @@
       help: "edElTitleHelp",
       // The Details format's alone - a ticker has no title line - and
       // there only while a title is set under Settings -> General.
-      hidden: (config) => !["detail", "allocation", "alerts"].includes(config.layout) || !config.title,
+      hidden: (config) => !["detail", "allocation", "alerts", "table"].includes(config.layout) || !config.title,
       colorHelp: "edColorHelp",
       fontHelp: "edFontHelp",
       fallback: "var(--primary-text-color)",
@@ -16054,6 +20756,71 @@
       fontHelp: "edFontHelp",
       fallback: "var(--secondary-text-color)",
       hidden: (config) => config.layout !== "alerts",
+    },
+    table_head: {
+      label: "edElTableHead",
+      help: "edElTableHeadHelp",
+      colorHelp: "edColorHelp",
+      fontHelp: "edFontHelp",
+      fallback: "var(--secondary-text-color)",
+      hidden: (config) => config.layout !== "table" || config.show_table_header === false,
+    },
+    table_cell: {
+      label: "edElTableCell",
+      help: "edElTableCellHelp",
+      colorHelp: "edColorHelp",
+      fontHelp: "edFontHelp",
+      fallback: "var(--primary-text-color)",
+      hidden: (config) => config.layout !== "table",
+    },
+    table_sub: {
+      label: "edElTableSub",
+      help: "edElTableSubHelp",
+      colorHelp: "edColorHelp",
+      fontHelp: "edFontHelp",
+      fallback: "var(--secondary-text-color)",
+      hidden: (config) => config.layout !== "table",
+    },
+    table_refresh: {
+      label: "edElTableRefresh",
+      help: "edElTableRefreshHelp",
+      icon: {
+        key: "table_refresh_icon",
+        label: "edToolIcon",
+        help: "edToolIconHelp",
+        size: { key: "table_refresh_icon_size", label: "edLogoSize", help: "edToolSizeHelp" },
+      },
+      // The pill it stands on: a switch on the colour's row, and its colour.
+      bgToggle: { key: "table_refresh_background", label: "edRefreshBg", help: "edRefreshBgHelp" },
+      extra: { key: "table_refresh_background_color", label: "edRefreshBgColor", help: "edRefreshBgColorHelp" },
+      colorHelp: "edColorHelp",
+      fontHelp: "edFontHelp",
+      fallback: "var(--secondary-text-color)",
+      hidden: (config) => config.layout !== "table" || config.show_table_refresh === false,
+    },
+    table_total: {
+      label: "edElTableTotal",
+      help: "edElTableTotalHelp",
+      colorHelp: "edColorHelp",
+      fontHelp: "edFontHelp",
+      fallback: "var(--primary-text-color)",
+      // There with the line itself: a table of portfolios, the sums on.
+      hidden: (config) => config.layout !== "table" || config.show_table_total === false || !tableHasPortfolio(config),
+    },
+    table_pill: {
+      label: "edElTablePill",
+      help: "edElTablePillHelp",
+      plainSize: { key: "table_pill_radius", label: "edPillRadius", help: "edPillRadiusHelp" },
+      opacity: { key: "table_pill_opacity", label: "edPillFill", help: "edPillFillHelp" },
+      // The gain or loss colour, as the figure in it.
+      noColor: true,
+      fontHelp: "edFontHelp",
+      hidden: (config) =>
+        config.layout !== "table" ||
+        !(
+          tableColumns(config, tableIsPortfolio(config)).some((column) => column.pill) ||
+          (tableByGroup(config) && groupColumns(config).some((column) => column.pill))
+        ),
     },
     alloc_total: {
       label: "edElAllocTotal",
@@ -16757,6 +21524,249 @@
       return row;
     }
 
+    // The Table format's block: where its columns start from, the columns
+    // themselves, and how the table is drawn.
+    _tableBlock(str) {
+      const preset = this._select("table_preset", [
+        { value: "auto", label: str.tbPresetAuto },
+        { value: "compact", label: str.tbPresetCompact },
+        { value: "classic", label: str.tbPresetClassic },
+        { value: "portfolio", label: str.formatAlloc },
+      ]);
+      // A starting point chosen is a starting point taken: its columns
+      // replace the ones that were set.
+      preset.addEventListener("change", () => {
+        if (Array.isArray(this._config.table_columns) && this._config.table_columns.length) this._set("table_columns", []);
+      });
+      const columns = document.createElement("div");
+      columns.className = "tb-cols";
+      columns.dataset.tableCols = "";
+      // What a row is, where the card has a portfolio to list - and with
+      // the portfolios as rows, their own columns.
+      const rows = this._fieldRow(str.tbRows, str.tbRowsHelp,
+        this._select("table_rows", [
+          { value: "instruments", label: str.tbRowsItems },
+          { value: "portfolios", label: str.tbRowsGroups },
+        ]));
+      rows.dataset.tableRows = "";
+      const groupColumnsBox = document.createElement("div");
+      groupColumnsBox.className = "tb-cols";
+      groupColumnsBox.dataset.tableGroupCols = "";
+      const groupColumnsRow = this._fieldRow(str.edTableGroupColumns, str.edTableGroupColumnsHelp, groupColumnsBox);
+      groupColumnsRow.dataset.tableGroupColsRow = "";
+      const block = this._contentBlock(str.formatTable, str.edBlockTableHelp, [
+        rows,
+        groupColumnsRow,
+        this._fieldRow(str.edTablePreset, str.edTablePresetHelp, preset),
+        this._fieldRow(str.edTableColumns, str.edTableColumnsHelp, columns),
+        this._toggleRow("show_table_search", str.edTableSearch, str.edTableSearchHelp),
+        this._toggleRow("show_table_refresh", str.edTableRefresh, str.edTableRefreshHelp),
+        this._toggleRow("show_table_header", str.edTableHeader, str.edTableHeaderHelp),
+        (() => {
+          // Only a table with a portfolio in it has sums.
+          const row = this._toggleRow("show_table_total", str.edTableTotal, str.edTableTotalHelp);
+          row.dataset.tableTotal = "";
+          return row;
+        })(),
+      ]);
+      block.dataset.tablePart = "";
+      return block;
+    }
+
+    // The table's columns as rows of the editor: each a value, a second
+    // value under it, and the buttons that move and remove it. Built anew
+    // only when the columns have changed, so that a menu just opened stays.
+    _syncTableColumns(str) {
+      const config = this._config;
+      // What a holding has is offered where there is a portfolio - and a
+      // value of that kind already chosen stays in its own menu.
+      const held = tableHasPortfolio(config);
+      const offered = (values, chosen) => values.filter((name) => held || !TABLE_HELD.includes(name) || name === chosen);
+      this._syncColumnList(str, "[data-table-cols]", {
+        key: "table_columns",
+        columns: tableColumns(config, tableIsPortfolio(config)),
+        values: (chosen) => offered(TABLE_VALUES, chosen),
+        subs: (chosen) => offered(TABLE_SUBS, chosen),
+        pillDefault: pillByDefault,
+        group: false,
+        state: held,
+      });
+      // The portfolios' own columns, while they are the rows.
+      this._syncColumnList(str, "[data-table-group-cols]", {
+        key: "table_group_columns",
+        columns: groupColumns(config),
+        values: () => GROUP_VALUES,
+        subs: () => GROUP_SUBS,
+        pillDefault: () => false,
+        group: true,
+        state: "",
+      });
+    }
+
+    // One list of columns: `spec` says which setting it writes, what its
+    // menus offer and whose words it uses.
+    _syncColumnList(str, selector, spec) {
+      const box = this.shadowRoot && this.shadowRoot.querySelector(selector);
+      if (!box) return;
+      const columns = spec.columns;
+      const nameOf = (value) => (spec.group && str[`tbNameG_${value}`]) || str[`tbName_${value}`] || str[`tbCol_${value}`] || value;
+      const infoOf = (value) => (spec.group && str[`tbInfoG_${value}`]) || str[`tbInfo_${value}`] || "";
+      const built = JSON.stringify([columns, this._hass && this._hass.language, spec.state]);
+      if (box.dataset.built === built) return;
+      box.dataset.built = built;
+      box.textContent = "";
+      // Only what is set: no empty subtitle, no empty heading.
+      const write = (next) =>
+        this._set(
+          spec.key,
+          next.map((column) => {
+            const kept = { value: column.value };
+            if (column.sub) kept.sub = column.sub;
+            if (column.label) kept.label = column.label;
+            // A starting point's own heading goes along as words, once its
+            // columns become the card's own.
+            else if (column.heading && str[column.heading]) kept.label = str[column.heading];
+            // The pill only where it is not as the value has it by itself.
+            if (TABLE_PILLS.includes(column.value) && !!column.pill !== spec.pillDefault(column.value)) kept.pill = !!column.pill;
+            return kept;
+          })
+        );
+      const menu = (values, chosen, label, none) => {
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", label);
+        select.title = label;
+        if (none) {
+          const option = document.createElement("option");
+          option.value = "";
+          option.textContent = str.tbNone;
+          select.appendChild(option);
+        }
+        for (const value of values) {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = nameOf(value);
+          select.appendChild(option);
+        }
+        select.value = chosen;
+        return select;
+      };
+      const button = (icon, label, run, off) => {
+        const el = document.createElement("button");
+        el.type = "button";
+        el.title = label;
+        el.setAttribute("aria-label", label);
+        el.disabled = !!off;
+        el.innerHTML = `<ha-icon icon="${icon}"></ha-icon>`;
+        el.addEventListener("click", run);
+        return el;
+      };
+      columns.forEach((column, at) => {
+        const row = document.createElement("div");
+        row.className = "tb-col";
+        const value = menu(spec.values(column.value), column.value, str.edTableValue, false);
+        value.addEventListener("change", () => {
+          const next = columns.map((item) => ({ ...item }));
+          next[at] = {
+            value: value.value,
+            sub: column.sub && column.sub !== value.value ? column.sub : "",
+            label: column.label,
+            heading: "",
+            pill: spec.pillDefault(value.value),
+          };
+          write(next);
+        });
+        const sub = menu(spec.subs(column.sub).filter((name) => name !== column.value), column.sub, str.edTableSub, true);
+        sub.addEventListener("change", () => {
+          const next = columns.map((item) => ({ ...item }));
+          next[at] = { value: column.value, sub: sub.value, label: column.label, pill: column.pill };
+          write(next);
+        });
+        const moves = document.createElement("div");
+        moves.className = "pick-moves";
+        const swap = (to) => () => {
+          const next = columns.map((item) => ({ ...item }));
+          [next[at], next[to]] = [next[to], next[at]];
+          write(next);
+        };
+        moves.appendChild(button("mdi:chevron-up", str.pickUp, swap(at - 1), at === 0));
+        moves.appendChild(button("mdi:chevron-down", str.pickDown, swap(at + 1), at === columns.length - 1));
+        moves.appendChild(
+          button("mdi:close", str.edTableRemove, () => write(columns.filter((item, index) => index !== at)), columns.length < 2)
+        );
+        // The heading: the value's name until another is written. Taken
+        // when the field is left, so that typing does not rebuild the row.
+        const heading = document.createElement("input");
+        heading.type = "text";
+        heading.className = "tb-col-label";
+        heading.value = column.label;
+        heading.placeholder = str[column.heading] || str[`tbCol_${column.value}`] || column.value;
+        heading.title = str.edTableHeading;
+        heading.setAttribute("aria-label", str.edTableHeading);
+        heading.addEventListener("change", () => {
+          const next = columns.map((item) => ({ ...item }));
+          next[at].label = heading.value.trim();
+          write(next);
+        });
+        // A small label over each of the three fields, with an "i": what
+        // the heading is, and what the value chosen shows.
+        const cap = (text, help, wide) => {
+          const el = document.createElement("div");
+          el.className = wide ? "tb-col-cap wide" : "tb-col-cap";
+          el.innerHTML =
+            `<span></span><span class="tooltip-anchor" data-tooltip=""><ha-icon icon="mdi:information-outline"></ha-icon></span>`;
+          el.firstChild.textContent = text;
+          el.querySelector(".tooltip-anchor").dataset.tooltip = help;
+          return el;
+        };
+        row.appendChild(cap(str.edTableHeading, str.edTableHeadingHelp, true));
+        row.appendChild(heading);
+        row.appendChild(cap(str.edTableValue, infoOf(column.value)));
+        row.appendChild(cap(str.edTableSub, column.sub ? infoOf(column.sub) : str.edTableSubNoneHelp));
+        row.appendChild(document.createElement("span"));
+        row.appendChild(value);
+        row.appendChild(sub);
+        row.appendChild(moves);
+        // The pill, for a value that is drawn in the gain or loss colour.
+        if (TABLE_PILLS.includes(column.value)) {
+          const pill = document.createElement("div");
+          pill.className = "toggle-row tb-col-pill";
+          pill.innerHTML =
+            `<label class="toggle"><input type="checkbox"><span class="track"></span></label><span class="toggle-label"></span>` +
+            `<span class="tooltip-anchor" data-tooltip=""><ha-icon icon="mdi:information-outline"></ha-icon></span>`;
+          pill.querySelector(".toggle-label").textContent = str.edTablePill;
+          pill.querySelector(".tooltip-anchor").dataset.tooltip = str.edTablePillHelp;
+          const input = pill.querySelector("input");
+          input.checked = column.pill;
+          input.setAttribute("aria-label", str.edTablePill);
+          input.addEventListener("change", () => {
+            const next = columns.map((item) => ({ ...item }));
+            next[at].pill = input.checked;
+            // The row is built anew with that: the switch keeps the keyboard.
+            this._pillFocus = `${spec.key}:${at}`;
+            write(next);
+          });
+          row.appendChild(pill);
+          if (this._pillFocus === `${spec.key}:${at}`) {
+            this._pillFocus = null;
+            setTimeout(() => input.focus(), 0);
+          }
+        }
+        box.appendChild(row);
+      });
+      const add = document.createElement("button");
+      add.type = "button";
+      add.className = "tb-col-add";
+      add.innerHTML = `<ha-icon icon="mdi:plus"></ha-icon><span></span>`;
+      add.querySelector("span").textContent = str.edTableAdd;
+      add.addEventListener("click", () => {
+        const used = columns.map((column) => column.value);
+        const value = spec.values("").find((name) => !used.includes(name)) || spec.values("")[0];
+        write(columns.concat([{ value, sub: "", pill: spec.pillDefault(value) }]));
+      });
+      box.appendChild(add);
+      this._prepareTooltips();
+    }
+
     // The card's own background: a switch, a colour, an image with an upload
     // and a preview, how that image meets the edges, and how much of both
     // comes through. Built by hand rather than from DESIGN_ELEMENTS - that
@@ -17233,6 +22243,7 @@
               { value: "detail", label: str.formatDetail },
               { value: "allocation", label: str.formatAlloc },
               { value: "alerts", label: str.formatAlerts },
+              { value: "table", label: str.formatTable },
             ]))
         );
         // Which group the card shows; its entries are the integration's
@@ -17248,12 +22259,29 @@
         single.dataset.tkDetail = "";
         body.appendChild(single);
         // Not in the Portfolio format, which lists the largest share first.
-        const sortRow = this._fieldRow(str.edSort, str.edSortHelp,
-          this._select("sort", [
-            { value: "listed", label: str.sortListed },
-            { value: "name", label: str.sortName },
-            { value: "change", label: str.sortChange },
+        // Not a plain field: what it shows while nothing is chosen depends
+        // on the format, and choosing just that writes nothing.
+        const sortSelect = document.createElement("select");
+        sortSelect.dataset.sortField = "";
+        for (const [value, label] of [["listed", str.sortListed], ["name", str.sortName], ["change", str.sortChange]]) {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = label;
+          sortSelect.appendChild(option);
+        }
+        sortSelect.addEventListener("change", () =>
+          this._set("sort", sortSelect.value === sortDefault(this._config) ? "" : sortSelect.value)
+        );
+        // What an entry is, in the three ticker formats and where the card
+        // has a portfolio.
+        const entriesRow = this._fieldRow(str.edEntries, str.edEntriesHelp,
+          this._select("tk_entries", [
+            { value: "instruments", label: str.tbRowsItems },
+            { value: "portfolios", label: str.tbRowsGroups },
           ]));
+        entriesRow.dataset.tkEntries = "";
+        body.appendChild(entriesRow);
+        const sortRow = this._fieldRow(str.edSort, str.edSortHelp, sortSelect);
         sortRow.dataset.tkSort = "";
         body.appendChild(sortRow);
         // What a click on an instrument opens. Not in the Details format,
@@ -17262,9 +22290,16 @@
           this._select("tap_action", [
             { value: "popup", label: str.tapPopup },
             { value: "tradingview", label: str.tapTradingView },
+            { value: "navigate", label: str.tapNavigate },
           ]));
-        tap.dataset.tkRows = "";
+        // In a table too: its rows are clicked like a ticker's entries.
+        tap.dataset.tkTap = "";
         body.appendChild(tap);
+        // Where "Navigate" leads: Home Assistant's own list of dashboards
+        // and views, or a path typed in.
+        const path = this._fieldRow(str.edTapPath, str.edTapPathHelp, this._picker("navigation_path", { navigation: {} }), true);
+        path.dataset.tkTapPath = "";
+        body.appendChild(path);
         body.appendChild(this._toggleRow("hide_amounts", str.edHideAmounts, str.edHideAmountsHelp));
         // The three buttons that change the integration's instruments from
         // the card, under one heading.
@@ -17279,6 +22314,8 @@
         );
       }
       if (groupKey === "content") {
+        // The Table format's own block, in the entries' place.
+        body.appendChild(this._tableBlock(str));
         const curve = this._toggleRow("show_row_sparkline", str.edRowSparkline, str.edRowSparklineHelp);
         curve.dataset.tkCurve = "";
         // What hangs on the chart stands under its switch, and goes with it.
@@ -17377,6 +22414,12 @@
             this._toggleRow("show_detail_logo", str.edRowLogo, str.edDetailLogoHelp),
             this._toggleRow("show_detail_tradingview", str.edDetailTv, str.edDetailTvHelp),
             this._toggleRow("show_detail_position", str.edDetailPosition, str.edDetailPositionHelp),
+            (() => {
+              const row = this._toggleRow("show_detail_trades", str.edDetailTrades, str.edDetailTradesHelp);
+              row.classList.add("sub-field-row", "sub-toggle-row");
+              row.dataset.withSwitch = "show_detail_position";
+              return row;
+            })(),
             this._toggleRow("show_detail_facts", str.edDetailFacts, str.edDetailFactsHelp),
             // Each figure under the list's switch, and gone with it.
             ...FACT_SWITCHES.map(([name, label, help]) => {
@@ -17398,6 +22441,7 @@
               this._movable(under(this._toggleRow(key, label, help)), "mark_order", MARK_NAMES, name, str)
             ),
             under(this._toggleRow("show_detail_volume", str.edDetailVolume, str.edDetailVolumeHelp)),
+            under(this._toggleRow("show_chart_trades", str.edChartTrades, str.edChartTradesHelp)),
             under(this._rangeRow(str)),
             under(
               this._fieldRow(str.edChartStyle, str.edChartStyleHelp,
@@ -17486,6 +22530,27 @@
         body.appendChild(this._tkSection(effect));
       }
       if (groupKey === "display") {
+        {
+          // A number, or nothing: empty is "as the theme has it".
+          const wrap = document.createElement("div");
+          wrap.className = "unit-input-wrap";
+          const input = document.createElement("input");
+          input.type = "number";
+          input.dataset.field = "card_inset";
+          input.min = 0;
+          input.max = 40;
+          input.placeholder = str.edCardInsetAuto;
+          input.addEventListener("input", () => {
+            const value = Number.parseInt(input.value, 10);
+            this._set("card_inset", input.value.trim() === "" || !Number.isFinite(value) ? "" : Math.max(0, Math.min(40, value)));
+          });
+          wrap.appendChild(input);
+          const suffix = document.createElement("span");
+          suffix.className = "unit-suffix";
+          suffix.textContent = "px";
+          wrap.appendChild(suffix);
+          body.appendChild(this._fieldRow(str.edCardInset, str.edCardInsetHelp, wrap));
+        }
         body.appendChild(this._designElement("title", DESIGN_ELEMENTS.title, str));
         body.appendChild(this._backgroundBlock(str));
         body.appendChild(this._tileBlock(str));
@@ -17574,7 +22639,71 @@
         const note = offNote();
         note.dataset.tkOffList = "";
         body.appendChild(note);
-        for (const prefix of ["logo", "row_symbol", "row_name", "row_price", "row_change"]) {
+        // The Table format's blocks and the logo it shares with the entries,
+        // built first and put in their order below.
+        const parts = { logo: this._designElement("logo", DESIGN_ELEMENTS.logo, str) };
+        for (const prefix of ["table_refresh", "table_head", "table_cell", "table_sub", "table_total", "table_pill"]) {
+          const block = this._designElement(prefix, DESIGN_ELEMENTS[prefix], str);
+          if (prefix === "table_refresh") {
+            // The pill's colour goes with the pill.
+            const fill = block.querySelector('.preset-select[data-preset-for="table_refresh_background_color"]');
+            if (fill) fill.closest(".field-row").dataset.withSwitch = "table_refresh_background";
+          }
+          parts[prefix] = block;
+        }
+        {
+          // The lines between the rows: a switch, and with it on a colour,
+          // a style and a width - as the figures' dividers have them.
+          const block = document.createElement("div");
+          block.className = "design-element";
+          block.dataset.design = "table_divider";
+          block.dataset.tablePart = "";
+          block.appendChild(this._groupLabelRow(str.edElTableDivider, str.edElTableDividerHelp));
+          const on = this._toggleRow("table_divider", str.edShowLines, str.edShowTableLinesHelp);
+          on.classList.add("sub-field-row", "sub-toggle-row");
+          block.appendChild(on);
+          const wrap = document.createElement("div");
+          wrap.className = "unit-input-wrap";
+          wrap.appendChild(this._decimalInput("table_divider_width", 0.5, 6, 0.5));
+          const suffix = document.createElement("span");
+          suffix.className = "unit-suffix";
+          suffix.textContent = "px";
+          wrap.appendChild(suffix);
+          for (const row of [
+            this._colorRow("table_divider_color", str.edColor, str.edRefColorHelp, str),
+            this._lineStyleRow("table_divider_style", str),
+            this._fieldRow(str.edChartLine, str.edLineWidthHelp, wrap, true),
+          ]) {
+            row.dataset.withSwitch = "table_divider";
+            block.appendChild(row);
+          }
+          parts.table_divider = block;
+        }
+        {
+          const block = document.createElement("div");
+          block.className = "design-element";
+          block.dataset.design = "table_arrow";
+          block.dataset.tablePart = "";
+          block.appendChild(this._groupLabelRow(str.edElTableArrow, str.edElTableArrowHelp));
+          for (const [key, label] of [
+            ["table_trend_up_icon", str.edTrendUpIcon],
+            ["table_trend_down_icon", str.edTrendDownIcon],
+            ["table_trend_flat_icon", str.edTrendFlatIcon],
+          ]) {
+            block.appendChild(this._fieldRow(label, str.edTrendIconHelp, this._picker(key, { icon: {} }), true));
+          }
+          block.appendChild(this._fieldRow(str.edArrowSize, str.edArrowSizeHelp, this._textInput("table_arrow_size", "18px"), true));
+          parts.table_arrow = block;
+        }
+        // From the top of the card down: the button, the headings and the
+        // lines, then what a row is made of, and the sums last. In the other
+        // formats only the logo of these is there, and it leads their own.
+        for (const name of [
+          "table_refresh", "table_head", "table_divider", "logo", "table_cell", "table_sub", "table_pill", "table_arrow", "table_total",
+        ]) {
+          body.appendChild(parts[name]);
+        }
+        for (const prefix of ["row_symbol", "row_name", "row_price", "row_change"]) {
           body.appendChild(this._designElement(prefix, DESIGN_ELEMENTS[prefix], str));
         }
       }
@@ -18457,6 +23586,10 @@
         }
         if (el.value !== next && !this._hasFocus(el)) el.value = next;
       });
+      each("select[data-sort-field]", (el) => {
+        const next = sortOf(config);
+        if (el.value !== next && !this._hasFocus(el)) el.value = next;
+      });
       each("input[data-toggle]", (el) => {
         const on = config[el.dataset.toggle] === true;
         el.checked = el.dataset.invert ? !on : on;
@@ -18499,7 +23632,7 @@
       const detail = layout === "detail";
       // The allocation, like the Details format, has neither entries nor
       // motion - and, like it, a title.
-      const flat = detail || layout === "allocation" || layout === "alerts";
+      const flat = detail || layout === "allocation" || layout === "alerts" || layout === "table";
       each("[data-tk-detail]", (row) => (row.hidden = !detail));
       each("[data-tk-title]", (row) => (row.hidden = !flat));
       const alloc = layout === "allocation";
@@ -18522,7 +23655,13 @@
       // The Layout tab of the entries is the Portfolio format's in that
       // format, and named after it.
       each('.tab[data-key="list"] span', (span) => {
-        span.textContent = alloc ? str.formatAlloc : layout === "alerts" ? str.formatAlerts : str.edGroupList;
+        span.textContent = alloc
+          ? str.formatAlloc
+          : layout === "alerts"
+            ? str.formatAlerts
+            : layout === "table"
+              ? str.formatTable
+              : str.edGroupList;
       });
       each("[data-perf-line]", (block) => {
         block.hidden =
@@ -18548,11 +23687,20 @@
         }
       });
       each("[data-tk-rows]", (block) => (block.hidden = flat));
+      const noTap = flat && layout !== "table";
+      each("[data-tk-tap]", (row) => (row.hidden = noTap));
+      each("[data-tk-tap-path]", (row) => (row.hidden = noTap || config.tap_action !== "navigate"));
       // The note that a tab has nothing to set: under Animation in both
       // formats without motion, under the entries' looks in the Details
       // format only - the Portfolio format has looks of its own there.
       each("[data-tk-off]", (note) => (note.hidden = "tkOffList" in note.dataset ? !detail : !flat));
       each("[data-alerts-part]", (block) => (block.hidden = layout !== "alerts"));
+      each("[data-table-part]", (block) => (block.hidden = layout !== "table"));
+      each("[data-table-total]", (row) => (row.hidden = !tableHasPortfolio(config)));
+      each("[data-table-rows]", (row) => (row.hidden = !tableHasPortfolio(config)));
+      each("[data-tk-entries]", (row) => (row.hidden = !["ticker", "line", "carousel"].includes(layout) || !tableHasPortfolio(config)));
+      each("[data-table-group-cols-row]", (row) => (row.hidden = !tableByGroup(config)));
+      this._syncTableColumns(str);
       this._syncColorRow("alerts_track_color", config.alerts_track_color || "", "rgba(127, 127, 127, 0.22)", str);
       this._syncColorRow("alerts_mark_color", config.alerts_mark_color || "", "var(--primary-text-color)", str);
       each("[data-tk-auto-block]", (block) => (block.hidden = flat));
@@ -18696,6 +23844,13 @@
       this._syncColorRow("rsi_color", config.rsi_color || "", RSI_COLOR, str);
       this._syncColorRow("grid_color", config.grid_color || "", "var(--divider-color)", str);
       this._syncColorRow("fact_divider_color", config.fact_divider_color || "", "var(--divider-color)", str);
+      this._syncColorRow("table_divider_color", config.table_divider_color || "", "var(--divider-color)", str);
+      this._syncColorRow(
+        "table_refresh_background_color",
+        config.table_refresh_background_color || "",
+        "var(--secondary-background-color)",
+        str
+      );
       each("[data-with-divider]", (row) => (row.hidden = config.fact_divider === false));
       each("[data-with-switch]", (row) => (row.hidden = config[row.dataset.withSwitch] === false));
       this._syncColorRow("ref_color", config.ref_color || "", "var(--secondary-text-color)", str);
@@ -18711,7 +23866,12 @@
         // A block whose element the card does not draw at all has nothing to
         // offer, so it goes rather than sitting there doing nothing.
         const block = root.querySelector(`[data-design="${prefix}"]`);
-        if (block) block.hidden = (el.hidden ? el.hidden(config) : false) || (flat && ROW_LOOKS.includes(prefix));
+        // In a table the logo comes with the column "Name & logo".
+        const tableLogo = prefix === "logo" && layout === "table";
+        const noLogoColumn = tableLogo && !tableColumns(config, tableIsPortfolio(config)).some((column) => column.value === "name");
+        if (block) {
+          block.hidden = (el.hidden ? el.hidden(config) : false) || (flat && ROW_LOOKS.includes(prefix) && !tableLogo) || noLogoColumn;
+        }
       }
     }
   }
@@ -19240,6 +24400,25 @@
     .pick-item span { flex: 1 1 auto; }
     /* The two arrows that move an instrument within its menu. */
     .pick-moves { flex: none; display: flex; gap: 2px; }
+    /* The Table format's columns: a value, what stands under it, and the
+       buttons that move and remove the column. */
+    .tb-cols { display: grid; gap: 6px; width: 100%; }
+    .tb-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 6px; align-items: center; }
+    .tb-col select { min-width: 0; width: 100%; }
+    .tb-col-label { grid-column: 1 / -1; min-width: 0; width: 100%; box-sizing: border-box; }
+    .tb-col-cap { display: flex; align-items: center; gap: 4px; min-width: 0; margin-bottom: -3px;
+                  font-size: 0.8em; color: var(--secondary-text-color); }
+    .tb-col-cap.wide { grid-column: 1 / -1; }
+    .tb-col .tb-col-pill { grid-column: 1 / -1; margin: 0; font-size: 0.85em; }
+    .tb-col-cap .tooltip-anchor ha-icon { --mdc-icon-size: 14px; }
+    .tb-col + .tb-col { padding-top: 6px; border-top: 1px solid rgba(127, 127, 127, 0.18); }
+    .tb-col .pick-moves button, .tb-col-add { all: unset; cursor: pointer; display: inline-flex; align-items: center;
+      justify-content: center; border-radius: 6px; color: var(--secondary-text-color); }
+    .tb-col .pick-moves button { width: 28px; height: 28px; --mdc-icon-size: 18px; }
+    .tb-col .pick-moves button:hover, .tb-col-add:hover { background: rgba(127, 127, 127, 0.18); color: var(--primary-text-color); }
+    .tb-col .pick-moves button:disabled { opacity: 0.3; cursor: default; background: none; }
+    .tb-col .pick-moves button:focus-visible, .tb-col-add:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 1px; }
+    .tb-col-add { gap: 6px; padding: 4px 10px 4px 6px; justify-self: start; font-size: 13px; --mdc-icon-size: 18px; }
     /* The same two arrows at the end of a switch's row. */
     .toggle-row > .row-moves { margin-left: auto; }
     .row-moves button:disabled { opacity: 0.3; cursor: default; background: none; }
@@ -19264,11 +24443,12 @@
     /* The card's own background on a layer of its own, behind everything
        the card draws and in front of the one the theme gives it. Its own
        layer because of the opacity: set on the card itself it would fade
-       the text with it. */
-    ha-card::before {
-      content: "";
+       the text with it. An element, not ::before: a theme may draw on the
+       card's pseudo-elements itself, and its rules would win. */
+    .mt-bg {
       position: absolute;
       inset: 0;
+      border-radius: inherit;
       background-color: var(--mt-card-background-color, transparent);
       background-image: var(--mt-card-background-image, none);
       background-size: var(--mt-card-background-size, cover);
@@ -19288,6 +24468,28 @@
     .mt-head { position: relative; z-index: 1; flex: none; display: flex; align-items: center; gap: 8px;
                padding: 12px 16px 0; }
     .mt-head:empty { display: none; }
+    /* The refresh: a pill - a centred row, the symbol and the word trimmed
+       to its capitals on its middle. */
+    .mt-back { all: unset; flex: none; cursor: pointer; width: 32px; height: 32px; margin: -4px 0 -4px -8px;
+               display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;
+               color: var(--secondary-text-color); --mdc-icon-size: 20px; }
+    .mt-back:hover { background: rgba(127, 127, 127, 0.18); color: var(--primary-text-color); }
+    .mt-back:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 1px; }
+    .mt-refresh { all: unset; flex: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+                  padding: 3px 10px; border-radius: 999px; background: var(--secondary-background-color);
+                  font-size: 0.8rem; line-height: 1.4; min-height: 1.4em; box-sizing: content-box;
+                  color: var(--secondary-text-color); white-space: nowrap; --mdc-icon-size: 16px; }
+    .mt-refresh ha-icon { display: flex; }
+    .mt-refresh .ago { text-box: trim-both cap alphabetic; }
+    .mt-refresh:hover { color: var(--primary-text-color); }
+    .mt-refresh:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
+    .mt-refresh[disabled] { cursor: default; }
+    .mt-refresh.spinning ha-icon { animation: mt-spin 1s linear infinite; }
+    @keyframes mt-spin { to { rotate: 360deg; } }
+    @media (prefers-reduced-motion: reduce) {
+      .mt-refresh.spinning ha-icon { animation: none; }
+      .mt-refresh.spinning { opacity: 0.5; }
+    }
     .mt-title { flex: 1 1 auto; min-width: 0; font-size: 1.25em; font-weight: 500; color: var(--primary-text-color);
                 overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .mt-add { all: unset; cursor: pointer; flex: none; width: 32px; height: 32px; margin: -4px -6px -4px 0;
@@ -19406,6 +24608,42 @@
                 font-weight: 500; color: var(--primary-text-color); }
     .pos-held, .pos-gain { white-space: nowrap; }
     .pos-sub { margin-top: 3px; font-size: 12px; color: var(--secondary-text-color); }
+    .pos-trades { margin-top: 8px; padding-top: 4px; border-top: 1px solid var(--divider-color, rgba(127, 127, 127, 0.25));
+                  font-size: 12px; font-variant-numeric: tabular-nums;
+                  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+    /* One grid for all rows, so that a purchase without a day keeps its
+       place in the columns. */
+    .pt-row { display: contents; }
+    .pt-row > * { padding: 2px 0; }
+    .pt-row > .pt-kind { padding: 0 8px; }
+    .pt-sum { text-align: right; grid-column: 4; }
+    .pos-trades:not(.all) .pt-row.more { display: none; }
+    .pt-row.edit > * { cursor: pointer; }
+    .pt-row.edit:hover > .pt-what { text-decoration: underline; }
+    .pt-row.edit > .pt-what:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; border-radius: 4px; }
+    .pt-date, .pt-sum { color: var(--secondary-text-color); white-space: nowrap; }
+    .pt-what { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--primary-text-color); }
+    .pt-kind { display: inline-flex; align-items: center; justify-content: center; min-height: 1lh; padding: 0 8px;
+               border-radius: 999px; font-size: 11px; }
+    .pt-kind .pill-text { text-box: trim-both cap alphabetic; }
+    .pt-kind.buy { color: var(--mt-gain); background: color-mix(in srgb, var(--mt-gain) 16%, transparent); }
+    .pt-kind.sell { color: var(--mt-loss); background: color-mix(in srgb, var(--mt-loss) 16%, transparent); }
+    .pt-sum.gain { color: var(--mt-gain); }
+    .pt-sum.loss { color: var(--mt-loss); }
+    .pt-more { all: unset; cursor: pointer; grid-column: 1 / -1; justify-self: start; padding: 3px 0; color: var(--primary-color); }
+    .pt-more:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; border-radius: 4px; }
+    /* A purchase: a triangle pointing up, its tip just under the price it
+       was made at. A sale: one pointing down, its tip just above. */
+    .plot .trade { position: absolute; z-index: 1; width: 0; height: 0; margin-left: -5px;
+                   border-left: 5px solid transparent; border-right: 5px solid transparent; }
+    .plot .trade.buy { margin-top: 3px; border-bottom: 8px solid var(--mt-gain); }
+    .plot .trade.sell { margin-top: -11px; border-top: 8px solid var(--mt-loss); }
+    .plot .avg-line { position: absolute; left: 0; right: 0; height: 0; pointer-events: none;
+                      border-top: 1px dashed var(--secondary-text-color); opacity: 0.75; }
+    .plot .avg-line span { position: absolute; left: 4px; bottom: 2px; font-size: 10px; line-height: 1;
+                           color: var(--secondary-text-color); white-space: nowrap; }
+    .tip .avg.buy i { background: var(--mt-gain); }
+    .tip .avg.sell i { background: var(--mt-loss); }
 
     /* The periods as plain words at the right, the one on show underlined;
        at the left the quiet button for candlesticks or a line. */
@@ -19550,6 +24788,10 @@
 
   const TICKER_STYLE = `
     ha-card.tkr { display: block; padding: 0; height: auto; }
+    /* Everything the card shows, in a box that ends before a frame the
+       theme draws inside the card (see _fitFrame) and cuts off there. */
+    .mt-in { position: relative; z-index: 1; margin: var(--mt-frame, 0px); border-radius: var(--mt-frame-radius, 0px);
+             overflow: hidden; }
     .tk-strip { position: relative; z-index: 1; }
     .tk-msg { padding: 14px 16px; color: var(--secondary-text-color); }
     /* The allocation: the ring with the sum in it, and the list beside it -
@@ -19667,6 +24909,88 @@
     .pf-days { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px;
                color: var(--secondary-text-color); }
     .pf-msg, .pf-note { margin-top: 8px; font-size: 12px; color: var(--secondary-text-color); }
+    /* The Table format. Wider than the card, the table is moved sideways
+       inside its own box - the card itself never scrolls. */
+    .tb-wrap { overflow-x: auto; padding: 4px 4px 8px; -webkit-overflow-scrolling: touch; }
+    .tb { border-collapse: separate; border-spacing: 0; width: 100%; font-variant-numeric: tabular-nums; font-size: 14px;
+          --dv: var(--mt-tb-div, var(--divider-color, rgba(127, 127, 127, 0.25))); --dw: var(--mt-tb-div-line, 1px); }
+    /* The line under a row is the row's, not its cells': one drawing from
+       edge to edge. As borders of the cells a dashed or dotted line began
+       anew in every column and did not meet at the joins. The cells only
+       keep the room for it. */
+    .tb tr { background-repeat: repeat-x; background-position: left bottom; background-size: 100% var(--dw);
+             background-image: linear-gradient(var(--dv), var(--dv)); }
+    .tb.dv-dashed tr { background-size: calc(var(--dw) * 5) var(--dw);
+                       background-image: linear-gradient(90deg, var(--dv) 60%, transparent 60%); }
+    .tb.dv-dotted tr { background-size: calc(var(--dw) * 2) var(--dw);
+                       background-image: radial-gradient(circle closest-side, var(--dv) 96%, transparent); }
+    .tb.dv-none tr, .tb tbody tr:last-child { background-image: none; }
+    .tb tfoot tr { background-position: left top; }
+    .tb.dv-none th, .tb.dv-none td { border-width: 0; }
+    .tb th, .tb td { padding: 8px 6px; text-align: right; white-space: nowrap; vertical-align: middle;
+                     border-bottom: var(--dw) solid transparent; }
+    .tb th { font-weight: 400; font-size: 12px; color: var(--secondary-text-color); cursor: pointer; user-select: none; }
+    /* The mark of the sorting stands beside the heading without taking
+       room: the heading stays where it is, on its line and at its edge.
+       Before a heading that is set to the right or the middle, after one
+       set to the left. The glyph fills only the middle of its box, so the
+       box may reach a little into the heading. */
+    .tb .tb-th { position: relative; display: inline-block; }
+    /* The search field, after the name's heading: small, quiet, and no
+       wider than the column has room for. */
+    .tb th.grow { white-space: nowrap; }
+    .tb .tb-search { all: unset; box-sizing: border-box; width: min(140px, 100% - 70px); min-width: 64px; height: 22px;
+                     margin-inline-start: 22px; padding: 0 8px; vertical-align: middle; cursor: text;
+                     border-radius: 999px; background: rgba(127, 127, 127, 0.14);
+                     font-size: 12px; color: var(--primary-text-color); }
+    .tb .tb-search::placeholder { color: var(--secondary-text-color); opacity: 0.8; }
+    .tb .tb-search:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 1px; }
+    .tb th ha-icon { --mdc-icon-size: 16px; position: absolute; top: 50%; right: calc(100% - 3px); transform: translateY(-50%); }
+    .tb th.l ha-icon { right: auto; left: calc(100% - 3px); }
+    .tb th.l, .tb td.l { text-align: left; }
+    .tb th.c, .tb td.c { text-align: center; }
+    .tb tbody tr { cursor: pointer; }
+    .tb tbody tr:hover { background-color: rgba(127, 127, 127, 0.08); }
+    .tb tbody tr:last-child td { border-bottom: 0; }
+    .tb tfoot td { border-bottom: 0; border-top: var(--dw) solid transparent; }
+    .tb b { font-weight: 500; }
+    /* A little air over what stands under a value - in every column the
+       same, so that a pill's edge does not sit on it. */
+    .tb .tb-sub { display: block; margin-top: 2px; font-size: 11px; line-height: 1.35; color: var(--secondary-text-color); font-weight: 400; }
+    .tb .tb-name { display: flex; align-items: center; gap: 8px; }
+    /* max-width 0 takes the text out of the column's width: the column gets
+       its share of the table and what the others leave, never less than
+       120 px, and the text ends in an ellipsis. Wider tables still move
+       sideways. */
+    .tb th.grow, .tb td.grow { width: 45%; max-width: 0; min-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+    .tb .tb-name > span { flex: 1 1 auto; min-width: 0; }
+    .tb .tb-name .logo { flex: none; }
+    .tb .tb-name b, .tb .tb-name .tb-sub { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tb .logo { width: var(--mt-logo-size, 24px); height: var(--mt-logo-size, 24px); font-size: 0.8em; }
+    .tb .gain { color: var(--mt-gain); }
+    .tb .loss { color: var(--mt-loss); }
+    /* A pill is as high as the line it stands in, no more: the row keeps
+       its measure with or without one, so values stand on one line across
+       the columns and what is under them on another. Its word is trimmed
+       to its capitals and set on the pill's middle - which puts its
+       baseline where the line's own is. */
+    .tb td { line-height: 1.45; }
+    .tb .tb-pill { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+                   min-height: 1lh; padding: 0 8px; vertical-align: baseline;
+                   border-radius: var(--mt-pill-radius, 999px); background: rgba(127, 127, 127, 0.14); }
+    .tb .tb-pill .pill-text { text-box: trim-both cap alphabetic; }
+    .tb .tb-piled { display: inline-block; text-align: center; vertical-align: middle; }
+    .tb .tb-pill.gain { background: color-mix(in srgb, var(--mt-gain) var(--mt-pill-fill, 16%), transparent); }
+    .tb .tb-pill.loss { background: color-mix(in srgb, var(--mt-loss) var(--mt-pill-fill, 16%), transparent); }
+    .tb .tb-trend ha-icon { --mdc-icon-size: var(--mt-tb-arrow, 18px); vertical-align: middle; }
+    .tb .tb-trend { color: var(--secondary-text-color); }
+    .tb .tb-trend.gain { color: var(--mt-gain); }
+    .tb .tb-trend.loss { color: var(--mt-loss); }
+    .tb .tb-spark { display: inline-block; width: 72px; height: 24px; vertical-align: middle; }
+    .tb .tb-spark svg { display: block; width: 100%; height: 100%; }
+    .tb .tk-alert, .tb .tk-news { display: inline-flex; vertical-align: middle; }
+    .tb .tb-sub .tk-alert, .tb .tb-sub .tk-news { margin-top: 2px; }
+    .tb tr.na td { opacity: 0.55; }
     .tk-marquee { overflow: hidden; }
     .tk-run, .tk-set { display: flex; width: max-content; }
     .tk-run.auto { animation: tk-run var(--tk-dur, 30s) linear infinite; }
@@ -19793,6 +25117,7 @@
        tall as the page; given a cell of a fixed height in a sections view,
        the page scrolls inside it instead of spilling out. */
     ha-card.tkr.detail { display: flex; flex-direction: column; height: 100%; }
+    ha-card.tkr.detail .mt-in { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
     .tk-inline { position: relative; z-index: 1; flex: 1 1 auto; min-height: 0; max-height: none; }
     .tk-inline .tk-nav { padding: 8px 10px 0; }
     .tk-inline .tk-body { padding: 8px 16px 16px; }
@@ -20078,6 +25403,7 @@
         { label: str.formatTicker, config: { type } },
         { label: str.formatAlloc, config: { type, layout: "allocation" } },
         { label: str.formatAlerts, config: { type, layout: "alerts" } },
+        { label: str.formatTable, config: { type, layout: "table" } },
       ];
     },
   };

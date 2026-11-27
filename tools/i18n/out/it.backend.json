@@ -188,6 +188,7 @@
                         "move": "📂 Sposta in un altro gruppo",
                         "add_lot": "➕ Aggiungi un acquisto",
                         "sell_lot": "➖ Aggiungi una vendita",
+                        "edit_lot": "✏️ Modifica un acquisto o una vendita",
                         "remove_lots": "🗑️ Rimuovi acquisti e vendite",
                         "alerts": "🔔 Avvisi di prezzo",
                         "color": "🎨 Colore",
@@ -257,6 +258,53 @@
                         "date": "Vuoto significa oggi. Stabilisce l'ordine in cui vengono conteggiati acquisti e vendite.",
                         "fees": "Facoltativo. Quanto è costata la vendita in commissioni.",
                         "taxes": "Facoltativo. Quanto è stato pagato in tasse."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Modifica un acquisto o una vendita",
+                    "description": "{name}: scegli la voce da modificare.",
+                    "data": {
+                        "lot": "Inseriti"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Modifica un acquisto",
+                    "description": "{name} - come inserito: {entry}.",
+                    "data": {
+                        "quantity": "Quantità acquistata",
+                        "price": "Prezzo di acquisto unitario ({currency})",
+                        "date": "Data di acquisto",
+                        "fees": "Commissioni ({currency})",
+                        "taxes": "Tasse ({currency})",
+                        "remove_lot": "Rimuovi questo acquisto"
+                    },
+                    "data_description": {
+                        "quantity": "Quante azioni, quote o monete sono state acquistate.",
+                        "price": "Quanto è costata una di esse, nella valuta in cui viene negoziata questa quotazione.",
+                        "date": "Facoltativo. Decide solo l'ordine in cui vengono conteggiati acquisti e vendite.",
+                        "fees": "Facoltativo. Quanto è costato l'acquisto in commissioni.",
+                        "taxes": "Facoltativo. Quanto è stato pagato in tasse.",
+                        "remove_lot": "Elimina questo acquisto invece di modificarlo."
+                    }
+                },
+                "change_sale": {
+                    "title": "Modifica una vendita",
+                    "description": "{name} - come inserita: {entry}.",
+                    "data": {
+                        "quantity": "Quantità venduta",
+                        "price": "Prezzo di vendita unitario ({currency})",
+                        "date": "Data di vendita",
+                        "fees": "Commissioni ({currency})",
+                        "taxes": "Tasse ({currency})",
+                        "remove_lot": "Rimuovi questa vendita"
+                    },
+                    "data_description": {
+                        "quantity": "Quante ne sono state vendute. Escono dalla posizione al prezzo medio di carico attuale.",
+                        "price": "Quanto è stato incassato per ciascuna, nella valuta in cui viene negoziata questa quotazione.",
+                        "date": "Stabilisce l'ordine in cui vengono conteggiati acquisti e vendite.",
+                        "fees": "Facoltativo. Quanto è costata la vendita in commissioni.",
+                        "taxes": "Facoltativo. Quanto è stato pagato in tasse.",
+                        "remove_lot": "Elimina questa vendita invece di modificarla."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Scegli uno dei colori o digita un valore come #009999.",
                 "group_exists": "Esiste già un gruppo con questo nome.",
                 "sell_too_many": "È più di quanto possiedi.",
-                "no_rate": "La BCE non pubblica un tasso di riferimento per la valuta di questa quotazione, quindi non può essere convertita."
+                "no_rate": "La BCE non pubblica un tasso di riferimento per la valuta di questa quotazione, quindi non può essere convertita.",
+                "lots_oversold": "Con questa modifica una vendita toglierebbe più di quanto possiedi in quel giorno."
             },
             "abort": {
                 "reconfigure_successful": "Il titolo è stato aggiornato."

@@ -188,6 +188,7 @@
                         "move": "📂 Başka bir gruba taşı",
                         "add_lot": "➕ Alış ekle",
                         "sell_lot": "➖ Satış ekle",
+                        "edit_lot": "✏️ Alış veya satışı değiştir",
                         "remove_lots": "🗑️ Alış ve satışları kaldır",
                         "alerts": "🔔 Fiyat alarmları",
                         "color": "🎨 Renk",
@@ -257,6 +258,53 @@
                         "date": "Boş bırakılırsa bugün. Alış ve satışların hangi sırayla hesaplanacağını belirler.",
                         "fees": "İsteğe bağlı. Satışın ücret olarak maliyeti.",
                         "taxes": "İsteğe bağlı. Bunun için ödenen vergi."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Alış veya satışı değiştir",
+                    "description": "{name}: değiştirilecek kaydı seçin.",
+                    "data": {
+                        "lot": "Girilenler"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Alışı değiştir",
+                    "description": "{name} - girildiği gibi: {entry}.",
+                    "data": {
+                        "quantity": "Alınan miktar",
+                        "price": "Birim alış fiyatı ({currency})",
+                        "date": "Alış tarihi",
+                        "fees": "Ücretler ({currency})",
+                        "taxes": "Vergiler ({currency})",
+                        "remove_lot": "Bu alışı kaldır"
+                    },
+                    "data_description": {
+                        "quantity": "Kaç hisse, fon payı veya coin alındığı.",
+                        "price": "Bir tanesinin maliyeti, bu kotasyonun işlem gördüğü para biriminde.",
+                        "date": "İsteğe bağlı. Yalnızca alış ve satışların hangi sırayla hesaplanacağını belirler.",
+                        "fees": "İsteğe bağlı. Alışın ücret olarak maliyeti.",
+                        "taxes": "İsteğe bağlı. Bunun için ödenen vergi.",
+                        "remove_lot": "Bu alışı değiştirmek yerine kaldırır."
+                    }
+                },
+                "change_sale": {
+                    "title": "Satışı değiştir",
+                    "description": "{name} - girildiği gibi: {entry}.",
+                    "data": {
+                        "quantity": "Satılan miktar",
+                        "price": "Birim satış fiyatı ({currency})",
+                        "date": "Satış tarihi",
+                        "fees": "Ücretler ({currency})",
+                        "taxes": "Vergiler ({currency})",
+                        "remove_lot": "Bu satışı kaldır"
+                    },
+                    "data_description": {
+                        "quantity": "Kaç tane satıldığı. Pozisyondan, o ana kadarki ortalama fiyatla düşülür.",
+                        "price": "Bir tanesinin getirdiği tutar, bu kotasyonun işlem gördüğü para biriminde.",
+                        "date": "Alış ve satışların hangi sırayla hesaplanacağını belirler.",
+                        "fees": "İsteğe bağlı. Satışın ücret olarak maliyeti.",
+                        "taxes": "İsteğe bağlı. Bunun için ödenen vergi.",
+                        "remove_lot": "Bu satışı değiştirmek yerine kaldırır."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Renklerden birini seçin veya #009999 gibi bir değer yazın.",
                 "group_exists": "Bu adda bir grup zaten var.",
                 "sell_too_many": "Bu, pozisyondaki miktardan fazla.",
-                "no_rate": "AMB bu kotasyonun para birimi için referans kuru yayımlamıyor, bu yüzden çevrilemez."
+                "no_rate": "AMB bu kotasyonun para birimi için referans kuru yayımlamıyor, bu yüzden çevrilemez.",
+                "lots_oversold": "Bu değişiklikle bir satış, kendi gününde pozisyondakinden fazlasını düşmüş olur."
             },
             "abort": {
                 "reconfigure_successful": "Enstrüman güncellendi."

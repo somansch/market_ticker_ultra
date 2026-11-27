@@ -40,7 +40,7 @@ from .const import (
 )
 from .coordinator import MarketTickerUltraCoordinator
 from .groups import groups_of, is_portfolio
-from .holdings import CONF_LOTS, holding_from_lots, ledger_from_lots
+from .holdings import CONF_LOTS, holding_from_lots, ledger_from_lots, trades_from_lots
 from .logos import ATTRIBUTION, OWN_LOGO_RENEW, OWN_LOGO_VALID, logo_url
 from .news import async_group_news, async_news
 from .performance import PERFORMANCE_RANGES, async_performance
@@ -135,6 +135,9 @@ def websocket_instruments(
                     if ledger.empty
                     else {"realized": ledger.realized, "fees": ledger.fees, "taxes": ledger.taxes}
                 ),
+                # The single purchases and sales, oldest first, in its
+                # currency: what the card marks in the chart and lists.
+                "trades": trades_from_lots(lots) or None,
                 "symbol": symbol,
                 "isin": data.get(CONF_ISIN),
                 "type": kind,
@@ -304,6 +307,25 @@ async def websocket_news(
     connection.send_result(msg["id"], {"news": await async_news(coordinator, instrument, name, msg.get("language"))})
 
 
+@websocket_api.websocket_command({vol.Required("type"): f"{DOMAIN}/refresh"})
+@websocket_api.async_response
+async def websocket_refresh(
+    hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict[str, Any]
+) -> None:
+    """Ask the sources again now - the card's refresh button. Answers once
+    the prices are in."""
+    coordinator = _coordinator(hass)
+    if coordinator is None:
+        connection.send_error(msg["id"], "not_found", "Market Ticker Ultra is not set up")
+        return
+    await coordinator.async_refresh()
+    data = coordinator.data
+    connection.send_result(
+        msg["id"],
+        {"fetched_at": data.fetched_at.isoformat() if data and data.fetched_at else None},
+    )
+
+
 @websocket_api.websocket_command({vol.Required("type"): f"{DOMAIN}/card_version"})
 @callback
 def websocket_card_version(
@@ -324,3 +346,4 @@ def async_register(hass: HomeAssistant) -> None:
     websocket_api.async_register_command(hass, websocket_details)
     websocket_api.async_register_command(hass, websocket_news)
     websocket_api.async_register_command(hass, websocket_card_version)
+    websocket_api.async_register_command(hass, websocket_refresh)

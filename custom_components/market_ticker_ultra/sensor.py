@@ -16,6 +16,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import MarketTickerUltraConfigEntry
@@ -137,7 +138,7 @@ def _entry_device(entry: MarketTickerUltraConfigEntry) -> DeviceInfo:
     )
 
 
-class PriceSensor(CoordinatorEntity[MarketTickerUltraCoordinator], SensorEntity):
+class PriceSensor(CoordinatorEntity[MarketTickerUltraCoordinator], RestoreEntity, SensorEntity):
     """What one instrument costs, with the rest of its quote as attributes."""
 
     _attr_has_entity_name = True
@@ -159,6 +160,25 @@ class PriceSensor(CoordinatorEntity[MarketTickerUltraCoordinator], SensorEntity)
         self._attr_unique_id = f"{subentry.subentry_id}_price"
         self._attr_icon = _ICONS.get(data.get(CONF_TYPE) or "", "mdi:chart-line")
         self._attr_device_info = _instrument_device(subentry)
+
+    async def async_added_to_hass(self) -> None:
+        """Take the trend up where it was: which way the price went with
+        its last update is known from one poll to the next only, and a
+        restart would leave it empty until the price moves again."""
+        await super().async_added_to_hass()
+        if self._id in self.coordinator.trends:
+            return
+        last = await self.async_get_last_state()
+        if last is None or last.attributes.get("trend") not in ("up", "down", "flat"):
+            return
+        # Only in the currency it was measured in.
+        if last.attributes.get("unit_of_measurement") != self.native_unit_of_measurement:
+            return
+        try:
+            difference = float(last.attributes.get("trend_change") or 0.0)
+        except (TypeError, ValueError):
+            difference = 0.0
+        self.coordinator.trends[self._id] = (last.attributes["trend"], difference)
 
     @property
     def _quote(self) -> Quote | None:
@@ -207,6 +227,7 @@ class PriceSensor(CoordinatorEntity[MarketTickerUltraCoordinator], SensorEntity)
         def rounded(value: float | None, digits: int = quote.precision) -> float | None:
             return None if value is None else round(value, digits)
 
+        trend = self.coordinator.trends.get(self._id)
         attrs.update(
             {
                 "change": rounded(quote.change),
@@ -219,6 +240,10 @@ class PriceSensor(CoordinatorEntity[MarketTickerUltraCoordinator], SensorEntity)
                 "volume": quote.volume,
                 "market_state": quote.market_state,
                 "quote_time": quote.quote_time.isoformat() if quote.quote_time else None,
+                # Which way the price went with its last update, and by how
+                # much - None until there has been one since the start.
+                "trend": trend[0] if trend else None,
+                "trend_change": rounded(trend[1]) if trend else None,
                 "exchange": quote.exchange,
                 "instrument_type": quote.type,
                 "instrument_name": quote.name,

@@ -188,6 +188,7 @@
                         "move": "📂 Move to another group",
                         "add_lot": "➕ Add a purchase",
                         "sell_lot": "➖ Add a sale",
+                        "edit_lot": "✏️ Change a purchase or sale",
                         "remove_lots": "🗑️ Remove purchases and sales",
                         "alerts": "🔔 Price alerts",
                         "color": "🎨 Colour",
@@ -257,6 +258,53 @@
                         "date": "Empty means today. It sets the order in which purchases and sales are counted.",
                         "fees": "Optional. What the sale cost in fees.",
                         "taxes": "Optional. What was paid in taxes on it."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Change a purchase or sale",
+                    "description": "{name}: choose the entry to change.",
+                    "data": {
+                        "lot": "Entered"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Change a purchase",
+                    "description": "{name} - as entered: {entry}.",
+                    "data": {
+                        "quantity": "Quantity bought",
+                        "price": "Purchase price each ({currency})",
+                        "date": "Purchase date",
+                        "fees": "Fees ({currency})",
+                        "taxes": "Taxes ({currency})",
+                        "remove_lot": "Remove this purchase"
+                    },
+                    "data_description": {
+                        "quantity": "How many shares, units or coins were bought.",
+                        "price": "What one of them cost, in the currency this listing trades in.",
+                        "date": "Optional. It only decides the order in which purchases and sales are counted.",
+                        "fees": "Optional. What the purchase cost in fees.",
+                        "taxes": "Optional. What was paid in taxes on it.",
+                        "remove_lot": "Takes this purchase out instead of changing it."
+                    }
+                },
+                "change_sale": {
+                    "title": "Change a sale",
+                    "description": "{name} - as entered: {entry}.",
+                    "data": {
+                        "quantity": "Quantity sold",
+                        "price": "Sale price each ({currency})",
+                        "date": "Sale date",
+                        "fees": "Fees ({currency})",
+                        "taxes": "Taxes ({currency})",
+                        "remove_lot": "Remove this sale"
+                    },
+                    "data_description": {
+                        "quantity": "How many were sold. They leave the holding at its average price so far.",
+                        "price": "What one of them brought in, in the currency this listing trades in.",
+                        "date": "It sets the order in which purchases and sales are counted.",
+                        "fees": "Optional. What the sale cost in fees.",
+                        "taxes": "Optional. What was paid in taxes on it.",
+                        "remove_lot": "Takes this sale out instead of changing it."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Choose one of the colours, or type a value such as #009999.",
                 "group_exists": "A group of this name already exists.",
                 "sell_too_many": "That is more than is held.",
-                "no_rate": "The ECB publishes no reference rate for this listing's currency, so it cannot be converted."
+                "no_rate": "The ECB publishes no reference rate for this listing's currency, so it cannot be converted.",
+                "lots_oversold": "With this change a sale would take out more than is held on its day."
             },
             "abort": {
                 "reconfigure_successful": "The instrument was updated."

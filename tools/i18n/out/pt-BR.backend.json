@@ -188,6 +188,7 @@
                         "move": "📂 Mover para outro grupo",
                         "add_lot": "➕ Adicionar uma compra",
                         "sell_lot": "➖ Adicionar uma venda",
+                        "edit_lot": "✏️ Alterar uma compra ou venda",
                         "remove_lots": "🗑️ Remover compras e vendas",
                         "alerts": "🔔 Alertas de preço",
                         "color": "🎨 Cor",
@@ -257,6 +258,53 @@
                         "date": "Vazio significa hoje. Define a ordem em que compras e vendas são contadas.",
                         "fees": "Opcional. Quanto a venda custou em taxas.",
                         "taxes": "Opcional. Quanto foi pago de impostos sobre ela."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Alterar uma compra ou venda",
+                    "description": "{name}: escolha o lançamento a alterar.",
+                    "data": {
+                        "lot": "Lançamento"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Alterar uma compra",
+                    "description": "{name} - como lançado: {entry}.",
+                    "data": {
+                        "quantity": "Quantidade comprada",
+                        "price": "Preço de compra unitário ({currency})",
+                        "date": "Data da compra",
+                        "fees": "Taxas ({currency})",
+                        "taxes": "Impostos ({currency})",
+                        "remove_lot": "Remover esta compra"
+                    },
+                    "data_description": {
+                        "quantity": "Quantas ações, cotas ou criptomoedas foram compradas.",
+                        "price": "Quanto custou cada uma, na moeda em que esta listagem é negociada.",
+                        "date": "Opcional. Define apenas a ordem em que compras e vendas são contadas.",
+                        "fees": "Opcional. Quanto a compra custou em taxas.",
+                        "taxes": "Opcional. Quanto foi pago de impostos sobre ela.",
+                        "remove_lot": "Remove esta compra em vez de alterá-la."
+                    }
+                },
+                "change_sale": {
+                    "title": "Alterar uma venda",
+                    "description": "{name} - como lançado: {entry}.",
+                    "data": {
+                        "quantity": "Quantidade vendida",
+                        "price": "Preço de venda unitário ({currency})",
+                        "date": "Data da venda",
+                        "fees": "Taxas ({currency})",
+                        "taxes": "Impostos ({currency})",
+                        "remove_lot": "Remover esta venda"
+                    },
+                    "data_description": {
+                        "quantity": "Quantas foram vendidas. Saem da posição pelo preço médio até então.",
+                        "price": "Quanto rendeu cada uma, na moeda em que esta listagem é negociada.",
+                        "date": "Define a ordem em que compras e vendas são contadas.",
+                        "fees": "Opcional. Quanto a venda custou em taxas.",
+                        "taxes": "Opcional. Quanto foi pago de impostos sobre ela.",
+                        "remove_lot": "Remove esta venda em vez de alterá-la."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Escolha uma das cores ou digite um valor como #009999.",
                 "group_exists": "Já existe um grupo com este nome.",
                 "sell_too_many": "Isso é mais do que você possui.",
-                "no_rate": "O BCE não publica taxa de referência para a moeda desta listagem, por isso ela não pode ser convertida."
+                "no_rate": "O BCE não publica taxa de referência para a moeda desta listagem, por isso ela não pode ser convertida.",
+                "lots_oversold": "Com esta alteração, uma venda tiraria mais do que há em posição no dia dela."
             },
             "abort": {
                 "reconfigure_successful": "O ativo foi atualizado."

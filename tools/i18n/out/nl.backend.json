@@ -188,6 +188,7 @@
                         "move": "📂 Naar een andere groep verplaatsen",
                         "add_lot": "➕ Aankoop toevoegen",
                         "sell_lot": "➖ Verkoop toevoegen",
+                        "edit_lot": "✏️ Aankoop of verkoop wijzigen",
                         "remove_lots": "🗑️ Aankopen en verkopen verwijderen",
                         "alerts": "🔔 Koersalarmen",
                         "color": "🎨 Kleur",
@@ -257,6 +258,53 @@
                         "date": "Leeg betekent vandaag. Bepaalt de volgorde waarin aankopen en verkopen worden meegeteld.",
                         "fees": "Optioneel. De transactiekosten van de verkoop.",
                         "taxes": "Optioneel. De belasting die erover is betaald."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Aankoop of verkoop wijzigen",
+                    "description": "{name}: kies wat gewijzigd moet worden.",
+                    "data": {
+                        "lot": "Ingevoerd"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Aankoop wijzigen",
+                    "description": "{name} - zoals ingevoerd: {entry}.",
+                    "data": {
+                        "quantity": "Gekocht aantal",
+                        "price": "Aankoopprijs per stuk ({currency})",
+                        "date": "Aankoopdatum",
+                        "fees": "Kosten ({currency})",
+                        "taxes": "Belastingen ({currency})",
+                        "remove_lot": "Deze aankoop verwijderen"
+                    },
+                    "data_description": {
+                        "quantity": "Hoeveel aandelen, participaties of munten er gekocht zijn.",
+                        "price": "Wat één ervan kostte, in de valuta waarin deze notering verhandeld wordt.",
+                        "date": "Optioneel. Bepaalt alleen de volgorde waarin aankopen en verkopen worden meegeteld.",
+                        "fees": "Optioneel. De transactiekosten van de aankoop.",
+                        "taxes": "Optioneel. De belasting die erover is betaald.",
+                        "remove_lot": "Haalt deze aankoop weg in plaats van hem te wijzigen."
+                    }
+                },
+                "change_sale": {
+                    "title": "Verkoop wijzigen",
+                    "description": "{name} - zoals ingevoerd: {entry}.",
+                    "data": {
+                        "quantity": "Verkocht aantal",
+                        "price": "Verkoopprijs per stuk ({currency})",
+                        "date": "Verkoopdatum",
+                        "fees": "Kosten ({currency})",
+                        "taxes": "Belastingen ({currency})",
+                        "remove_lot": "Deze verkoop verwijderen"
+                    },
+                    "data_description": {
+                        "quantity": "Hoeveel er verkocht zijn. Ze verlaten de positie tegen de gemiddelde prijs tot nu toe.",
+                        "price": "Wat één ervan opbracht, in de valuta waarin deze notering verhandeld wordt.",
+                        "date": "Bepaalt de volgorde waarin aankopen en verkopen worden meegeteld.",
+                        "fees": "Optioneel. De transactiekosten van de verkoop.",
+                        "taxes": "Optioneel. De belasting die erover is betaald.",
+                        "remove_lot": "Haalt deze verkoop weg in plaats van hem te wijzigen."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Kies een van de kleuren, of typ een waarde zoals #009999.",
                 "group_exists": "Er bestaat al een groep met deze naam.",
                 "sell_too_many": "Dat is meer dan er in bezit is.",
-                "no_rate": "De ECB publiceert geen referentiekoers voor de valuta van deze notering, dus kan die niet worden omgerekend."
+                "no_rate": "De ECB publiceert geen referentiekoers voor de valuta van deze notering, dus kan die niet worden omgerekend.",
+                "lots_oversold": "Met deze wijziging zou een verkoop meer weghalen dan er op die dag in bezit is."
             },
             "abort": {
                 "reconfigure_successful": "Het instrument is bijgewerkt."

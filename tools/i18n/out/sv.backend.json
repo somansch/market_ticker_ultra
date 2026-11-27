@@ -188,6 +188,7 @@
                         "move": "📂 Flytta till en annan grupp",
                         "add_lot": "➕ Lägg till ett köp",
                         "sell_lot": "➖ Lägg till en försäljning",
+                        "edit_lot": "✏️ Ändra ett köp eller en försäljning",
                         "remove_lots": "🗑️ Ta bort köp och försäljningar",
                         "alerts": "🔔 Kurslarm",
                         "color": "🎨 Färg",
@@ -257,6 +258,53 @@
                         "date": "Tomt betyder i dag. Avgör i vilken ordning köp och försäljningar räknas.",
                         "fees": "Valfritt. Vad försäljningen kostade i avgifter.",
                         "taxes": "Valfritt. Vad som betalades i skatt på det."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Ändra ett köp eller en försäljning",
+                    "description": "{name}: välj posten som ska ändras.",
+                    "data": {
+                        "lot": "Inlagda"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Ändra ett köp",
+                    "description": "{name} - som inlagt: {entry}.",
+                    "data": {
+                        "quantity": "Köpt antal",
+                        "price": "Köpkurs per st ({currency})",
+                        "date": "Köpdatum",
+                        "fees": "Avgifter ({currency})",
+                        "taxes": "Skatter ({currency})",
+                        "remove_lot": "Ta bort det här köpet"
+                    },
+                    "data_description": {
+                        "quantity": "Hur många aktier, andelar eller mynt som köptes.",
+                        "price": "Vad en av dem kostade, i den valuta som noteringen handlas i.",
+                        "date": "Valfritt. Avgör bara i vilken ordning köp och försäljningar räknas.",
+                        "fees": "Valfritt. Vad köpet kostade i avgifter.",
+                        "taxes": "Valfritt. Vad som betalades i skatt på det.",
+                        "remove_lot": "Tar bort det här köpet i stället för att ändra det."
+                    }
+                },
+                "change_sale": {
+                    "title": "Ändra en försäljning",
+                    "description": "{name} - som inlagt: {entry}.",
+                    "data": {
+                        "quantity": "Sålt antal",
+                        "price": "Säljkurs per st ({currency})",
+                        "date": "Säljdatum",
+                        "fees": "Avgifter ({currency})",
+                        "taxes": "Skatter ({currency})",
+                        "remove_lot": "Ta bort den här försäljningen"
+                    },
+                    "data_description": {
+                        "quantity": "Hur många som såldes. De lämnar innehavet till dess hittillsvarande snittkurs.",
+                        "price": "Vad en av dem inbringade, i den valuta som noteringen handlas i.",
+                        "date": "Avgör i vilken ordning köp och försäljningar räknas.",
+                        "fees": "Valfritt. Vad försäljningen kostade i avgifter.",
+                        "taxes": "Valfritt. Vad som betalades i skatt på det.",
+                        "remove_lot": "Tar bort den här försäljningen i stället för att ändra den."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Välj en av färgerna eller skriv ett värde som #009999.",
                 "group_exists": "Det finns redan en grupp med det här namnet.",
                 "sell_too_many": "Det är mer än innehavet.",
-                "no_rate": "ECB publicerar ingen referenskurs för den här noteringens valuta, så den kan inte räknas om."
+                "no_rate": "ECB publicerar ingen referenskurs för den här noteringens valuta, så den kan inte räknas om.",
+                "lots_oversold": "Med den här ändringen skulle en försäljning ta ut mer än vad som finns i innehavet den dagen."
             },
             "abort": {
                 "reconfigure_successful": "Instrumentet har uppdaterats."

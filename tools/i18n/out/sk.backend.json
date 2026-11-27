@@ -188,6 +188,7 @@
                         "move": "📂 Presunúť do inej skupiny",
                         "add_lot": "➕ Pridať nákup",
                         "sell_lot": "➖ Pridať predaj",
+                        "edit_lot": "✏️ Zmeniť nákup alebo predaj",
                         "remove_lots": "🗑️ Odstrániť nákupy a predaje",
                         "alerts": "🔔 Cenové upozornenia",
                         "color": "🎨 Farba",
@@ -257,6 +258,53 @@
                         "date": "Prázdne pole znamená dnes. Určuje poradie, v akom sa nákupy a predaje započítavajú.",
                         "fees": "Voliteľné. Koľko stál predaj na poplatkoch.",
                         "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Zmeniť nákup alebo predaj",
+                    "description": "{name}: vyberte záznam, ktorý sa má zmeniť.",
+                    "data": {
+                        "lot": "Zadané"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Zmeniť nákup",
+                    "description": "{name} – zadané: {entry}.",
+                    "data": {
+                        "quantity": "Kúpené množstvo",
+                        "price": "Nákupná cena za kus ({currency})",
+                        "date": "Dátum nákupu",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Dane ({currency})",
+                        "remove_lot": "Odstrániť tento nákup"
+                    },
+                    "data_description": {
+                        "quantity": "Koľko akcií, podielov alebo mincí sa kúpilo.",
+                        "price": "Koľko stál jeden kus, v mene, v ktorej sa toto kótovanie obchoduje.",
+                        "date": "Voliteľné. Určuje iba poradie, v akom sa nákupy a predaje započítavajú.",
+                        "fees": "Voliteľné. Koľko stál nákup na poplatkoch.",
+                        "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach.",
+                        "remove_lot": "Tento nákup odstráni namiesto toho, aby ho zmenil."
+                    }
+                },
+                "change_sale": {
+                    "title": "Zmeniť predaj",
+                    "description": "{name} – zadané: {entry}.",
+                    "data": {
+                        "quantity": "Predané množstvo",
+                        "price": "Predajná cena za kus ({currency})",
+                        "date": "Dátum predaja",
+                        "fees": "Poplatky ({currency})",
+                        "taxes": "Dane ({currency})",
+                        "remove_lot": "Odstrániť tento predaj"
+                    },
+                    "data_description": {
+                        "quantity": "Koľko sa predalo. Z pozície sa odpíšu za doterajšiu priemernú cenu.",
+                        "price": "Koľko vyniesol jeden kus, v mene, v ktorej sa toto kótovanie obchoduje.",
+                        "date": "Určuje poradie, v akom sa nákupy a predaje započítavajú.",
+                        "fees": "Voliteľné. Koľko stál predaj na poplatkoch.",
+                        "taxes": "Voliteľné. Koľko sa z toho zaplatilo na daniach.",
+                        "remove_lot": "Tento predaj odstráni namiesto toho, aby ho zmenil."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Vyberte jednu z farieb alebo zadajte hodnotu ako #009999.",
                 "group_exists": "Skupina s týmto názvom už existuje.",
                 "sell_too_many": "To je viac, ako držíte.",
-                "no_rate": "Pre menu tohto kótovania ECB nezverejňuje referenčný kurz, preto ju nemožno prepočítať."
+                "no_rate": "Pre menu tohto kótovania ECB nezverejňuje referenčný kurz, preto ju nemožno prepočítať.",
+                "lots_oversold": "Po tejto zmene by predaj odpísal viac, ako sa v jeho deň drží."
             },
             "abort": {
                 "reconfigure_successful": "Inštrument bol aktualizovaný."

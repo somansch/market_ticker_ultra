@@ -188,6 +188,7 @@
                         "move": "📂 Perkelti į kitą grupę",
                         "add_lot": "➕ Pridėti pirkimą",
                         "sell_lot": "➖ Pridėti pardavimą",
+                        "edit_lot": "✏️ Keisti pirkimą arba pardavimą",
                         "remove_lots": "🗑️ Pašalinti pirkimus ir pardavimus",
                         "alerts": "🔔 Kainos įspėjimai",
                         "color": "🎨 Spalva",
@@ -257,6 +258,53 @@
                         "date": "Tuščia reiškia šiandien. Nustato tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
                         "fees": "Neprivaloma. Kiek pardavimas kainavo komisinių.",
                         "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių."
+                    }
+                },
+                "edit_lot": {
+                    "title": "Keisti pirkimą arba pardavimą",
+                    "description": "{name}: pasirinkite įrašą, kurį norite pakeisti.",
+                    "data": {
+                        "lot": "Įvesta"
+                    }
+                },
+                "change_purchase": {
+                    "title": "Keisti pirkimą",
+                    "description": "{name} – įvesta: {entry}.",
+                    "data": {
+                        "quantity": "Nupirktas kiekis",
+                        "price": "Pirkimo kaina už vienetą ({currency})",
+                        "date": "Pirkimo data",
+                        "fees": "Komisiniai ({currency})",
+                        "taxes": "Mokesčiai ({currency})",
+                        "remove_lot": "Pašalinti šį pirkimą"
+                    },
+                    "data_description": {
+                        "quantity": "Kiek akcijų, vienetų ar monetų nupirkta.",
+                        "price": "Kiek kainavo vienas vienetas, ta valiuta, kuria prekiaujama šiame kotiravime.",
+                        "date": "Neprivaloma. Lemia tik tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
+                        "fees": "Neprivaloma. Kiek pirkimas kainavo komisinių.",
+                        "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių.",
+                        "remove_lot": "Pašalina šį pirkimą, užuot jį pakeitus."
+                    }
+                },
+                "change_sale": {
+                    "title": "Keisti pardavimą",
+                    "description": "{name} – įvesta: {entry}.",
+                    "data": {
+                        "quantity": "Parduotas kiekis",
+                        "price": "Pardavimo kaina už vienetą ({currency})",
+                        "date": "Pardavimo data",
+                        "fees": "Komisiniai ({currency})",
+                        "taxes": "Mokesčiai ({currency})",
+                        "remove_lot": "Pašalinti šį pardavimą"
+                    },
+                    "data_description": {
+                        "quantity": "Kiek parduota. Jie pašalinami iš pozicijos iki šiol buvusia vidutine kaina.",
+                        "price": "Kiek gauta už vieną vienetą, ta valiuta, kuria prekiaujama šiame kotiravime.",
+                        "date": "Nustato tvarką, kuria įskaičiuojami pirkimai ir pardavimai.",
+                        "fees": "Neprivaloma. Kiek pardavimas kainavo komisinių.",
+                        "taxes": "Neprivaloma. Kiek už jį sumokėta mokesčių.",
+                        "remove_lot": "Pašalina šį pardavimą, užuot jį pakeitus."
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "Pasirinkite vieną iš spalvų arba įveskite reikšmę, pvz., #009999.",
                 "group_exists": "Grupė tokiu pavadinimu jau yra.",
                 "sell_too_many": "Tai daugiau, nei turima.",
-                "no_rate": "ECB neskelbia šio kotiravimo valiutos orientacinio kurso, todėl jos perskaičiuoti negalima."
+                "no_rate": "ECB neskelbia šio kotiravimo valiutos orientacinio kurso, todėl jos perskaičiuoti negalima.",
+                "lots_oversold": "Po šio pakeitimo pardavimu būtų pašalinama daugiau, nei jo dieną turima."
             },
             "abort": {
                 "reconfigure_successful": "Priemonė atnaujinta."

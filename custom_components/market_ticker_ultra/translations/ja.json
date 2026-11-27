@@ -188,6 +188,7 @@
                         "move": "📂 別のグループへ移動",
                         "add_lot": "➕ 購入を追加",
                         "sell_lot": "➖ 売却を追加",
+                        "edit_lot": "✏️ 購入または売却を変更",
                         "remove_lots": "🗑️ 購入と売却を削除",
                         "alerts": "🔔 価格アラート",
                         "color": "🎨 色",
@@ -257,6 +258,53 @@
                         "date": "空欄の場合は今日です。購入と売却を計算する順序を決めます。",
                         "fees": "任意。売却にかかった手数料です。",
                         "taxes": "任意。それにかかった税金です。"
+                    }
+                },
+                "edit_lot": {
+                    "title": "購入または売却を変更",
+                    "description": "{name}: 変更する登録を選びます。",
+                    "data": {
+                        "lot": "登録済み"
+                    }
+                },
+                "change_purchase": {
+                    "title": "購入を変更",
+                    "description": "{name} - 登録内容: {entry}。",
+                    "data": {
+                        "quantity": "購入数量",
+                        "price": "1単位あたりの購入価格 ({currency})",
+                        "date": "購入日",
+                        "fees": "手数料 ({currency})",
+                        "taxes": "税金 ({currency})",
+                        "remove_lot": "この購入を削除"
+                    },
+                    "data_description": {
+                        "quantity": "購入した株数、口数、またはコインの数です。",
+                        "price": "1単位あたりの購入価格で、この取引市場の取引通貨で入力します。",
+                        "date": "任意。購入と売却を計算する順序だけを決めます。",
+                        "fees": "任意。購入にかかった手数料です。",
+                        "taxes": "任意。それにかかった税金です。",
+                        "remove_lot": "この購入を変更せずに削除します。"
+                    }
+                },
+                "change_sale": {
+                    "title": "売却を変更",
+                    "description": "{name} - 登録内容: {entry}。",
+                    "data": {
+                        "quantity": "売却数量",
+                        "price": "1単位あたりの売却価格 ({currency})",
+                        "date": "売却日",
+                        "fees": "手数料 ({currency})",
+                        "taxes": "税金 ({currency})",
+                        "remove_lot": "この売却を削除"
+                    },
+                    "data_description": {
+                        "quantity": "売却した数量です。それまでの平均取得価格で保有分から差し引かれます。",
+                        "price": "1単位あたりの売却価格で、この取引市場の取引通貨で入力します。",
+                        "date": "購入と売却を計算する順序を決めます。",
+                        "fees": "任意。売却にかかった手数料です。",
+                        "taxes": "任意。それにかかった税金です。",
+                        "remove_lot": "この売却を変更せずに削除します。"
                     }
                 },
                 "remove_lots": {
@@ -346,7 +394,8 @@
                 "invalid_color": "色を選ぶか、#009999 のような値を入力してください。",
                 "group_exists": "この名前のグループはすでに存在します。",
                 "sell_too_many": "保有数量を超えています。",
-                "no_rate": "この取引市場の通貨には ECB の参照レートがないため、換算できません。"
+                "no_rate": "この取引市場の通貨には ECB の参照レートがないため、換算できません。",
+                "lots_oversold": "この変更では、売却がその日の保有数量を超えてしまいます。"
             },
             "abort": {
                 "reconfigure_successful": "銘柄を更新しました。"
